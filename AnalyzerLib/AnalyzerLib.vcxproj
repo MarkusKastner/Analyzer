@@ -77,6 +77,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\Byte.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\Byte.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
