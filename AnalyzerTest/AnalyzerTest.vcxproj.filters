@@ -16,6 +16,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{8f87b7b4-8ad2-4952-bf1a-7ef660085d78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\error">
+      <UniqueIdentifier>{3b51f009-a361-43cf-bf06-5667d5ff2762}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,12 +27,36 @@
     <ClCompile Include="..\AnalyzerLib\core\Byte.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp">
+      <Filter>Core\error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\Word.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\Byte.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
+      <Filter>Core\error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\BasicType.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\BasicTypeTest.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\WordTest.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\Word.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>

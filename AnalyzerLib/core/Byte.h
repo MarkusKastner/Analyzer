@@ -1,25 +1,28 @@
 #ifndef BYTE_H
 #define BYTE_H
 
+#include "BasicType.h"
+
 #include <string>
 
 namespace analyzer{
   namespace core{
-    class Byte
+    class Byte : public BasicType
     {
     public:
       static const unsigned int ByteSize = 8;
 
       Byte();
-      explicit Byte(const char & value);
+      explicit Byte(const unsigned char & value);
       virtual ~Byte();
 
-      const char & GetValue() const;
-      unsigned int GetBitAt(const unsigned int & index);
-      std::string GetBitsAsString();
+      const unsigned char & GetValue() const;
+
+      virtual unsigned int GetBitAt(const unsigned int & index);
+      virtual std::string GetBitsAsString();
 
     private:
-      char value;
+      unsigned char value;
      
     };
   }

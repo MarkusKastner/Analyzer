@@ -8,14 +8,35 @@
     <Filter Include="core">
       <UniqueIdentifier>{96d98b57-cd26-41b6-8e45-0be1f000f0c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\error">
+      <UniqueIdentifier>{2b538e63-557f-46da-a7ad-501101dd947b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="core\error\CoreException.cpp">
+      <Filter>core\error</Filter>
+    </ClCompile>
+    <ClCompile Include="core\BasicType.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Word.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\error\CoreException.h">
+      <Filter>core\error</Filter>
+    </ClInclude>
+    <ClInclude Include="core\BasicType.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Word.h">
       <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>

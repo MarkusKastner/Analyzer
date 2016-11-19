@@ -80,12 +80,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\Byte.cpp" />
+    <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
+    <ClCompile Include="..\AnalyzerLib\core\Word.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />
     <ClInclude Include="..\AnalyzerLib\core\Byte.h" />
+    <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
+    <ClInclude Include="..\AnalyzerLib\core\Word.h" />
+    <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteTest.h" />
+    <ClInclude Include="core\WordTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
