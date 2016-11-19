@@ -33,13 +33,19 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="mainwindow">
+      <UniqueIdentifier>{1d2a7194-4b2e-421e-9485-25d470d96de7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Analyzer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GeneratedFiles\qrc_Analyzer.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow\Analyzer.cpp">
+      <Filter>mainwindow</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_Analyzer.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -47,19 +53,16 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Analyzer.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_Analyzer.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Analyzer.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Analyzer.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="Analyzer.qrc">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow\Analyzer.h">
+      <Filter>mainwindow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow\Analyzer.ui">
+      <Filter>mainwindow</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
