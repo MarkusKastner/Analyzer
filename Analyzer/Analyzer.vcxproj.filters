@@ -36,10 +36,19 @@
     <Filter Include="mainwindow">
       <UniqueIdentifier>{1d2a7194-4b2e-421e-9485-25d470d96de7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{f42238de-db25-4189-956a-a80f03b6c720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\error">
+      <UniqueIdentifier>{074ab6e8-563a-428b-baba-6d27510b7a01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="application\IOActionsImpl.cpp">
+      <Filter>application</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -50,18 +59,42 @@
     <ClCompile Include="mainwindow\MainWindow.cpp">
       <Filter>mainwindow</Filter>
     </ClCompile>
+    <ClCompile Include="application\error\AppException.cpp">
+      <Filter>application\error</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow\Actions.cpp">
+      <Filter>mainwindow</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Actions.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Actions.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="mainwindow\MainWindow.h">
-      <Filter>mainwindow</Filter>
-    </CustomBuild>
-    <CustomBuild Include="mainwindow\MainWindow.ui">
-      <Filter>mainwindow</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="application\IOActions.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="application\IOActionsImpl.h">
+      <Filter>application</Filter>
+    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="application\error\AppException.h">
+      <Filter>application\error</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="mainwindow\MainWindow.ui">
+      <Filter>mainwindow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow\MainWindow.h">
+      <Filter>mainwindow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow\Actions.h">
+      <Filter>mainwindow</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>
