@@ -4,6 +4,7 @@
 #include "core\BasicTypeTest.h"
 #include "core\WordTest.h"
 #include "core\ByteCollectionTest.h"
+#include "interpreter\BinaryStyleInterpreterTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

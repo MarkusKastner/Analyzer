@@ -11,6 +11,9 @@
     <Filter Include="core\error">
       <UniqueIdentifier>{2b538e63-557f-46da-a7ad-501101dd947b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interpreter">
+      <UniqueIdentifier>{8bfc9365-63e6-4662-961f-604a3963e9ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -28,6 +31,9 @@
     <ClCompile Include="core\ByteCollection.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -44,6 +50,12 @@
     </ClInclude>
     <ClInclude Include="core\ByteCollection.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\Interpreter.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\BinaryStyleInterpreter.h">
+      <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -82,6 +82,7 @@
     <ClCompile Include="core\ByteCollection.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\Word.cpp" />
+    <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\BasicType.h" />
@@ -89,6 +90,8 @@
     <ClInclude Include="core\ByteCollection.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\Word.h" />
+    <ClInclude Include="interpreter\BinaryStyleInterpreter.h" />
+    <ClInclude Include="interpreter\Interpreter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
