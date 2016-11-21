@@ -25,6 +25,8 @@ namespace analyzer{
       unsigned char value;
      
     };
+
+    bool operator==(const Byte & b1, const Byte & b2);
   }
 }
 #endif

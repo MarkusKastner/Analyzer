@@ -3,6 +3,7 @@
 #include "core\ByteTest.h"
 #include "core\BasicTypeTest.h"
 #include "core\WordTest.h"
+#include "core\ByteCollectionTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

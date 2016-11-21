@@ -25,6 +25,9 @@
     <ClCompile Include="core\Word.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="core\ByteCollection.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -37,6 +40,9 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\Word.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ByteCollection.h">
       <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>

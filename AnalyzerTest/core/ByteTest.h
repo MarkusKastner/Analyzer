@@ -52,3 +52,10 @@ TEST(ByteTest, GetBitIndexOutOfRange)
   }
   FAIL() << "Expected core exception";
 }
+
+TEST(ByteTest, EquationOperator)
+{
+  analyzer::core::Byte byte1(25);
+  analyzer::core::Byte byte2(25);
+  ASSERT_EQ(byte1, byte2);
+}

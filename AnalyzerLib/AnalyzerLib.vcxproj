@@ -79,12 +79,14 @@
   <ItemGroup>
     <ClCompile Include="core\BasicType.cpp" />
     <ClCompile Include="core\Byte.cpp" />
+    <ClCompile Include="core\ByteCollection.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\Word.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\BasicType.h" />
     <ClInclude Include="core\Byte.h" />
+    <ClInclude Include="core\ByteCollection.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\Word.h" />
   </ItemGroup>

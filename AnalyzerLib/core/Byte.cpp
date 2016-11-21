@@ -6,6 +6,12 @@
 
 namespace analyzer{
   namespace core{
+
+    bool operator==(const Byte & b1, const Byte & b2)
+    {
+      return b1.GetValue() == b2.GetValue();
+    }
+
     Byte::Byte()
       : BasicType(), value(0)
     {
@@ -27,7 +33,7 @@ namespace analyzer{
 
     unsigned int Byte::GetBitAt(const unsigned int & index)
     {
-      if (index > 7){
+      if (index > ByteSize - 1){
         throw CoreException("Bit index out of range");
       }
       return std::bitset<ByteSize>(this->value).at(index);
