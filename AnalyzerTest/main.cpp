@@ -8,6 +8,7 @@
 #include "interpreter\TextGlyphTest.h"
 #include "interpreter\strategy\InterpreterStrategyTest.h"
 #include "interpreter\strategy\DefaultTextTest.h"
+#include "interpreter\TextChangedObserverTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

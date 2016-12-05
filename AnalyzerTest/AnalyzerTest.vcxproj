@@ -105,6 +105,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStartegy.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\TextChangedObserver.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\TextGlyph.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h" />
     <ClInclude Include="interpreter\strategy\DefaultTextTest.h" />
     <ClInclude Include="interpreter\strategy\InterpreterStrategyTest.h" />
+    <ClInclude Include="interpreter\TextChangedObserverTest.h" />
     <ClInclude Include="interpreter\TextGlyphTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

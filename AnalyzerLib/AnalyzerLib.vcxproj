@@ -101,6 +101,7 @@
     <ClInclude Include="interpreter\strategy\DefaultPlainTextStrategy.h" />
     <ClInclude Include="interpreter\strategy\InterpretStrategy.h" />
     <ClInclude Include="interpreter\strategy\InterpretStrategyImpl.h" />
+    <ClInclude Include="interpreter\TextChangedObserver.h" />
     <ClInclude Include="interpreter\TextGlyph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

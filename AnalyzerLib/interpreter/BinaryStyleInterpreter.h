@@ -19,12 +19,16 @@ namespace analyzer{
       virtual void ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
       virtual std::string GetPlainText();
 
+      virtual bool HasObservers();
+      virtual void RegisterObserver(TextChangedObserver * observer);
+
       size_t NumGlyphs() const;
       std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> byteCollection;
       std::vector<std::shared_ptr<TextGlyph>> gylphs;
+      std::vector<TextChangedObserver*> textChangeObservers;
 
       void createGlyphs();
 

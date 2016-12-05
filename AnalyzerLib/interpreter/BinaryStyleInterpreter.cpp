@@ -6,7 +6,7 @@ namespace analyzer{
   namespace interpreter{
 
     BinaryStyleInterpreter::BinaryStyleInterpreter()
-      : byteCollection(), gylphs()
+      : byteCollection(), gylphs(), textChangeObservers()
     {
     }
 
@@ -49,6 +49,16 @@ namespace analyzer{
       }
       output.pop_back();
       return output;
+    }
+
+    bool BinaryStyleInterpreter::HasObservers()
+    {
+      return !this->textChangeObservers.empty();
+    }
+
+    void BinaryStyleInterpreter::RegisterObserver(TextChangedObserver * observer)
+    {
+      this->textChangeObservers.push_back(observer);
     }
 
     size_t BinaryStyleInterpreter::NumGlyphs() const

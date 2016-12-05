@@ -87,5 +87,8 @@
     <ClInclude Include="interpreter\error\InterpreterException.h">
       <Filter>interpreter\error</Filter>
     </ClInclude>
+    <ClInclude Include="interpreter\TextChangedObserver.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

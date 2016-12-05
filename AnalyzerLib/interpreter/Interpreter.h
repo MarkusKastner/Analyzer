@@ -8,12 +8,16 @@
 
 namespace analyzer{
   namespace interpreter{
+    class TextChangedObserver;
     class Interpreter
     {
     public:
       virtual bool HasData() = 0;
       virtual void ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data) = 0;
       virtual std::string GetPlainText() = 0;
+
+      virtual bool HasObservers() = 0;
+      virtual void RegisterObserver(TextChangedObserver * observer) = 0;
     };
   }
 }
