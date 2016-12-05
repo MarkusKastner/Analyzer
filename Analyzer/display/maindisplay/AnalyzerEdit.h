@@ -10,13 +10,18 @@ namespace analyzer{
   }
   namespace gui{
     namespace display{
-      class AnalyzerEdit : public QTextEdit
+      class AnalyzerEdit : public QTextEdit, public interpreter::TextChangedObserver
       {
       public:
         AnalyzerEdit(QWidget * parent = 0);
         virtual ~AnalyzerEdit();
 
+        virtual void NotifyDataChanged();
+
         void SetInterpreter(interpreter::Interpreter * interpreter);
+
+      private:
+        interpreter::Interpreter * interpreter;
       };
     }
   }

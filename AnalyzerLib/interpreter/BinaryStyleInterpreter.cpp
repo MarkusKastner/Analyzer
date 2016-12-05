@@ -39,6 +39,7 @@ namespace analyzer{
     {
       *this->byteCollection = data;
       this->createGlyphs();
+      this->NotifyTextChange();
     }
 
     std::string BinaryStyleInterpreter::GetPlainText()
