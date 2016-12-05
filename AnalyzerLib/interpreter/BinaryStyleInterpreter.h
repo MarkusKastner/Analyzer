@@ -9,36 +9,22 @@
 
 #include <memory>
 
-#include "InterpreterObserverImpl.h"
+#include "InterpreterDataImpl.h"
 #include "TextGlyph.h"
 
 namespace analyzer{
   namespace interpreter{
-    class IMEX BinaryStyleInterpreter : public InterpreterObserverImpl
+    class IMEX BinaryStyleInterpreter : public InterpreterDataImpl
     {
     public:
       BinaryStyleInterpreter();
       explicit BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
       virtual ~BinaryStyleInterpreter();
 
-      virtual bool HasData();
-      virtual void ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
-      virtual void ResetData(const std::vector<char> & data);
-
       virtual std::string GetPlainText();
 
-      size_t NumGlyphs() const;
-      std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
-
     private:
-      std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
-      std::vector<std::shared_ptr<TextGlyph>> * glyphs;
 
-      void onNewData();
-      void createGlyphs();
-
-      void throwGlyphIndex(const size_t & index);
-      
     };
   }
 }

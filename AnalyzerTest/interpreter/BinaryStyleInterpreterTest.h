@@ -9,7 +9,6 @@
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 #include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\TextGlyph.h"
-#include "AnalyzerLib\interpreter\TextGlyph.h"
 #include "AnalyzerLib\interpreter\error\InterpreterException.h"
 
 class BinaryStyleInterpreterTest : public testing::Test

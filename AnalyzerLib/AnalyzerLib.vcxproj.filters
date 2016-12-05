@@ -58,6 +58,12 @@
     <ClCompile Include="base\AnalyzerBase.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\TextStyleInterpreter.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\InterpreterDataImpl.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -104,6 +110,12 @@
     </ClInclude>
     <ClInclude Include="base\AnalyzerBase.h">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\TextStyleInterpreter.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\InterpreterDataImpl.h">
+      <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

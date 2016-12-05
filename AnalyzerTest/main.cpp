@@ -5,6 +5,7 @@
 #include "core\WordTest.h"
 #include "core\ByteCollectionTest.h"
 #include "interpreter\BinaryStyleInterpreterTest.h"
+#include "interpreter\TextStyleInterpreterTest.h"
 #include "interpreter\TextGlyphTest.h"
 #include "interpreter\strategy\InterpreterStrategyTest.h"
 #include "interpreter\strategy\DefaultTextTest.h"

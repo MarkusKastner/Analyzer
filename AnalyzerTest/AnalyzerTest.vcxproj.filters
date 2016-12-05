@@ -69,6 +69,12 @@
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterDataImpl.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -145,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="base\AnalyzerBaseTest.h">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\TextStyleInterpreterTest.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterDataImpl.h">
+      <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

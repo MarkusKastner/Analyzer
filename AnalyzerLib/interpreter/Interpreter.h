@@ -9,6 +9,7 @@
 namespace analyzer{
   namespace interpreter{
     class TextChangedObserver;
+    class TextGlyph;
     class Interpreter
     {
     public:
@@ -17,6 +18,9 @@ namespace analyzer{
       virtual void ResetData(const std::vector<char> & data) = 0;
 
       virtual std::string GetPlainText() = 0;
+
+      virtual size_t NumGlyphs() const = 0;
+      virtual std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index) = 0;
 
       virtual bool HasObservers() = 0;
       virtual size_t NumberOfObservers() = 0;
