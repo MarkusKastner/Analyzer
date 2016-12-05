@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\error\AppException.h" />
+    <ClInclude Include="application\IOActionObserver.h" />
     <ClInclude Include="application\IOActions.h" />
     <ClInclude Include="application\IOActionsImpl.h" />
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h" />

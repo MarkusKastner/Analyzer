@@ -1,6 +1,7 @@
 #include "IOActions.h"
 
 #include <string>
+#include <vector>
 
 namespace analyzer{
   namespace app{
@@ -11,6 +12,10 @@ namespace analyzer{
       virtual ~IOActionsImpl();
 
       virtual void ReadFile(const std::string & path);
+      virtual const std::vector<char> & GetData();
+
+    private:
+      std::vector<char> currentData;
     };
   }
 }

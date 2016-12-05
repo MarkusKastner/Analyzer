@@ -38,8 +38,13 @@ namespace analyzer{
     void BinaryStyleInterpreter::ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data)
     {
       *this->byteCollection = data;
-      this->createGlyphs();
-      this->NotifyTextChange();
+      this->onNewData();
+    }
+
+    void BinaryStyleInterpreter::ResetData(const std::vector<char> & data)
+    {
+      this->byteCollection->reset(new core::ByteCollection(data));
+      this->onNewData();
     }
 
     std::string BinaryStyleInterpreter::GetPlainText()
@@ -62,6 +67,12 @@ namespace analyzer{
     {
       this->throwGlyphIndex(index);
       return this->glyphs->at(index);
+    }
+
+    void BinaryStyleInterpreter::onNewData()
+    {
+      this->createGlyphs();
+      this->NotifyTextChange();
     }
 
     void BinaryStyleInterpreter::createGlyphs()

@@ -7,23 +7,28 @@
 namespace analyzer{
   namespace app{
 
-      IOActionsImpl::IOActionsImpl()
-      {
+    IOActionsImpl::IOActionsImpl()
+    {
 
-      }
+    }
       
-      IOActionsImpl::~IOActionsImpl()
-      {
+    IOActionsImpl::~IOActionsImpl()
+    {
 
+    }
+
+    void IOActionsImpl::ReadFile(const std::string & path)
+    {
+      std::ifstream file(path.c_str(), std::ios::binary | std::ios::in);
+      if (file.bad() || !file.is_open()){
+        throw AppException("Cannot open " + path);
       }
 
-      void IOActionsImpl::ReadFile(const std::string & path)
-      {
-        std::ifstream file(path.c_str(), std::ios::binary | std::ios::in);
-        if (file.bad() || !file.is_open()){
-          throw AppException("Cannot open " + path);
-        }
-      }
-    
+    }
+
+    const std::vector<char> & IOActionsImpl::GetData()
+    {
+      return this->currentData;
+    }
   }
 }

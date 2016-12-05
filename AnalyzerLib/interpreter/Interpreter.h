@@ -14,6 +14,8 @@ namespace analyzer{
     public:
       virtual bool HasData() = 0;
       virtual void ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data) = 0;
+      virtual void ResetData(const std::vector<char> & data) = 0;
+
       virtual std::string GetPlainText() = 0;
 
       virtual bool HasObservers() = 0;

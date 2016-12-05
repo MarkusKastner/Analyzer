@@ -97,6 +97,9 @@
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h">
       <Filter>display\maindisplay</Filter>
     </ClInclude>
+    <ClInclude Include="application\IOActionObserver.h">
+      <Filter>application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow\MainWindow.ui">

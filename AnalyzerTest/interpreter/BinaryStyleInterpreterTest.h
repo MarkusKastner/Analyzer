@@ -20,7 +20,8 @@ public:
     byteCollection1(new analyzer::core::ByteCollection()), 
     byteCollection2(),
     byteCollection3(),
-    testGlyph()
+    testGlyph(),
+    charVector()
   {}
 
   ~BinaryStyleInterpreterTest()
@@ -41,6 +42,10 @@ public:
 
     this->byteCollection2.reset(new analyzer::core::ByteCollection(bytes2, numBytes2));
     this->byteCollection3.reset(new analyzer::core::ByteCollection(bytes3, numBytes3));
+
+    for (int i = 0; i < 5; i++){
+      this->charVector.push_back('a');
+    }
   }
 
   char * bytes2;
@@ -53,6 +58,7 @@ public:
   std::shared_ptr<analyzer::core::ByteCollection> byteCollection2;
   std::shared_ptr<analyzer::core::ByteCollection> byteCollection3;
   std::shared_ptr<analyzer::interpreter::TextGlyph> testGlyph;
+  std::vector<char> charVector;
 };
 
 TEST_F(BinaryStyleInterpreterTest, AbstractImplEmptyOnDefaultCtor)
@@ -101,11 +107,20 @@ TEST_F(BinaryStyleInterpreterTest, InvalidGlyphIndex)
   ASSERT_STREQ(errorMsg.c_str(), std::string("Invalid index").c_str());
 }
 
-TEST_F(BinaryStyleInterpreterTest, ResetData)
+TEST_F(BinaryStyleInterpreterTest, ResetDataByteCollection)
 {
   analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection2);
   size_t sizePreReset = interpreter.NumGlyphs();
   interpreter.ResetData(this->byteCollection3);
+
+  ASSERT_FALSE(interpreter.NumGlyphs() == sizePreReset);
+}
+
+TEST_F(BinaryStyleInterpreterTest, ResetDataCharVector)
+{
+  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection2);
+  size_t sizePreReset = interpreter.NumGlyphs();
+  interpreter.ResetData(this->charVector);
 
   ASSERT_FALSE(interpreter.NumGlyphs() == sizePreReset);
 }

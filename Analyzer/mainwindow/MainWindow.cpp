@@ -3,8 +3,9 @@
 #include <QLayout>
 
 #include "application\error\AppException.h"
-
 #include "application\IOActions.h"
+
+#include "AnalyzerLib\interpreter\Interpreter.h"
 
 namespace analyzer{
   namespace gui{
@@ -21,8 +22,9 @@ namespace analyzer{
 
     }
 
-    void MainWindow::SetData(const std::shared_ptr<core::ByteCollection> & data)
+    void MainWindow::NotifyDataLoad()
     {
+      this->analyzerBase.Interpreter()->ResetData(this->ioActions->GetData());
     }
 
     void MainWindow::setup()

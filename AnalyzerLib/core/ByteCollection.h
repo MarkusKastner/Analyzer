@@ -19,6 +19,7 @@ namespace analyzer{
     public:
       ByteCollection();
       explicit ByteCollection(const char *  data, const size_t & size);
+      explicit ByteCollection(const std::vector<char> data);
       virtual ~ByteCollection();
 
       size_t GetSize() const;

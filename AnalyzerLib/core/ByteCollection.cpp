@@ -19,6 +19,14 @@ namespace analyzer{
       }
     }
 
+    ByteCollection::ByteCollection(const std::vector<char> data)
+      : data(new std::vector<std::shared_ptr<Byte>>())
+    {
+      for (auto& byte : data){
+        this->data->push_back(std::shared_ptr<Byte>(new Byte(byte)));
+      }
+    }
+
     ByteCollection::~ByteCollection()
     {
       delete this->data;

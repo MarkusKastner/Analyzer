@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "Actions.h"
+#include "application\IOActionObserver.h"
 #include "display\maindisplay\AnalyzerEdit.h"
 #include "AnalyzerLib\base\AnalyzerBase.h"
 
@@ -19,7 +20,7 @@ namespace analyzer{
   }
   namespace gui{
 
-    class MainWindow : public QMainWindow
+    class MainWindow : public QMainWindow, public app::IOActionObserver
     {
       Q_OBJECT
 
@@ -27,7 +28,7 @@ namespace analyzer{
       MainWindow(app::IOActions * ioActions, base::AnalyzerBase & analyzerBase, QWidget *parent = 0);
       ~MainWindow();
 
-      void SetData(const std::shared_ptr<core::ByteCollection> & data);
+      virtual void NotifyDataLoad();
 
     private:
       Ui::MainWindow ui;

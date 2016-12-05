@@ -22,6 +22,18 @@ TEST(ByteCollectionTest, InitByCharArray)
   ASSERT_EQ(byteCollection.GetSize(), 10);
 }
 
+TEST(ByteCollectionTest, InitByCharVector)
+{
+  std::vector<char> bytes;
+  bytes.push_back('a');
+  bytes.push_back('a');
+  bytes.push_back('a');
+  bytes.push_back('a');
+
+  analyzer::core::ByteCollection byteCollection(bytes);
+  ASSERT_EQ(byteCollection.GetSize(), 4);
+}
+
 TEST(ByteCollectionTest, GetByteAt)
 {
   char bytes[10] = { 0 };
