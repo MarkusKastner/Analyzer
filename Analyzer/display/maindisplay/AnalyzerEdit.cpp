@@ -18,8 +18,7 @@ namespace analyzer{
       
       void AnalyzerEdit::NotifyDataChanged()
       {
-        QString text(this->interpreter->GetPlainText().c_str());
-        this->setText(text);
+        this->setText(this->interpreter->GetPlainText().c_str());
       }
 
       void AnalyzerEdit::SetInterpreter(interpreter::Interpreter * interpreter)

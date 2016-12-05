@@ -30,6 +30,8 @@ namespace analyzer{
     void MainWindow::setup()
     {
       this->throwIOActions();
+      this->ioActions->RegisterObserver(this);
+
       this->ui.centralWidget->setLayout(new QVBoxLayout());
       this->analyzerEdit = new gui::display::AnalyzerEdit();
       this->ui.centralWidget->layout()->addWidget(this->analyzerEdit);
