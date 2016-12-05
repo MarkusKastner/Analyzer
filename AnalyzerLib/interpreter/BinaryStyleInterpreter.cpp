@@ -6,12 +6,12 @@ namespace analyzer{
   namespace interpreter{
 
     BinaryStyleInterpreter::BinaryStyleInterpreter()
-      : byteCollection(), gylphs(), textChangeObservers()
+      :InterpreterObserverImpl(), byteCollection(), gylphs()
     {
     }
 
     BinaryStyleInterpreter::BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
-      : byteCollection(byteCollection), gylphs()
+      : InterpreterObserverImpl(), byteCollection(byteCollection), gylphs()
     {
       this->createGlyphs();
     }
@@ -51,22 +51,6 @@ namespace analyzer{
       return output;
     }
 
-    bool BinaryStyleInterpreter::HasObservers()
-    {
-      return !this->textChangeObservers.empty();
-    }
-
-    void BinaryStyleInterpreter::RegisterObserver(TextChangedObserver * observer)
-    {
-      this->throwInvalidObserver(observer);
-      this->textChangeObservers.push_back(observer);
-    }
-
-    void BinaryStyleInterpreter::UnregisterObserver(TextChangedObserver * observer)
-    {
-      this->textChangeObservers.clear();
-    }
-
     size_t BinaryStyleInterpreter::NumGlyphs() const
     {
       return this->gylphs.size();
@@ -95,13 +79,6 @@ namespace analyzer{
     {
       if (this->gylphs.size() == 0 || index > this->gylphs.size() - 1){
         throw InterpreterException("Invalid index");
-      }
-    }
-
-    void BinaryStyleInterpreter::throwInvalidObserver(TextChangedObserver * observer)
-    {
-      if (nullptr == observer){
-        throw InterpreterException("Invalid observer");
       }
     }
   }

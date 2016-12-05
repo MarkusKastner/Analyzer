@@ -11,7 +11,7 @@ class TextChangedObserverTest : public testing::Test
 {
 public:
   TextChangedObserverTest()
-    : observer1()
+    : observer1(), observer2()
   {}
 
   ~TextChangedObserverTest(){}
@@ -39,6 +39,7 @@ public:
 
   }
   SomeObserver observer1;
+  SomeObserver observer2;
 };
 
 TEST_F(TextChangedObserverTest, Init)
@@ -75,6 +76,24 @@ TEST_F(TextChangedObserverTest, InvalidObserver)
   }
   
   ASSERT_STREQ(msg.c_str(), "Invalid observer");
+}
+
+TEST_F(TextChangedObserverTest, RegisterObserverTwice)
+{
+  std::unique_ptr<analyzer::interpreter::Interpreter> interpreter(new analyzer::interpreter::BinaryStyleInterpreter());
+  interpreter->RegisterObserver(&observer1);
+  interpreter->RegisterObserver(&observer1);
+  ASSERT_EQ(interpreter->NumberOfObservers(), 1);
+}
+
+TEST_F(TextChangedObserverTest, Notify)
+{
+  std::unique_ptr<analyzer::interpreter::Interpreter> interpreter(new analyzer::interpreter::BinaryStyleInterpreter());
+  interpreter->RegisterObserver(&observer1);
+  interpreter->RegisterObserver(&observer2);
+  interpreter->NotifyTextChange();
+  ASSERT_TRUE(observer1.IsNotified());
+  ASSERT_TRUE(observer2.IsNotified());
 }
 
 #endif

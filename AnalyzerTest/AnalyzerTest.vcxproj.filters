@@ -60,6 +60,9 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.cpp">
       <Filter>Interpreter\strategy</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -126,6 +129,9 @@
       <Filter>Interpreter</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\TextChangedObserverTest.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.h">
       <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>

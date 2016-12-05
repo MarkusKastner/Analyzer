@@ -17,8 +17,10 @@ namespace analyzer{
       virtual std::string GetPlainText() = 0;
 
       virtual bool HasObservers() = 0;
+      virtual size_t NumberOfObservers() = 0;
       virtual void RegisterObserver(TextChangedObserver * observer) = 0;
       virtual void UnregisterObserver(TextChangedObserver * observer) = 0;
+      virtual void NotifyTextChange() = 0;
     };
   }
 }

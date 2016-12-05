@@ -85,6 +85,7 @@
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\Word.cpp" />
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
+    <ClCompile Include="interpreter\InterpreterObserverImpl.cpp" />
     <ClCompile Include="interpreter\strategy\DefaultPlainTextStrategy.cpp" />
     <ClCompile Include="interpreter\strategy\InterpretStrategyImpl.cpp" />
     <ClCompile Include="interpreter\TextGlyph.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h" />
     <ClInclude Include="interpreter\error\InterpreterException.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
+    <ClInclude Include="interpreter\InterpreterObserverImpl.h" />
     <ClInclude Include="interpreter\strategy\DefaultPlainTextStrategy.h" />
     <ClInclude Include="interpreter\strategy\InterpretStrategy.h" />
     <ClInclude Include="interpreter\strategy\InterpretStrategyImpl.h" />

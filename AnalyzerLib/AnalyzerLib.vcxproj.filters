@@ -49,6 +49,9 @@
     <ClCompile Include="interpreter\strategy\InterpretStrategyImpl.cpp">
       <Filter>interpreter\strategy</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\InterpreterObserverImpl.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -88,6 +91,9 @@
       <Filter>interpreter\error</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\TextChangedObserver.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\InterpreterObserverImpl.h">
       <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>
