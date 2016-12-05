@@ -58,7 +58,13 @@ namespace analyzer{
 
     void BinaryStyleInterpreter::RegisterObserver(TextChangedObserver * observer)
     {
+      this->throwInvalidObserver(observer);
       this->textChangeObservers.push_back(observer);
+    }
+
+    void BinaryStyleInterpreter::UnregisterObserver(TextChangedObserver * observer)
+    {
+      this->textChangeObservers.clear();
     }
 
     size_t BinaryStyleInterpreter::NumGlyphs() const
@@ -89,6 +95,13 @@ namespace analyzer{
     {
       if (this->gylphs.size() == 0 || index > this->gylphs.size() - 1){
         throw InterpreterException("Invalid index");
+      }
+    }
+
+    void BinaryStyleInterpreter::throwInvalidObserver(TextChangedObserver * observer)
+    {
+      if (nullptr == observer){
+        throw InterpreterException("Invalid observer");
       }
     }
   }

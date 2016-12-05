@@ -21,6 +21,7 @@ namespace analyzer{
 
       virtual bool HasObservers();
       virtual void RegisterObserver(TextChangedObserver * observer);
+      virtual void UnregisterObserver(TextChangedObserver * observer);
 
       size_t NumGlyphs() const;
       std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
@@ -33,6 +34,7 @@ namespace analyzer{
       void createGlyphs();
 
       void throwGlyphIndex(const size_t & index);
+      void throwInvalidObserver(TextChangedObserver * observer);
     };
   }
 }
