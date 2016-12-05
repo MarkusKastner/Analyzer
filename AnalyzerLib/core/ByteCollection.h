@@ -2,6 +2,7 @@
 #define BYTECOLLECTION_H
 
 #include <vector>
+#include <memory>
 
 #include "Byte.h"
 
@@ -15,12 +16,12 @@ namespace analyzer{
       virtual ~ByteCollection();
 
       size_t GetSize() const;
-      const Byte & GetByteAt(const size_t & index);
+      const std::shared_ptr<Byte> & GetByteAt(const size_t & index);
 
-      std::vector<Byte>::iterator begin();
-      std::vector<Byte>::iterator end();
+      std::vector<std::shared_ptr<Byte>>::iterator begin();
+      std::vector<std::shared_ptr<Byte>>::iterator end();
     private:
-      std::vector<Byte> data;
+      std::vector<std::shared_ptr<Byte>> data;
     };
   }
 }

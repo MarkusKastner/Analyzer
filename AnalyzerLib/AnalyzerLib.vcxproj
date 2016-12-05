@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -53,6 +54,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ANALYZERLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>.;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,6 +85,9 @@
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\Word.cpp" />
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
+    <ClCompile Include="interpreter\strategy\DefaultPlainTextStrategy.cpp" />
+    <ClCompile Include="interpreter\strategy\InterpretStrategyImpl.cpp" />
+    <ClCompile Include="interpreter\TextGlyph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\BasicType.h" />
@@ -91,7 +96,12 @@
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\Word.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h" />
+    <ClInclude Include="interpreter\error\InterpreterException.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
+    <ClInclude Include="interpreter\strategy\DefaultPlainTextStrategy.h" />
+    <ClInclude Include="interpreter\strategy\InterpretStrategy.h" />
+    <ClInclude Include="interpreter\strategy\InterpretStrategyImpl.h" />
+    <ClInclude Include="interpreter\TextGlyph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

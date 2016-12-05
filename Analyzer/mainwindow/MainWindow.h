@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "Actions.h"
+#include "display\maindisplay\AnalyzerEdit.h"
 
 namespace analyzer{
   namespace app{
@@ -26,6 +27,7 @@ namespace analyzer{
       Ui::MainWindow ui;
       std::unique_ptr<Actions> actions;
       app::IOActions * ioActions;
+      gui::display::AnalyzerEdit * analyzerEdit;
 
       void setup();
       void connectUI();

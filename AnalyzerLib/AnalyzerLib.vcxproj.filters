@@ -14,6 +14,12 @@
     <Filter Include="interpreter">
       <UniqueIdentifier>{8bfc9365-63e6-4662-961f-604a3963e9ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interpreter\strategy">
+      <UniqueIdentifier>{4b10ee82-1356-4bb0-8bec-0e74eb375224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interpreter\error">
+      <UniqueIdentifier>{e0762845-f015-4b4d-be4b-7b252c8f2b44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -33,6 +39,15 @@
     </ClCompile>
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp">
       <Filter>interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\TextGlyph.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\strategy\DefaultPlainTextStrategy.cpp">
+      <Filter>interpreter\strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\strategy\InterpretStrategyImpl.cpp">
+      <Filter>interpreter\strategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +71,21 @@
     </ClInclude>
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h">
       <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\TextGlyph.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\strategy\DefaultPlainTextStrategy.h">
+      <Filter>interpreter\strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\strategy\InterpretStrategyImpl.h">
+      <Filter>interpreter\strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\strategy\InterpretStrategy.h">
+      <Filter>interpreter\strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\error\InterpreterException.h">
+      <Filter>interpreter\error</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

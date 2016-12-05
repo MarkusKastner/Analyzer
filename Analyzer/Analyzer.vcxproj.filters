@@ -42,6 +42,12 @@
     <Filter Include="application\error">
       <UniqueIdentifier>{074ab6e8-563a-428b-baba-6d27510b7a01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="display">
+      <UniqueIdentifier>{165f3a4f-4bca-4050-8f71-f46374331c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="display\maindisplay">
+      <UniqueIdentifier>{eb9c9b5b-152f-4d8b-a805-712ee12ac3aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,6 +77,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Actions.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp">
+      <Filter>display\maindisplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\IOActions.h">
@@ -84,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="application\error\AppException.h">
       <Filter>application\error</Filter>
+    </ClInclude>
+    <ClInclude Include="display\maindisplay\AnalyzerEdit.h">
+      <Filter>display\maindisplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

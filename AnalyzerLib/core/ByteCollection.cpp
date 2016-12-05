@@ -15,7 +15,7 @@ namespace analyzer{
       :data()
     {
       for (size_t i = 0; i < size; i++){
-        this->data.push_back(Byte(data[i]));
+        this->data.push_back(std::shared_ptr<Byte>(new Byte(data[i])));
       }
     }
 
@@ -29,7 +29,7 @@ namespace analyzer{
       return data.size();
     }
 
-    const Byte & ByteCollection::GetByteAt(const size_t & index)
+    const std::shared_ptr<Byte> & ByteCollection::GetByteAt(const size_t & index)
     {
       if (index > this->data.size() - 1){
         throw CoreException("Byte index out of range");
@@ -37,12 +37,12 @@ namespace analyzer{
       return this->data.at(index);
     }
 
-    std::vector<Byte>::iterator ByteCollection::begin()
+    std::vector<std::shared_ptr<Byte>>::iterator ByteCollection::begin()
     {
       return this->data.begin();
     }
 
-    std::vector<Byte>::iterator ByteCollection::end()
+    std::vector<std::shared_ptr<Byte>>::iterator ByteCollection::end()
     {
       return this->data.end();
     }

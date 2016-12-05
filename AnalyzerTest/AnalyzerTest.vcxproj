@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -52,7 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..;c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..;c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\include;..\Analyzer\mainwindow</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -77,6 +78,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>gtest.lib;qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -86,6 +88,9 @@
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\Word.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\TextGlyph.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -95,12 +100,20 @@
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\Word.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\error\InterpreterException.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStartegy.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\TextGlyph.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
     <ClInclude Include="core\ByteTest.h" />
     <ClInclude Include="core\WordTest.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h" />
+    <ClInclude Include="interpreter\strategy\DefaultTextTest.h" />
+    <ClInclude Include="interpreter\strategy\InterpreterStrategyTest.h" />
+    <ClInclude Include="interpreter\TextGlyphTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,13 @@
+#ifndef BYTECOLLECTIONTEST_H
+#define BYTECOLLECTIONTEST_H
+
 #include <gtest/gtest.h>
 
 #include <string>
 
 #include "AnalyzerLib\core\Byte.h"
 #include "AnalyzerLib\core\ByteCollection.h"
+#include "AnalyzerLib\core\error\CoreException.h"
 
 TEST(ByteCollectionTest, EmptyOnDefaultInit)
 {
@@ -24,7 +28,7 @@ TEST(ByteCollectionTest, GetByteAt)
   bytes[3] = 42;
   analyzer::core::ByteCollection byteCollection(bytes, 10);
   analyzer::core::Byte testByte(42);
-  ASSERT_EQ(byteCollection.GetByteAt(3), testByte);
+  ASSERT_EQ(*byteCollection.GetByteAt(3).get(), testByte);
 }
 
 TEST(ByteCollectionTest, IndexMissmatch)
@@ -35,7 +39,7 @@ TEST(ByteCollectionTest, IndexMissmatch)
   try{
     byteCollection.GetByteAt(42);
   }
-  catch (analyzer::core::CoreException const & ex){
+  catch (analyzer::core::CoreException & ex){
     ASSERT_STREQ(ex.what(), "Byte index out of range");
     return;
   }
@@ -49,8 +53,21 @@ TEST(ByteCollectionTest, Iterate)
   analyzer::core::ByteCollection byteCollection(bytes, 10);
   size_t index = 0;
   for (auto& byte : byteCollection){
-    ASSERT_EQ(byteCollection.GetByteAt(index).GetValue(), index);
+    ASSERT_EQ(byteCollection.GetByteAt(index)->GetValue(), index);
     index++;
   }
-  
 }
+
+TEST(ByteCollectionTest, AsSharedPtr)
+{
+  char bytes[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+  std::shared_ptr<analyzer::core::ByteCollection> byteCollection(new analyzer::core::ByteCollection(bytes, 10));
+  size_t index = 0;
+  for (auto byte : *byteCollection.get()){
+    ASSERT_EQ(byteCollection->GetByteAt(index)->GetValue(), index);
+    index++;
+  }
+}
+
+#endif
