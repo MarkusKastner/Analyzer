@@ -1,11 +1,17 @@
 #ifndef BASICTYPE_H
 #define BASICTYPE_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include <string>
 
 namespace analyzer{
   namespace core{
-    class BasicType
+    class IMEX BasicType
     {
     public:
       virtual ~BasicType();

@@ -1,6 +1,12 @@
 #ifndef BINARYSTYLEINTERPRETER_H
 #define BINARYSTYLEINTERPRETER_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include <memory>
 
 #include "InterpreterObserverImpl.h"
@@ -8,7 +14,7 @@
 
 namespace analyzer{
   namespace interpreter{
-    class BinaryStyleInterpreter : public InterpreterObserverImpl
+    class IMEX BinaryStyleInterpreter : public InterpreterObserverImpl
     {
     public:
       BinaryStyleInterpreter();
@@ -23,8 +29,8 @@ namespace analyzer{
       std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
 
     private:
-      std::shared_ptr<analyzer::core::ByteCollection> byteCollection;
-      std::vector<std::shared_ptr<TextGlyph>> gylphs;
+      std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
+      std::vector<std::shared_ptr<TextGlyph>> * glyphs;
 
       void createGlyphs();
 

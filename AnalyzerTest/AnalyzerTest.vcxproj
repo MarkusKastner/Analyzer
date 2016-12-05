@@ -52,7 +52,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;..;c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\include;..\Analyzer\mainwindow</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\Byte.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\AnalyzerLib\base\AnalyzerBase.h" />
     <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />
     <ClInclude Include="..\AnalyzerLib\core\Byte.h" />
     <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h" />
@@ -109,6 +111,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\TextChangedObserver.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\TextGlyph.h" />
+    <ClInclude Include="base\AnalyzerBaseTest.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
     <ClInclude Include="core\ByteTest.h" />

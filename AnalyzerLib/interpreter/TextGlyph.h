@@ -1,6 +1,12 @@
 #ifndef TEXTGLYPH_H
 #define TEXTGLYPH_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include <memory>
 #include <vector>
 
@@ -9,7 +15,7 @@
 
 namespace analyzer{
   namespace interpreter{
-    class TextGlyph
+    class IMEX TextGlyph
     {
     public:
       TextGlyph();
@@ -25,7 +31,7 @@ namespace analyzer{
       std::string GetPlainText();
 
     private:
-      std::vector<std::shared_ptr<analyzer::core::Byte>> data;
+      std::vector<std::shared_ptr<analyzer::core::Byte>> * data;
       strategy::InterpretStrategy * interpretStrategy;
     };
   }

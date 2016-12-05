@@ -6,27 +6,28 @@ namespace analyzer{
   namespace interpreter{
 
     BinaryStyleInterpreter::BinaryStyleInterpreter()
-      :InterpreterObserverImpl(), byteCollection(), gylphs()
+      :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>()), glyphs(new std::vector<std::shared_ptr<TextGlyph>>())
     {
     }
 
     BinaryStyleInterpreter::BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
-      : InterpreterObserverImpl(), byteCollection(byteCollection), gylphs()
+      : InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(byteCollection)), glyphs(new std::vector<std::shared_ptr<TextGlyph>>())
     {
       this->createGlyphs();
     }
 
     BinaryStyleInterpreter::~BinaryStyleInterpreter()
     {
-
+      delete this->byteCollection;
+      delete this->glyphs;
     }
 
     bool BinaryStyleInterpreter::HasData()
     {
-      if (!this->byteCollection){
+      if (!(*this->byteCollection)){
         return false;
       }
-      if (this->byteCollection->GetSize() == 0){
+      if ((*this->byteCollection)->GetSize() == 0){
         return false;
       }
       else{
@@ -36,14 +37,14 @@ namespace analyzer{
     
     void BinaryStyleInterpreter::ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data)
     {
-      this->byteCollection = data;
+      *this->byteCollection = data;
       this->createGlyphs();
     }
 
     std::string BinaryStyleInterpreter::GetPlainText()
     {
       std::string output;
-      for (auto byte : *this->byteCollection.get()){
+      for (auto byte : *this->byteCollection->get()){
         output += byte->GetBitsAsString();
         output += " ";
       }
@@ -53,31 +54,31 @@ namespace analyzer{
 
     size_t BinaryStyleInterpreter::NumGlyphs() const
     {
-      return this->gylphs.size();
+      return this->glyphs->size();
     }
 
     std::shared_ptr<TextGlyph> BinaryStyleInterpreter::GetGlyphAt(const size_t & index)
     {
       this->throwGlyphIndex(index);
-      return this->gylphs.at(index);
+      return this->glyphs->at(index);
     }
 
     void BinaryStyleInterpreter::createGlyphs()
     {
-      this->gylphs.clear();
-      if (this->byteCollection->GetSize() <= 0){
+      this->glyphs->clear();
+      if ((*this->byteCollection)->GetSize() <= 0){
         return;
       }
-      for (auto byte : *this->byteCollection.get()){
+      for (auto byte : *this->byteCollection->get()){
         std::vector<std::shared_ptr<analyzer::core::Byte>> bytes;
         bytes.push_back(byte);
-        this->gylphs.push_back(std::shared_ptr<TextGlyph>(new TextGlyph(bytes)));
+        this->glyphs->push_back(std::shared_ptr<TextGlyph>(new TextGlyph(bytes)));
       }
     }
 
     void BinaryStyleInterpreter::throwGlyphIndex(const size_t & index)
     {
-      if (this->gylphs.size() == 0 || index > this->gylphs.size() - 1){
+      if (this->glyphs->size() == 0 || index > this->glyphs->size() - 1){
         throw InterpreterException("Invalid index");
       }
     }

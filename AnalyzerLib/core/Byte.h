@@ -1,13 +1,19 @@
 #ifndef BYTE_H
 #define BYTE_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include "BasicType.h"
 
 #include <string>
 
 namespace analyzer{
   namespace core{
-    class Byte : public BasicType
+    class IMEX Byte : public BasicType
     {
     public:
       static const unsigned int ByteSize = 8;

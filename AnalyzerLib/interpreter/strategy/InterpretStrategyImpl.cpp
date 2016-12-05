@@ -5,6 +5,7 @@ namespace analyzer{
     namespace strategy{
       InterpretStrategyImpl::~InterpretStrategyImpl()
       {
+        delete this->data;
       }
 
       std::string InterpretStrategyImpl::GetPlainText()
@@ -13,18 +14,18 @@ namespace analyzer{
       }
 
       InterpretStrategyImpl::InterpretStrategyImpl()
-        : data()
+        : data(new std::vector<std::shared_ptr<analyzer::core::Byte>>())
       {
       }
 
       InterpretStrategyImpl::InterpretStrategyImpl(const std::vector<std::shared_ptr<analyzer::core::Byte>> & data)
-        : data(data)
+        : data(new std::vector<std::shared_ptr<analyzer::core::Byte>>(data))
       {
       }
 
       std::vector<std::shared_ptr<analyzer::core::Byte>> & InterpretStrategyImpl::currentData()
       {
-        return this->data;
+        return *this->data;
       }
     }
   }

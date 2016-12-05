@@ -9,6 +9,7 @@
 #include "interpreter\strategy\InterpreterStrategyTest.h"
 #include "interpreter\strategy\DefaultTextTest.h"
 #include "interpreter\TextChangedObserverTest.h"
+#include "base\AnalyzerBaseTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

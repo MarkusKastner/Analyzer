@@ -1,6 +1,12 @@
 #ifndef INTERPRETSTRATEGYIMPL_H
 #define INTERPRETSTRATEGYIMPL_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include <string>
 #include <vector>
 #include <memory>
@@ -11,7 +17,7 @@
 namespace analyzer{
   namespace interpreter{
     namespace strategy{
-      class InterpretStrategyImpl : public InterpretStrategy
+      class IMEX InterpretStrategyImpl : public InterpretStrategy
       {
       public:
         virtual ~InterpretStrategyImpl();
@@ -23,7 +29,7 @@ namespace analyzer{
         std::vector<std::shared_ptr<analyzer::core::Byte>> & currentData();
 
       private:
-        std::vector<std::shared_ptr<analyzer::core::Byte>> data;
+        std::vector<std::shared_ptr<analyzer::core::Byte>> * data;
       };
     }
   }

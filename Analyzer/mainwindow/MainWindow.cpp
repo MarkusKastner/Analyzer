@@ -9,8 +9,8 @@
 namespace analyzer{
   namespace gui{
 
-    MainWindow::MainWindow(app::IOActions * ioActions, QWidget *parent)
-      : QMainWindow(parent), actions(), ioActions(ioActions), analyzerEdit(nullptr)
+    MainWindow::MainWindow(app::IOActions * ioActions, base::AnalyzerBase & analyzerBase, QWidget *parent)
+      : QMainWindow(parent), actions(), ioActions(ioActions), analyzerBase(analyzerBase), analyzerEdit(nullptr)
     {
       ui.setupUi(this);
       this->setup();
@@ -21,6 +21,10 @@ namespace analyzer{
 
     }
 
+    void MainWindow::SetData(const std::shared_ptr<core::ByteCollection> & data)
+    {
+    }
+
     void MainWindow::setup()
     {
       this->throwIOActions();
@@ -28,6 +32,8 @@ namespace analyzer{
       this->analyzerEdit = new gui::display::AnalyzerEdit();
       this->ui.centralWidget->layout()->addWidget(this->analyzerEdit);
 
+      this->analyzerEdit->SetInterpreter(this->analyzerBase.Interpreter());
+      
       this->actions.reset(new Actions(this, this->ioActions));
       this->connectUI();
     }

@@ -1,12 +1,18 @@
 #ifndef WORD_H
 #define WORD_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include "BasicType.h"
 #include "Byte.h"
 
 namespace analyzer{
   namespace core{
-    class Word : public BasicType
+    class IMEX Word : public BasicType
     {
     public:
       Word();

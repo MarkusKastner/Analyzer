@@ -28,6 +28,9 @@
     <Filter Include="Interpreter\error">
       <UniqueIdentifier>{2a8dfe16-f2eb-4977-83dd-54455b403ffa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{4c8b2d5f-c694-4040-9d37-9dc455d2da77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.cpp">
       <Filter>Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp">
+      <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.h">
       <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\base\AnalyzerBase.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\AnalyzerBaseTest.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

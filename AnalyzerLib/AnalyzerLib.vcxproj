@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base\AnalyzerBase.cpp" />
     <ClCompile Include="core\BasicType.cpp" />
     <ClCompile Include="core\Byte.cpp" />
     <ClCompile Include="core\ByteCollection.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="interpreter\TextGlyph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base\AnalyzerBase.h" />
     <ClInclude Include="core\BasicType.h" />
     <ClInclude Include="core\Byte.h" />
     <ClInclude Include="core\ByteCollection.h" />

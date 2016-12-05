@@ -2,6 +2,7 @@
 #define ANALYZEREDIT_H
 
 #include <QTextEdit>
+#include "AnalyzerLib\interpreter\TextChangedObserver.h"
 
 namespace analyzer{
   namespace interpreter{

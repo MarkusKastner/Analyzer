@@ -1,6 +1,12 @@
 #ifndef BYTECOLLECTION_H
 #define BYTECOLLECTION_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include <vector>
 #include <memory>
 
@@ -8,11 +14,11 @@
 
 namespace analyzer{
   namespace core{
-    class ByteCollection
+    class IMEX ByteCollection
     {
     public:
       ByteCollection();
-      explicit ByteCollection(const char const *  data, const size_t & size);
+      explicit ByteCollection(const char *  data, const size_t & size);
       virtual ~ByteCollection();
 
       size_t GetSize() const;
@@ -21,7 +27,7 @@ namespace analyzer{
       std::vector<std::shared_ptr<Byte>>::iterator begin();
       std::vector<std::shared_ptr<Byte>>::iterator end();
     private:
-      std::vector<std::shared_ptr<Byte>> data;
+      std::vector<std::shared_ptr<Byte>> * data;
     };
   }
 }

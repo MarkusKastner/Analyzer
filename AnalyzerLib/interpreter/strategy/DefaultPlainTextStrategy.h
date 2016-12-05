@@ -1,12 +1,18 @@
 #ifndef DEFAULTPLAINTEXTSTRATEGY_H
 #define DEFAULTPLAINTEXTSTRATEGY_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+
+#endif
 #include "InterpretStrategyImpl.h"
 
 namespace analyzer{
   namespace interpreter{
     namespace strategy{
-      class DefaultPlainTextStrategy : public InterpretStrategyImpl
+      class IMEX DefaultPlainTextStrategy : public InterpretStrategyImpl
       {
       public:
         DefaultPlainTextStrategy();
