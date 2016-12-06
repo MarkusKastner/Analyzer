@@ -114,6 +114,7 @@ TEST_F(AnalyzerBaseTest, EmptyHasData)
 TEST_F(AnalyzerBaseTest, LoadFile)
 {
   this->analyzerBase1.LoadFile(this->path1);
+  std::this_thread::sleep_for(std::chrono::milliseconds(200));
   ASSERT_TRUE(this->analyzerBase1.HasData());
 }
 
@@ -123,6 +124,8 @@ TEST_F(AnalyzerBaseTest, InvalidFile)
   std::string invalidPath("C:/dev/invalid.txt");
   try{
     this->analyzerBase1.LoadFile(invalidPath);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    this->analyzerBase1.Rethrow();
   }
   catch (analyzer::base::AnalyzerBaseException & ex){
     message = ex.what();

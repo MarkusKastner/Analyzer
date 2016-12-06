@@ -11,13 +11,35 @@
 namespace analyzer{
   namespace base{
     AnalyzerBase::AnalyzerBase()
-      : interpreter(new std::unique_ptr<interpreter::Interpreter>()), baseObservers(new std::vector<AnalyzerBaseObserver*>())
+      : baseThread(nullptr), runBaseWorker(new std::atomic<bool>(true)),
+      workCondition(new std::condition_variable()), waitLock(new std::mutex),// hasException(new std::atomic<bool>(true)), 
+      workerException(new std::exception_ptr()),
+      workTasks(new std::queue<Task>()),
+      currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()), 
+      baseObservers(new std::vector<AnalyzerBaseObserver*>())
     {
       this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
+      this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
     }
 
     AnalyzerBase::~AnalyzerBase()
     {
+      *this->runBaseWorker = false;
+
+      if (this->baseThread != nullptr){
+        //*this->baseWorkerNotified = true;
+        this->workCondition->notify_one();
+        this->baseThread->join();
+        delete this->baseThread;
+      }
+
+      delete this->workCondition;
+      delete this->waitLock;
+      //delete this->hasException;
+      //delete this->workerException;
+      delete this->workTasks;
+      delete this->runBaseWorker;
+      delete this->currentFilePath;
       delete this->interpreter;
       delete this->baseObservers;
     }
@@ -77,9 +99,52 @@ namespace analyzer{
 
     void AnalyzerBase::LoadFile(const std::string & path)
     {
-      std::ifstream file(path.c_str(), std::ios::binary);
+      *this->currentFilePath = path;
+      this->workTasks->push(Task::LoadNewDataFromFile);
+      this->workCondition->notify_one();
+    }
+
+    bool AnalyzerBase::HasData()
+    {
+      return this->interpreter->get()->HasData();
+    }
+
+    void AnalyzerBase::Rethrow()
+    {
+      if (*this->workerException){
+        std::rethrow_exception(*this->workerException);
+      }
+    }
+
+    void AnalyzerBase::baseWorker()
+    {
+      std::unique_lock<std::mutex> lock(*this->waitLock);
+      while (this->runBaseWorker->load()){
+        try{
+          this->workCondition->wait(lock);
+          while (!this->workTasks->empty()){
+            
+            switch (this->workTasks->front()){
+            case Task::LoadNewDataFromFile:
+              this->loadFile();
+              this->workTasks->pop();
+              break;
+            }
+          }
+        }
+        catch (...){
+          *this->workerException = std::current_exception();
+          //*this->hasException = true;
+          break;
+        }
+      }
+    }
+
+    void AnalyzerBase::loadFile()
+    {
+      std::ifstream file(this->currentFilePath->c_str(), std::ios::binary);
       if (file.bad() || !file.is_open()){
-        throw AnalyzerBaseException("Cannot open " + path);
+        throw AnalyzerBaseException("Cannot open " + *this->currentFilePath);
       }
 
       std::vector<char> data;
@@ -92,11 +157,6 @@ namespace analyzer{
       data.reserve(fileSize);
       data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
       this->interpreter->get()->ResetData(data);
-    }
-
-    bool AnalyzerBase::HasData()
-    {
-      return this->interpreter->get()->HasData();
     }
 
     void AnalyzerBase::notifyInterpreterChange()

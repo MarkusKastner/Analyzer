@@ -9,6 +9,12 @@
 
 #include <memory>
 #include <vector>
+#include <thread>
+#include <atomic>
+#include <queue>
+#include <chrono>
+#include <mutex>
+#include <condition_variable>
 
 namespace analyzer{
   namespace interpreter{
@@ -19,6 +25,12 @@ namespace analyzer{
     class IMEX AnalyzerBase
     {
     public:
+
+      enum Task
+      {
+        LoadNewDataFromFile = 0
+      };
+
       AnalyzerBase();
       virtual ~AnalyzerBase();
 
@@ -35,9 +47,25 @@ namespace analyzer{
       void LoadFile(const std::string & path);
       bool HasData();
 
+      void Rethrow();
+
     private:
+      std::thread * baseThread;
+      std::atomic<bool> * runBaseWorker;
+      std::condition_variable * workCondition;
+      std::mutex * waitLock;
+      //std::atomic<bool> * hasException;
+      std::exception_ptr * workerException;
+
+      std::queue<Task> * workTasks;
+
+      std::string * currentFilePath;
       std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
+
+      void baseWorker();
+
+      void loadFile();
 
       void notifyInterpreterChange();
 
