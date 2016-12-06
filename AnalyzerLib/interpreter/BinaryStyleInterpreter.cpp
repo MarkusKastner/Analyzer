@@ -23,7 +23,7 @@ namespace analyzer{
     std::string BinaryStyleInterpreter::GetPlainText()
     {
       std::string output;
-      if (*this->getByteCollection()){
+      if (this->HasData()){
         for (auto byte : *this->getByteCollection()->get()){
           output += byte->GetBitsAsString();
           output += " ";

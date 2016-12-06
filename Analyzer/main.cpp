@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include "application\IOActionsImpl.h"
 #include "AnalyzerLib\base\AnalyzerBase.h"
 
 int main(int argc, char *argv[])

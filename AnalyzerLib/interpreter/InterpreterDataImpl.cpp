@@ -6,7 +6,8 @@ namespace analyzer{
   namespace interpreter{
 
     InterpreterDataImpl::InterpreterDataImpl()
-      :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>()), glyphs(new std::vector<std::shared_ptr<TextGlyph>>())
+      :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(new analyzer::core::ByteCollection())), 
+      glyphs(new std::vector<std::shared_ptr<TextGlyph>>())
     {
     }
 
@@ -44,6 +45,11 @@ namespace analyzer{
     {
       this->byteCollection->reset(new core::ByteCollection(data));
       this->onNewData();
+    }
+
+    std::shared_ptr<analyzer::core::ByteCollection> InterpreterDataImpl::GetData()
+    {
+      return *this->byteCollection;
     }
 
     size_t InterpreterDataImpl::NumGlyphs() const

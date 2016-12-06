@@ -54,7 +54,7 @@ namespace analyzer{
     void AnalyzerBase::SetBinaryMode()
     {
       if (!dynamic_cast<interpreter::BinaryStyleInterpreter*>(this->interpreter->get())){
-        this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
+        this->interpreter->reset(new interpreter::BinaryStyleInterpreter(this->interpreter->get()->GetData()));
         this->notifyInterpreterChange();
       }
     }
@@ -62,7 +62,7 @@ namespace analyzer{
     void AnalyzerBase::SetTextMode()
     {
       if (!dynamic_cast<interpreter::TextStyleInterpreter*>(this->interpreter->get())){
-        this->interpreter->reset(new interpreter::TextStyleInterpreter());
+        this->interpreter->reset(new interpreter::TextStyleInterpreter(this->interpreter->get()->GetData()));
         this->notifyInterpreterChange();
       }
     }

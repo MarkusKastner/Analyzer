@@ -28,6 +28,7 @@ namespace analyzer{
       virtual bool HasData();
       virtual void ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
       virtual void ResetData(const std::vector<char> & data);
+      virtual std::shared_ptr<analyzer::core::ByteCollection> GetData();
 
       virtual size_t NumGlyphs() const;
       virtual std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);

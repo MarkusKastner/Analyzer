@@ -30,17 +30,22 @@ public:
   };
 
   AnalyzerBaseTest()
-    :analyzerBase1(), observer1(), path1("c:/dev/test.txt")
+    :analyzerBase1(), observer1(), path1("c:/dev/test.txt"), dummyData1()
   {}
   ~AnalyzerBaseTest(){}
 
   void SetUp(){
-
+    dummyData1.push_back('D');
+    dummyData1.push_back('u');
+    dummyData1.push_back('m');
+    dummyData1.push_back('m');
+    dummyData1.push_back('y');
   }
 
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
   std::string path1;
+  std::vector<char> dummyData1;
 };
 
 TEST_F(AnalyzerBaseTest, init)
@@ -59,6 +64,17 @@ TEST_F(AnalyzerBaseTest, SwitchMode)
   ASSERT_TRUE(dynamic_cast<analyzer::interpreter::TextStyleInterpreter*>(this->analyzerBase1.Interpreter()));
   this->analyzerBase1.SetBinaryMode();
   ASSERT_TRUE(dynamic_cast<analyzer::interpreter::BinaryStyleInterpreter*>(this->analyzerBase1.Interpreter()));
+}
+
+TEST_F(AnalyzerBaseTest, SwitchModeWithData)
+{
+  ASSERT_FALSE(this->analyzerBase1.HasData());
+
+  this->analyzerBase1.Interpreter()->ResetData(this->dummyData1);
+  this->analyzerBase1.SetTextMode();
+  ASSERT_TRUE(this->analyzerBase1.HasData());
+  this->analyzerBase1.SetBinaryMode();
+  ASSERT_TRUE(this->analyzerBase1.HasData());
 }
 
 TEST_F(AnalyzerBaseTest, HasObserver)
