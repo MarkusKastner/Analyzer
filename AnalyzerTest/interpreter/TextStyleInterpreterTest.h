@@ -54,4 +54,10 @@ TEST_F(TextStyleInterpreterTest, GetPlainText)
 {
   ASSERT_STREQ(this->interpreter2->GetPlainText().c_str(), this->compare2.c_str());
 }
+
+TEST_F(TextStyleInterpreterTest, GetPlainTextOnEmptyInterpreter)
+{
+  analyzer::interpreter::TextStyleInterpreter interpreter;
+  ASSERT_STREQ(interpreter.GetPlainText().c_str(), std::string("").c_str());
+}
 #endif

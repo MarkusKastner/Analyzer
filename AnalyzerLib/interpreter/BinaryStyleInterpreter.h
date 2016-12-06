@@ -16,6 +16,10 @@ namespace analyzer{
   namespace interpreter{
     class IMEX BinaryStyleInterpreter : public InterpreterDataImpl
     {
+    private:
+      BinaryStyleInterpreter(const BinaryStyleInterpreter&){}
+      BinaryStyleInterpreter & operator=(const BinaryStyleInterpreter&){ return *this; }
+
     public:
       BinaryStyleInterpreter();
       explicit BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);

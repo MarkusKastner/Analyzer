@@ -16,6 +16,10 @@ namespace analyzer{
   namespace interpreter{
     class IMEX InterpreterDataImpl : public InterpreterObserverImpl
     {
+    private:
+      InterpreterDataImpl(const InterpreterDataImpl&){}
+      InterpreterDataImpl & operator=(const InterpreterDataImpl&){ return *this; }
+
     public:
       InterpreterDataImpl();
       explicit InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);

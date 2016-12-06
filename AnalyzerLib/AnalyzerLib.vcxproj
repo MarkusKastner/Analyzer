@@ -95,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\AnalyzerBase.h" />
+    <ClInclude Include="base\AnalyzerBaseObserver.h" />
+    <ClInclude Include="base\error\AnalyzerBaseException.h" />
     <ClInclude Include="core\BasicType.h" />
     <ClInclude Include="core\Byte.h" />
     <ClInclude Include="core\ByteCollection.h" />

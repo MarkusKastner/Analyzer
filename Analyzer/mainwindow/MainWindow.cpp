@@ -19,6 +19,8 @@ namespace analyzer{
 
     MainWindow::~MainWindow()
     {
+      this->ioActions->UnregisterObserver(this);
+      this->analyzerBase.UnregisterObserver(this);
     }
 
     void MainWindow::NotifyDataLoad()
@@ -26,10 +28,16 @@ namespace analyzer{
       this->analyzerBase.Interpreter()->ResetData(this->ioActions->GetData());
     }
 
+    void MainWindow::NotifyInterprterChange()
+    {
+      this->analyzerEdit->SetInterpreter(this->analyzerBase.Interpreter());
+    }
+
     void MainWindow::setup()
     {
       this->throwIOActions();
       this->ioActions->RegisterObserver(this);
+      this->analyzerBase.RegisterObserver(this);
 
       this->ui.centralWidget->setLayout(new QVBoxLayout());
       this->analyzerEdit = new gui::display::AnalyzerEdit();
@@ -37,7 +45,7 @@ namespace analyzer{
 
       this->analyzerEdit->SetInterpreter(this->analyzerBase.Interpreter());
       
-      this->actions.reset(new Actions(this, this->ioActions, analyzerBase));
+      this->actions.reset(new Actions(this, this->ioActions, this->analyzerBase));
       this->connectUI();
     }
 

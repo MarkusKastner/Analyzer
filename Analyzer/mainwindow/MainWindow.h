@@ -10,6 +10,7 @@
 #include "application\IOActionObserver.h"
 #include "display\maindisplay\AnalyzerEdit.h"
 #include "AnalyzerLib\base\AnalyzerBase.h"
+#include "AnalyzerLib\base\AnalyzerBaseObserver.h"
 
 namespace analyzer{
   namespace app{
@@ -20,7 +21,7 @@ namespace analyzer{
   }
   namespace gui{
 
-    class MainWindow : public QMainWindow, public app::IOActionObserver
+    class MainWindow : public QMainWindow, public app::IOActionObserver, public base::AnalyzerBaseObserver
     {
       Q_OBJECT
 
@@ -29,6 +30,7 @@ namespace analyzer{
       ~MainWindow();
 
       virtual void NotifyDataLoad();
+      virtual void NotifyInterprterChange();
 
     private:
       Ui::MainWindow ui;

@@ -23,12 +23,10 @@ namespace analyzer{
 
       void AnalyzerEdit::SetInterpreter(interpreter::Interpreter * interpreter)
       {
-        if (this->interpreter != nullptr){
-          this->interpreter->UnregisterObserver(this);
-        }
-        this->interpreter = interpreter;
         if (interpreter != nullptr){
+          this->interpreter = interpreter;
           this->interpreter->RegisterObserver(this);
+          this->setText(this->interpreter->GetPlainText().c_str());
         }
       }
     }

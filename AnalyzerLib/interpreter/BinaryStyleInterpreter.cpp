@@ -23,11 +23,13 @@ namespace analyzer{
     std::string BinaryStyleInterpreter::GetPlainText()
     {
       std::string output;
-      for (auto byte : *this->getByteCollection()->get()){
-        output += byte->GetBitsAsString();
-        output += " ";
+      if (*this->getByteCollection()){
+        for (auto byte : *this->getByteCollection()->get()){
+          output += byte->GetBitsAsString();
+          output += " ";
+        }
+        output.pop_back();
       }
-      output.pop_back();
       return output;
     }
   }
