@@ -30,7 +30,7 @@ public:
   };
 
   AnalyzerBaseTest()
-    :analyzerBase1(), observer1()
+    :analyzerBase1(), observer1(), path1("c:/dev/test.txt")
   {}
   ~AnalyzerBaseTest(){}
 
@@ -40,6 +40,7 @@ public:
 
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
+  std::string path1;
 };
 
 TEST_F(AnalyzerBaseTest, init)
@@ -104,4 +105,29 @@ TEST_F(AnalyzerBaseTest, NotifyInterpreterChanged)
   this->analyzerBase1.SetTextMode();
   ASSERT_TRUE(this->observer1.InterpreterChanged());
 }
+
+TEST_F(AnalyzerBaseTest, EmptyHasData)
+{
+  ASSERT_FALSE(this->analyzerBase1.HasData());
+}
+
+TEST_F(AnalyzerBaseTest, LoadFile)
+{
+  this->analyzerBase1.LoadFile(this->path1);
+  ASSERT_TRUE(this->analyzerBase1.HasData());
+}
+
+TEST_F(AnalyzerBaseTest, InvalidFile)
+{
+  std::string message;
+  std::string invalidPath("C:/dev/invalid.txt");
+  try{
+    this->analyzerBase1.LoadFile(invalidPath);
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex){
+    message = ex.what();
+  }
+  ASSERT_STREQ(message.c_str(), std::string("Cannot open " + invalidPath).c_str());
+}
+
 #endif

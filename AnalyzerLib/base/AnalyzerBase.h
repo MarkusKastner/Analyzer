@@ -32,6 +32,9 @@ namespace analyzer{
       void RegisterObserver(AnalyzerBaseObserver * observer);
       void UnregisterObserver(AnalyzerBaseObserver * observer);
 
+      void LoadFile(const std::string & path);
+      bool HasData();
+
     private:
       std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;

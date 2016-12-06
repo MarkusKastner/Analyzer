@@ -1,5 +1,7 @@
 #include "AnalyzerBase.h"
 
+#include <fstream>
+
 #include "AnalyzerLib\interpreter\Interpreter.h"
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
@@ -71,6 +73,30 @@ namespace analyzer{
           return;
         }
       }
+    }
+
+    void AnalyzerBase::LoadFile(const std::string & path)
+    {
+      std::ifstream file(path.c_str(), std::ios::binary);
+      if (file.bad() || !file.is_open()){
+        throw AnalyzerBaseException("Cannot open " + path);
+      }
+
+      std::vector<char> data;
+
+      long fileSize = 0;
+      file.seekg(0, std::ios::end);
+      fileSize = file.tellg();
+      file.seekg(0, std::ios::beg);
+
+      data.reserve(fileSize);
+      data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
+      this->interpreter->get()->ResetData(data);
+    }
+
+    bool AnalyzerBase::HasData()
+    {
+      return this->interpreter->get()->HasData();
     }
 
     void AnalyzerBase::notifyInterpreterChange()
