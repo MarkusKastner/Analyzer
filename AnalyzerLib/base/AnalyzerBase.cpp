@@ -12,7 +12,7 @@ namespace analyzer{
   namespace base{
     AnalyzerBase::AnalyzerBase()
       : baseThread(nullptr), runBaseWorker(new std::atomic<bool>(true)),
-      workCondition(new std::condition_variable()), waitLock(new std::mutex),// hasException(new std::atomic<bool>(true)), 
+      workCondition(new std::condition_variable()), waitLock(new std::mutex), 
       workerException(new std::exception_ptr()),
       workTasks(new std::queue<Task>()),
       currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()), 
@@ -27,7 +27,6 @@ namespace analyzer{
       *this->runBaseWorker = false;
 
       if (this->baseThread != nullptr){
-        //*this->baseWorkerNotified = true;
         this->workCondition->notify_one();
         this->baseThread->join();
         delete this->baseThread;
@@ -35,8 +34,6 @@ namespace analyzer{
 
       delete this->workCondition;
       delete this->waitLock;
-      //delete this->hasException;
-      //delete this->workerException;
       delete this->workTasks;
       delete this->runBaseWorker;
       delete this->currentFilePath;
@@ -134,7 +131,6 @@ namespace analyzer{
         }
         catch (...){
           *this->workerException = std::current_exception();
-          //*this->hasException = true;
           break;
         }
       }

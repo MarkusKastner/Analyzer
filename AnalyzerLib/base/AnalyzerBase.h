@@ -54,7 +54,6 @@ namespace analyzer{
       std::atomic<bool> * runBaseWorker;
       std::condition_variable * workCondition;
       std::mutex * waitLock;
-      //std::atomic<bool> * hasException;
       std::exception_ptr * workerException;
 
       std::queue<Task> * workTasks;

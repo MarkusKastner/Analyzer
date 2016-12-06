@@ -8,10 +8,9 @@
 
 namespace analyzer{
   namespace gui{
-    Actions::Actions(MainWindow * mainWindow, app::IOActions * ioActions, base::AnalyzerBase & analyzerBase)
-      :QObject(), mainWindow(mainWindow), ioActions(ioActions), analyzerBase(analyzerBase)
+    Actions::Actions(MainWindow * mainWindow, base::AnalyzerBase & analyzerBase)
+      :QObject(), mainWindow(mainWindow), analyzerBase(analyzerBase)
     {
-      this->throwIOActions();
       this->throwMainWindow();
     }
 
@@ -23,7 +22,7 @@ namespace analyzer{
     void Actions::OnOpen()
     {
       QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Read File")));
-      this->ioActions->ReadFile(fileName.toStdString());
+      this->analyzerBase.LoadFile(fileName.toStdString());
     }
     
     void Actions::OnWorkingModeBianry()
@@ -34,13 +33,6 @@ namespace analyzer{
     void Actions::OnWorkingModeText()
     {
       this->analyzerBase.SetTextMode();
-    }
-
-    void Actions::throwIOActions()
-    {
-      if (nullptr == this->ioActions){
-        throw app::AppException("Invalid io actions");
-      }
     }
 
     void Actions::throwMainWindow()

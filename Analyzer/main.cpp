@@ -9,9 +9,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    std::unique_ptr<analyzer::app::IOActions> ioActions(new analyzer::app::IOActionsImpl());
     std::unique_ptr<analyzer::base::AnalyzerBase> analyzerBase(new analyzer::base::AnalyzerBase());
-    analyzer::gui::MainWindow w(ioActions.get(), *analyzerBase.get());
+    analyzer::gui::MainWindow w(*analyzerBase.get());
     w.show();
     return a.exec();
 }

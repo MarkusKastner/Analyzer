@@ -6,16 +6,13 @@
 #include "AnalyzerLib\base\AnalyzerBase.h"
 
 namespace analyzer{
-  namespace app{
-    class IOActions;
-  }
   namespace gui{
     class MainWindow;
     class Actions : public QObject
     {
       Q_OBJECT
     public:
-      Actions(MainWindow * mainWindow, app::IOActions * ioActions, base::AnalyzerBase & analyzerBase);
+      Actions(MainWindow * mainWindow, base::AnalyzerBase & analyzerBase);
       virtual ~Actions();
 
       void OnOpen();
@@ -24,10 +21,8 @@ namespace analyzer{
 
     private:
       MainWindow * mainWindow;
-      app::IOActions * ioActions;
       base::AnalyzerBase & analyzerBase;
 
-      void throwIOActions();
       void throwMainWindow();
     };
   }

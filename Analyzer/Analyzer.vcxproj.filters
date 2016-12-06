@@ -53,9 +53,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="application\IOActionsImpl.cpp">
-      <Filter>application</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -82,12 +79,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="application\IOActions.h">
-      <Filter>application</Filter>
-    </ClInclude>
-    <ClInclude Include="application\IOActionsImpl.h">
-      <Filter>application</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -96,9 +87,6 @@
     </ClInclude>
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h">
       <Filter>display\maindisplay</Filter>
-    </ClInclude>
-    <ClInclude Include="application\IOActionObserver.h">
-      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

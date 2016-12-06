@@ -138,7 +138,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application\error\AppException.cpp" />
-    <ClCompile Include="application\IOActionsImpl.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Actions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -162,9 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\error\AppException.h" />
-    <ClInclude Include="application\IOActionObserver.h" />
-    <ClInclude Include="application\IOActions.h" />
-    <ClInclude Include="application\IOActionsImpl.h" />
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h" />
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h" />
     <CustomBuild Include="mainwindow\Actions.h">

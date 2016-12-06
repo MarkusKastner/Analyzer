@@ -2,6 +2,8 @@
 #define ANALYZEREDIT_H
 
 #include <QTextEdit>
+#include <QEvent>
+
 #include "AnalyzerLib\interpreter\TextChangedObserver.h"
 
 namespace analyzer{
@@ -12,6 +14,15 @@ namespace analyzer{
     namespace display{
       class AnalyzerEdit : public QTextEdit, public interpreter::TextChangedObserver
       {
+      private:
+        class EditEvent : public QEvent
+        {
+        public:
+          EditEvent()
+            :QEvent(Type::User)
+          {}
+          virtual ~EditEvent(){}
+        };
       public:
         AnalyzerEdit(QWidget * parent = 0);
         virtual ~AnalyzerEdit();
@@ -19,6 +30,9 @@ namespace analyzer{
         virtual void NotifyDataChanged();
 
         void SetInterpreter(interpreter::Interpreter * interpreter);
+      
+      protected:
+        void customEvent(QEvent * evt);
 
       private:
         interpreter::Interpreter * interpreter;
