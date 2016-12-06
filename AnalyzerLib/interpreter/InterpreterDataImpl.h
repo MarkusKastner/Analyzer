@@ -8,6 +8,7 @@
 #endif
 
 #include <memory>
+#include <mutex>
 
 #include "InterpreterObserverImpl.h"
 #include "TextGlyph.h"
@@ -45,9 +46,11 @@ namespace analyzer{
       std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
       std::vector<std::shared_ptr<TextGlyph>> * glyphs;
 
+      std::recursive_mutex * dataLock;
+      std::recursive_mutex * glyphsLock;
+
       void onNewData();
       
-
       void throwGlyphIndex(const size_t & index);
     };
   }
