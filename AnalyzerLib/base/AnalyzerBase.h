@@ -23,6 +23,9 @@ namespace analyzer{
       bool HasInterpreter();
       interpreter::Interpreter * Interpreter();
 
+      void SetBinaryMode();
+      void SetTextMode();
+
     private:
       std::unique_ptr<interpreter::Interpreter> * interpreter;
     };

@@ -19,7 +19,6 @@ namespace analyzer{
 
     MainWindow::~MainWindow()
     {
-
     }
 
     void MainWindow::NotifyDataLoad()
@@ -38,13 +37,15 @@ namespace analyzer{
 
       this->analyzerEdit->SetInterpreter(this->analyzerBase.Interpreter());
       
-      this->actions.reset(new Actions(this, this->ioActions));
+      this->actions.reset(new Actions(this, this->ioActions, analyzerBase));
       this->connectUI();
     }
 
     void MainWindow::connectUI()
     {
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
+      connect(this->ui.actionBinary, &QAction::triggered, this->actions.get(), &Actions::OnWorkingModeBianry);
+      connect(this->ui.actionText, &QAction::triggered, this->actions.get(), &Actions::OnWorkingModeText);
     }
 
     void MainWindow::throwIOActions()

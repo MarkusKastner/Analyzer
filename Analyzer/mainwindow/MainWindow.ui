@@ -29,7 +29,21 @@
     </property>
     <addaction name="actionOpen"/>
    </widget>
+   <widget class="QMenu" name="menuAnalyzer">
+    <property name="title">
+     <string>Analyzer</string>
+    </property>
+    <widget class="QMenu" name="menuWorking_Mode">
+     <property name="title">
+      <string>Working Mode</string>
+     </property>
+     <addaction name="actionBinary"/>
+     <addaction name="actionText"/>
+    </widget>
+    <addaction name="menuWorking_Mode"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuAnalyzer"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -43,6 +57,16 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
+   </property>
+  </action>
+  <action name="actionBinary">
+   <property name="text">
+    <string>Binary</string>
+   </property>
+  </action>
+  <action name="actionText">
+   <property name="text">
+    <string>Text</string>
    </property>
   </action>
  </widget>

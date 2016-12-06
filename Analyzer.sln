@@ -4,10 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Analyzer", "Analyzer\Analyzer.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD911381-65A0-484B-B088-F9D4E1977934} = {FD911381-65A0-484B-B088-F9D4E1977934}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnalyzerLib", "AnalyzerLib\AnalyzerLib.vcxproj", "{FD911381-65A0-484B-B088-F9D4E1977934}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnalyzerTest", "AnalyzerTest\AnalyzerTest.vcxproj", "{F53787B0-64B7-4B91-872D-2E6F6D2F9955}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD911381-65A0-484B-B088-F9D4E1977934} = {FD911381-65A0-484B-B088-F9D4E1977934}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,8 +8,8 @@
 
 namespace analyzer{
   namespace gui{
-    Actions::Actions(MainWindow * mainWindow, app::IOActions * ioActions)
-      :QObject(), mainWindow(mainWindow), ioActions(ioActions)
+    Actions::Actions(MainWindow * mainWindow, app::IOActions * ioActions, base::AnalyzerBase & analyzerBase)
+      :QObject(), mainWindow(mainWindow), ioActions(ioActions), analyzerBase(analyzerBase)
     {
       this->throwIOActions();
       this->throwMainWindow();
@@ -26,6 +26,16 @@ namespace analyzer{
       this->ioActions->ReadFile(fileName.toStdString());
     }
     
+    void Actions::OnWorkingModeBianry()
+    {
+      this->analyzerBase.SetBinaryMode();
+    }
+
+    void Actions::OnWorkingModeText()
+    {
+      this->analyzerBase.SetTextMode();
+    }
+
     void Actions::throwIOActions()
     {
       if (nullptr == this->ioActions){
