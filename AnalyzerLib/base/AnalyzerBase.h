@@ -62,7 +62,12 @@ namespace analyzer{
       std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
 
+      std::recursive_mutex * workTasksLock;
+
       void baseWorker();
+      bool hasTask();
+      Task getNextTask();
+      void addTask(const Task & task);
 
       void loadFile();
 

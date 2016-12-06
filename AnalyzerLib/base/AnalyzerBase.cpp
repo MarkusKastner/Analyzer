@@ -12,11 +12,12 @@ namespace analyzer{
   namespace base{
     AnalyzerBase::AnalyzerBase()
       : baseThread(nullptr), runBaseWorker(new std::atomic<bool>(true)),
-      workCondition(new std::condition_variable()), waitLock(new std::mutex), 
+      workCondition(new std::condition_variable()), waitLock(new std::mutex),
       workerException(new std::exception_ptr()),
       workTasks(new std::queue<Task>()),
-      currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()), 
-      baseObservers(new std::vector<AnalyzerBaseObserver*>())
+      currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()),
+      baseObservers(new std::vector<AnalyzerBaseObserver*>()),
+      workTasksLock(new std::recursive_mutex())
     {
       this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
@@ -39,6 +40,7 @@ namespace analyzer{
       delete this->currentFilePath;
       delete this->interpreter;
       delete this->baseObservers;
+      delete this->workTasksLock;
     }
 
     bool AnalyzerBase::HasInterpreter()
@@ -97,7 +99,7 @@ namespace analyzer{
     void AnalyzerBase::LoadFile(const std::string & path)
     {
       *this->currentFilePath = path;
-      this->workTasks->push(Task::LoadNewDataFromFile);
+      this->addTask(Task::LoadNewDataFromFile);
       this->workCondition->notify_one();
     }
 
@@ -119,12 +121,11 @@ namespace analyzer{
       while (this->runBaseWorker->load()){
         try{
           this->workCondition->wait(lock);
-          while (!this->workTasks->empty()){
+          while (this->hasTask()){
             
-            switch (this->workTasks->front()){
+            switch (this->getNextTask()){
             case Task::LoadNewDataFromFile:
               this->loadFile();
-              this->workTasks->pop();
               break;
             }
           }
@@ -134,6 +135,26 @@ namespace analyzer{
           break;
         }
       }
+    }
+
+    bool AnalyzerBase::hasTask()
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->workTasksLock);
+      return !this->workTasks->empty();
+    }
+
+    AnalyzerBase::Task AnalyzerBase::getNextTask()
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->workTasksLock);
+      Task nextTask = this->workTasks->front();
+      this->workTasks->pop();
+      return nextTask;
+    }
+
+    void AnalyzerBase::addTask(const AnalyzerBase::Task & task)
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->workTasksLock);
+      this->workTasks->push(task);
     }
 
     void AnalyzerBase::loadFile()
