@@ -20,7 +20,7 @@ public:
   ~TextGlyphTest(){}
 
   void SetUp(){
-    data.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(0)));
+    data.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte('0')));
   }
   std::vector<std::shared_ptr<analyzer::core::Byte>> data;
   size_t numBytes;

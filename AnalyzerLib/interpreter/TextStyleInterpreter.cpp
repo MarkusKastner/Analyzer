@@ -10,6 +10,12 @@ namespace analyzer{
 
     }
 
+    TextStyleInterpreter::TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
+      :InterpreterDataImpl(byteCollection)
+    {
+      this->createGlyphs();
+    }
+
     TextStyleInterpreter::~TextStyleInterpreter()
     {
 
@@ -17,7 +23,21 @@ namespace analyzer{
 
     std::string TextStyleInterpreter::GetPlainText()
     {
-      return "";
+      return this->getPlainText();
+    }
+
+    void TextStyleInterpreter::createGlyphs()
+    {
+      this->clearGlyphs();
+      if ((*this->getByteCollection())->GetSize() <= 0){
+        return;
+      }
+      std::vector<std::shared_ptr<analyzer::core::Byte>> bytes;
+      for (auto byte : *this->getByteCollection()->get()){
+        bytes.push_back(byte);
+      }
+      std::shared_ptr<TextGlyph> glyph(new TextGlyph(bytes));
+      this->addGlyph(glyph);
     }
   }
 }

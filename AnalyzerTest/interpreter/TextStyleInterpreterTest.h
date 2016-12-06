@@ -14,18 +14,44 @@
 class TextStyleInterpreterTest : public testing::Test
 {
 public:
-  TextStyleInterpreterTest(){}
-  ~TextStyleInterpreterTest(){}
+  TextStyleInterpreterTest()
+    :interpreter1(), interpreter2(), compare2("Test 100\nx")
+  {}
+
+  ~TextStyleInterpreterTest()
+  {}
 
   void SetUp(){
+    this->interpreter1.reset(new analyzer::interpreter::TextStyleInterpreter());
 
+    std::vector<char> data2;
+    data2.push_back('T');
+    data2.push_back('e');
+    data2.push_back('s');
+    data2.push_back('t');
+    data2.push_back(' ');
+    data2.push_back('1');
+    data2.push_back('0');
+    data2.push_back('0');
+    data2.push_back('\n');
+    data2.push_back('x');
+
+    std::shared_ptr<analyzer::core::ByteCollection> byteCollection2(new analyzer::core::ByteCollection(data2));
+    this->interpreter2.reset(new analyzer::interpreter::TextStyleInterpreter(byteCollection2));
   }
+
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter1;
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter2;
+  std::string compare2;
 };
 
 TEST_F(TextStyleInterpreterTest, InitAbstract)
 {
-  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter(new analyzer::interpreter::TextStyleInterpreter());
-  ASSERT_FALSE(interpreter->HasData());
+  ASSERT_FALSE(this->interpreter1->HasData());
 }
 
+TEST_F(TextStyleInterpreterTest, GetPlainText)
+{
+  ASSERT_STREQ(this->interpreter2->GetPlainText().c_str(), this->compare2.c_str());
+}
 #endif

@@ -13,7 +13,6 @@ namespace analyzer{
     InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       : InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(byteCollection)), glyphs(new std::vector<std::shared_ptr<TextGlyph>>())
     {
-      this->createGlyphs();
     }
 
     InterpreterDataImpl::~InterpreterDataImpl()
@@ -63,23 +62,42 @@ namespace analyzer{
       return this->byteCollection;
     }
 
-    void InterpreterDataImpl::onNewData()
+    void InterpreterDataImpl::clearGlyphs()
     {
-      this->createGlyphs();
-      this->NotifyTextChange();
+      this->glyphs->clear();
+    }
+
+    void InterpreterDataImpl::addGlyph(const std::shared_ptr<TextGlyph> & glyph)
+    {
+      this->glyphs->push_back(glyph);
+    }
+
+    std::string InterpreterDataImpl::getPlainText()
+    {
+      std::string text;
+      for (auto glyph : *this->glyphs){
+        text += glyph->GetPlainText();
+      }
+      return text;
     }
 
     void InterpreterDataImpl::createGlyphs()
     {
-      this->glyphs->clear();
+      this->clearGlyphs();
       if ((*this->byteCollection)->GetSize() <= 0){
         return;
       }
       for (auto byte : *this->byteCollection->get()){
         std::vector<std::shared_ptr<analyzer::core::Byte>> bytes;
         bytes.push_back(byte);
-        this->glyphs->push_back(std::shared_ptr<TextGlyph>(new TextGlyph(bytes)));
+        this->addGlyph(std::shared_ptr<TextGlyph>(new TextGlyph(bytes)));
       }
+    }
+
+    void InterpreterDataImpl::onNewData()
+    {
+      this->createGlyphs();
+      this->NotifyTextChange();
     }
 
     void InterpreterDataImpl::throwGlyphIndex(const size_t & index)

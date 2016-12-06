@@ -22,7 +22,7 @@ namespace analyzer{
       {
         std::string text;
         for (auto& byte : this->currentData()){
-          text += std::to_string(byte->GetValue());
+          text += static_cast<char>(byte->GetValue());
         }
         return text;
       }

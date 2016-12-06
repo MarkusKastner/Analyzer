@@ -30,13 +30,18 @@ namespace analyzer{
 
     protected:
       std::shared_ptr<analyzer::core::ByteCollection> * getByteCollection();
+      void clearGlyphs();
+      void addGlyph(const std::shared_ptr<TextGlyph> & glyph);
+      std::string getPlainText();
+
+      virtual void createGlyphs();
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
       std::vector<std::shared_ptr<TextGlyph>> * glyphs;
 
       void onNewData();
-      void createGlyphs();
+      
 
       void throwGlyphIndex(const size_t & index);
     };

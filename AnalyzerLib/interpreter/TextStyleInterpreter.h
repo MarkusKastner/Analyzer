@@ -18,9 +18,13 @@ namespace analyzer{
     {
     public:
       TextStyleInterpreter();
+      explicit TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
       virtual ~TextStyleInterpreter();
 
       virtual std::string GetPlainText();
+
+    protected:
+      virtual void createGlyphs();
     };
   }
 }

@@ -22,13 +22,13 @@ public:
 
   void SetUp()
   {
-    data1.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(0)));
+    data1.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte('0')));
     strategy1.reset(new analyzer::interpreter::strategy::DefaultPlainTextStrategy(data1));
 
-    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(0)));
-    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(1)));
-    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(2)));
-    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(3)));
+    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte('0')));
+    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte('1')));
+    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte('2')));
+    data2.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte('3')));
     strategy2.reset(new analyzer::interpreter::strategy::DefaultPlainTextStrategy(data2));
   }
 
