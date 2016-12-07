@@ -138,6 +138,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application\error\AppException.cpp" />
+    <ClCompile Include="dialogs\DisplayOptions.cpp" />
+    <ClCompile Include="dialogs\DisplayOptionsBinary.cpp" />
+    <ClCompile Include="dialogs\DisplayOptionsText.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Actions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -161,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\error\AppException.h" />
+    <ClInclude Include="dialogs\DisplayOptions.h" />
+    <ClInclude Include="dialogs\DisplayOptionsBinary.h" />
+    <ClInclude Include="dialogs\DisplayOptionsText.h" />
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h" />
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h" />
     <CustomBuild Include="mainwindow\Actions.h">

@@ -31,6 +31,12 @@ namespace analyzer{
         LoadNewDataFromFile = 0
       };
 
+      enum WorkingMode
+      {
+        Binary = 0,
+        Text
+      };
+
       AnalyzerBase();
       virtual ~AnalyzerBase();
 
@@ -39,6 +45,7 @@ namespace analyzer{
 
       void SetBinaryMode();
       void SetTextMode();
+      WorkingMode GetWorkingMode();
 
       size_t NumberOfObservers();
       void RegisterObserver(AnalyzerBaseObserver * observer);

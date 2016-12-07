@@ -6,6 +6,8 @@
 
 #include <memory>
 
+#include <QDockWidget>
+
 #include "Actions.h"
 #include "display\maindisplay\AnalyzerEdit.h"
 #include "AnalyzerLib\base\AnalyzerBase.h"
@@ -33,7 +35,12 @@ namespace analyzer{
       base::AnalyzerBase & analyzerBase;
       gui::display::AnalyzerEdit * analyzerEdit;
 
+      QDockWidget * displayOptions;
+
       void setup();
+      void setupDialogs();
+
+      void changeWorkingMode();
       void connectUI();
     };
   }

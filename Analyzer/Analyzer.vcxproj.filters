@@ -48,6 +48,9 @@
     <Filter Include="display\maindisplay">
       <UniqueIdentifier>{eb9c9b5b-152f-4d8b-a805-712ee12ac3aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dialogs">
+      <UniqueIdentifier>{41101485-0785-4068-92c9-3a9af8fcaf23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -77,6 +80,15 @@
     <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp">
       <Filter>display\maindisplay</Filter>
     </ClCompile>
+    <ClCompile Include="dialogs\DisplayOptions.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\DisplayOptionsBinary.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\DisplayOptionsText.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -87,6 +99,15 @@
     </ClInclude>
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h">
       <Filter>display\maindisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\DisplayOptions.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\DisplayOptionsBinary.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\DisplayOptionsText.h">
+      <Filter>dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

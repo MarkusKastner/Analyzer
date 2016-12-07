@@ -69,6 +69,16 @@ namespace analyzer{
       }
     }
 
+    AnalyzerBase::WorkingMode AnalyzerBase::GetWorkingMode()
+    {
+      if (dynamic_cast<interpreter::BinaryStyleInterpreter*>(this->interpreter->get())){
+        return AnalyzerBase::WorkingMode::Binary;
+      }
+      else{
+        return AnalyzerBase::WorkingMode::Text;
+      }
+    }
+
     size_t AnalyzerBase::NumberOfObservers()
     {
       return this->baseObservers->size();

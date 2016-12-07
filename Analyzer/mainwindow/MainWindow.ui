@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Analyzer</string>
   </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
@@ -42,8 +42,15 @@
     </widget>
     <addaction name="menuWorking_Mode"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionDisplayOptions"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAnalyzer"/>
+   <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -67,6 +74,11 @@
   <action name="actionText">
    <property name="text">
     <string>Text</string>
+   </property>
+  </action>
+  <action name="actionDisplayOptions">
+   <property name="text">
+    <string>DisplayOptions</string>
    </property>
   </action>
  </widget>
