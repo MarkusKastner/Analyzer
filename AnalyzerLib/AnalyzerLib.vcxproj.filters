@@ -26,6 +26,9 @@
     <Filter Include="base\error">
       <UniqueIdentifier>{62d2f8c3-88f2-4404-bd16-c3daeda3db86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\zip">
+      <UniqueIdentifier>{f723062e-eecc-4217-85d8-de22db08bad6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -66,6 +69,12 @@
     </ClCompile>
     <ClCompile Include="interpreter\InterpreterDataImpl.cpp">
       <Filter>interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\ZIPContainer.cpp">
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="core\zip\miniz.c">
+      <Filter>core\zip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="base\error\AnalyzerBaseException.h">
       <Filter>base\error</Filter>
+    </ClInclude>
+    <ClInclude Include="core\zip\ZIPContainer.h">
+      <Filter>core\zip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

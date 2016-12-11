@@ -11,6 +11,7 @@
 #include "interpreter\strategy\DefaultTextTest.h"
 #include "interpreter\TextChangedObserverTest.h"
 #include "base\AnalyzerBaseTest.h"
+#include "core\zip\ZIPContainerTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

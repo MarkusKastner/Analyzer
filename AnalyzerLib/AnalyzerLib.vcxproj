@@ -85,6 +85,8 @@
     <ClCompile Include="core\ByteCollection.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\Word.cpp" />
+    <ClCompile Include="core\zip\miniz.c" />
+    <ClCompile Include="core\zip\ZIPContainer.cpp" />
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
     <ClCompile Include="interpreter\InterpreterDataImpl.cpp" />
     <ClCompile Include="interpreter\InterpreterObserverImpl.cpp" />
@@ -102,6 +104,7 @@
     <ClInclude Include="core\ByteCollection.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\Word.h" />
+    <ClInclude Include="core\zip\ZIPContainer.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h" />
     <ClInclude Include="interpreter\error\InterpreterException.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
