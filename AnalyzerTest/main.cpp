@@ -12,6 +12,7 @@
 #include "interpreter\TextChangedObserverTest.h"
 #include "base\AnalyzerBaseTest.h"
 #include "core\zip\ZIPContainerTest.h"
+#include "core\FileTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

@@ -76,6 +76,9 @@
     <ClCompile Include="core\zip\miniz.c">
       <Filter>core\zip</Filter>
     </ClCompile>
+    <ClCompile Include="core\File.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -137,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="core\zip\ZIPContainer.h">
       <Filter>core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="core\File.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

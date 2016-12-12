@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{8f87b7b4-8ad2-4952-bf1a-7ef660085d78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\error">
-      <UniqueIdentifier>{3b51f009-a361-43cf-bf06-5667d5ff2762}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interpreter">
       <UniqueIdentifier>{01c7b2d7-0e80-4cbe-84cd-ae482e767e66}</UniqueIdentifier>
     </Filter>
@@ -34,7 +28,13 @@
     <Filter Include="base\error">
       <UniqueIdentifier>{5b10e384-e06e-472d-b703-ee15e7282c0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\zip">
+    <Filter Include="core">
+      <UniqueIdentifier>{8f87b7b4-8ad2-4952-bf1a-7ef660085d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\error">
+      <UniqueIdentifier>{3b51f009-a361-43cf-bf06-5667d5ff2762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\zip">
       <UniqueIdentifier>{49ef9502-6de8-4790-80f2-17f253a06fc5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -43,19 +43,19 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\Byte.cpp">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp">
-      <Filter>Core\error</Filter>
+      <Filter>core\error</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\Word.cpp">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp">
       <Filter>Interpreter</Filter>
@@ -82,39 +82,42 @@
       <Filter>Interpreter</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\zip\ZIPContainer.cpp">
-      <Filter>Core\zip</Filter>
+      <Filter>core\zip</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\zip\miniz.c">
-      <Filter>Core\zip</Filter>
+      <Filter>core\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\File.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\Byte.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
-      <Filter>Core\error</Filter>
+      <Filter>core\error</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\BasicType.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\BasicTypeTest.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\WordTest.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\Word.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\ByteCollectionTest.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h">
-      <Filter>Core</Filter>
+      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h">
       <Filter>Interpreter</Filter>
@@ -180,10 +183,16 @@
       <Filter>base\error</Filter>
     </ClInclude>
     <ClInclude Include="core\zip\ZIPContainerTest.h">
-      <Filter>Core\zip</Filter>
+      <Filter>core\zip</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\zip\ZIPContainer.h">
-      <Filter>Core\zip</Filter>
+      <Filter>core\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="core\FileTest.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\File.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

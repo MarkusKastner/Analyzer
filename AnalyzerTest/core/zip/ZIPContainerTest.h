@@ -12,7 +12,7 @@ class ZIPContainerTest : public testing::Test
 public:
   ZIPContainerTest()
     : zipContainer1(),
-    testFile1("c:/dev/test.zip")
+    testFile1("c:/dev/test.docx")
   {}
 
   ~ZIPContainerTest()
