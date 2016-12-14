@@ -16,6 +16,21 @@ namespace analyzer{
       this->setDirectoryNames(fileName, "/");
     }
 
+    File::File(const File& other)
+      : data(new std::shared_ptr<ByteCollection>(*other.data)), fileName(new std::string(*other.fileName)), path(new std::vector<std::string>(*other.path))
+    {
+    }
+
+    File& File::operator=(const File & other)
+    {
+      if (this != &other){
+        *this->data = *other.data;
+        *this->fileName = *other.fileName;
+        *this->path = *other.path;
+      }
+      return *this;
+    }
+
     File::~File()
     {
       delete this->data;

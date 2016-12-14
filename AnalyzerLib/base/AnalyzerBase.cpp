@@ -17,7 +17,8 @@ namespace analyzer{
       workTasks(new std::queue<Task>()),
       currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()),
       baseObservers(new std::vector<AnalyzerBaseObserver*>()),
-      workTasksLock(new std::recursive_mutex())
+      workTasksLock(new std::recursive_mutex()),
+      files(new std::vector<core::File>())
     {
       this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
@@ -41,6 +42,7 @@ namespace analyzer{
       delete this->interpreter;
       delete this->baseObservers;
       delete this->workTasksLock;
+      delete this->files;
     }
 
     bool AnalyzerBase::HasInterpreter()
@@ -123,6 +125,16 @@ namespace analyzer{
       if (*this->workerException){
         std::rethrow_exception(*this->workerException);
       }
+    }
+
+    void AnalyzerBase::AddAnalyzerFile(const core::File & file)
+    {
+      this->files->push_back(file);
+    }
+
+    bool AnalyzerBase::HasFile()
+    {
+      return !this->files->empty();
     }
 
     void AnalyzerBase::baseWorker()

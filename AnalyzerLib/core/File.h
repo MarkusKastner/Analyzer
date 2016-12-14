@@ -20,6 +20,8 @@ namespace analyzer{
     public:
       File();
       explicit File(const std::string & fileName, const std::vector<char> & data);
+      File(const File & other);
+      File& operator=(const File & other);
       virtual ~File();
 
       void SetFileData(const std::string & fileName, const std::vector<char> & data);

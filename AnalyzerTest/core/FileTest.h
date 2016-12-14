@@ -60,4 +60,25 @@ TEST_F(FileTest, SetFileNameWithPath)
   ASSERT_STREQ(this->file1.GetPath()[1].c_str(), "subTestDir");
 }
 
+TEST_F(FileTest, CpyCtor)
+{
+  this->file1.SetFileData(fileName1, charVector);
+
+  analyzer::core::File theNewfile(this->file1);
+
+  ASSERT_STREQ(theNewfile.GetFileName().c_str(), this->fileName1.c_str());
+  ASSERT_EQ(theNewfile.GetData()->GetSize(), this->byteCollection1->GetSize());
+}
+
+TEST_F(FileTest, AssignOperator)
+{
+  analyzer::core::File theNewfile;
+  {
+    this->file1.SetFileData(fileName1, charVector);
+    theNewfile = this->file1;
+  }
+  ASSERT_STREQ(theNewfile.GetFileName().c_str(), this->fileName1.c_str());
+  ASSERT_EQ(theNewfile.GetData()->GetSize(), this->byteCollection1->GetSize());
+}
+
 #endif

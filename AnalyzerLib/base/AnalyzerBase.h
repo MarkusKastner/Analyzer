@@ -16,6 +16,8 @@
 #include <mutex>
 #include <condition_variable>
 
+#include "AnalyzerLib\core\File.h"
+
 namespace analyzer{
   namespace interpreter{
     class Interpreter;
@@ -56,6 +58,9 @@ namespace analyzer{
 
       void Rethrow();
 
+      void AddAnalyzerFile(const core::File & file);
+      bool HasFile();
+
     private:
       std::thread * baseThread;
       std::atomic<bool> * runBaseWorker;
@@ -68,8 +73,10 @@ namespace analyzer{
       std::string * currentFilePath;
       std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
-
+      
       std::recursive_mutex * workTasksLock;
+
+      std::vector<core::File> * files;
 
       void baseWorker();
       bool hasTask();

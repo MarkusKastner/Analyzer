@@ -6,6 +6,7 @@
 #include "AnalyzerLib\base\AnalyzerBase.h"
 #include "AnalyzerLib\base\AnalyzerBaseObserver.h"
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
+#include "AnalyzerLib\core\File.h"
 
 class AnalyzerBaseTest : public testing::Test
 {
@@ -147,6 +148,21 @@ TEST_F(AnalyzerBaseTest, InvalidFile)
     message = ex.what();
   }
   ASSERT_STREQ(message.c_str(), std::string("Cannot open " + invalidPath).c_str());
+}
+
+TEST_F(AnalyzerBaseTest, HasFile)
+{
+  analyzer::core::File analyzerFile;
+
+  ASSERT_FALSE(this->analyzerBase1.HasFile());
+}
+
+TEST_F(AnalyzerBaseTest, AddFile)
+{
+  analyzer::core::File analyzerFile;
+
+  this->analyzerBase1.AddAnalyzerFile(analyzerFile);
+  ASSERT_TRUE(this->analyzerBase1.HasFile());
 }
 
 #endif
