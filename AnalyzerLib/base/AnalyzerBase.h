@@ -63,6 +63,7 @@ namespace analyzer{
       bool HasFile(const std::string & fileName);
       size_t FileCount();
       core::File GetAnalyzerFile(const std::string & fileName);
+      core::File GetAnalyzerFile(const size_t & index);
 
     private:
       std::thread * baseThread;
@@ -78,8 +79,9 @@ namespace analyzer{
       std::vector<AnalyzerBaseObserver*> * baseObservers;
       
       std::recursive_mutex * workTasksLock;
-
+      
       std::vector<core::File> * files;
+      std::recursive_mutex * filesLock;
 
       void baseWorker();
       bool hasTask();

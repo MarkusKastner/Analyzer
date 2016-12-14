@@ -206,5 +206,26 @@ TEST_F(AnalyzerBaseTest, HasFile)
   ASSERT_TRUE(this->analyzerBase1.HasFile(this->path1));
 }
 
+TEST_F(AnalyzerBaseTest, GetFileByIndex)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(0);
+  ASSERT_STREQ(file.GetFileName().c_str(), path1.c_str());
+}
 
+TEST_F(AnalyzerBaseTest, InvalidfileIndex)
+{
+  std::string message;
+  try{
+    this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+    analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(1);
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex){
+    message = ex.what();
+  }
+  catch (...){
+
+  }
+  ASSERT_STREQ(message.c_str(), "invalid index");
+}
 #endif

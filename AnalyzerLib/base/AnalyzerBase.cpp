@@ -18,7 +18,7 @@ namespace analyzer{
       currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()),
       baseObservers(new std::vector<AnalyzerBaseObserver*>()),
       workTasksLock(new std::recursive_mutex()),
-      files(new std::vector<core::File>())
+      files(new std::vector<core::File>()), filesLock(new std::recursive_mutex())
     {
       this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
@@ -43,6 +43,7 @@ namespace analyzer{
       delete this->baseObservers;
       delete this->workTasksLock;
       delete this->files;
+      delete this->filesLock;
     }
 
     bool AnalyzerBase::HasInterpreter()
@@ -129,6 +130,7 @@ namespace analyzer{
 
     void AnalyzerBase::AddAnalyzerFile(core::File & file)
     {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       for (auto& exisiting : *this->files){
         if (exisiting.GetFileName().compare(file.GetFileName()) == 0){
           return;
@@ -139,11 +141,13 @@ namespace analyzer{
 
     bool AnalyzerBase::HasFiles()
     {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       return !this->files->empty();
     }
 
     bool AnalyzerBase::HasFile(const std::string & fileName)
     {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       for (auto& exisiting : *this->files){
         if (exisiting.GetFileName().compare(fileName) == 0){
           return true;
@@ -154,17 +158,30 @@ namespace analyzer{
 
     size_t AnalyzerBase::FileCount()
     {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       return this->files->size();
     }
 
     core::File AnalyzerBase::GetAnalyzerFile(const std::string & fileName)
     {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       for (auto& exisiting : *this->files){
         if (exisiting.GetFileName().compare(fileName) == 0){
           return exisiting;
         }
       }
       throw AnalyzerBaseException("unknown file");
+    }
+
+    core::File AnalyzerBase::GetAnalyzerFile(const size_t & index)
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
+      for (size_t i = 0; i < this->files->size(); i++){
+        if (index == i){
+          return this->files->at(i);
+        }
+      }
+      throw AnalyzerBaseException("invalid index");
     }
 
     void AnalyzerBase::baseWorker()
