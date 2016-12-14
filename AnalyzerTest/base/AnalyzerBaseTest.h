@@ -41,12 +41,15 @@ public:
     dummyData1.push_back('m');
     dummyData1.push_back('m');
     dummyData1.push_back('y');
+
+    analyzerFile.SetFileData(path1, dummyData1);
   }
 
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
   std::string path1;
   std::vector<char> dummyData1;
+  analyzer::core::File analyzerFile;
 };
 
 TEST_F(AnalyzerBaseTest, init)
@@ -150,19 +153,58 @@ TEST_F(AnalyzerBaseTest, InvalidFile)
   ASSERT_STREQ(message.c_str(), std::string("Cannot open " + invalidPath).c_str());
 }
 
-TEST_F(AnalyzerBaseTest, HasFile)
+TEST_F(AnalyzerBaseTest, HasFiles)
 {
-  analyzer::core::File analyzerFile;
-
-  ASSERT_FALSE(this->analyzerBase1.HasFile());
+  ASSERT_FALSE(this->analyzerBase1.HasFiles());
 }
 
 TEST_F(AnalyzerBaseTest, AddFile)
 {
-  analyzer::core::File analyzerFile;
-
-  this->analyzerBase1.AddAnalyzerFile(analyzerFile);
-  ASSERT_TRUE(this->analyzerBase1.HasFile());
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  ASSERT_TRUE(this->analyzerBase1.HasFiles());
 }
+
+TEST_F(AnalyzerBaseTest, FileCount)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  ASSERT_EQ(this->analyzerBase1.FileCount(), 1);
+}
+
+TEST_F(AnalyzerBaseTest, AddFileTwice)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  ASSERT_EQ(this->analyzerBase1.FileCount(), 1);
+}
+
+TEST_F(AnalyzerBaseTest, GetFileByName)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(path1);
+  ASSERT_STREQ(file.GetFileName().c_str(), path1.c_str());
+}
+
+TEST_F(AnalyzerBaseTest, TryGetInvalidFileByName)
+{
+  std::string message;
+  try{
+    this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+    analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile("some/invalid/path.txt");
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex){
+    message = ex.what();
+  }
+  catch (...){
+
+  }
+  ASSERT_STREQ(message.c_str(), "unknown file");
+}
+
+TEST_F(AnalyzerBaseTest, HasFile)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  ASSERT_TRUE(this->analyzerBase1.HasFile(this->path1));
+}
+
 
 #endif

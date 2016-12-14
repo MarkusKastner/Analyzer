@@ -58,8 +58,11 @@ namespace analyzer{
 
       void Rethrow();
 
-      void AddAnalyzerFile(const core::File & file);
-      bool HasFile();
+      void AddAnalyzerFile(core::File & file);
+      bool HasFiles();
+      bool HasFile(const std::string & fileName);
+      size_t FileCount();
+      core::File GetAnalyzerFile(const std::string & fileName);
 
     private:
       std::thread * baseThread;

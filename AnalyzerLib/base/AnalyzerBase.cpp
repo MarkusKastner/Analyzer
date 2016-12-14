@@ -127,14 +127,44 @@ namespace analyzer{
       }
     }
 
-    void AnalyzerBase::AddAnalyzerFile(const core::File & file)
+    void AnalyzerBase::AddAnalyzerFile(core::File & file)
     {
+      for (auto& exisiting : *this->files){
+        if (exisiting.GetFileName().compare(file.GetFileName()) == 0){
+          return;
+        }
+      }
       this->files->push_back(file);
     }
 
-    bool AnalyzerBase::HasFile()
+    bool AnalyzerBase::HasFiles()
     {
       return !this->files->empty();
+    }
+
+    bool AnalyzerBase::HasFile(const std::string & fileName)
+    {
+      for (auto& exisiting : *this->files){
+        if (exisiting.GetFileName().compare(fileName) == 0){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    size_t AnalyzerBase::FileCount()
+    {
+      return this->files->size();
+    }
+
+    core::File AnalyzerBase::GetAnalyzerFile(const std::string & fileName)
+    {
+      for (auto& exisiting : *this->files){
+        if (exisiting.GetFileName().compare(fileName) == 0){
+          return exisiting;
+        }
+      }
+      throw AnalyzerBaseException("unknown file");
     }
 
     void AnalyzerBase::baseWorker()
