@@ -52,15 +52,11 @@ public:
   analyzer::core::File analyzerFile;
 };
 
-//TEST_F(AnalyzerBaseTest, init)
-//{
-//  ASSERT_TRUE(analyzerBase1.HasInterpreter());
-//}
-//
-//TEST_F(AnalyzerBaseTest, GetInterpreter)
-//{
-//  ASSERT_TRUE(analyzerBase1.Interpreter() != nullptr);
-//}
+TEST_F(AnalyzerBaseTest, init)
+{
+  ASSERT_FALSE(analyzerBase1.HasActivefile());
+}
+
 //
 //TEST_F(AnalyzerBaseTest, SwitchMode)
 //{
@@ -162,6 +158,18 @@ TEST_F(AnalyzerBaseTest, AddFile)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
   ASSERT_TRUE(this->analyzerBase1.HasFiles());
+}
+
+TEST_F(AnalyzerBaseTest, SetFileAsDefault)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile().GetFileName().c_str(), this->analyzerFile.GetFileName().c_str());
+}
+
+TEST_F(AnalyzerBaseTest, GetInterpreter)
+{
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  ASSERT_TRUE(analyzerBase1.CurrentInterpreter() != nullptr);
 }
 
 TEST_F(AnalyzerBaseTest, FileCount)

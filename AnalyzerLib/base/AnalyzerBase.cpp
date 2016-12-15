@@ -15,7 +15,7 @@ namespace analyzer{
       workCondition(new std::condition_variable()), waitLock(new std::mutex),
       workerException(new std::exception_ptr()),
       workTasks(new std::queue<Task>()),
-      currentFilePath(new std::string()), //interpreter(new std::unique_ptr<interpreter::Interpreter>()),
+      activeFilePath(new std::string()), //interpreter(new std::unique_ptr<interpreter::Interpreter>()),
       baseObservers(new std::vector<AnalyzerBaseObserver*>()),
       workTasksLock(new std::recursive_mutex()),
       files(new std::vector<core::File>()), filesLock(new std::recursive_mutex())
@@ -38,7 +38,7 @@ namespace analyzer{
       delete this->waitLock;
       delete this->workTasks;
       delete this->runBaseWorker;
-      delete this->currentFilePath;
+      delete this->activeFilePath;
       //delete this->interpreter;
       delete this->baseObservers;
       delete this->workTasksLock;
@@ -46,15 +46,27 @@ namespace analyzer{
       delete this->filesLock;
     }
 
-    //bool AnalyzerBase::HasInterpreter()
-    //{
-    //  return !(!interpreter);
-    //}
+    bool AnalyzerBase::HasActivefile()
+    {
+      if (!this->activeFilePath->empty() && !this->files->empty()){
+        for (auto& file : *this->files){
+          if (file.GetFileName().compare(*this->activeFilePath) == 0){
+            return true;
+          }
+        }
+      }
+      return false;
+    }
 
-    //interpreter::Interpreter * AnalyzerBase::Interpreter()
-    //{
-    //  return this->interpreter->get();
-    //}
+    interpreter::Interpreter * AnalyzerBase::CurrentInterpreter()
+    {
+      for (auto& file : *this->files){
+        if (file.GetFileName().compare(*this->activeFilePath) == 0){
+          return file.GetInterpreter().get();
+        }
+      }
+      return nullptr;// this->interpreter->get();
+    }
 
     void AnalyzerBase::SetBinaryMode()
     {
@@ -112,7 +124,7 @@ namespace analyzer{
 
     void AnalyzerBase::LoadFile(const std::string & path)
     {
-      *this->currentFilePath = path;
+      *this->activeFilePath = path;
       this->addTask(Task::LoadNewDataFromFile);
       this->workCondition->notify_one();
     }
@@ -138,6 +150,9 @@ namespace analyzer{
         }
       }
       this->files->push_back(file);
+      if (this->files->size() == 1){
+        *this->activeFilePath = file.GetFileName();
+      }
     }
 
     bool AnalyzerBase::HasFiles()
@@ -185,6 +200,17 @@ namespace analyzer{
       throw AnalyzerBaseException("invalid index");
     }
 
+    core::File AnalyzerBase::GetActiveAnalyzerFile()
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
+      for (auto& exisiting : *this->files){
+        if (exisiting.GetFileName().compare(*this->activeFilePath) == 0){
+          return exisiting;
+        }
+      }
+      throw AnalyzerBaseException("unknown file");
+    }
+
     void AnalyzerBase::baseWorker()
     {
       std::unique_lock<std::mutex> lock(*this->waitLock);
@@ -229,9 +255,9 @@ namespace analyzer{
 
     void AnalyzerBase::loadFile()
     {
-      std::ifstream file(this->currentFilePath->c_str(), std::ios::binary);
+      std::ifstream file(this->activeFilePath->c_str(), std::ios::binary);
       if (file.bad() || !file.is_open()){
-        throw AnalyzerBaseException("Cannot open " + *this->currentFilePath);
+        throw AnalyzerBaseException("Cannot open " + *this->activeFilePath);
       }
 
       std::vector<char> data;

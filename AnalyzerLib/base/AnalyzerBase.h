@@ -42,8 +42,8 @@ namespace analyzer{
       AnalyzerBase();
       virtual ~AnalyzerBase();
 
-      //bool HasInterpreter();
-      //interpreter::Interpreter * Interpreter();
+      bool HasActivefile();
+      interpreter::Interpreter * CurrentInterpreter();
 
       void SetBinaryMode();
       void SetTextMode();
@@ -64,6 +64,7 @@ namespace analyzer{
       size_t FileCount();
       core::File GetAnalyzerFile(const std::string & fileName);
       core::File GetAnalyzerFile(const size_t & index);
+      core::File GetActiveAnalyzerFile();
 
     private:
       std::thread * baseThread;
@@ -74,7 +75,7 @@ namespace analyzer{
 
       std::queue<Task> * workTasks;
 
-      std::string * currentFilePath;
+      std::string * activeFilePath;
       //std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
       
