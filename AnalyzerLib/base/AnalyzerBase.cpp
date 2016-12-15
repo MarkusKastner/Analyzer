@@ -15,12 +15,12 @@ namespace analyzer{
       workCondition(new std::condition_variable()), waitLock(new std::mutex),
       workerException(new std::exception_ptr()),
       workTasks(new std::queue<Task>()),
-      currentFilePath(new std::string()), interpreter(new std::unique_ptr<interpreter::Interpreter>()),
+      currentFilePath(new std::string()), //interpreter(new std::unique_ptr<interpreter::Interpreter>()),
       baseObservers(new std::vector<AnalyzerBaseObserver*>()),
       workTasksLock(new std::recursive_mutex()),
       files(new std::vector<core::File>()), filesLock(new std::recursive_mutex())
     {
-      this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
+      //this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
     }
 
@@ -39,47 +39,48 @@ namespace analyzer{
       delete this->workTasks;
       delete this->runBaseWorker;
       delete this->currentFilePath;
-      delete this->interpreter;
+      //delete this->interpreter;
       delete this->baseObservers;
       delete this->workTasksLock;
       delete this->files;
       delete this->filesLock;
     }
 
-    bool AnalyzerBase::HasInterpreter()
-    {
-      return !(!interpreter);
-    }
+    //bool AnalyzerBase::HasInterpreter()
+    //{
+    //  return !(!interpreter);
+    //}
 
-    interpreter::Interpreter * AnalyzerBase::Interpreter()
-    {
-      return this->interpreter->get();
-    }
+    //interpreter::Interpreter * AnalyzerBase::Interpreter()
+    //{
+    //  return this->interpreter->get();
+    //}
 
     void AnalyzerBase::SetBinaryMode()
     {
-      if (!dynamic_cast<interpreter::BinaryStyleInterpreter*>(this->interpreter->get())){
-        this->interpreter->reset(new interpreter::BinaryStyleInterpreter(this->interpreter->get()->GetData()));
-        this->notifyInterpreterChange();
-      }
+      //if (!dynamic_cast<interpreter::BinaryStyleInterpreter*>(this->interpreter->get())){
+      //  this->interpreter->reset(new interpreter::BinaryStyleInterpreter(this->interpreter->get()->GetData()));
+      //  this->notifyInterpreterChange();
+      //}
     }
 
     void AnalyzerBase::SetTextMode()
     {
-      if (!dynamic_cast<interpreter::TextStyleInterpreter*>(this->interpreter->get())){
-        this->interpreter->reset(new interpreter::TextStyleInterpreter(this->interpreter->get()->GetData()));
-        this->notifyInterpreterChange();
-      }
+      //if (!dynamic_cast<interpreter::TextStyleInterpreter*>(this->interpreter->get())){
+      //  this->interpreter->reset(new interpreter::TextStyleInterpreter(this->interpreter->get()->GetData()));
+      //  this->notifyInterpreterChange();
+      //}
     }
 
     AnalyzerBase::WorkingMode AnalyzerBase::GetWorkingMode()
     {
-      if (dynamic_cast<interpreter::BinaryStyleInterpreter*>(this->interpreter->get())){
-        return AnalyzerBase::WorkingMode::Binary;
-      }
-      else{
-        return AnalyzerBase::WorkingMode::Text;
-      }
+      return AnalyzerBase::WorkingMode::Text;
+      //if (dynamic_cast<interpreter::BinaryStyleInterpreter*>(this->interpreter->get())){
+      //  return AnalyzerBase::WorkingMode::Binary;
+      //}
+      //else{
+      //  return AnalyzerBase::WorkingMode::Text;
+      //}
     }
 
     size_t AnalyzerBase::NumberOfObservers()
@@ -116,10 +117,10 @@ namespace analyzer{
       this->workCondition->notify_one();
     }
 
-    bool AnalyzerBase::HasData()
-    {
-      return this->interpreter->get()->HasData();
-    }
+    //bool AnalyzerBase::HasData()
+    //{
+    //  return this->interpreter->get()->HasData();
+    //}
 
     void AnalyzerBase::Rethrow()
     {
@@ -242,7 +243,7 @@ namespace analyzer{
 
       data.reserve(fileSize);
       data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-      this->interpreter->get()->ResetData(data);
+      //this->interpreter->get()->ResetData(data);
     }
 
     void AnalyzerBase::notifyInterpreterChange()

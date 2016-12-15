@@ -25,7 +25,7 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
-      this->analyzerEdit->SetInterpreter(this->analyzerBase.Interpreter());
+      //this->analyzerEdit->SetInterpreter(this->analyzerBase.Currentfile()->Interpreter());
       this->changeWorkingMode();
     }
 
@@ -35,7 +35,7 @@ namespace analyzer{
 
       this->analyzerEdit = new gui::display::AnalyzerEdit();
       this->setCentralWidget(this->analyzerEdit);
-      this->analyzerEdit->SetInterpreter(this->analyzerBase.Interpreter());
+      //this->analyzerEdit->SetInterpreter(this->analyzerBase.Currentfile()->Interpreter());
       
       this->setupDialogs();
 

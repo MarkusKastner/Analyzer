@@ -42,8 +42,8 @@ namespace analyzer{
       AnalyzerBase();
       virtual ~AnalyzerBase();
 
-      bool HasInterpreter();
-      interpreter::Interpreter * Interpreter();
+      //bool HasInterpreter();
+      //interpreter::Interpreter * Interpreter();
 
       void SetBinaryMode();
       void SetTextMode();
@@ -54,7 +54,7 @@ namespace analyzer{
       void UnregisterObserver(AnalyzerBaseObserver * observer);
 
       void LoadFile(const std::string & path);
-      bool HasData();
+      //bool HasData();
 
       void Rethrow();
 
@@ -75,7 +75,7 @@ namespace analyzer{
       std::queue<Task> * workTasks;
 
       std::string * currentFilePath;
-      std::unique_ptr<interpreter::Interpreter> * interpreter;
+      //std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
       
       std::recursive_mutex * workTasksLock;
