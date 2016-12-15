@@ -81,4 +81,9 @@ TEST_F(FileTest, AssignOperator)
   ASSERT_EQ(theNewfile.GetData()->GetSize(), this->byteCollection1->GetSize());
 }
 
+TEST_F(FileTest, GetInterpreter)
+{
+  analyzer::core::File file(fileName1, charVector);
+  ASSERT_TRUE(file.GetInterpreter()->HasData());
+}
 #endif

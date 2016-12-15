@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "ByteCollection.h"
+#include "AnalyzerLib\interpreter\Interpreter.h"
 
 #if _USRDLL
 #define IMEX __declspec(dllexport)
@@ -30,13 +31,16 @@ namespace analyzer{
       const std::string & GetFileName();
       const std::shared_ptr<ByteCollection> & GetData();
       const std::vector<std::string> & GetPath();
+      const std::shared_ptr<interpreter::Interpreter> & GetInterpreter();
 
     private:
       std::shared_ptr<ByteCollection> * data;
       std::string * fileName;
       std::vector<std::string> * path;
+      std::shared_ptr<interpreter::Interpreter> * interpreter;
 
       void setDirectoryNames(const std::string& input, const std::string& regex);
+      void feedInterpreter();
     };
   }
 }
