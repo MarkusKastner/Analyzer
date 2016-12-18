@@ -54,7 +54,7 @@ namespace analyzer{
       void UnregisterObserver(AnalyzerBaseObserver * observer);
 
       void LoadFile(const std::string & path);
-      //bool HasData();
+      bool HasData();
 
       void Rethrow();
 
@@ -76,7 +76,6 @@ namespace analyzer{
       std::queue<Task> * workTasks;
 
       std::string * activeFilePath;
-      //std::unique_ptr<interpreter::Interpreter> * interpreter;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
       
       std::recursive_mutex * workTasksLock;
@@ -90,8 +89,11 @@ namespace analyzer{
       void addTask(const Task & task);
 
       void loadFile();
+      void loadSimpleFile();
+      void loadContainer();
 
       void notifyInterpreterChange();
+      void notifyFilesChange();
 
       void throwInvalidObserver(AnalyzerBaseObserver * observer);
     };

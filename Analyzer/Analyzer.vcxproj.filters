@@ -89,6 +89,9 @@
     <ClCompile Include="dialogs\DisplayOptionsText.cpp">
       <Filter>dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="dialogs\DocumentStructure.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -107,6 +110,9 @@
       <Filter>dialogs</Filter>
     </ClInclude>
     <ClInclude Include="dialogs\DisplayOptionsText.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\DocumentStructure.h">
       <Filter>dialogs</Filter>
     </ClInclude>
   </ItemGroup>

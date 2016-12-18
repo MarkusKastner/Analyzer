@@ -5,6 +5,7 @@
 #include "application\error\AppException.h"
 #include "dialogs\DisplayOptionsBinary.h"
 #include "dialogs\DisplayOptionsText.h"
+#include "dialogs\DocumentStructure.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
 
@@ -12,7 +13,8 @@ namespace analyzer{
   namespace gui{
 
     MainWindow::MainWindow(base::AnalyzerBase & analyzerBase, QWidget *parent)
-      : QMainWindow(parent), actions(), analyzerBase(analyzerBase), analyzerEdit(nullptr), displayOptions(nullptr)
+      : QMainWindow(parent), actions(), analyzerBase(analyzerBase), analyzerEdit(nullptr), 
+      displayOptions(nullptr), documentStructure(nullptr)
     {
       ui.setupUi(this);
       this->setup();
@@ -27,6 +29,11 @@ namespace analyzer{
     {
       //this->analyzerEdit->SetInterpreter(this->analyzerBase.Currentfile()->Interpreter());
       this->changeWorkingMode();
+    }
+
+    void MainWindow::NotifyFileChange()
+    {
+
     }
 
     void MainWindow::setup()
@@ -57,6 +64,11 @@ namespace analyzer{
        
       this->displayOptions->setWidget(options);
       this->addDockWidget(Qt::RightDockWidgetArea, this->displayOptions);
+
+      this->documentStructure = new QDockWidget(tr("document structure"), this);
+      this->documentStructure->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+      this->documentStructure->setWidget(new DocumentStructure());
+      this->addDockWidget(Qt::LeftDockWidgetArea, this->documentStructure);
     }
 
     void MainWindow::changeWorkingMode()

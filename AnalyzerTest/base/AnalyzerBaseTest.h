@@ -16,22 +16,29 @@ public:
   {
   public:
     SomeObserver()
-      :interpreterChanged(false)
+      :interpreterChanged(false), filesChanged(false)
     {}
     ~SomeObserver(){}
 
     virtual void NotifyInterprterChange(){
       this->interpreterChanged = true;
     }
+    virtual void NotifyFileChange(){
+      this->filesChanged = true;
+    }
     bool InterpreterChanged(){
       return this->interpreterChanged;
     }
+    bool FilesChanged(){
+      return this->filesChanged;
+    }
   private:
     bool interpreterChanged;
+    bool filesChanged;
   };
 
   AnalyzerBaseTest()
-    :analyzerBase1(), observer1(), path1("c:/dev/test.txt"), dummyData1()
+    :analyzerBase1(), observer1(), path1("c:/dev/test.txt"), dummyData1(), path2("c:/dev/test.zip"), path3("c:/dev/test.docx")
   {}
   ~AnalyzerBaseTest(){}
 
@@ -50,6 +57,8 @@ public:
   std::string path1;
   std::vector<char> dummyData1;
   analyzer::core::File analyzerFile;
+  std::string path2;
+  std::string path3;
 };
 
 TEST_F(AnalyzerBaseTest, init)
@@ -121,18 +130,20 @@ TEST_F(AnalyzerBaseTest, InvalidObserver)
 //  this->analyzerBase1.SetTextMode();
 //  ASSERT_TRUE(this->observer1.InterpreterChanged());
 //}
-//
-//TEST_F(AnalyzerBaseTest, EmptyHasData)
-//{
-//  ASSERT_FALSE(this->analyzerBase1.HasData());
-//}
-//
-//TEST_F(AnalyzerBaseTest, LoadFile)
-//{
-//  this->analyzerBase1.LoadFile(this->path1);
-//  std::this_thread::sleep_for(std::chrono::milliseconds(200));
-//  ASSERT_TRUE(this->analyzerBase1.HasData());
-//}
+
+TEST_F(AnalyzerBaseTest, EmptyHasData)
+{
+  ASSERT_FALSE(this->analyzerBase1.HasData());
+}
+
+TEST_F(AnalyzerBaseTest, LoadTxtFile)
+{
+  this->analyzerBase1.RegisterObserver(&this->observer1);
+  this->analyzerBase1.LoadFile(this->path1);
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  ASSERT_TRUE(this->analyzerBase1.HasData());
+  ASSERT_TRUE(this->observer1.FilesChanged());
+}
 
 TEST_F(AnalyzerBaseTest, InvalidFile)
 {
@@ -236,4 +247,21 @@ TEST_F(AnalyzerBaseTest, InvalidfileIndex)
   }
   ASSERT_STREQ(message.c_str(), "invalid index");
 }
+
+TEST_F(AnalyzerBaseTest, LoadZipFile)
+{
+  this->analyzerBase1.RegisterObserver(&this->observer1);
+  this->analyzerBase1.LoadFile(this->path2);
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  ASSERT_EQ(this->analyzerBase1.FileCount(), 2);
+}
+
+TEST_F(AnalyzerBaseTest, LoadDocxFile)
+{
+  this->analyzerBase1.RegisterObserver(&this->observer1);
+  this->analyzerBase1.LoadFile(this->path3);
+  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+  ASSERT_EQ(this->analyzerBase1.FileCount(), 11);
+}
+
 #endif

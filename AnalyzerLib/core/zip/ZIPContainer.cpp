@@ -4,7 +4,7 @@ namespace analyzer{
   namespace core{
 
     ZIPContainer::ZIPContainer()
-      :fileNames()
+      :files()
     {
 
     }
@@ -16,13 +16,23 @@ namespace analyzer{
 
     bool ZIPContainer::HasContent()
     {
-      return !this->fileNames.empty();
+      return !this->files.empty();
     }
 
     void ZIPContainer::Open(const std::string & containerFile)
     {
       MiniZIP miniZip(containerFile);
-      fileNames = miniZip.GetfileNames();
+      this->files = miniZip.GetFiles();
+    }
+
+    size_t ZIPContainer::GetFileCount()
+    {
+      return this->files.size();
+    }
+
+    core::File ZIPContainer::GetFileAt(const size_t & index)
+    {
+      return this->files.at(index);
     }
   }
 }

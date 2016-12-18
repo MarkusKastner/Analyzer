@@ -28,6 +28,7 @@ namespace analyzer{
       ~MainWindow();
 
       virtual void NotifyInterprterChange();
+      virtual void NotifyFileChange();
 
     private:
       Ui::MainWindow ui;
@@ -36,6 +37,7 @@ namespace analyzer{
       gui::display::AnalyzerEdit * analyzerEdit;
 
       QDockWidget * displayOptions;
+      QDockWidget * documentStructure;
 
       void setup();
       void setupDialogs();

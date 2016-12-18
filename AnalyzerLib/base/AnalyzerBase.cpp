@@ -7,6 +7,7 @@
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 #include "AnalyzerBaseObserver.h"
+#include "AnalyzerLib\core\zip\ZIPContainer.h"
 
 namespace analyzer{
   namespace base{
@@ -129,10 +130,10 @@ namespace analyzer{
       this->workCondition->notify_one();
     }
 
-    //bool AnalyzerBase::HasData()
-    //{
-    //  return this->interpreter->get()->HasData();
-    //}
+    bool AnalyzerBase::HasData()
+    {
+      return !this->files->empty();
+    }
 
     void AnalyzerBase::Rethrow()
     {
@@ -153,6 +154,7 @@ namespace analyzer{
       if (this->files->size() == 1){
         *this->activeFilePath = file.GetFileName();
       }
+      this->notifyFilesChange();
     }
 
     bool AnalyzerBase::HasFiles()
@@ -255,6 +257,27 @@ namespace analyzer{
 
     void AnalyzerBase::loadFile()
     {
+      std::string fileType;
+      size_t p = this->activeFilePath->find_last_of('.');
+      if (p != 0){
+        size_t endingLen = this->activeFilePath->length() - p;
+        fileType = this->activeFilePath->substr(p + 1, endingLen);
+      }
+
+      if (fileType.compare("zip") == 0){
+        this->loadContainer();
+      }
+      else if (fileType.compare("docx") == 0){
+        this->loadContainer();
+      }
+      else{
+        this->loadSimpleFile();
+      }
+      
+    }
+
+    void AnalyzerBase::loadSimpleFile()
+    {
       std::ifstream file(this->activeFilePath->c_str(), std::ios::binary);
       if (file.bad() || !file.is_open()){
         throw AnalyzerBaseException("Cannot open " + *this->activeFilePath);
@@ -269,13 +292,33 @@ namespace analyzer{
 
       data.reserve(fileSize);
       data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-      //this->interpreter->get()->ResetData(data);
+      core::File analyzerFile;
+      analyzerFile.SetFileData(*this->activeFilePath, data);
+      this->AddAnalyzerFile(analyzerFile);
+    }
+
+    void AnalyzerBase::loadContainer()
+    {
+      core::ZIPContainer zip;
+      zip.Open(*this->activeFilePath);
+      if (zip.HasContent()){
+        for (size_t i = 0; i < zip.GetFileCount(); i++){
+          this->AddAnalyzerFile(zip.GetFileAt(i));
+        }
+      }
     }
 
     void AnalyzerBase::notifyInterpreterChange()
     {
       for (auto observer : *this->baseObservers){
         observer->NotifyInterprterChange();
+      }
+    }
+
+    void AnalyzerBase::notifyFilesChange()
+    {
+      for (auto observer : *this->baseObservers){
+        observer->NotifyFileChange();
       }
     }
 

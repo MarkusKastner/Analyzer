@@ -141,6 +141,7 @@
     <ClCompile Include="dialogs\DisplayOptions.cpp" />
     <ClCompile Include="dialogs\DisplayOptionsBinary.cpp" />
     <ClCompile Include="dialogs\DisplayOptionsText.cpp" />
+    <ClCompile Include="dialogs\DocumentStructure.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Actions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -167,6 +168,7 @@
     <ClInclude Include="dialogs\DisplayOptions.h" />
     <ClInclude Include="dialogs\DisplayOptionsBinary.h" />
     <ClInclude Include="dialogs\DisplayOptionsText.h" />
+    <ClInclude Include="dialogs\DocumentStructure.h" />
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h" />
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h" />
     <CustomBuild Include="mainwindow\Actions.h">

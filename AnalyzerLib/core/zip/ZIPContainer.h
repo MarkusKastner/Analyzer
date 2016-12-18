@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "..\error\CoreException.h"
+#include "AnalyzerLib\core\File.h"
 
 namespace analyzer{
   namespace core{
@@ -18,34 +19,52 @@ namespace analyzer{
       {
       public:
         explicit MiniZIP(const std::string & containerFile)
-          : zip_archive({ 0 })
+          : zip_archive({ 0 }), containerFile(containerFile)
         {
-          this->open(containerFile);
+          this->open();
         }
         ~MiniZIP(){
           mz_zip_reader_end(&zip_archive);
         }
 
-        std::vector<std::string> GetfileNames(){
-          std::vector<std::string> fileNames;
-          for (int i = 0; i < (int)mz_zip_reader_get_num_files(&zip_archive); i++){
+        std::vector<core::File> GetFiles(){
+          void *p = nullptr;
+          size_t uncomp_size;
+
+          std::vector<core::File> files;
+          unsigned int numFiles = mz_zip_reader_get_num_files(&zip_archive);
+
+          for (unsigned int i = 0; i < numFiles; i++){
+            std::vector<char> data;
             mz_zip_archive_file_stat file_stat;
             if (!mz_zip_reader_file_stat(&zip_archive, i, &file_stat)){
-              mz_zip_reader_end(&zip_archive);
               throw CoreException("mz_zip_reader_file_stat() failed!\n");
             }
 
-            fileNames.push_back(file_stat.m_filename);
+            p = mz_zip_reader_extract_file_to_heap(&zip_archive, file_stat.m_filename, &uncomp_size, 0);
+            if (!p){
+              throw CoreException("mz_zip_reader_extract_file_to_heap() failed!\n");
+            }
+            data.resize(uncomp_size);
+            if (memcpy(&data[0], p, uncomp_size) != &data[0]){
+              mz_free(p);
+              throw CoreException("mz_zip_reader_extract_file_to_heap() failed to extract the proper data\n");
+            }
+
+            files.push_back(core::File(file_stat.m_filename, data));
+            mz_free(p);
           }
-          return fileNames;
+          return files;
+
         }
       private:
         mz_zip_archive zip_archive;
+        std::string containerFile;
 
-        void open(const std::string & containerFile){
+        void open(){
           memset(&zip_archive, 0, sizeof(zip_archive));
 
-          if (!mz_zip_reader_init_file(&zip_archive, containerFile.c_str(), 0)){
+          if (!mz_zip_reader_init_file(&zip_archive, this->containerFile.c_str(), 0)){
             throw CoreException("mz_zip_reader_init_file() failed!\n");
           }
         }
@@ -57,9 +76,11 @@ namespace analyzer{
 
       bool HasContent();
       void Open(const std::string & containerFile);
+      size_t GetFileCount();
+      core::File GetFileAt(const size_t & index);
 
     private:
-      std::vector<std::string> fileNames;
+      std::vector<core::File> files;
 
     };
   }
