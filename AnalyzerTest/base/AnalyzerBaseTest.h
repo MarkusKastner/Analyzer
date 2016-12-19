@@ -264,4 +264,13 @@ TEST_F(AnalyzerBaseTest, LoadDocxFile)
   ASSERT_EQ(this->analyzerBase1.FileCount(), 11);
 }
 
+TEST_F(AnalyzerBaseTest, GetFileNames)
+{
+  this->analyzerBase1.RegisterObserver(&this->observer1);
+  this->analyzerBase1.LoadFile(this->path2);
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  std::vector<std::string> fileNames(this->analyzerBase1.GetFileNames());
+  ASSERT_STREQ(fileNames.at(0).c_str(), "Erlkoenig.txt");
+}
+
 #endif

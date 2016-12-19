@@ -27,13 +27,12 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
-      //this->analyzerEdit->SetInterpreter(this->analyzerBase.Currentfile()->Interpreter());
       this->changeWorkingMode();
     }
 
     void MainWindow::NotifyFileChange()
     {
-
+      this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
     }
 
     void MainWindow::setup()
@@ -42,7 +41,6 @@ namespace analyzer{
 
       this->analyzerEdit = new gui::display::AnalyzerEdit();
       this->setCentralWidget(this->analyzerEdit);
-      //this->analyzerEdit->SetInterpreter(this->analyzerBase.Currentfile()->Interpreter());
       
       this->setupDialogs();
 
@@ -65,9 +63,7 @@ namespace analyzer{
       this->displayOptions->setWidget(options);
       this->addDockWidget(Qt::RightDockWidgetArea, this->displayOptions);
 
-      this->documentStructure = new QDockWidget(tr("document structure"), this);
-      this->documentStructure->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-      this->documentStructure->setWidget(new DocumentStructure());
+      this->documentStructure = new DocumentStructure(tr("document structure"), this);
       this->addDockWidget(Qt::LeftDockWidgetArea, this->documentStructure);
     }
 

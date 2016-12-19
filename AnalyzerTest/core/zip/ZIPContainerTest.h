@@ -42,7 +42,7 @@ TEST_F(ZIPContainerTest, Open)
 TEST_F(ZIPContainerTest, FileCount)
 {
   zipContainer1.Open(testFile2);
-  ASSERT_TRUE(zipContainer1.GetFileCount(), 2);
+  ASSERT_EQ(zipContainer1.GetFileCount(), 2);
 }
 
 TEST_F(ZIPContainerTest, GetFiles)

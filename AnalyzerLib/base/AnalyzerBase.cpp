@@ -213,6 +213,16 @@ namespace analyzer{
       throw AnalyzerBaseException("unknown file");
     }
 
+    std::vector<std::string> AnalyzerBase::GetFileNames()
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
+      std::vector<std::string> fileNames;
+      for (auto& file : *this->files){
+        fileNames.push_back(file.GetFileName());
+      }
+      return fileNames;
+    }
+
     void AnalyzerBase::baseWorker()
     {
       std::unique_lock<std::mutex> lock(*this->waitLock);

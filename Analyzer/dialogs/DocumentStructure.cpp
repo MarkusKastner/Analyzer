@@ -1,9 +1,12 @@
 #include "DocumentStructure.h"
 
+#include <QApplication>
+#include <QVBoxLayout>
+
 namespace analyzer{
   namespace gui{
-    DocumentStructure::DocumentStructure(QWidget * parent)
-      :QWidget(parent), fileTree(nullptr)
+    DocumentStructure::DocumentStructure(const QString & title, QWidget * parent)
+      :QDockWidget(title, parent), baseWidget(nullptr), fileTree(nullptr)
     {
       this->setup();
     }
@@ -15,6 +18,30 @@ namespace analyzer{
 
     void DocumentStructure::SetFiles(const std::vector<std::string> files)
     {
+      QApplication::postEvent(this, new FilesEvent(files));
+    }
+
+    void DocumentStructure::customEvent(QEvent * evt)
+    {
+      if (dynamic_cast<FilesEvent*>(evt)){
+        this->setFiles(dynamic_cast<FilesEvent*>(evt)->GetFiles());
+      }
+    }
+
+    void DocumentStructure::setup()
+    {
+      this->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+      this->baseWidget = new QWidget();
+      this->setWidget(this->baseWidget);
+      this->baseWidget->setLayout(new QVBoxLayout());
+
+      this->fileTree = new QTreeWidget(this->baseWidget);
+      this->baseWidget->layout()->addWidget(this->fileTree);
+    }
+
+    void DocumentStructure::setFiles(const std::vector<std::string> files)
+    {
+      this->fileTree->clear();
       QStringList fileNames;
       for each (auto& file in files)
       {
@@ -53,11 +80,6 @@ namespace analyzer{
         QTreeWidgetItem *childItem = new QTreeWidgetItem(parentItem);
         childItem->setText(0, splitFileName.last());
       }
-    }
-
-    void DocumentStructure::setup()
-    {
-      this->fileTree = new QTreeWidget(this);
     }
   }
 }

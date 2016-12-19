@@ -18,7 +18,7 @@ namespace analyzer{
     class ByteCollection;
   }
   namespace gui{
-
+    class DocumentStructure;
     class MainWindow : public QMainWindow, public base::AnalyzerBaseObserver
     {
       Q_OBJECT
@@ -37,7 +37,7 @@ namespace analyzer{
       gui::display::AnalyzerEdit * analyzerEdit;
 
       QDockWidget * displayOptions;
-      QDockWidget * documentStructure;
+      DocumentStructure * documentStructure;
 
       void setup();
       void setupDialogs();
