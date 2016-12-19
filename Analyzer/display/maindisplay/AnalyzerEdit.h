@@ -30,7 +30,8 @@ namespace analyzer{
         virtual void NotifyDataChanged();
 
         void SetInterpreter(interpreter::Interpreter * interpreter);
-      
+        void ClearInterpreter();
+
       protected:
         void customEvent(QEvent * evt);
 

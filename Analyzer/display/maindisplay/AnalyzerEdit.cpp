@@ -25,6 +25,7 @@ namespace analyzer{
 
       void AnalyzerEdit::SetInterpreter(interpreter::Interpreter * interpreter)
       {
+        this->ClearInterpreter();
         if (interpreter != nullptr){
           this->interpreter = interpreter;
           this->interpreter->RegisterObserver(this);
@@ -32,6 +33,13 @@ namespace analyzer{
         }
       }
 
+      void AnalyzerEdit::ClearInterpreter()
+      {
+        this->setText("");
+        if (this->interpreter != nullptr){
+          this->interpreter->UnregisterObserver(this);
+        }
+      }
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){

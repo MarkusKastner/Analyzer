@@ -44,6 +44,8 @@ namespace analyzer{
 
       void changeWorkingMode();
       void connectUI();
+
+      void activeFileChanged(const std::string & fileName);
     };
   }
 }

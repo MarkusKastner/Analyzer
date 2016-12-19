@@ -27,7 +27,7 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
-      this->changeWorkingMode();
+      this->analyzerEdit->SetInterpreter(this->analyzerBase.GetActiveAnalyzerFile().GetInterpreter().get());
     }
 
     void MainWindow::NotifyFileChange()
@@ -84,6 +84,12 @@ namespace analyzer{
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
       connect(this->ui.actionBinary, &QAction::triggered, this->actions.get(), &Actions::OnWorkingModeBianry);
       connect(this->ui.actionText, &QAction::triggered, this->actions.get(), &Actions::OnWorkingModeText);
+      connect(this->documentStructure, &DocumentStructure::ActiveFileChanged, this, &MainWindow::activeFileChanged);
+    }
+
+    void MainWindow::activeFileChanged(const std::string & fileName)
+    {
+      this->analyzerBase.SetActiveFile(fileName);
     }
   }
 }

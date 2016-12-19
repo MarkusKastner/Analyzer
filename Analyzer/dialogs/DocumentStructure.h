@@ -9,6 +9,7 @@ namespace analyzer{
   namespace gui{
     class DocumentStructure : public QDockWidget
     {
+      Q_OBJECT
     private:
       class FilesEvent : public QEvent
       {
@@ -28,6 +29,9 @@ namespace analyzer{
       virtual ~DocumentStructure();
       void SetFiles(const std::vector<std::string> files);
 
+    signals:
+      void ActiveFileChanged(const std::string & fileName);
+
     protected:
       void customEvent(QEvent * evt);
 
@@ -37,6 +41,7 @@ namespace analyzer{
 
       void setup();
       void setFiles(const std::vector<std::string> files);
+      void onFileChange(const QModelIndex & index);
     };
   }
 }

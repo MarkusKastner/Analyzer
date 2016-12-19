@@ -40,7 +40,6 @@ namespace analyzer{
       delete this->workTasks;
       delete this->runBaseWorker;
       delete this->activeFilePath;
-      //delete this->interpreter;
       delete this->baseObservers;
       delete this->workTasksLock;
       delete this->files;
@@ -154,7 +153,6 @@ namespace analyzer{
       if (this->files->size() == 1){
         *this->activeFilePath = file.GetFileName();
       }
-      this->notifyFilesChange();
     }
 
     bool AnalyzerBase::HasFiles()
@@ -221,6 +219,19 @@ namespace analyzer{
         fileNames.push_back(file.GetFileName());
       }
       return fileNames;
+    }
+
+    void AnalyzerBase::SetActiveFile(const std::string & fileName)
+    {
+      std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
+      for (auto& exisiting : *this->files){
+        if (exisiting.GetFileName().compare(fileName) == 0){
+          *this->activeFilePath = fileName;
+          this->notifyInterpreterChange();
+          return;
+        }
+      }
+      throw AnalyzerBaseException("unknown file");
     }
 
     void AnalyzerBase::baseWorker()
@@ -305,6 +316,7 @@ namespace analyzer{
       core::File analyzerFile;
       analyzerFile.SetFileData(*this->activeFilePath, data);
       this->AddAnalyzerFile(analyzerFile);
+      this->notifyFilesChange();
     }
 
     void AnalyzerBase::loadContainer()
@@ -316,6 +328,7 @@ namespace analyzer{
           this->AddAnalyzerFile(zip.GetFileAt(i));
         }
       }
+      this->notifyFilesChange();
     }
 
     void AnalyzerBase::notifyInterpreterChange()

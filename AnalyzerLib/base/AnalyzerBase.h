@@ -66,6 +66,7 @@ namespace analyzer{
       core::File GetAnalyzerFile(const size_t & index);
       core::File GetActiveAnalyzerFile();
       std::vector<std::string> GetFileNames();
+      void SetActiveFile(const std::string & fileName);
 
     private:
       std::thread * baseThread;

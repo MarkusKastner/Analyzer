@@ -92,6 +92,12 @@
     <ClCompile Include="dialogs\DocumentStructure.cpp">
       <Filter>dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DocumentStructure.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DocumentStructure.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -112,9 +118,6 @@
     <ClInclude Include="dialogs\DisplayOptionsText.h">
       <Filter>dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="dialogs\DocumentStructure.h">
-      <Filter>dialogs</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow\MainWindow.ui">
@@ -125,6 +128,9 @@
     </CustomBuild>
     <CustomBuild Include="mainwindow\Actions.h">
       <Filter>mainwindow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dialogs\DocumentStructure.h">
+      <Filter>dialogs</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>
