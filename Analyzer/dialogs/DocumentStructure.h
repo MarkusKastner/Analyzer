@@ -24,6 +24,19 @@ namespace analyzer{
         std::vector<std::string> files;
       };
 
+      class FileItem : public QTreeWidgetItem
+      {
+      public:
+        explicit FileItem(QTreeWidgetItem * parent = nullptr)
+          :QTreeWidgetItem(parent)
+        {}
+        virtual ~FileItem(){}
+        void SetFilePath(const std::string & filePath) { this->filePath = filePath; }
+        const std::string & GetFilePath(){ return this->filePath; }
+      private:
+        std::string filePath;
+      };
+
     public:
       DocumentStructure(const QString & title,  QWidget * parent = 0);
       virtual ~DocumentStructure();
@@ -41,7 +54,15 @@ namespace analyzer{
 
       void setup();
       void setFiles(const std::vector<std::string> files);
-      void onFileChange(const QModelIndex & index);
+      QTreeWidgetItem * checkDir(const std::string & file);
+      QTreeWidgetItem * createFileItem(const std::string & file);
+      void addFile(QTreeWidgetItem * item);
+      void addFile(QTreeWidgetItem * parent, QTreeWidgetItem * item);
+
+      std::vector<std::string> getSplittedDir(const std::string & dir);
+      std::string getFileName(const std::string & file);
+
+      void onItemChanged(QTreeWidgetItem * item, int col);
     };
   }
 }

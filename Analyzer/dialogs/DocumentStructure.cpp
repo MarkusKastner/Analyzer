@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QVBoxLayout>
 
+#include <regex>
+
 namespace analyzer{
   namespace gui{
     DocumentStructure::DocumentStructure(const QString & title, QWidget * parent)
@@ -37,55 +39,109 @@ namespace analyzer{
 
       this->fileTree = new QTreeWidget(this->baseWidget);
       this->baseWidget->layout()->addWidget(this->fileTree);
-
-      connect(this->fileTree, &QTreeWidget::clicked, this, &DocumentStructure::onFileChange);
+      this->fileTree->setHeaderHidden(true);
+      connect(this->fileTree, &QTreeWidget::itemClicked, this, &DocumentStructure::onItemChanged);
     }
 
     void DocumentStructure::setFiles(const std::vector<std::string> files)
     {
       this->fileTree->clear();
-      QStringList fileNames;
-      for each (auto& file in files){
-        fileNames.push_back(file.c_str());
-      }
 
-      QTreeWidgetItem *topLevelItem = NULL;
-      foreach(const QString &fileName, fileNames){
-        QStringList splitFileName = fileName.split("/");
-        
-        if (this->fileTree->findItems(splitFileName[0], Qt::MatchFixedString).isEmpty()){
-          topLevelItem = new QTreeWidgetItem;
-          topLevelItem->setText(0, splitFileName[0]);
-          this->fileTree->addTopLevelItem(topLevelItem);
+      for (auto& file : files){
+        QTreeWidgetItem * parent = this->checkDir(file);
+        QTreeWidgetItem * item = createFileItem(file);
+        if (parent == nullptr){
+          this->addFile(item);
         }
-
-        QTreeWidgetItem *parentItem = topLevelItem;
-
-        for (int i = 1; i < splitFileName.size() - 1; ++i){
-          bool thisDirectoryExists = false;
-          for (int j = 0; j < parentItem->childCount(); ++j){
-            if (splitFileName[i] == parentItem->child(j)->text(0)){
-              thisDirectoryExists = true;
-              parentItem = parentItem->child(j);
-              break;
-            }
-          }
-
-          if (!thisDirectoryExists){
-            parentItem = new QTreeWidgetItem(parentItem);
-            parentItem->setText(0, splitFileName[i]);
-          }
+        else{
+          this->addFile(parent, item);
         }
-        QTreeWidgetItem *childItem = new QTreeWidgetItem(parentItem);
-        childItem->setText(0, splitFileName.last());
       }
     }
 
-    void DocumentStructure::onFileChange(const QModelIndex & index)
+    QTreeWidgetItem * DocumentStructure::checkDir(const std::string & file)
     {
-      QVariant data = index.data();
-      std::string file = data.toString().toStdString();
-      std::string test;
+      std::vector<std::string> dir(getSplittedDir(file));
+      if (dir.empty()){
+        return nullptr;
+      }
+      QTreeWidgetItem * parentItem = nullptr;
+      for (auto& folder : dir){
+        QList<QTreeWidgetItem *> entries;
+        if (parentItem == nullptr){
+          entries = this->fileTree->findItems(folder.c_str(), Qt::MatchFixedString);
+        }
+        else{
+          for (int i = 0; i < parentItem->childCount(); i++){
+            if (parentItem->child(i)->text(0).compare(QString(folder.c_str())) == 0){
+              entries.push_back(parentItem->child(i));
+            }
+          }
+        }
+
+        if (entries.empty()){
+          parentItem = new QTreeWidgetItem(parentItem);
+          parentItem->setText(0, folder.c_str());
+          this->fileTree->addTopLevelItem(parentItem);
+        }
+        else{
+          parentItem = entries.at(0);
+        }
+      }
+      return parentItem;
+    }
+
+    QTreeWidgetItem * DocumentStructure::createFileItem(const std::string & file)
+    {
+      FileItem * item = new FileItem();
+      item->setText(0, this->getFileName(file).c_str());
+      item->SetFilePath(file);
+      return item;
+    }
+
+    void DocumentStructure::addFile(QTreeWidgetItem * item)
+    {
+      this->fileTree->addTopLevelItem(item);
+    }
+
+    void DocumentStructure::addFile(QTreeWidgetItem * parent, QTreeWidgetItem * item)
+    {
+      parent->addChild(item);
+    }
+
+    std::vector<std::string> getPathParts(const std::string & fullFileName){
+      std::regex re("/");
+      std::sregex_token_iterator first{ fullFileName.begin(), fullFileName.end(), re, -1 }, last;
+      std::vector<std::string> parts{ first, last };
+      return parts;
+    }
+
+    std::vector<std::string> DocumentStructure::getSplittedDir(const std::string & dir)
+    {
+      std::vector<std::string> parts(getPathParts(dir));
+      if (parts.size() > 0){
+        parts.erase(parts.begin() + parts.size() - 1);
+      }
+      return parts;
+    }
+
+    std::string DocumentStructure::getFileName(const std::string & file)
+    {
+      std::vector<std::string> parts(getPathParts(file));
+      if (parts.empty()){
+        return "";
+      }
+      else{
+        return parts.back();
+      }
+    }
+
+    void DocumentStructure::onItemChanged(QTreeWidgetItem * item, int col)
+    {
+      auto fileItem = dynamic_cast<FileItem*>(item);
+      if (fileItem != nullptr){
+        this->ActiveFileChanged(fileItem->GetFilePath());
+      }
     }
   }
 }
