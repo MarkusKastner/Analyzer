@@ -79,6 +79,9 @@
     <ClCompile Include="core\File.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="base\DefinitionDB.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="core\File.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="base\DefinitionDB.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

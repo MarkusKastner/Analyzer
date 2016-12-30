@@ -53,14 +53,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..;c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\include;..\Analyzer\mainwindow</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..;c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\include;..\Analyzer\mainwindow;$(MYSQLX86)\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\msvc\gtest\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>gtestd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>c:\dev\googletest-release-1.8.0\googletest-release-1.8.0\googletest\msvc\gtest\Debug;$(MYSQLX86)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtestd.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
+    <ClCompile Include="..\AnalyzerLib\base\DefinitionDB.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\Byte.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp" />
@@ -103,6 +104,7 @@
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBase.h" />
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBaseObserver.h" />
+    <ClInclude Include="..\AnalyzerLib\base\DefinitionDB.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
     <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />
     <ClInclude Include="..\AnalyzerLib\core\Byte.h" />
@@ -123,6 +125,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\TextGlyph.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />
+    <ClInclude Include="base\DefinitionDBTest.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
     <ClInclude Include="core\ByteTest.h" />
