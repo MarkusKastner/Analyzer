@@ -150,5 +150,8 @@
     <ClInclude Include="base\DefinitionDB.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="base\error\DBException.h">
+      <Filter>base\error</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

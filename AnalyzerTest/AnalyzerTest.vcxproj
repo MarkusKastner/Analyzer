@@ -106,6 +106,7 @@
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBaseObserver.h" />
     <ClInclude Include="..\AnalyzerLib\base\DefinitionDB.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
+    <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
     <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />
     <ClInclude Include="..\AnalyzerLib\core\Byte.h" />
     <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h" />

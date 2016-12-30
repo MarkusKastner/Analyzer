@@ -2,6 +2,8 @@
 
 #include "my_global.h"
 
+#include "error\DBException.h"
+
 namespace analyzer{
   namespace base{
     DefinitionDB::DefinitionDB()
@@ -18,12 +20,11 @@ namespace analyzer{
     {
       this->connection = mysql_init(NULL);
       if (nullptr == this->connection){
-        throw - 1;
+        throw DBException("Cannot initialize MySQL C-Connector");
       }
 
       if (mysql_real_connect(this->connection, address.c_str(), user.c_str(), password.c_str(), NULL, port, NULL, 0) == NULL){
-        //fprintf(stderr, "%s\n", mysql_error(this->connection));
-        throw - 1;
+        throw DBException(std::string(mysql_error(this->connection)));
       }
     }
 
