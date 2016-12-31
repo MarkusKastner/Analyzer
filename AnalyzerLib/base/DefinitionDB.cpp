@@ -7,7 +7,7 @@
 namespace analyzer{
   namespace base{
     DefinitionDB::DefinitionDB()
-      :connection(nullptr)
+      :DefinitionSource(), connection(nullptr)
     {
     }
 
@@ -28,7 +28,7 @@ namespace analyzer{
       }
     }
 
-    bool DefinitionDB::IsConnected()
+    bool DefinitionDB::IsInitialized()
     {
       if (this->connection != nullptr){
         return true;

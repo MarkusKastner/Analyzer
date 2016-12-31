@@ -15,7 +15,7 @@ TEST_F(DefinitionDBTest, ConnectDB)
 {
   analyzer::base::DefinitionDB db;
   db.Connect("127.0.0.1", 3306, "root", "toor");
-  ASSERT_TRUE(db.IsConnected());
+  ASSERT_TRUE(db.IsInitialized());
 }
 
 TEST_F(DefinitionDBTest, DBException)

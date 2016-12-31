@@ -15,16 +15,18 @@
 
 #include "mysql.h"
 
+#include "DefinitionSource.h"
+
 namespace analyzer{
   namespace base{
-    class IMEX DefinitionDB
+    class IMEX DefinitionDB : public DefinitionSource
     {
     public:
       DefinitionDB();
       virtual ~DefinitionDB();
 
       void Connect(const std::string & address, const int & port, const std::string & user, const std::string & password);
-      bool IsConnected();
+      virtual bool IsInitialized();
 
     private:
       MYSQL * connection;
