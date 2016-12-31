@@ -93,6 +93,12 @@
     <ClCompile Include="..\AnalyzerLib\base\DefinitionDB.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\base\LocalDefinition.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\base\DefinitionVault.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -205,6 +211,15 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h">
       <Filter>base\error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\base\LocalDefinition.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\base\DefinitionVault.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\DefinitionVaultTest.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

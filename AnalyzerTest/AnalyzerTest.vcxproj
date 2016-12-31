@@ -84,6 +84,8 @@
   <ItemGroup>
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
     <ClCompile Include="..\AnalyzerLib\base\DefinitionDB.cpp" />
+    <ClCompile Include="..\AnalyzerLib\base\DefinitionVault.cpp" />
+    <ClCompile Include="..\AnalyzerLib\base\LocalDefinition.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\Byte.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp" />
@@ -105,8 +107,10 @@
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBase.h" />
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBaseObserver.h" />
     <ClInclude Include="..\AnalyzerLib\base\DefinitionDB.h" />
+    <ClInclude Include="..\AnalyzerLib\base\DefinitionVault.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
+    <ClInclude Include="..\AnalyzerLib\base\LocalDefinition.h" />
     <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />
     <ClInclude Include="..\AnalyzerLib\core\Byte.h" />
     <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h" />
@@ -127,6 +131,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />
     <ClInclude Include="base\DefinitionDBTest.h" />
+    <ClInclude Include="base\DefinitionVaultTest.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
     <ClInclude Include="core\ByteTest.h" />

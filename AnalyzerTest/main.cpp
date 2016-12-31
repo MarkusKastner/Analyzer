@@ -14,6 +14,7 @@
 #include "core\zip\ZIPContainerTest.h"
 #include "core\FileTest.h"
 #include "base\DefinitionDBTest.h"
+#include "base\DefinitionVaultTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

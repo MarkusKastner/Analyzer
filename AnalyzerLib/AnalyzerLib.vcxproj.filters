@@ -82,6 +82,12 @@
     <ClCompile Include="base\DefinitionDB.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="base\LocalDefinition.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\DefinitionVault.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -152,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="base\error\DBException.h">
       <Filter>base\error</Filter>
+    </ClInclude>
+    <ClInclude Include="base\LocalDefinition.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\DefinitionVault.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
