@@ -15,5 +15,10 @@ namespace analyzer{
     {
       return true;
     }
+
+    size_t DefinitionVault::GetNumSources()
+    {
+      return 1;
+    }
   }
 }

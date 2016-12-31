@@ -8,13 +8,18 @@
 
 class DefinitionVaultTest : public testing::Test
 {
-  
+public:
+  analyzer::base::DefinitionVault defSource;
 };
 
 TEST_F(DefinitionVaultTest, init)
 {
-  analyzer::base::DefinitionVault defSource;
   ASSERT_TRUE(defSource.HasDefinitions());
+}
+
+TEST_F(DefinitionVaultTest, NumSources)
+{
+  ASSERT_EQ(defSource.GetNumSources(), 1);
 }
 
 #endif

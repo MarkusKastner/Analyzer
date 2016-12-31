@@ -10,6 +10,7 @@ namespace analyzer{
       virtual ~DefinitionVault();
 
       bool HasDefinitions();
+      size_t GetNumSources();
 
     };
   }
