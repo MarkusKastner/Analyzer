@@ -230,5 +230,8 @@
     <ClInclude Include="base\DefinitionSourceTest.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="base\LocalDefinitionTest.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

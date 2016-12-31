@@ -135,6 +135,7 @@
     <ClInclude Include="base\DefinitionDBTest.h" />
     <ClInclude Include="base\DefinitionSourceTest.h" />
     <ClInclude Include="base\DefinitionVaultTest.h" />
+    <ClInclude Include="base\LocalDefinitionTest.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
     <ClInclude Include="core\ByteTest.h" />
