@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\AnalyzerBase.cpp" />
+    <ClCompile Include="base\DefinitionSource.cpp" />
     <ClCompile Include="base\DefinitionVault.cpp" />
     <ClCompile Include="base\DefinitionDB.cpp" />
     <ClCompile Include="base\LocalDefinition.cpp" />
@@ -106,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="base\AnalyzerBase.h" />
     <ClInclude Include="base\AnalyzerBaseObserver.h" />
+    <ClInclude Include="base\DefinitionSource.h" />
     <ClInclude Include="base\DefinitionVault.h" />
     <ClInclude Include="base\DefinitionDB.h" />
     <ClInclude Include="base\error\AnalyzerBaseException.h" />
