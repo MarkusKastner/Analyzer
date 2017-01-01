@@ -108,6 +108,9 @@
     <ClCompile Include="..\AnalyzerLib\definitions\Definition.cpp">
       <Filter>definitions</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\definitions\TextDefinition.cpp">
+      <Filter>definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -243,6 +246,12 @@
       <Filter>definitions</Filter>
     </ClInclude>
     <ClInclude Include="definitions\DefinitionTest.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="definitions\TextDefinitionTest.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\definitions\TextDefinition.h">
       <Filter>definitions</Filter>
     </ClInclude>
   </ItemGroup>

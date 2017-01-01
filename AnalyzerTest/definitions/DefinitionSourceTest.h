@@ -20,21 +20,19 @@ public:
     virtual ~SomeDefSource(){}
 
     virtual bool IsInitialized() { return true; }
-
-  
   };
+  SomeDefSource defSource;
 };
 
 TEST_F(DefinitionSourceTest, init)
 {
-  SomeDefSource defSource;
   ASSERT_TRUE(defSource.IsInitialized());
 }
 
 TEST_F(DefinitionSourceTest, GetName)
 {
-  SomeDefSource defSource;
   ASSERT_STREQ(defSource.GetName().c_str(), "some_source");
 }
+
 
 #endif

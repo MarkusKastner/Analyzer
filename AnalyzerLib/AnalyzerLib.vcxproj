@@ -97,6 +97,7 @@
     <ClCompile Include="definitions\DefinitionSource.cpp" />
     <ClCompile Include="definitions\DefinitionVault.cpp" />
     <ClCompile Include="definitions\LocalDefinition.cpp" />
+    <ClCompile Include="definitions\TextDefinition.cpp" />
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
     <ClCompile Include="interpreter\InterpreterDataImpl.cpp" />
     <ClCompile Include="interpreter\InterpreterObserverImpl.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="definitions\DefinitionSource.h" />
     <ClInclude Include="definitions\DefinitionVault.h" />
     <ClInclude Include="definitions\LocalDefinition.h" />
+    <ClInclude Include="definitions\TextDefinition.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h" />
     <ClInclude Include="interpreter\error\InterpreterException.h" />
     <ClInclude Include="interpreter\Interpreter.h" />

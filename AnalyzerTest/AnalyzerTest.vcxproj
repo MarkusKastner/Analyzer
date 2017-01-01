@@ -96,6 +96,7 @@
     <ClCompile Include="..\AnalyzerLib\definitions\DefinitionSource.cpp" />
     <ClCompile Include="..\AnalyzerLib\definitions\DefinitionVault.cpp" />
     <ClCompile Include="..\AnalyzerLib\definitions\LocalDefinition.cpp" />
+    <ClCompile Include="..\AnalyzerLib\definitions\TextDefinition.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterDataImpl.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="..\AnalyzerLib\definitions\DefinitionSource.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\DefinitionVault.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\LocalDefinition.h" />
+    <ClInclude Include="..\AnalyzerLib\definitions\TextDefinition.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\error\InterpreterException.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
@@ -145,6 +147,7 @@
     <ClInclude Include="definitions\DefinitionTest.h" />
     <ClInclude Include="definitions\DefinitionVaultTest.h" />
     <ClInclude Include="definitions\LocalDefinitionTest.h" />
+    <ClInclude Include="definitions\TextDefinitionTest.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h" />
     <ClInclude Include="interpreter\strategy\DefaultTextTest.h" />
     <ClInclude Include="interpreter\strategy\InterpreterStrategyTest.h" />
