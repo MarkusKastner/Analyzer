@@ -12,8 +12,8 @@ class DefinitionTest : public testing::Test
 
 TEST_F(DefinitionTest, init)
 {
-  analyzer::definition::Definition definition;
-
+  analyzer::definition::Definition definition(0);
+  ASSERT_EQ(definition.GetID(), 0);
 }
 
 #endif

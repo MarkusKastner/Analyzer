@@ -13,9 +13,16 @@ namespace analyzer{
   namespace definition{
     class IMEX Definition
     {
+    private:
+      Definition(){}
     public:
-      Definition();
+      explicit Definition(const unsigned int & id);
       virtual ~Definition();
+
+      const unsigned int & GetID();
+
+    private:
+      unsigned int id;
     };
   }
 }
