@@ -21,8 +21,12 @@ namespace analyzer{
 
       const unsigned int & GetID();
 
+      void SetDescription(const std::string & description);
+      const std::string & GetDescription();
+
     private:
       unsigned int id;
+      std::string * description;
     };
   }
 }
