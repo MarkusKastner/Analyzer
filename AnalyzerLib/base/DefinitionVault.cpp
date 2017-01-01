@@ -47,5 +47,15 @@ namespace analyzer{
       }
       throw AnalyzerBaseException("Unknown source name");
     }
+
+    bool DefinitionVault::HasSource(const std::string & sourceName)
+    {
+      for (auto& source : *this->sources){
+        if (source->GetName().compare(sourceName) == 0){
+          return true;;
+        }
+      }
+      return false;
+    }
   }
 }

@@ -75,4 +75,8 @@ TEST_F(DefinitionVaultTest, InvalidSourceName)
   ASSERT_STREQ(errorMsg.c_str(), "Unknown source name");
 }
 
+TEST_F(DefinitionVaultTest, HasSource)
+{
+  ASSERT_TRUE(asciiSource.HasSource("default_ascii"));
+}
 #endif
