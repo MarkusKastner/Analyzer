@@ -18,4 +18,10 @@ TEST_F(LocalDefinitionTest, init)
   ASSERT_TRUE(localSource.IsInitialized());
 }
 
+TEST_F(LocalDefinitionTest, initNamedResource)
+{
+  analyzer::base::LocalDefinition localSource("source_name");
+  ASSERT_STREQ(localSource.GetName().c_str(), "source_name");
+}
+
 #endif

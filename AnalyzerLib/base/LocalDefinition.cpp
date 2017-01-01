@@ -9,6 +9,12 @@ namespace analyzer{
 
     }
 
+    LocalDefinition::LocalDefinition(const std::string & name)
+      :DefinitionSource()
+    {
+      this->setName(name);
+    }
+
     LocalDefinition::~LocalDefinition()
     {
 

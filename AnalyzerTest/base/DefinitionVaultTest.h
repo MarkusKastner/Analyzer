@@ -22,4 +22,9 @@ TEST_F(DefinitionVaultTest, NumSources)
   ASSERT_EQ(defSource.GetNumSources(), 1);
 }
 
+TEST_F(DefinitionVaultTest, GetSourceAt)
+{
+  ASSERT_STREQ(defSource.GetSourceAt(0)->GetName().c_str(), "default_ascii");
+}
+
 #endif

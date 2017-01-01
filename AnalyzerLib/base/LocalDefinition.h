@@ -9,12 +9,15 @@
 
 #include "DefinitionSource.h"
 
+#include <string>
+
 namespace analyzer{
   namespace base{
     class IMEX LocalDefinition : public DefinitionSource
     {
     public:
       LocalDefinition();
+      LocalDefinition(const std::string & name);
       virtual ~LocalDefinition();
       virtual bool IsInitialized();
     };
