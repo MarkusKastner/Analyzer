@@ -2,7 +2,7 @@
 #define DEFINITIONVAULT_H
 
 #include <memory>
-
+#include <vector>
 #include "DefinitionSource.h"
 
 namespace analyzer{
@@ -16,6 +16,9 @@ namespace analyzer{
       bool HasDefinitions();
       size_t GetNumSources();
       std::shared_ptr<DefinitionSource> GetSourceAt(const size_t index);
+
+    private:
+      std::vector<std::shared_ptr<DefinitionSource>> * sources;
     };
   }
 }
