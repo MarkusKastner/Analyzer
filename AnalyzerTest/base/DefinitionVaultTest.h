@@ -42,4 +42,37 @@ TEST_F(DefinitionVaultTest, GetSourceAt)
   ASSERT_STREQ(asciiSource.GetSourceAt(0)->GetName().c_str(), "default_ascii");
 }
 
+TEST_F(DefinitionVaultTest, GetSourceByName)
+{
+  ASSERT_STREQ(asciiSource.GetSource("default_ascii")->GetName().c_str(), "default_ascii");
+}
+
+TEST_F(DefinitionVaultTest, InvalidIndex)
+{
+  std::string errorMsg;
+
+  try{
+    ASSERT_STREQ(asciiSource.GetSourceAt(1)->GetName().c_str(), "default_ascii");
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex){
+    errorMsg = std::string(ex.what());
+  }
+  catch (...){}
+  ASSERT_STREQ(errorMsg.c_str(), "Invalid index");
+}
+
+TEST_F(DefinitionVaultTest, InvalidSourceName)
+{
+  std::string errorMsg;
+
+  try{
+    ASSERT_STREQ(asciiSource.GetSource("unknown")->GetName().c_str(), "unknown");
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex){
+    errorMsg = std::string(ex.what());
+  }
+  catch (...){}
+  ASSERT_STREQ(errorMsg.c_str(), "Unknown source name");
+}
+
 #endif

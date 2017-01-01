@@ -1,6 +1,7 @@
 #include "DefinitionVault.h"
 
 #include "LocalDefinition.h"
+#include "error\AnalyzerBaseException.h"
 
 namespace analyzer{
   namespace base{
@@ -31,7 +32,20 @@ namespace analyzer{
 
     std::shared_ptr<DefinitionSource> DefinitionVault::GetSourceAt(const size_t index)
     {
+      if (index > this->sources->size() - 1){
+        throw AnalyzerBaseException("Invalid index");
+      }
       return this->sources->at(0);
+    }
+
+    std::shared_ptr<DefinitionSource> DefinitionVault::GetSource(const std::string & sourceName)
+    {
+      for (auto& source : *this->sources){
+        if (source->GetName().compare(sourceName) == 0){
+          return source;
+        }
+      }
+      throw AnalyzerBaseException("Unknown source name");
     }
   }
 }
