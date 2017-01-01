@@ -46,4 +46,18 @@ TEST_F(DefinitionSourceTest, AddDefinition)
   defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(0)));
   ASSERT_EQ(defSource1.GetNumDefinitions(), 1);
 }
+
+TEST_F(DefinitionSourceTest, ThrowExistingID)
+{
+  std::string errorMsg;
+  try{
+    defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(0)));
+    defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(0)));
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex){
+    errorMsg = std::string(ex.what());
+  }
+  catch (...){}
+  ASSERT_STREQ(errorMsg.c_str(), "ID already in use");
+}
 #endif

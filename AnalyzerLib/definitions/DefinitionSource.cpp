@@ -1,5 +1,7 @@
 #include "DefinitionSource.h"
 
+#include "AnalyzerLib\base\error\AnalyzerBaseException.h"
+
 namespace analyzer{
   namespace definition{
     DefinitionSource::~DefinitionSource()
@@ -31,6 +33,9 @@ namespace analyzer{
 
     void DefinitionSource::AddDefinition(const std::shared_ptr<Definition> & definition)
     {
+      if (this->hasID(definition->GetID())){
+        throw base::AnalyzerBaseException("ID already in use");
+      }
       this->definitions->push_back(definition);
     }
 
@@ -39,5 +44,14 @@ namespace analyzer{
       return this->definitions->size();
     }
 
+    bool DefinitionSource::hasID(const unsigned int & id)
+    {
+      for (auto& definition : *this->definitions){
+        if (definition->GetID() == id){
+          return true;
+        }
+      }
+      return false;
+    }
   }
 }

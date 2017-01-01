@@ -35,6 +35,8 @@ namespace analyzer{
     private:
       std::string * name;
       std::vector<std::shared_ptr<Definition>> * definitions;
+
+      bool hasID(const unsigned int & id);
     };
   }
 }
