@@ -91,6 +91,7 @@
     <ClCompile Include="..\AnalyzerLib\core\Word.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\zip\miniz.c" />
     <ClCompile Include="..\AnalyzerLib\core\zip\ZIPContainer.cpp" />
+    <ClCompile Include="..\AnalyzerLib\definitions\Definition.cpp" />
     <ClCompile Include="..\AnalyzerLib\definitions\DefinitionDB.cpp" />
     <ClCompile Include="..\AnalyzerLib\definitions\DefinitionSource.cpp" />
     <ClCompile Include="..\AnalyzerLib\definitions\DefinitionVault.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
     <ClInclude Include="..\AnalyzerLib\core\Word.h" />
     <ClInclude Include="..\AnalyzerLib\core\zip\ZIPContainer.h" />
+    <ClInclude Include="..\AnalyzerLib\definitions\Definition.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\DefinitionDB.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\DefinitionSource.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\DefinitionVault.h" />
@@ -140,6 +142,7 @@
     <ClInclude Include="core\zip\ZIPContainerTest.h" />
     <ClInclude Include="definitions\DefinitionDBTest.h" />
     <ClInclude Include="definitions\DefinitionSourceTest.h" />
+    <ClInclude Include="definitions\DefinitionTest.h" />
     <ClInclude Include="definitions\DefinitionVaultTest.h" />
     <ClInclude Include="definitions\LocalDefinitionTest.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h" />

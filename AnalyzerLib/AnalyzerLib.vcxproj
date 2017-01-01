@@ -92,6 +92,7 @@
     <ClCompile Include="core\Word.cpp" />
     <ClCompile Include="core\zip\miniz.c" />
     <ClCompile Include="core\zip\ZIPContainer.cpp" />
+    <ClCompile Include="definitions\Definition.cpp" />
     <ClCompile Include="definitions\DefinitionDB.cpp" />
     <ClCompile Include="definitions\DefinitionSource.cpp" />
     <ClCompile Include="definitions\DefinitionVault.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\Word.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
+    <ClInclude Include="definitions\Definition.h" />
     <ClInclude Include="definitions\DefinitionDB.h" />
     <ClInclude Include="definitions\DefinitionSource.h" />
     <ClInclude Include="definitions\DefinitionVault.h" />

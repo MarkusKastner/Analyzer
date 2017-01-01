@@ -17,6 +17,7 @@
 #include "definitions\DefinitionVaultTest.h"
 #include "definitions\DefinitionSourceTest.h"
 #include "definitions\LocalDefinitionTest.h"
+#include "definitions\DefinitionTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

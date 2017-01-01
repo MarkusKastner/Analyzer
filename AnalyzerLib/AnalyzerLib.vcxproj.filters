@@ -94,6 +94,9 @@
     <ClCompile Include="definitions\LocalDefinition.cpp">
       <Filter>definitions</Filter>
     </ClCompile>
+    <ClCompile Include="definitions\Definition.cpp">
+      <Filter>definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -172,6 +175,9 @@
       <Filter>definitions</Filter>
     </ClInclude>
     <ClInclude Include="definitions\LocalDefinition.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="definitions\Definition.h">
       <Filter>definitions</Filter>
     </ClInclude>
   </ItemGroup>

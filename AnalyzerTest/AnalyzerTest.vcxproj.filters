@@ -105,6 +105,9 @@
     <ClCompile Include="..\AnalyzerLib\definitions\LocalDefinition.cpp">
       <Filter>definitions</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\definitions\Definition.cpp">
+      <Filter>definitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -234,6 +237,12 @@
       <Filter>definitions</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\definitions\LocalDefinition.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\definitions\Definition.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="definitions\DefinitionTest.h">
       <Filter>definitions</Filter>
     </ClInclude>
   </ItemGroup>
