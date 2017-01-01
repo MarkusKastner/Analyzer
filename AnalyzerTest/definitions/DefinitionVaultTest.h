@@ -4,10 +4,11 @@
 #include <gtest\gtest.h>
 #include <memory>
 
-#include "AnalyzerLib\base\DefinitionVault.h"
+#include "AnalyzerLib\definitions\DefinitionVault.h"
+#include "AnalyzerLib\definitions\DefinitionSource.h"
+#include "AnalyzerLib\definitions\LocalDefinition.h"
+
 #include "AnalyzerLib\base\error\DBException.h"
-#include "AnalyzerLib\base\DefinitionSource.h"
-#include "AnalyzerLib\base\LocalDefinition.h"
 
 class DefinitionVaultTest : public testing::Test
 {

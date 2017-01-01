@@ -2,7 +2,7 @@
 
 #include "my_global.h"
 
-#include "error\DBException.h"
+#include "AnalyzerLib\base\error\DBException.h"
 
 namespace analyzer{
   namespace base{

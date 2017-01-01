@@ -1,7 +1,7 @@
 #include "DefinitionVault.h"
 
 #include "LocalDefinition.h"
-#include "error\AnalyzerBaseException.h"
+#include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 
 namespace analyzer{
   namespace base{

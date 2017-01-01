@@ -29,6 +29,9 @@
     <Filter Include="core\zip">
       <UniqueIdentifier>{f723062e-eecc-4217-85d8-de22db08bad6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="definitions">
+      <UniqueIdentifier>{dfcf44b7-1d2d-4007-9379-5cccec78a2e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -79,17 +82,17 @@
     <ClCompile Include="core\File.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="base\DefinitionDB.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="definitions\DefinitionDB.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
-    <ClCompile Include="base\LocalDefinition.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="definitions\DefinitionSource.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
-    <ClCompile Include="base\DefinitionVault.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="definitions\DefinitionVault.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
-    <ClCompile Include="base\DefinitionSource.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="definitions\LocalDefinition.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,20 +159,20 @@
     <ClInclude Include="core\File.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="base\DefinitionDB.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="base\error\DBException.h">
       <Filter>base\error</Filter>
     </ClInclude>
-    <ClInclude Include="base\LocalDefinition.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\DefinitionDB.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="base\DefinitionVault.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\DefinitionSource.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="base\DefinitionSource.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\DefinitionVault.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="definitions\LocalDefinition.h">
+      <Filter>definitions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

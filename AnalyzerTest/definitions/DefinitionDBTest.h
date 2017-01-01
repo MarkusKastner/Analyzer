@@ -3,7 +3,7 @@
 
 #include <gtest\gtest.h>
 
-#include "AnalyzerLib\base\DefinitionDB.h"
+#include "AnalyzerLib\definitions\DefinitionDB.h"
 #include "AnalyzerLib\base\error\DBException.h"
 
 class DefinitionDBTest : public testing::Test

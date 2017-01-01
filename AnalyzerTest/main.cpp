@@ -13,10 +13,10 @@
 #include "base\AnalyzerBaseTest.h"
 #include "core\zip\ZIPContainerTest.h"
 #include "core\FileTest.h"
-#include "base\DefinitionDBTest.h"
-#include "base\DefinitionVaultTest.h"
-#include "base\DefinitionSourceTest.h"
-#include "base\LocalDefinitionTest.h"
+#include "definitions\DefinitionDBTest.h"
+#include "definitions\DefinitionVaultTest.h"
+#include "definitions\DefinitionSourceTest.h"
+#include "definitions\LocalDefinitionTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

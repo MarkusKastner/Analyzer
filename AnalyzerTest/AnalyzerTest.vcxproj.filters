@@ -37,6 +37,9 @@
     <Filter Include="core\zip">
       <UniqueIdentifier>{49ef9502-6de8-4790-80f2-17f253a06fc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="definitions">
+      <UniqueIdentifier>{070114b9-5ab0-4d94-80b5-56cf4cb0473f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,17 +93,17 @@
     <ClCompile Include="..\AnalyzerLib\core\File.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\base\DefinitionDB.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="..\AnalyzerLib\definitions\DefinitionDB.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\base\LocalDefinition.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="..\AnalyzerLib\definitions\DefinitionSource.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\base\DefinitionVault.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="..\AnalyzerLib\definitions\DefinitionVault.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\base\DefinitionSource.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="..\AnalyzerLib\definitions\LocalDefinition.cpp">
+      <Filter>definitions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,32 +209,32 @@
     <ClInclude Include="..\AnalyzerLib\core\File.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="base\DefinitionDBTest.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\base\DefinitionDB.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h">
       <Filter>base\error</Filter>
     </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\base\LocalDefinition.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\DefinitionDBTest.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\base\DefinitionVault.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\DefinitionSourceTest.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="base\DefinitionVaultTest.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\DefinitionVaultTest.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\base\DefinitionSource.h">
-      <Filter>base</Filter>
+    <ClInclude Include="definitions\LocalDefinitionTest.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="base\DefinitionSourceTest.h">
-      <Filter>base</Filter>
+    <ClInclude Include="..\AnalyzerLib\definitions\DefinitionDB.h">
+      <Filter>definitions</Filter>
     </ClInclude>
-    <ClInclude Include="base\LocalDefinitionTest.h">
-      <Filter>base</Filter>
+    <ClInclude Include="..\AnalyzerLib\definitions\DefinitionSource.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\definitions\DefinitionVault.h">
+      <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\definitions\LocalDefinition.h">
+      <Filter>definitions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,8 @@
 
 #include <gtest\gtest.h>
 
-#include "AnalyzerLib\base\LocalDefinition.h"
+#include "AnalyzerLib\definitions\LocalDefinition.h"
+
 #include "AnalyzerLib\base\error\DBException.h"
 
 class LocalDefinitionTest : public testing::Test
