@@ -7,7 +7,6 @@ namespace analyzer{
     DefinitionVault::DefinitionVault()
       :sources(new std::vector<std::shared_ptr<DefinitionSource>>())
     {
-      this->sources->push_back(std::shared_ptr<DefinitionSource>(new LocalDefinition("default_ascii")));
     }
     
     DefinitionVault::~DefinitionVault()
@@ -23,6 +22,11 @@ namespace analyzer{
     size_t DefinitionVault::GetNumSources()
     {
       return this->sources->size();
+    }
+
+    void DefinitionVault::AddSource(const std::shared_ptr<DefinitionSource> & source)
+    {
+      this->sources->push_back(source);
     }
 
     std::shared_ptr<DefinitionSource> DefinitionVault::GetSourceAt(const size_t index)

@@ -15,6 +15,7 @@ namespace analyzer{
 
       bool HasDefinitions();
       size_t GetNumSources();
+      void AddSource(const std::shared_ptr<DefinitionSource> & source);
       std::shared_ptr<DefinitionSource> GetSourceAt(const size_t index);
 
     private:
