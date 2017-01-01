@@ -18,7 +18,7 @@
 #include "DefinitionSource.h"
 
 namespace analyzer{
-  namespace base{
+  namespace definition{
     class IMEX DefinitionDB : public DefinitionSource
     {
     public:

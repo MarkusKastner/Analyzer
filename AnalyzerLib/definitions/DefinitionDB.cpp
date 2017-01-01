@@ -5,7 +5,7 @@
 #include "AnalyzerLib\base\error\DBException.h"
 
 namespace analyzer{
-  namespace base{
+  namespace definition{
     DefinitionDB::DefinitionDB()
       :DefinitionSource(), connection(nullptr)
     {
@@ -20,11 +20,11 @@ namespace analyzer{
     {
       this->connection = mysql_init(NULL);
       if (nullptr == this->connection){
-        throw DBException("Cannot initialize MySQL C-Connector");
+        throw base::DBException("Cannot initialize MySQL C-Connector");
       }
 
       if (mysql_real_connect(this->connection, address.c_str(), user.c_str(), password.c_str(), NULL, port, NULL, 0) == NULL){
-        throw DBException(std::string(mysql_error(this->connection)));
+        throw base::DBException(std::string(mysql_error(this->connection)));
       }
     }
 

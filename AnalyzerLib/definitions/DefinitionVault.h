@@ -12,7 +12,7 @@
 #include "DefinitionSource.h"
 
 namespace analyzer{
-  namespace base{
+  namespace definition{
     class IMEX DefinitionVault
     {
     public:

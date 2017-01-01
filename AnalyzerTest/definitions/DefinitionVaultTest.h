@@ -15,11 +15,11 @@ class DefinitionVaultTest : public testing::Test
 public:
 
   void SetUp(){
-    asciiSource.AddSource(std::shared_ptr<analyzer::base::DefinitionSource>(new analyzer::base::LocalDefinition("default_ascii")));
+    asciiSource.AddSource(std::shared_ptr<analyzer::definition::DefinitionSource>(new analyzer::definition::LocalDefinition("default_ascii")));
   }
 
-  analyzer::base::DefinitionVault emptySource;
-  analyzer::base::DefinitionVault asciiSource;
+  analyzer::definition::DefinitionVault emptySource;
+  analyzer::definition::DefinitionVault asciiSource;
 };
 
 TEST_F(DefinitionVaultTest, init)
@@ -29,7 +29,7 @@ TEST_F(DefinitionVaultTest, init)
 
 TEST_F(DefinitionVaultTest, AddSource)
 {
-  emptySource.AddSource(std::shared_ptr<analyzer::base::DefinitionSource>(new analyzer::base::LocalDefinition("default_ascii")));
+  emptySource.AddSource(std::shared_ptr<analyzer::definition::DefinitionSource>(new analyzer::definition::LocalDefinition("default_ascii")));
   ASSERT_STREQ(emptySource.GetSourceAt(0)->GetName().c_str(), "default_ascii");
 }
 

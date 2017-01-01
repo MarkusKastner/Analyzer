@@ -4,7 +4,7 @@
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 
 namespace analyzer{
-  namespace base{
+  namespace definition{
     DefinitionVault::DefinitionVault()
       :sources(new std::vector<std::shared_ptr<DefinitionSource>>())
     {
@@ -33,7 +33,7 @@ namespace analyzer{
     std::shared_ptr<DefinitionSource> DefinitionVault::GetSourceAt(const size_t index)
     {
       if (index > this->sources->size() - 1){
-        throw AnalyzerBaseException("Invalid index");
+        throw base::AnalyzerBaseException("Invalid index");
       }
       return this->sources->at(0);
     }
@@ -45,7 +45,7 @@ namespace analyzer{
           return source;
         }
       }
-      throw AnalyzerBaseException("Unknown source name");
+      throw base::AnalyzerBaseException("Unknown source name");
     }
 
     bool DefinitionVault::HasSource(const std::string & sourceName)

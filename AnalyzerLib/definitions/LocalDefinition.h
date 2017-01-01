@@ -12,7 +12,7 @@
 #include <string>
 
 namespace analyzer{
-  namespace base{
+  namespace definition{
     class IMEX LocalDefinition : public DefinitionSource
     {
     public:

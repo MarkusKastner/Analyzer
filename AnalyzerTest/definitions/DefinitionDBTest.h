@@ -13,7 +13,7 @@ class DefinitionDBTest : public testing::Test
 
 TEST_F(DefinitionDBTest, ConnectDB)
 {
-  analyzer::base::DefinitionDB db;
+  analyzer::definition::DefinitionDB db;
   db.Connect("127.0.0.1", 3306, "root", "toor");
   ASSERT_TRUE(db.IsInitialized());
 }
@@ -23,7 +23,7 @@ TEST_F(DefinitionDBTest, DBException)
   bool dbExceptionThrown = false;
 
   try{
-    analyzer::base::DefinitionDB db;
+    analyzer::definition::DefinitionDB db;
     db.Connect("127.0.0.1", 3306, "root", "wrong");
   }
   catch (analyzer::base::DBException & exception){

@@ -9,11 +9,11 @@
 class DefinitionSourceTest : public testing::Test
 {
 public:
-  class SomeDefSource : public analyzer::base::DefinitionSource
+  class SomeDefSource : public analyzer::definition::DefinitionSource
   {
   public:
     SomeDefSource()
-      : analyzer::base::DefinitionSource()
+      : analyzer::definition::DefinitionSource()
     {
       this->setName("some_source");
     }

@@ -1,8 +1,7 @@
 #include "DefinitionSource.h"
 
 namespace analyzer{
-  namespace base{
-
+  namespace definition{
     DefinitionSource::~DefinitionSource()
     {
       delete this->name;

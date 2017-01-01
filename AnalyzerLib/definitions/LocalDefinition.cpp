@@ -1,8 +1,7 @@
 #include "LocalDefinition.h"
 
 namespace analyzer{
-  namespace base{
-
+  namespace definition{
     LocalDefinition::LocalDefinition()
       :DefinitionSource()
     {
