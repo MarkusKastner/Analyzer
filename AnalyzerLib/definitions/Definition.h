@@ -16,13 +16,15 @@ namespace analyzer{
     private:
       Definition(){}
     public:
-      explicit Definition(const unsigned int & id);
       virtual ~Definition();
 
       const unsigned int & GetID();
 
       void SetDescription(const std::string & description);
       const std::string & GetDescription();
+
+    protected:
+      explicit Definition(const unsigned int & id);
 
     private:
       unsigned int id;

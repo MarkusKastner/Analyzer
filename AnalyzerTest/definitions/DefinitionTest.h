@@ -9,15 +9,24 @@ class DefinitionTest : public testing::Test
 {
 public:
 
+  class SomeDefinition : public analyzer::definition::Definition
+  {
+  public:
+    explicit SomeDefinition(const unsigned int & id)
+      :analyzer::definition::Definition(id)
+    {
+    }
+    virtual ~SomeDefinition(){}
+  };
   void SetUp(){
-    def1.reset(new analyzer::definition::Definition(0));
+    def1.reset(new SomeDefinition(0));
   }
   std::shared_ptr<analyzer::definition::Definition> def1;
 };
 
 TEST_F(DefinitionTest, init)
 {
-  analyzer::definition::Definition definition(0);
+  SomeDefinition definition(0);
   ASSERT_EQ(definition.GetID(), 0);
 }
 
