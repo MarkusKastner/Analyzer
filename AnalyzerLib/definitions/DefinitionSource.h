@@ -26,6 +26,7 @@ namespace analyzer{
 
       void AddDefinition(const std::shared_ptr<Definition> & definition);
       size_t GetNumDefinitions();
+      size_t GetNextFreeID();
 
     protected:
       DefinitionSource();
@@ -37,6 +38,7 @@ namespace analyzer{
       std::vector<std::shared_ptr<Definition>> * definitions;
 
       bool hasID(const unsigned int & id);
+      std::vector<unsigned int> getExisitingIDs();
     };
   }
 }

@@ -1,5 +1,7 @@
 #include "DefinitionSource.h"
 
+#include <algorithm>
+
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 
 namespace analyzer{
@@ -44,6 +46,23 @@ namespace analyzer{
       return this->definitions->size();
     }
 
+    size_t DefinitionSource::GetNextFreeID()
+    {
+      if (this->definitions->empty()){
+        return 0;
+      }
+      std::vector<unsigned int> ids(this->getExisitingIDs());
+
+      unsigned int last = 0;
+      for (auto& id : ids){
+        if (id - last > 1){
+          return last + 1;
+        }
+        last = id;
+      }
+      return ids.back() + 1;
+    }
+
     bool DefinitionSource::hasID(const unsigned int & id)
     {
       for (auto& definition : *this->definitions){
@@ -52,6 +71,16 @@ namespace analyzer{
         }
       }
       return false;
+    }
+
+    std::vector<unsigned int> DefinitionSource::getExisitingIDs()
+    {
+      std::vector<unsigned int> ids;
+      for (auto& definition : *this->definitions){
+        ids.push_back(definition->GetID());
+      }
+      std::sort(ids.begin(), ids.end());
+      return ids;
     }
   }
 }

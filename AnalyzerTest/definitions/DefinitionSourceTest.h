@@ -60,4 +60,17 @@ TEST_F(DefinitionSourceTest, ThrowExistingID)
   catch (...){}
   ASSERT_STREQ(errorMsg.c_str(), "ID already in use");
 }
+
+TEST_F(DefinitionSourceTest, GetNextFreeID)
+{
+  ASSERT_EQ(defSource1.GetNextFreeID(), 0);
+
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(0)));
+  ASSERT_EQ(defSource1.GetNextFreeID(), 1);
+
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(1)));
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(3)));
+  ASSERT_EQ(defSource1.GetNextFreeID(), 2);
+}
+
 #endif
