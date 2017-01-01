@@ -8,6 +8,10 @@
 #endif
 
 #include <string>
+#include <memory>
+#include <vector>
+
+#include "Definition.h"
 
 namespace analyzer{
   namespace definition{
@@ -17,8 +21,11 @@ namespace analyzer{
       virtual ~DefinitionSource();
 
       virtual bool IsInitialized();
-      
+     
       const std::string & GetName();
+
+      void AddDefinition(const std::shared_ptr<Definition> & definition);
+      size_t GetNumDefinitions();
 
     protected:
       DefinitionSource();
@@ -27,6 +34,7 @@ namespace analyzer{
 
     private:
       std::string * name;
+      std::vector<std::shared_ptr<Definition>> * definitions;
     };
   }
 }

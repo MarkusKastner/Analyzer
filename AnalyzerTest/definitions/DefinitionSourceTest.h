@@ -4,6 +4,8 @@
 #include <gtest\gtest.h>
 
 #include "AnalyzerLib\definitions\DefinitionSource.h"
+#include "AnalyzerLib\definitions\TextDefinition.h"
+
 #include "AnalyzerLib\base\error\DBException.h"
 
 class DefinitionSourceTest : public testing::Test
@@ -21,18 +23,27 @@ public:
 
     virtual bool IsInitialized() { return true; }
   };
-  SomeDefSource defSource;
+
+  void SetUp(){
+
+  }
+  SomeDefSource defSource1;
+  SomeDefSource defSource2;
 };
 
 TEST_F(DefinitionSourceTest, init)
 {
-  ASSERT_TRUE(defSource.IsInitialized());
+  ASSERT_TRUE(defSource1.IsInitialized());
 }
 
 TEST_F(DefinitionSourceTest, GetName)
 {
-  ASSERT_STREQ(defSource.GetName().c_str(), "some_source");
+  ASSERT_STREQ(defSource1.GetName().c_str(), "some_source");
 }
 
-
+TEST_F(DefinitionSourceTest, AddDefinition)
+{
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(0)));
+  ASSERT_EQ(defSource1.GetNumDefinitions(), 1);
+}
 #endif
