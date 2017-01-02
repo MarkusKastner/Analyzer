@@ -16,12 +16,11 @@ namespace analyzer{
       workCondition(new std::condition_variable()), waitLock(new std::mutex),
       workerException(new std::exception_ptr()),
       workTasks(new std::queue<Task>()),
-      activeFilePath(new std::string()), //interpreter(new std::unique_ptr<interpreter::Interpreter>()),
+      activeFilePath(new std::string()),
       baseObservers(new std::vector<AnalyzerBaseObserver*>()),
       workTasksLock(new std::recursive_mutex()),
       files(new std::vector<core::File>()), filesLock(new std::recursive_mutex())
     {
-      //this->interpreter->reset(new interpreter::BinaryStyleInterpreter());
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
     }
 
@@ -65,7 +64,7 @@ namespace analyzer{
           return file.GetInterpreter().get();
         }
       }
-      return nullptr;// this->interpreter->get();
+      return nullptr;
     }
 
     void AnalyzerBase::SetBinaryMode()

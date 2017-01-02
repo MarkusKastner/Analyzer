@@ -1,10 +1,17 @@
 #ifndef ANALYZEREDIT_H
 #define ANALYZEREDIT_H
 
-#include <QTextEdit>
+#include <QPlainTextEdit>
 #include <QEvent>
 
 #include "AnalyzerLib\interpreter\TextChangedObserver.h"
+
+class QPaintEvent;
+class QResizeEvent;
+class QSize;
+class QWidget;
+
+class LineNumberArea;
 
 namespace analyzer{
   namespace interpreter{
@@ -12,7 +19,8 @@ namespace analyzer{
   }
   namespace gui{
     namespace display{
-      class AnalyzerEdit : public QTextEdit, public interpreter::TextChangedObserver
+      class AnalyzerEditHighlighter;
+      class AnalyzerEdit : public QPlainTextEdit, public interpreter::TextChangedObserver
       {
       private:
         class EditEvent : public QEvent
@@ -23,6 +31,7 @@ namespace analyzer{
           {}
           virtual ~EditEvent(){}
         };
+
       public:
         AnalyzerEdit(QWidget * parent = 0);
         virtual ~AnalyzerEdit();
@@ -32,11 +41,41 @@ namespace analyzer{
         void SetInterpreter(interpreter::Interpreter * interpreter);
         void ClearInterpreter();
 
+        void LineNumberAreaPaintEvent(QPaintEvent *event);
+        int GetLineNumbersWidth();
+
       protected:
         void customEvent(QEvent * evt);
+        void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
       private:
         interpreter::Interpreter * interpreter;
+        QWidget *lineNumbers;
+        AnalyzerEditHighlighter * highlighter;
+
+        void highlightCurrentLine();
+        void updateLineNumberAreaWidth(int newBlockCount);
+        void updateLineNumberArea(const QRect &, int);
+      };
+
+      class LineNumberArea : public QWidget
+      {
+      public:
+        LineNumberArea(AnalyzerEdit *editor) : QWidget(editor) {
+          codeEditor = editor;
+        }
+
+        QSize sizeHint() const Q_DECL_OVERRIDE{
+          return QSize(codeEditor->GetLineNumbersWidth(), 0);
+        }
+
+      protected:
+        void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE{
+          codeEditor->LineNumberAreaPaintEvent(event);
+        }
+
+      private:
+        AnalyzerEdit *codeEditor;
       };
     }
   }

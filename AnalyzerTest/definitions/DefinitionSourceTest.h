@@ -71,6 +71,9 @@ TEST_F(DefinitionSourceTest, GetNextFreeID)
   defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(1)));
   defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(3)));
   ASSERT_EQ(defSource1.GetNextFreeID(), 2);
+
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(2)));
+  ASSERT_EQ(defSource1.GetNextFreeID(), 4);
 }
 
 #endif
