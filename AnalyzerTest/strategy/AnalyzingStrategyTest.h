@@ -51,6 +51,9 @@ public:
       :analyzer::strategy::AnalyzingStrategy()
     {}
     virtual ~SomeAnalyzingStrategy(){}
+    virtual void analyze(const std::shared_ptr<analyzer::definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data){
+      std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    }
   };
 
   void SetUp(){
@@ -63,9 +66,12 @@ public:
 
     data = createData();
 
+    strategy2.SetDefinitions(defSource);
+    strategy2.SetData(data);
   }
 
   SomeAnalyzingStrategy strategy;
+  SomeAnalyzingStrategy strategy2;
   std::shared_ptr<analyzer::definition::DefinitionSource> defSource;
   std::shared_ptr<analyzer::core::ByteCollection> data;
 };
@@ -80,6 +86,12 @@ TEST_F(AnalyzingStrategyTest, data)
 {
   strategy.SetData(data);
   ASSERT_TRUE(strategy.HasData());
+}
+
+TEST_F(AnalyzingStrategyTest, isAnalyzing)
+{
+  strategy2.StartAnalyzing();
+  ASSERT_TRUE(strategy2.IsAnalyzing());
 }
 
 std::shared_ptr<analyzer::core::ByteCollection> createData()
