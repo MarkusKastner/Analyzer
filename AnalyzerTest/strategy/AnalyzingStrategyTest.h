@@ -12,6 +12,7 @@
 #include "AnalyzerLib\core\ByteCollection.h"
 
 std::shared_ptr<analyzer::core::ByteCollection> createData();
+std::vector<std::wstring> findTags(const std::wstring & text);
 
 class AnalyzingStrategyTest : public testing::Test
 {
@@ -26,7 +27,7 @@ public:
     virtual ~TestDef(){}
 
     void SetExpression(const std::wstring & expression) { this->expression = expression; }
-    const std::wstring & GetExpression() const;
+    const std::wstring & GetExpression() const { return this->expression; }
 
   private:
     std::wstring expression;
@@ -53,7 +54,44 @@ public:
     virtual ~SomeAnalyzingStrategy(){}
     virtual void analyze(const std::shared_ptr<analyzer::definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data){
       std::this_thread::sleep_for(std::chrono::milliseconds(200));
-      //for (auto& definition : definitions)
+      
+      std::string text;
+      for (auto& byte : (*data)){
+        text += static_cast<char>(byte->GetValue());
+      }
+      
+      std::wstring textW(text.begin(), text.end());
+      std::vector<std::wstring> tags(findTags(textW));
+
+      for (auto& tag : tags){
+        unsigned int id = 0;
+        
+        for (auto& definition : (*definitions)){
+          if (dynamic_cast<TestDef*>(definition.get())->GetExpression().compare(tag) == 0){
+            id = definition->GetID();
+            break;
+          }
+        }
+
+        switch (id){
+        case 0:
+
+          break;
+
+        case 1:
+
+          break;
+
+        case 2:
+
+          break;
+
+        case 3:
+
+          break;
+        }
+      }
+
     }
   };
 
@@ -61,9 +99,9 @@ public:
 
     defSource.reset(new TestSource());
     
-    defSource->AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new TestDef(0, L"checked")));
-    defSource->AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new TestDef(1, L"warning")));
-    defSource->AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new TestDef(2, L"alarm")));
+    defSource->AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new TestDef(1, L"checked")));
+    defSource->AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new TestDef(2, L"warning")));
+    defSource->AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new TestDef(3, L"alarm")));
 
     data = createData();
 
@@ -93,6 +131,9 @@ TEST_F(AnalyzingStrategyTest, isAnalyzing)
 {
   strategy2.StartAnalyzing();
   ASSERT_TRUE(strategy2.IsAnalyzing());
+  while (strategy2.IsAnalyzing()){
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  }
 }
 
 std::shared_ptr<analyzer::core::ByteCollection> createData()
@@ -107,6 +148,31 @@ std::shared_ptr<analyzer::core::ByteCollection> createData()
 
   std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
   return data;
+}
+
+std::vector<std::wstring> findTags(const std::wstring & text)
+{
+  std::vector<std::wstring> tags;
+  std::wstring tag;
+  bool create = false;
+
+  for (auto& letter : text){
+    if (letter == '<'){
+      create = true;
+      continue;
+    }
+    if (letter == '>'){
+      create = false;
+      tags.push_back(tag);
+      tag.clear();
+      continue;
+    }
+    if (create && letter != '/'){
+      tag += letter;
+    }
+
+  }
+  return tags;
 }
 
 #endif

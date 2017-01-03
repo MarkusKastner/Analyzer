@@ -13,6 +13,10 @@ namespace analyzer{
   namespace strategy{
     class AnalyzingStrategy
     {
+    private:
+      AnalyzingStrategy(const AnalyzingStrategy&);
+      AnalyzingStrategy & operator=(const AnalyzingStrategy&);
+
     public:
       virtual ~AnalyzingStrategy();
 
