@@ -105,6 +105,7 @@
     <ClCompile Include="interpreter\strategy\InterpretStrategyImpl.cpp" />
     <ClCompile Include="interpreter\TextStyleInterpreter.cpp" />
     <ClCompile Include="interpreter\TextGlyph.cpp" />
+    <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\AnalyzerBase.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="interpreter\TextChangedObserver.h" />
     <ClInclude Include="interpreter\TextGlyph.h" />
+    <ClInclude Include="strategy\AnalyzingStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

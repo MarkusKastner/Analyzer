@@ -32,6 +32,9 @@
     <Filter Include="definitions">
       <UniqueIdentifier>{dfcf44b7-1d2d-4007-9379-5cccec78a2e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="strategy">
+      <UniqueIdentifier>{505a519c-fc11-4f5c-a4ea-e0da3a1c4f4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -99,6 +102,9 @@
     </ClCompile>
     <ClCompile Include="definitions\TextDefinition.cpp">
       <Filter>definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="strategy\AnalyzingStrategy.cpp">
+      <Filter>strategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="definitions\TextDefinition.h">
       <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="strategy\AnalyzingStrategy.h">
+      <Filter>strategy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

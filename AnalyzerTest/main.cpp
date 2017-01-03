@@ -19,6 +19,7 @@
 #include "definitions\LocalDefinitionTest.h"
 #include "definitions\DefinitionTest.h"
 #include "definitions\TextDefinitionTest.h"
+#include "strategy\AnalyzingStrategyTest.h"
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

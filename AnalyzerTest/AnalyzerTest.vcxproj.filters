@@ -40,6 +40,9 @@
     <Filter Include="definitions">
       <UniqueIdentifier>{070114b9-5ab0-4d94-80b5-56cf4cb0473f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="strategy">
+      <UniqueIdentifier>{cc5c7263-6500-48ab-87dd-2f822e3c82c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\definitions\TextDefinition.cpp">
       <Filter>definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp">
+      <Filter>strategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\definitions\TextDefinition.h">
       <Filter>definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\strategy\AnalyzingStrategy.h">
+      <Filter>strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="strategy\AnalyzingStrategyTest.h">
+      <Filter>strategy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
