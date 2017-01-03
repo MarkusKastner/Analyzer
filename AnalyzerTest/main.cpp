@@ -1,5 +1,8 @@
 #include <gtest/gtest.h>
 
+#include <string>
+#include <filesystem>
+
 #include "core\ByteTest.h"
 #include "core\BasicTypeTest.h"
 #include "core\WordTest.h"
@@ -21,9 +24,26 @@
 #include "definitions\TextDefinitionTest.h"
 #include "strategy\AnalyzingStrategyTest.h"
 
-int main(int argc, char** argv) {
-  testing::InitGoogleTest(&argc, argv);
+namespace fs = std::tr2::sys;
+fs::path testDir;
 
+void setupTestDir(const std::string appPath)
+{
+  fs::path app(appPath);
+  fs::path dir(std::string(app.remove_filename().string() + "/" + app.basename().c_str()));
+
+  if (!fs::exists(dir)){
+    fs::create_directory(dir);
+  }
+  testDir = dir;
+}
+
+int main(int argc, char** argv) {
+
+  std::string path(argv[0]);
+  setupTestDir(path);
+
+  testing::InitGoogleTest(&argc, argv);
   int ret = RUN_ALL_TESTS();
 
   getchar();
