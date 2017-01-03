@@ -53,6 +53,7 @@ public:
     virtual ~SomeAnalyzingStrategy(){}
     virtual void analyze(const std::shared_ptr<analyzer::definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data){
       std::this_thread::sleep_for(std::chrono::milliseconds(200));
+      //for (auto& definition : definitions)
     }
   };
 

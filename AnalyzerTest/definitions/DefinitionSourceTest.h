@@ -76,4 +76,17 @@ TEST_F(DefinitionSourceTest, GetNextFreeID)
   ASSERT_EQ(defSource1.GetNextFreeID(), 4);
 }
 
+TEST_F(DefinitionSourceTest, iterate)
+{
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(0)));
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(1)));
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(2)));
+  defSource1.AddDefinition(std::shared_ptr<analyzer::definition::Definition>(new analyzer::definition::TextDefinition(3)));
+  unsigned int counter = 0;
+  for (auto& def : defSource1){
+    ASSERT_EQ(def->GetID(), counter);
+    counter++;
+  }
+}
+
 #endif

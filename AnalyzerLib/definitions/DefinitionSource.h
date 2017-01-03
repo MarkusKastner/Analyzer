@@ -28,6 +28,9 @@ namespace analyzer{
       size_t GetNumDefinitions();
       size_t GetNextFreeID();
 
+      std::vector<std::shared_ptr<Definition>>::iterator begin();
+      std::vector<std::shared_ptr<Definition>>::iterator end();
+
     protected:
       DefinitionSource();
 

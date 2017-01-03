@@ -63,6 +63,16 @@ namespace analyzer{
       return ids.back() + 1;
     }
 
+    std::vector<std::shared_ptr<Definition>>::iterator DefinitionSource::begin()
+    {
+      return this->definitions->begin();
+    }
+
+    std::vector<std::shared_ptr<Definition>>::iterator DefinitionSource::end()
+    {
+      return this->definitions->end();
+    }
+
     bool DefinitionSource::hasID(const unsigned int & id)
     {
       for (auto& definition : *this->definitions){
