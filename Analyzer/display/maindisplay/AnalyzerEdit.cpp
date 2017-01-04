@@ -42,7 +42,12 @@ namespace analyzer{
         if (interpreter != nullptr){
           this->interpreter = interpreter;
           this->interpreter->RegisterObserver(this);
-          this->setPlainText(this->interpreter->GetPlainText().c_str());
+          if (this->interpreter->HasKnownFormat()){
+            this->setPlainText(QString::fromWCharArray(this->interpreter->GetFormatedText().c_str()));
+          }
+          else{
+            this->setPlainText(this->interpreter->GetPlainText().c_str());
+          }
         }
       }
 

@@ -26,6 +26,16 @@ namespace analyzer{
       return this->getPlainText();
     }
 
+    std::wstring TextStyleInterpreter::GetFormatedText()
+    {
+      return std::wstring();
+    }
+
+    bool TextStyleInterpreter::HasKnownFormat()
+    {
+      return false;
+    }
+
     void TextStyleInterpreter::createGlyphs()
     {
       this->clearGlyphs();

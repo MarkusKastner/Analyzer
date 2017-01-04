@@ -26,6 +26,8 @@ namespace analyzer{
       virtual ~BinaryStyleInterpreter();
 
       virtual std::string GetPlainText();
+      virtual std::wstring GetFormatedText();
+      virtual bool HasKnownFormat();
 
     private:
 

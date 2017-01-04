@@ -32,5 +32,15 @@ namespace analyzer{
       }
       return output;
     }
+
+    std::wstring BinaryStyleInterpreter::GetFormatedText()
+    {
+      return std::wstring();
+    }
+
+    bool BinaryStyleInterpreter::HasKnownFormat()
+    {
+      return false;
+    }
   }
 }

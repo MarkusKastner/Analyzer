@@ -22,6 +22,8 @@ namespace analyzer{
       virtual ~TextStyleInterpreter();
 
       virtual std::string GetPlainText();
+      virtual std::wstring GetFormatedText();
+      virtual bool HasKnownFormat();
 
     protected:
       virtual void createGlyphs();
