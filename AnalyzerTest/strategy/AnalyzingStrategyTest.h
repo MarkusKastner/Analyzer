@@ -26,6 +26,7 @@ public:
     {
     }
     virtual ~TextResult(){}
+    const std::wstring & GetExpression() { return this->expression; }
 
   private:
     std::wstring expression;
@@ -105,6 +106,15 @@ public:
         }
       }
     }
+
+    virtual bool compareResult(const std::shared_ptr<analyzer::strategy::Result> & result1, const std::shared_ptr<analyzer::strategy::Result> & result2){
+      if (dynamic_cast<TextResult*>(result1.get())->GetExpression().compare(dynamic_cast<TextResult*>(result2.get())->GetExpression()) == 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
   };
 
   void SetUp(){
@@ -155,7 +165,7 @@ TEST_F(AnalyzingStrategyTest, results)
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 
-  ASSERT_EQ(strategy2.GetResults().size(), 10);
+  ASSERT_EQ(strategy2.GetResults().size(), 5);
 }
 
 std::shared_ptr<analyzer::core::ByteCollection> createData()

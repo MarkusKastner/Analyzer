@@ -82,6 +82,9 @@ namespace analyzer{
 
     void AnalyzingStrategy::addResult(const std::shared_ptr<Result> & result)
     {
+      if (this->hasResult(result)){
+        return;
+      }
       std::lock_guard<std::recursive_mutex> lockRes(*this->resultLock);
       this->results->push_back(result);
     }
@@ -93,6 +96,17 @@ namespace analyzer{
       this->analyze(*this->defSource, *this->data);
 
       *this->isAnalyzing = false;
+    }
+
+    bool AnalyzingStrategy::hasResult(const std::shared_ptr<Result> & result)
+    {
+      std::lock_guard<std::recursive_mutex> lockRes(*this->resultLock);
+      for (auto& res : (*this->results)){
+        if (this->compareResult(res, result)){
+          return true;
+        }
+      }
+      return false;
     }
   }
 }

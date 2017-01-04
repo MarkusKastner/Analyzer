@@ -35,6 +35,7 @@ namespace analyzer{
     protected:
       AnalyzingStrategy();
       virtual void analyze(const std::shared_ptr<definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data) = 0;
+      virtual bool compareResult(const std::shared_ptr<Result> & result1, const std::shared_ptr<Result> & result2) = 0;
 
       void addResult(const std::shared_ptr<Result> & result);
 
@@ -51,6 +52,7 @@ namespace analyzer{
       std::recursive_mutex * resultLock;
 
       void analyzingRoutine();
+      bool hasResult(const std::shared_ptr<Result> & result);
     };
   }
 }
