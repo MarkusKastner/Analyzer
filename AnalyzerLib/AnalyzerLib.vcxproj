@@ -107,6 +107,7 @@
     <ClCompile Include="interpreter\TextGlyph.cpp" />
     <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
     <ClCompile Include="strategy\Result.cpp" />
+    <ClCompile Include="strategy\xml\XMLStrategy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\AnalyzerBase.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="interpreter\TextGlyph.h" />
     <ClInclude Include="strategy\AnalyzingStrategy.h" />
     <ClInclude Include="strategy\Result.h" />
+    <ClInclude Include="strategy\xml\XMLStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

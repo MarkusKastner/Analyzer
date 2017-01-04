@@ -35,6 +35,9 @@
     <Filter Include="strategy">
       <UniqueIdentifier>{505a519c-fc11-4f5c-a4ea-e0da3a1c4f4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="strategy\xml">
+      <UniqueIdentifier>{cbd688b9-6cf3-40ec-b26c-c86a84ff83e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -108,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="strategy\Result.cpp">
       <Filter>strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="strategy\xml\XMLStrategy.cpp">
+      <Filter>strategy\xml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="strategy\Result.h">
       <Filter>strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="strategy\xml\XMLStrategy.h">
+      <Filter>strategy\xml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

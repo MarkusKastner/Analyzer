@@ -24,6 +24,7 @@
 #include "definitions\TextDefinitionTest.h"
 #include "strategy\AnalyzingStrategyTest.h"
 #include "strategy\ResultTest.h"
+#include "strategy\xml\XMLStrategyTest.h"
 
 namespace fs = std::tr2::sys;
 fs::path testDir;

@@ -106,6 +106,7 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp" />
     <ClCompile Include="..\AnalyzerLib\strategy\Result.cpp" />
+    <ClCompile Include="..\AnalyzerLib\strategy\xml\XMLStrategy.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\AnalyzingStrategy.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\Result.h" />
+    <ClInclude Include="..\AnalyzerLib\strategy\xml\XMLStrategy.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />
     <ClInclude Include="core\BasicTypeTest.h" />
     <ClInclude Include="core\ByteCollectionTest.h" />
@@ -160,6 +162,7 @@
     <ClInclude Include="interpreter\TextGlyphTest.h" />
     <ClInclude Include="strategy\AnalyzingStrategyTest.h" />
     <ClInclude Include="strategy\ResultTest.h" />
+    <ClInclude Include="strategy\xml\XMLStrategyTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
