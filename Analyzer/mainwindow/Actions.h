@@ -16,8 +16,6 @@ namespace analyzer{
       virtual ~Actions();
 
       void OnOpen();
-      void OnWorkingModeBianry();
-      void OnWorkingModeText();
 
     private:
       MainWindow * mainWindow;

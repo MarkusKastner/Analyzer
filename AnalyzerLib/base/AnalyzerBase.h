@@ -45,10 +45,6 @@ namespace analyzer{
       bool HasActivefile();
       interpreter::Interpreter * CurrentInterpreter();
 
-      void SetBinaryMode();
-      void SetTextMode();
-      WorkingMode GetWorkingMode();
-
       size_t NumberOfObservers();
       void RegisterObserver(AnalyzerBaseObserver * observer);
       void UnregisterObserver(AnalyzerBaseObserver * observer);

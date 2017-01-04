@@ -42,7 +42,6 @@ namespace analyzer{
       void setup();
       void setupDialogs();
 
-      void changeWorkingMode();
       void connectUI();
 
       void activeFileChanged(const std::string & fileName);

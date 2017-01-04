@@ -33,14 +33,6 @@
     <property name="title">
      <string>Analyzer</string>
     </property>
-    <widget class="QMenu" name="menuWorking_Mode">
-     <property name="title">
-      <string>Working Mode</string>
-     </property>
-     <addaction name="actionBinary"/>
-     <addaction name="actionText"/>
-    </widget>
-    <addaction name="menuWorking_Mode"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">

@@ -53,12 +53,8 @@ namespace analyzer{
       this->displayOptions = new QDockWidget(tr("display options"), this);
       this->displayOptions->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
       DisplayOptions * options = nullptr;
-      if (this->analyzerBase.GetWorkingMode() == analyzer::base::AnalyzerBase::WorkingMode::Binary){
-        options = new DisplayOptionsBinary(this->displayOptions);
-      }
-      else{
-        options = new DisplayOptionsText(this->displayOptions);
-      }
+      options = new DisplayOptionsText(this->displayOptions);
+
        
       this->displayOptions->setWidget(options);
       this->addDockWidget(Qt::RightDockWidgetArea, this->displayOptions);
@@ -67,23 +63,9 @@ namespace analyzer{
       this->addDockWidget(Qt::LeftDockWidgetArea, this->documentStructure);
     }
 
-    void MainWindow::changeWorkingMode()
-    {
-      DisplayOptions * options = nullptr;
-      if (this->analyzerBase.GetWorkingMode() == analyzer::base::AnalyzerBase::WorkingMode::Binary){
-        options = new DisplayOptionsBinary(this->displayOptions);
-      }
-      else{
-        options = new DisplayOptionsText(this->displayOptions);
-      }
-      this->displayOptions->setWidget(options);
-    }
-
     void MainWindow::connectUI()
     {
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
-      connect(this->ui.actionBinary, &QAction::triggered, this->actions.get(), &Actions::OnWorkingModeBianry);
-      connect(this->ui.actionText, &QAction::triggered, this->actions.get(), &Actions::OnWorkingModeText);
       connect(this->documentStructure, &DocumentStructure::ActiveFileChanged, this, &MainWindow::activeFileChanged);
     }
 

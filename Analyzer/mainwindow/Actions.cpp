@@ -23,16 +23,6 @@ namespace analyzer{
       QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Read File")));
       this->analyzerBase.LoadFile(fileName.toStdString());
     }
-    
-    void Actions::OnWorkingModeBianry()
-    {
-      this->analyzerBase.SetBinaryMode();
-    }
-
-    void Actions::OnWorkingModeText()
-    {
-      this->analyzerBase.SetTextMode();
-    }
 
     void Actions::throwMainWindow()
     {

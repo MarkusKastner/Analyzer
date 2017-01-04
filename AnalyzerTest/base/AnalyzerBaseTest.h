@@ -66,26 +66,6 @@ TEST_F(AnalyzerBaseTest, init)
   ASSERT_FALSE(analyzerBase1.HasActivefile());
 }
 
-//
-//TEST_F(AnalyzerBaseTest, SwitchMode)
-//{
-//  this->analyzerBase1.SetTextMode();
-//  ASSERT_TRUE(dynamic_cast<analyzer::interpreter::TextStyleInterpreter*>(this->analyzerBase1.Interpreter()));
-//  this->analyzerBase1.SetBinaryMode();
-//  ASSERT_TRUE(dynamic_cast<analyzer::interpreter::BinaryStyleInterpreter*>(this->analyzerBase1.Interpreter()));
-//}
-//
-//TEST_F(AnalyzerBaseTest, SwitchModeWithData)
-//{
-//  ASSERT_FALSE(this->analyzerBase1.HasData());
-//
-//  this->analyzerBase1.Interpreter()->ResetData(this->dummyData1);
-//  this->analyzerBase1.SetTextMode();
-//  ASSERT_TRUE(this->analyzerBase1.HasData());
-//  this->analyzerBase1.SetBinaryMode();
-//  ASSERT_TRUE(this->analyzerBase1.HasData());
-//}
-
 TEST_F(AnalyzerBaseTest, HasObserver)
 {
   ASSERT_EQ(this->analyzerBase1.NumberOfObservers(), 0);
