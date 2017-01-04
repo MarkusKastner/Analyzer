@@ -117,6 +117,9 @@
     <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp">
       <Filter>strategy</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\strategy\Result.cpp">
+      <Filter>strategy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -264,6 +267,12 @@
       <Filter>strategy</Filter>
     </ClInclude>
     <ClInclude Include="strategy\AnalyzingStrategyTest.h">
+      <Filter>strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="strategy\ResultTest.h">
+      <Filter>strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\strategy\Result.h">
       <Filter>strategy</Filter>
     </ClInclude>
   </ItemGroup>

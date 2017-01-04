@@ -7,6 +7,7 @@
 #include <string>
 
 #include "AnalyzerLib\strategy\AnalyzingStrategy.h"
+#include "AnalyzerLib\strategy\Result.h"
 #include "AnalyzerLib\definitions\Definition.h"
 #include "AnalyzerLib\definitions\DefinitionSource.h"
 #include "AnalyzerLib\core\ByteCollection.h"
@@ -17,6 +18,19 @@ std::vector<std::wstring> findTags(const std::wstring & text);
 class AnalyzingStrategyTest : public testing::Test
 {
 public:
+  class TextResult : public analyzer::strategy::Result
+  {
+  public:
+    TextResult(const analyzer::strategy::Result::Classification & classification, const std::wstring & expression)
+      :analyzer::strategy::Result(classification), expression(expression)
+    {
+    }
+    virtual ~TextResult(){}
+
+  private:
+    std::wstring expression;
+  };
+
   class TestDef : public analyzer::definition::Definition
   {
   public:
@@ -72,26 +86,24 @@ public:
             break;
           }
         }
-
         switch (id){
         case 0:
-
+          this->addResult(std::shared_ptr<analyzer::strategy::Result>(new TextResult(TextResult::Classification::unknown, tag)));
           break;
 
         case 1:
-
+          this->addResult(std::shared_ptr<analyzer::strategy::Result>(new TextResult(TextResult::Classification::checked, tag)));
           break;
 
         case 2:
-
+          this->addResult(std::shared_ptr<analyzer::strategy::Result>(new TextResult(TextResult::Classification::warning, tag)));
           break;
 
         case 3:
-
+          this->addResult(std::shared_ptr<analyzer::strategy::Result>(new TextResult(TextResult::Classification::alarm, tag)));
           break;
         }
       }
-
     }
   };
 
@@ -134,6 +146,16 @@ TEST_F(AnalyzingStrategyTest, isAnalyzing)
   while (strategy2.IsAnalyzing()){
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
+}
+
+TEST_F(AnalyzingStrategyTest, results)
+{
+  strategy2.StartAnalyzing();
+  while (strategy2.IsAnalyzing()){
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  }
+
+  ASSERT_EQ(strategy2.GetResults().size(), 10);
 }
 
 std::shared_ptr<analyzer::core::ByteCollection> createData()

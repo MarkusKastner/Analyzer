@@ -23,6 +23,7 @@
 #include "definitions\DefinitionTest.h"
 #include "definitions\TextDefinitionTest.h"
 #include "strategy\AnalyzingStrategyTest.h"
+#include "strategy\ResultTest.h"
 
 namespace fs = std::tr2::sys;
 fs::path testDir;

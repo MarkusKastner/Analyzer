@@ -5,7 +5,11 @@ namespace analyzer{
     AnalyzingStrategy::AnalyzingStrategy()
       : defSource(new std::shared_ptr<definition::DefinitionSource>()),
       data(new std::shared_ptr<analyzer::core::ByteCollection>()),
-      analyzingThread(nullptr), sourceLock(new std::recursive_mutex()), dataLock(new std::recursive_mutex()), isAnalyzing(new std::atomic<bool>(false))
+      results(new std::vector<std::shared_ptr<Result>>()),
+      analyzingThread(nullptr), isAnalyzing(new std::atomic<bool>(false)),
+      sourceLock(new std::recursive_mutex()), 
+      dataLock(new std::recursive_mutex()),
+      resultLock(new std::recursive_mutex())
     {
 
     }
@@ -14,6 +18,7 @@ namespace analyzer{
     {
       delete this->defSource;
       delete this->data;
+      delete this->results;
 
       if (this->analyzingThread != nullptr){
         if (this->analyzingThread->joinable()){
@@ -25,6 +30,7 @@ namespace analyzer{
       delete this->sourceLock;
       delete this->dataLock;
       delete this->isAnalyzing;
+      delete this->resultLock;
     }
 
     void AnalyzingStrategy::SetDefinitions(const std::shared_ptr<definition::DefinitionSource> & definitionSource)
@@ -66,6 +72,18 @@ namespace analyzer{
     bool AnalyzingStrategy::IsAnalyzing()
     {
       return *this->isAnalyzing;
+    }
+
+    const std::vector<std::shared_ptr<Result>> & AnalyzingStrategy::GetResults()
+    {
+      std::lock_guard<std::recursive_mutex> lockRes(*this->resultLock);
+      return *this->results;
+    }
+
+    void AnalyzingStrategy::addResult(const std::shared_ptr<Result> & result)
+    {
+      std::lock_guard<std::recursive_mutex> lockRes(*this->resultLock);
+      this->results->push_back(result);
     }
 
     void AnalyzingStrategy::analyzingRoutine()
