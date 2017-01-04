@@ -7,6 +7,7 @@
 
 #include "ByteCollection.h"
 #include "AnalyzerLib\interpreter\Interpreter.h"
+#include "AnalyzerLib\core\FormatFinder.h"
 
 #if _USRDLL
 #define IMEX __declspec(dllexport)
@@ -38,6 +39,7 @@ namespace analyzer{
       std::string * fileName;
       std::vector<std::string> * path;
       std::shared_ptr<interpreter::Interpreter> * interpreter;
+      FormatFinder formatFinder;
 
       void setDirectoryNames(const std::string& input, const std::string& regex);
       void feedInterpreter();

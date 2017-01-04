@@ -88,6 +88,7 @@
     <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
+    <ClCompile Include="..\AnalyzerLib\core\FormatFinder.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\Word.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\zip\miniz.c" />
     <ClCompile Include="..\AnalyzerLib\core\zip\ZIPContainer.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
+    <ClInclude Include="..\AnalyzerLib\core\FormatFinder.h" />
     <ClInclude Include="..\AnalyzerLib\core\Word.h" />
     <ClInclude Include="..\AnalyzerLib\core\zip\ZIPContainer.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\Definition.h" />
@@ -146,6 +148,7 @@
     <ClInclude Include="core\ByteCollectionTest.h" />
     <ClInclude Include="core\ByteTest.h" />
     <ClInclude Include="core\FileTest.h" />
+    <ClInclude Include="core\FormatFinderTest.h" />
     <ClInclude Include="core\WordTest.h" />
     <ClInclude Include="core\zip\ZIPContainerTest.h" />
     <ClInclude Include="definitions\DefinitionDBTest.h" />

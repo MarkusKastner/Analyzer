@@ -89,6 +89,7 @@
     <ClCompile Include="core\ByteCollection.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
+    <ClCompile Include="core\FormatFinder.cpp" />
     <ClCompile Include="core\Word.cpp" />
     <ClCompile Include="core\zip\miniz.c" />
     <ClCompile Include="core\zip\ZIPContainer.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="core\ByteCollection.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
+    <ClInclude Include="core\FormatFinder.h" />
     <ClInclude Include="core\Word.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
     <ClInclude Include="definitions\Definition.h" />

@@ -115,6 +115,9 @@
     <ClCompile Include="strategy\xml\XMLStrategy.cpp">
       <Filter>strategy\xml</Filter>
     </ClCompile>
+    <ClCompile Include="core\FormatFinder.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="strategy\xml\XMLStrategy.h">
       <Filter>strategy\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="core\FormatFinder.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

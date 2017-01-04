@@ -8,7 +8,8 @@ namespace analyzer{
     File::File()
       : data(new std::shared_ptr<ByteCollection>(new ByteCollection())), 
       fileName(new std::string()), path(new std::vector<std::string>()),
-      interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter()))
+      interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
+      formatFinder()
     {
 
     }
@@ -16,7 +17,8 @@ namespace analyzer{
     File::File(const std::string & fileName, const std::vector<char> & data)
       : data(new std::shared_ptr<ByteCollection>(new ByteCollection(data))), 
       fileName(new std::string(fileName)), path(new std::vector<std::string>()),
-      interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter()))
+      interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
+      formatFinder()
     {
       this->setDirectoryNames(fileName, "/");
       this->feedInterpreter();
@@ -25,7 +27,8 @@ namespace analyzer{
     File::File(const File& other)
       : data(new std::shared_ptr<ByteCollection>(*other.data)), 
       fileName(new std::string(*other.fileName)), path(new std::vector<std::string>(*other.path)),
-      interpreter(new std::shared_ptr<interpreter::Interpreter>(*other.interpreter))
+      interpreter(new std::shared_ptr<interpreter::Interpreter>(*other.interpreter)),
+      formatFinder()
     {
     }
 

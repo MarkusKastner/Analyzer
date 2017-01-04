@@ -126,6 +126,9 @@
     <ClCompile Include="..\AnalyzerLib\strategy\xml\XMLStrategy.cpp">
       <Filter>strategy\xml</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\FormatFinder.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -286,6 +289,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\strategy\xml\XMLStrategy.h">
       <Filter>strategy\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="core\FormatFinderTest.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\FormatFinder.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
