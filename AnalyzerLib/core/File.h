@@ -32,14 +32,14 @@ namespace analyzer{
       const std::string & GetFileName();
       const std::shared_ptr<ByteCollection> & GetData();
       const std::vector<std::string> & GetPath();
-      const std::shared_ptr<interpreter::Interpreter> & GetInterpreter();
+      const std::shared_ptr<interpreter::Interpreter> & GetTextInterpreter();
       const std::shared_ptr<interpreter::Interpreter> & GetBinaryInterpreter();
 
     private:
       std::shared_ptr<ByteCollection> * data;
       std::string * fileName;
       std::vector<std::string> * path;
-      std::shared_ptr<interpreter::Interpreter> * interpreter;
+      std::shared_ptr<interpreter::Interpreter> * textInterpreter;
       std::shared_ptr<interpreter::Interpreter> * binaryInterpreter;
       FormatFinder formatFinder;
 

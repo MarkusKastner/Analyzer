@@ -5,6 +5,7 @@
 #include <QEvent>
 
 #include "AnalyzerLib\interpreter\TextChangedObserver.h"
+#include "AnalyzerLib\core\File.h"
 
 class QPaintEvent;
 class QResizeEvent;
@@ -38,8 +39,8 @@ namespace analyzer{
 
         virtual void NotifyDataChanged();
 
-        void SetInterpreter(interpreter::Interpreter * interpreter);
-        void ClearInterpreter();
+        void SetFile(core::File * file);
+        void ClearFile();
 
         void LineNumberAreaPaintEvent(QPaintEvent *event);
         int GetLineNumbersWidth();
@@ -49,9 +50,10 @@ namespace analyzer{
         void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
       private:
-        interpreter::Interpreter * interpreter;
+        core::File * file;
         QWidget *lineNumbers;
         AnalyzerEditHighlighter * highlighter;
+        std::shared_ptr<interpreter::Interpreter> activeInterpreter;
 
         void highlightCurrentLine();
         void updateLineNumberAreaWidth(int newBlockCount);

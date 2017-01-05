@@ -57,11 +57,11 @@ namespace analyzer{
       return false;
     }
 
-    interpreter::Interpreter * AnalyzerBase::CurrentInterpreter()
+    core::File * AnalyzerBase::CurrentFile()
     {
       for (auto& file : *this->files){
         if (file.GetFileName().compare(*this->activeFilePath) == 0){
-          return file.GetInterpreter().get();
+          return &file;
         }
       }
       return nullptr;
@@ -172,12 +172,12 @@ namespace analyzer{
       throw AnalyzerBaseException("invalid index");
     }
 
-    core::File AnalyzerBase::GetActiveAnalyzerFile()
+    core::File * AnalyzerBase::GetActiveAnalyzerFile()
     {
       std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       for (auto& exisiting : *this->files){
         if (exisiting.GetFileName().compare(*this->activeFilePath) == 0){
-          return exisiting;
+          return &exisiting;
         }
       }
       throw AnalyzerBaseException("unknown file");

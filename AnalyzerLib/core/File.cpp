@@ -9,7 +9,7 @@ namespace analyzer{
     File::File()
       : data(new std::shared_ptr<ByteCollection>(new ByteCollection())), 
       fileName(new std::string()), path(new std::vector<std::string>()),
-      interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
+      textInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
       binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
       formatFinder()
     {
@@ -19,7 +19,7 @@ namespace analyzer{
     File::File(const std::string & fileName, const std::vector<char> & data)
       : data(new std::shared_ptr<ByteCollection>(new ByteCollection(data))), 
       fileName(new std::string(fileName)), path(new std::vector<std::string>()),
-      interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
+      textInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
       binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
       formatFinder()
     {
@@ -30,7 +30,7 @@ namespace analyzer{
     File::File(const File& other)
       : data(new std::shared_ptr<ByteCollection>(*other.data)), 
       fileName(new std::string(*other.fileName)), path(new std::vector<std::string>(*other.path)),
-      interpreter(new std::shared_ptr<interpreter::Interpreter>(*other.interpreter)),
+      textInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.textInterpreter)),
       binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.binaryInterpreter)),
       formatFinder()
     {
@@ -42,7 +42,7 @@ namespace analyzer{
         *this->data = *other.data;
         *this->fileName = *other.fileName;
         *this->path = *other.path;
-        *this->interpreter = *other.interpreter;
+        *this->textInterpreter = *other.textInterpreter;
         *this->binaryInterpreter = *other.binaryInterpreter;
       }
       return *this;
@@ -53,7 +53,7 @@ namespace analyzer{
       delete this->data;
       delete this->fileName;
       delete this->path;
-      delete this->interpreter;
+      delete this->textInterpreter;
       delete this->binaryInterpreter;
     }
 
@@ -90,9 +90,9 @@ namespace analyzer{
       return *this->path;
     }
 
-    const std::shared_ptr<interpreter::Interpreter> & File::GetInterpreter()
+    const std::shared_ptr<interpreter::Interpreter> & File::GetTextInterpreter()
     {
-      return *this->interpreter;
+      return *this->textInterpreter;
     }
 
     const std::shared_ptr<interpreter::Interpreter> & File::GetBinaryInterpreter()
@@ -113,7 +113,8 @@ namespace analyzer{
 
     void File::feedInterpreter()
     {
-      this->interpreter->get()->ResetData(*this->data);
+      this->textInterpreter->get()->ResetData(*this->data);
+      this->binaryInterpreter->get()->ResetData(*this->data);
     }
   }
 }

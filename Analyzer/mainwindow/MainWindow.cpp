@@ -27,7 +27,7 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
-      this->analyzerEdit->SetInterpreter(this->analyzerBase.GetActiveAnalyzerFile().GetInterpreter().get());
+      this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
     void MainWindow::NotifyFileChange()

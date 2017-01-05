@@ -43,7 +43,7 @@ namespace analyzer{
       virtual ~AnalyzerBase();
 
       bool HasActivefile();
-      interpreter::Interpreter * CurrentInterpreter();
+      core::File * CurrentFile();
 
       size_t NumberOfObservers();
       void RegisterObserver(AnalyzerBaseObserver * observer);
@@ -60,7 +60,7 @@ namespace analyzer{
       size_t FileCount();
       core::File GetAnalyzerFile(const std::string & fileName);
       core::File GetAnalyzerFile(const size_t & index);
-      core::File GetActiveAnalyzerFile();
+      core::File * GetActiveAnalyzerFile();
       std::vector<std::string> GetFileNames();
       void SetActiveFile(const std::string & fileName);
 

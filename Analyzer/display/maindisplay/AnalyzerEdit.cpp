@@ -13,7 +13,7 @@ namespace analyzer{
     namespace display{
 
       AnalyzerEdit::AnalyzerEdit(QWidget * parent)
-        :QPlainTextEdit(parent), interpreter(nullptr), highlighter(nullptr)
+        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), activeInterpreter()
       {
         this->lineNumbers = new LineNumberArea(this);
         this->setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -36,26 +36,26 @@ namespace analyzer{
         QApplication::postEvent(this, new EditEvent());
       }
 
-      void AnalyzerEdit::SetInterpreter(interpreter::Interpreter * interpreter)
+      void AnalyzerEdit::SetFile(core::File * file)
       {
-        this->ClearInterpreter();
-        if (interpreter != nullptr){
-          this->interpreter = interpreter;
-          this->interpreter->RegisterObserver(this);
-          if (this->interpreter->HasKnownFormat()){
-            this->setPlainText(QString::fromWCharArray(this->interpreter->GetFormatedText().c_str()));
-          }
-          else{
-            this->setPlainText(this->interpreter->GetPlainText().c_str());
-          }
+        this->ClearFile();
+        if (file != nullptr){
+          this->file = file;
+          this->file->GetBinaryInterpreter()->RegisterObserver(this);
+          this->file->GetTextInterpreter()->RegisterObserver(this);
+          this->activeInterpreter = this->file->GetTextInterpreter();
+          this->setPlainText(QString::fromWCharArray(this->activeInterpreter->GetFormatedText().c_str()));
+
         }
       }
 
-      void AnalyzerEdit::ClearInterpreter()
+      void AnalyzerEdit::ClearFile()
       {
         this->setPlainText("");
-        if (this->interpreter != nullptr){
-          this->interpreter->UnregisterObserver(this);
+        if (this->file != nullptr){
+          this->file->GetBinaryInterpreter()->UnregisterObserver(this);
+          this->file->GetTextInterpreter()->UnregisterObserver(this);
+          this->activeInterpreter = nullptr;
         }
       }
 
@@ -101,7 +101,7 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
-          this->setPlainText(this->interpreter->GetPlainText().c_str());
+          this->setPlainText(this->activeInterpreter->GetPlainText().c_str());
         }
       }
 

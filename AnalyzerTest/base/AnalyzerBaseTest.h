@@ -147,13 +147,13 @@ TEST_F(AnalyzerBaseTest, AddFile)
 TEST_F(AnalyzerBaseTest, SetFileAsDefault)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile().GetFileName().c_str(), this->analyzerFile.GetFileName().c_str());
+  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName().c_str(), this->analyzerFile.GetFileName().c_str());
 }
 
-TEST_F(AnalyzerBaseTest, GetInterpreter)
+TEST_F(AnalyzerBaseTest, GetCurrentFile)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  ASSERT_TRUE(analyzerBase1.CurrentInterpreter() != nullptr);
+  ASSERT_TRUE(analyzerBase1.CurrentFile() != nullptr);
 }
 
 TEST_F(AnalyzerBaseTest, FileCount)
@@ -233,7 +233,14 @@ TEST_F(AnalyzerBaseTest, LoadDocxFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.LoadFile(this->path3);
-  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+  for (int i = 0; i < 100; i++){
+    if (this->analyzerBase1.FileCount() != 11){
+      std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    }
+    else{
+      break;
+    }
+  }
   ASSERT_EQ(this->analyzerBase1.FileCount(), 11);
 }
 
@@ -250,18 +257,11 @@ TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
 {
   this->analyzerBase1.LoadFile(this->path2);
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
-  std::string defaultActive(this->analyzerBase1.GetActiveAnalyzerFile().GetFileName());
+  std::string defaultActive(this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName());
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.SetActiveFile("Zauberlehrling.txt");
-  ASSERT_STRNE(defaultActive.c_str(), this->analyzerBase1.GetActiveAnalyzerFile().GetFileName().c_str());
+  ASSERT_STRNE(defaultActive.c_str(), this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName().c_str());
   ASSERT_TRUE(this->observer1.InterpreterChanged());
 }
-
-//TEST_F(AnalyzerBaseTest, NotifyInterpreterChanged)
-//{
-//  this->analyzerBase1.RegisterObserver(&this->observer1);
-//  this->analyzerBase1.SetTextMode();
-//  ASSERT_TRUE(this->observer1.InterpreterChanged());
-//}
 
 #endif
