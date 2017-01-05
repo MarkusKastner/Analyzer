@@ -9,6 +9,8 @@
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\core\ByteCollection.h"
+#include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
+#include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 
 class FileTest : public testing::Test
 {
@@ -86,4 +88,11 @@ TEST_F(FileTest, GetInterpreter)
   analyzer::core::File file(fileName1, charVector);
   ASSERT_TRUE(file.GetInterpreter()->HasData());
 }
+
+TEST_F(FileTest, GetBinaryInterpreter)
+{
+  analyzer::core::File file(fileName1, charVector);
+  ASSERT_TRUE(dynamic_cast<analyzer::interpreter::BinaryStyleInterpreter*>(file.GetBinaryInterpreter().get()));
+}
+
 #endif

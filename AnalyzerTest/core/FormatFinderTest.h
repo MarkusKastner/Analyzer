@@ -14,9 +14,7 @@ public:
   std::shared_ptr<analyzer::core::ByteCollection> createASCIITextData()
   {
     std::string fileData;
-
     fileData += "this is just some ascii text.";
-
     std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
     return data;
   }
@@ -28,5 +26,6 @@ TEST_F(FormatFinderTest, identifyASCII)
 {
   ASSERT_EQ(finder.Analyze(this->createASCIITextData()), analyzer::core::FormatFinder::Format::ascii);
 }
+
 
 #endif

@@ -2,6 +2,7 @@
 
 #include <regex>
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
+#include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 
 namespace analyzer{
   namespace core{
@@ -9,6 +10,7 @@ namespace analyzer{
       : data(new std::shared_ptr<ByteCollection>(new ByteCollection())), 
       fileName(new std::string()), path(new std::vector<std::string>()),
       interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
+      binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
       formatFinder()
     {
 
@@ -18,6 +20,7 @@ namespace analyzer{
       : data(new std::shared_ptr<ByteCollection>(new ByteCollection(data))), 
       fileName(new std::string(fileName)), path(new std::vector<std::string>()),
       interpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
+      binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
       formatFinder()
     {
       this->setDirectoryNames(fileName, "/");
@@ -28,6 +31,7 @@ namespace analyzer{
       : data(new std::shared_ptr<ByteCollection>(*other.data)), 
       fileName(new std::string(*other.fileName)), path(new std::vector<std::string>(*other.path)),
       interpreter(new std::shared_ptr<interpreter::Interpreter>(*other.interpreter)),
+      binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.binaryInterpreter)),
       formatFinder()
     {
     }
@@ -39,6 +43,7 @@ namespace analyzer{
         *this->fileName = *other.fileName;
         *this->path = *other.path;
         *this->interpreter = *other.interpreter;
+        *this->binaryInterpreter = *other.binaryInterpreter;
       }
       return *this;
     }
@@ -49,6 +54,7 @@ namespace analyzer{
       delete this->fileName;
       delete this->path;
       delete this->interpreter;
+      delete this->binaryInterpreter;
     }
 
     void File::SetFileData(const std::string & fileName, const std::vector<char> & data)
@@ -87,6 +93,11 @@ namespace analyzer{
     const std::shared_ptr<interpreter::Interpreter> & File::GetInterpreter()
     {
       return *this->interpreter;
+    }
+
+    const std::shared_ptr<interpreter::Interpreter> & File::GetBinaryInterpreter()
+    {
+      return *this->binaryInterpreter;
     }
 
     void File::setDirectoryNames(const std::string& input, const std::string& regex)

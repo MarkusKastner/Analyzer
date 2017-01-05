@@ -13,13 +13,19 @@ namespace analyzer{
       enum Format
       {
         unknown = 0,
-        ascii
+        ascii,
+        UTF8
       };
 
       FormatFinder();
       virtual ~FormatFinder();
 
       analyzer::core::FormatFinder::Format Analyze(const std::shared_ptr<analyzer::core::ByteCollection> & data);
+
+    private:
+      std::shared_ptr<analyzer::core::ByteCollection> * data;
+
+      bool hasNoneASCIIBytes();
 
     };
   }
