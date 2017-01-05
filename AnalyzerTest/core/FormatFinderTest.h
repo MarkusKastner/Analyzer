@@ -11,21 +11,37 @@
 class FormatFinderTest : public testing::Test
 {
 public:
-  std::shared_ptr<analyzer::core::ByteCollection> createASCIITextData()
+  std::shared_ptr<analyzer::core::ByteCollection> createTextData1()
   {
     std::string fileData;
-    fileData += "this is just some ascii text.";
+    fileData += "some text.\n";
+    fileData += "üהצß/&%$§ית\n";
     std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
     return data;
+  }
+
+  void SetUp(){
+
   }
 
   analyzer::core::FormatFinder finder;
 };
 
-TEST_F(FormatFinderTest, identifyASCII)
+TEST_F(FormatFinderTest, isText)
 {
-  ASSERT_EQ(finder.Analyze(this->createASCIITextData()), analyzer::core::FormatFinder::Format::ascii);
+  finder.SetData(createTextData1());
+  finder.Analyze();
+  ASSERT_EQ(finder.GetBaseFormat(), analyzer::core::FormatFinder::BaseFormat::text);
 }
 
+//TEST_F(FormatFinderTest, identifyASCII)
+//{
+//  ASSERT_EQ(finder.Analyze(this->createASCIITextData()), analyzer::core::FormatFinder::Format::ascii);
+//}
+//
+//TEST_F(FormatFinderTest, identifyXML)
+//{
+//  ASSERT_EQ(finder.Analyze(this->createASCIITextData()), analyzer::core::FormatFinder::Format::xml);
+//}
 
 #endif

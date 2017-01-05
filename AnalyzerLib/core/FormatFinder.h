@@ -10,22 +10,26 @@ namespace analyzer{
     class FormatFinder
     {
     public:
-      enum Format
+      enum BaseFormat
       {
         unknown = 0,
-        ascii,
-        UTF8
+        text,
+        binary
       };
 
       FormatFinder();
       virtual ~FormatFinder();
 
-      analyzer::core::FormatFinder::Format Analyze(const std::shared_ptr<analyzer::core::ByteCollection> & data);
+      void SetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
+      void Analyze();
+      analyzer::core::FormatFinder::BaseFormat GetBaseFormat();
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * data;
+      analyzer::core::FormatFinder::BaseFormat baseFormat;
 
-      bool hasNoneASCIIBytes();
+      void analyzeBaseFormat();
+      bool isLetter(const std::shared_ptr<Byte> & byte);
 
     };
   }

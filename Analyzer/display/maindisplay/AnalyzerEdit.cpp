@@ -44,8 +44,12 @@ namespace analyzer{
           this->file->GetBinaryInterpreter()->RegisterObserver(this);
           this->file->GetTextInterpreter()->RegisterObserver(this);
           this->activeInterpreter = this->file->GetTextInterpreter();
-          this->setPlainText(QString::fromWCharArray(this->activeInterpreter->GetFormatedText().c_str()));
-
+          if (this->activeInterpreter->HasKnownFormat()){
+            this->setPlainText(QString::fromWCharArray(this->activeInterpreter->GetFormatedText().c_str()));
+          }
+          else{
+            this->setPlainText(this->activeInterpreter->GetPlainText().c_str());
+          }
         }
       }
 
