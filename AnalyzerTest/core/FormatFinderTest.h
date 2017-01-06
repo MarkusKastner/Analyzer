@@ -20,6 +20,13 @@ public:
     return data;
   }
 
+  std::shared_ptr<analyzer::core::ByteCollection> createXMLData()
+  {
+    std::string fileData("<?xml version=\"1.0\"?>");
+    std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
+    return data;
+  }
+
   void SetUp(){
 
   }
@@ -31,17 +38,14 @@ TEST_F(FormatFinderTest, isText)
 {
   finder.SetData(createTextData1());
   finder.Analyze();
-  ASSERT_EQ(finder.GetBaseFormat(), analyzer::core::FormatFinder::BaseFormat::text);
+  ASSERT_EQ(finder.GetBaseFormat(), analyzer::core::FormatFinder::Format::text);
 }
 
-//TEST_F(FormatFinderTest, identifyASCII)
-//{
-//  ASSERT_EQ(finder.Analyze(this->createASCIITextData()), analyzer::core::FormatFinder::Format::ascii);
-//}
-//
-//TEST_F(FormatFinderTest, identifyXML)
-//{
-//  ASSERT_EQ(finder.Analyze(this->createASCIITextData()), analyzer::core::FormatFinder::Format::xml);
-//}
+TEST_F(FormatFinderTest, isXML)
+{
+  finder.SetData(createXMLData());
+  finder.Analyze();
+  ASSERT_EQ(finder.GetDetailFormat(), analyzer::core::FormatFinder::Format::xml);
+}
 
 #endif

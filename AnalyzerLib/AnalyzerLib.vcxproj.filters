@@ -124,6 +124,9 @@
     <ClCompile Include="interpreter\formatter\Formatter.cpp">
       <Filter>interpreter\formatter</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\formatter\XMLFormatter.cpp">
+      <Filter>interpreter\formatter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -223,6 +226,9 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\formatter\Formatter.h">
+      <Filter>interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\XMLFormatter.h">
       <Filter>interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>

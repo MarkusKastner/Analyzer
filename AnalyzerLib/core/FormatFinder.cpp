@@ -4,7 +4,7 @@ namespace analyzer{
   namespace core{
     FormatFinder::FormatFinder()
       : data(new std::shared_ptr<analyzer::core::ByteCollection>()),
-      baseFormat(BaseFormat::unknown)
+      baseFormat(Format::unknown), detailFormat(Format::unknown)
     {
     }
 
@@ -23,9 +23,14 @@ namespace analyzer{
       this->analyzeBaseFormat();
     }
 
-    analyzer::core::FormatFinder::BaseFormat FormatFinder::GetBaseFormat()
+    analyzer::core::FormatFinder::Format FormatFinder::GetBaseFormat()
     {
       return this->baseFormat;
+    }
+
+    analyzer::core::FormatFinder::Format FormatFinder::GetDetailFormat()
+    {
+      return this->detailFormat;
     }
 
     void FormatFinder::analyzeBaseFormat()
@@ -40,11 +45,21 @@ namespace analyzer{
       }
 
       if (letters > (totalTested / 2)){
-        this->baseFormat = BaseFormat::text;
+        this->baseFormat = Format::text;
+        this->analyzeDetailTextFormat();
       }
       else{
-        this->baseFormat = BaseFormat::binary;
+        this->baseFormat = Format::binary;
       }
+    }
+
+    void FormatFinder::analyzeDetailTextFormat()
+    {
+      if (this->isXML()){
+        this->detailFormat = Format::xml;
+        return;
+      }
+      this->detailFormat = Format::unknown;
     }
 
     bool FormatFinder::isLetter(const std::shared_ptr<Byte> & byte)
@@ -61,25 +76,23 @@ namespace analyzer{
       }
     }
 
-    //analyzer::core::FormatFinder::Format FormatFinder::Analyze(const std::shared_ptr<analyzer::core::ByteCollection> & data)
-    //{
-    //  *this->data = data;
-    //  if (!this->hasNoneASCIIBytes()){
-
-    //    return Format::ascii;
-    //  }
-    //  
-    //}
-
-    //bool FormatFinder::hasNoneASCIIBytes()
-    //{
-    //  for (auto& byte : (**this->data)){
-    //    if (byte->GetBitAt(7) == 1){
-    //      return true;
-    //    }
-    //  }
-    //  return false;
-    //}
-
+    bool FormatFinder::isXML()
+    {
+      std::string text;
+      for (auto& byte : (**this->data)){
+        if (this->isLetter(byte)){
+          text.push_back(static_cast<char>(byte->GetValue()));
+        }
+        if (text.size() >= 5){
+          if (text.substr(0, 5).compare("<?xml") == 0){
+            return true;
+          }
+          else{
+            return false;
+          }
+        }
+      }
+      return false;
+    }
   }
 }

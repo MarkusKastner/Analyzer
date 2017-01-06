@@ -10,11 +10,13 @@ namespace analyzer{
     class FormatFinder
     {
     public:
-      enum BaseFormat
+      enum Format
       {
         unknown = 0,
         text,
-        binary
+        binary,
+        xml,
+        pdf
       };
 
       FormatFinder();
@@ -22,14 +24,19 @@ namespace analyzer{
 
       void SetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
       void Analyze();
-      analyzer::core::FormatFinder::BaseFormat GetBaseFormat();
+      analyzer::core::FormatFinder::Format GetBaseFormat();
+      analyzer::core::FormatFinder::Format GetDetailFormat();
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * data;
-      analyzer::core::FormatFinder::BaseFormat baseFormat;
+      analyzer::core::FormatFinder::Format baseFormat;
+      analyzer::core::FormatFinder::Format detailFormat;
 
       void analyzeBaseFormat();
+      void analyzeDetailTextFormat();
+      
       bool isLetter(const std::shared_ptr<Byte> & byte);
+      bool isXML();
 
     };
   }
