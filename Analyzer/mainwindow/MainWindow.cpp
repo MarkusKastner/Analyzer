@@ -3,8 +3,7 @@
 #include <QLayout>
 
 #include "application\error\AppException.h"
-#include "dialogs\DisplayOptionsBinary.h"
-#include "dialogs\DisplayOptionsText.h"
+#include "dialogs\DisplayOptions.h"
 #include "dialogs\DocumentStructure.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
@@ -53,7 +52,7 @@ namespace analyzer{
       this->displayOptions = new QDockWidget(tr("display options"), this);
       this->displayOptions->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
       DisplayOptions * options = nullptr;
-      options = new DisplayOptionsText(this->displayOptions);
+      options = new DisplayOptions(this->displayOptions);
 
        
       this->displayOptions->setWidget(options);

@@ -1,13 +1,12 @@
 #ifndef DISPLAYOPTIONSTEXT_H
 #define DISPLAYOPTIONSTEXT_H
 
-#include "DisplayOptions.h"
-
+#include <QWidget>
 #include <QRadioButton>
 
 namespace analyzer{
   namespace gui{
-    class DisplayOptionsText : public DisplayOptions
+    class DisplayOptionsText : public QWidget
     {
     public:
       DisplayOptionsText(QWidget * parent = 0);
@@ -15,6 +14,7 @@ namespace analyzer{
 
     private:
       QRadioButton * plainText;
+      QRadioButton * xmlMode;
       QRadioButton * pdfMode;
 
       void setup();

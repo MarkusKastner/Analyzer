@@ -1,12 +1,12 @@
 #include "DisplayOptionsBinary.h"
 
-#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 namespace analyzer{
   namespace gui{
 
     DisplayOptionsBinary::DisplayOptionsBinary(QWidget * parent)
-      : DisplayOptions(parent), plainBits(nullptr), hex(nullptr)
+      : QWidget(parent), binary(nullptr), hex(nullptr)
     {
       this->setup();
     }
@@ -18,13 +18,14 @@ namespace analyzer{
 
     void DisplayOptionsBinary::setup()
     {
-      this->plainBits = new QRadioButton(tr("Plain bits"), this);
+      this->setLayout(new QVBoxLayout());
+      this->binary = new QRadioButton(tr("Plain bits"), this);
       this->hex = new QRadioButton(tr("Hex"), this);
-      this->layout()->addWidget(this->plainBits);
+      this->layout()->addWidget(this->binary);
       this->layout()->addWidget(this->hex);
       this->layout()->addItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
-      this->plainBits->setChecked(true);
+      this->binary->setChecked(true);
     }
   }
 }
