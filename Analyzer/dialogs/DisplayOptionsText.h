@@ -8,9 +8,13 @@ namespace analyzer{
   namespace gui{
     class DisplayOptionsText : public QWidget
     {
+      Q_OBJECT
     public:
       DisplayOptionsText(QWidget * parent = 0);
       virtual ~DisplayOptionsText();
+
+    signals:
+      void DisplayOptionsChanged();
 
     private:
       QRadioButton * plainText;
@@ -18,6 +22,7 @@ namespace analyzer{
       QRadioButton * pdfMode;
 
       void setup();
+      void onOptionsChange();
     };
   }
 }

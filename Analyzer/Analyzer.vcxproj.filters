@@ -107,6 +107,24 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AnalyzerEditHighlighter.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DisplayOptions.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DisplayOptions.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DisplayOptionsText.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DisplayOptionsBinary.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DisplayOptionsBinary.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DisplayOptionsText.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -117,15 +135,6 @@
     </ClInclude>
     <ClInclude Include="display\maindisplay\AnalyzerEdit.h">
       <Filter>display\maindisplay</Filter>
-    </ClInclude>
-    <ClInclude Include="dialogs\DisplayOptions.h">
-      <Filter>dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="dialogs\DisplayOptionsBinary.h">
-      <Filter>dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="dialogs\DisplayOptionsText.h">
-      <Filter>dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +152,15 @@
     </CustomBuild>
     <CustomBuild Include="display\maindisplay\AnalyzerEditHighlighter.h">
       <Filter>display\maindisplay</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dialogs\DisplayOptions.h">
+      <Filter>dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dialogs\DisplayOptionsBinary.h">
+      <Filter>dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dialogs\DisplayOptionsText.h">
+      <Filter>dialogs</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

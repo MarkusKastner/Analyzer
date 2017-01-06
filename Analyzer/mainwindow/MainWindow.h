@@ -14,11 +14,9 @@
 #include "AnalyzerLib\base\AnalyzerBaseObserver.h"
 
 namespace analyzer{
-  namespace core{
-    class ByteCollection;
-  }
   namespace gui{
     class DocumentStructure;
+    class DisplayOptions;
     class MainWindow : public QMainWindow, public base::AnalyzerBaseObserver
     {
       Q_OBJECT
@@ -30,14 +28,17 @@ namespace analyzer{
       virtual void NotifyInterprterChange();
       virtual void NotifyFileChange();
 
+      void DisplayOptionsChanged();
+
     private:
       Ui::MainWindow ui;
       std::unique_ptr<Actions> actions;
       base::AnalyzerBase & analyzerBase;
       gui::display::AnalyzerEdit * analyzerEdit;
 
-      QDockWidget * displayOptions;
+      QDockWidget * displayOptionsDock;
       DocumentStructure * documentStructure;
+      DisplayOptions * displayOptions;
 
       void setup();
       void setupDialogs();

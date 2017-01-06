@@ -46,6 +46,9 @@ namespace analyzer{
       connect(this->textMode, &QRadioButton::clicked, this, &DisplayOptions::onOptionsChange);
       connect(this->binaryMode, &QRadioButton::clicked, this, &DisplayOptions::onOptionsChange);
 
+      connect(this->binaryOptions, &DisplayOptionsBinary::DisplayOptionsChanged, this, &DisplayOptions::DisplayOptionsChanged);
+      connect(this->textOptions, &DisplayOptionsText::DisplayOptionsChanged, this, &DisplayOptions::DisplayOptionsChanged);
+
       this->textMode->setChecked(true);
       this->onOptionsChange();
     }
@@ -60,6 +63,7 @@ namespace analyzer{
         this->textOptions->setVisible(false);
         this->binaryOptions->setVisible(true);
       }
+      this->DisplayOptionsChanged();
     }
   }
 }

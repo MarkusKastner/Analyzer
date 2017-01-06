@@ -11,9 +11,13 @@ namespace analyzer{
   namespace gui{
     class DisplayOptions : public QWidget
     {
+      Q_OBJECT
     public: 
       DisplayOptions(QWidget * parent = 0);
       virtual ~DisplayOptions();
+
+    signals:
+      void DisplayOptionsChanged();
 
     private:
       QRadioButton * textMode;

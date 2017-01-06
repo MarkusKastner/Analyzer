@@ -264,4 +264,9 @@ TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
   ASSERT_TRUE(this->observer1.InterpreterChanged());
 }
 
+TEST_F(AnalyzerBaseTest, displayOptionsChange)
+{
+  this->analyzerBase1.RegisterObserver(&this->observer1);
+}
+
 #endif

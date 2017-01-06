@@ -28,6 +28,14 @@ namespace analyzer{
       this->layout()->addItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
       this->plainText->setChecked(true);
+      connect(this->plainText, &QRadioButton::clicked, this, &DisplayOptionsText::onOptionsChange);
+      connect(this->xmlMode, &QRadioButton::clicked, this, &DisplayOptionsText::onOptionsChange);
+      connect(this->pdfMode, &QRadioButton::clicked, this, &DisplayOptionsText::onOptionsChange);
+    }
+
+    void DisplayOptionsText::onOptionsChange()
+    {
+      this->DisplayOptionsChanged();
     }
   }
 }

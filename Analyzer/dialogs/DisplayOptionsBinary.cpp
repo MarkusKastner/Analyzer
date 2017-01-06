@@ -26,6 +26,13 @@ namespace analyzer{
       this->layout()->addItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
       this->binary->setChecked(true);
+      connect(this->binary, &QRadioButton::clicked, this, &DisplayOptionsBinary::onOptionsChange);
+      connect(this->hex, &QRadioButton::clicked, this, &DisplayOptionsBinary::onOptionsChange);
+    }
+
+    void DisplayOptionsBinary::onOptionsChange()
+    {
+      this->DisplayOptionsChanged();
     }
   }
 }

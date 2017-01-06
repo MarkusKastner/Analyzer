@@ -13,7 +13,7 @@ namespace analyzer{
 
     MainWindow::MainWindow(base::AnalyzerBase & analyzerBase, QWidget *parent)
       : QMainWindow(parent), actions(), analyzerBase(analyzerBase), analyzerEdit(nullptr), 
-      displayOptions(nullptr), documentStructure(nullptr)
+      displayOptionsDock(nullptr), documentStructure(nullptr), displayOptions(nullptr)
     {
       ui.setupUi(this);
       this->setup();
@@ -34,6 +34,11 @@ namespace analyzer{
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
     }
 
+    void MainWindow::DisplayOptionsChanged()
+    {
+      
+    }
+
     void MainWindow::setup()
     {
       this->analyzerBase.RegisterObserver(this);
@@ -49,14 +54,12 @@ namespace analyzer{
 
     void MainWindow::setupDialogs()
     {
-      this->displayOptions = new QDockWidget(tr("display options"), this);
-      this->displayOptions->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-      DisplayOptions * options = nullptr;
-      options = new DisplayOptions(this->displayOptions);
+      this->displayOptionsDock = new QDockWidget(tr("display options"), this);
+      this->displayOptionsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
-       
-      this->displayOptions->setWidget(options);
-      this->addDockWidget(Qt::RightDockWidgetArea, this->displayOptions);
+      this->displayOptions = new DisplayOptions(this->displayOptionsDock);
+      this->displayOptionsDock->setWidget(this->displayOptions);
+      this->addDockWidget(Qt::RightDockWidgetArea, this->displayOptionsDock);
 
       this->documentStructure = new DocumentStructure(tr("document structure"), this);
       this->addDockWidget(Qt::LeftDockWidgetArea, this->documentStructure);
@@ -66,6 +69,7 @@ namespace analyzer{
     {
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
       connect(this->documentStructure, &DocumentStructure::ActiveFileChanged, this, &MainWindow::activeFileChanged);
+      connect(this->displayOptions, &DisplayOptions::DisplayOptionsChanged, this, &MainWindow::DisplayOptionsChanged);
     }
 
     void MainWindow::activeFileChanged(const std::string & fileName)
