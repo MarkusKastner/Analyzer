@@ -28,7 +28,8 @@ namespace analyzer{
 
     std::wstring TextStyleInterpreter::GetFormatedText()
     {
-      return std::wstring();
+      auto text(this->getPlainText());
+      return std::wstring(text.begin(), text.end());
     }
 
     bool TextStyleInterpreter::HasKnownFormat()

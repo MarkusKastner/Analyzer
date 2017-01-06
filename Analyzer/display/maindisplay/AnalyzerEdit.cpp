@@ -13,7 +13,7 @@ namespace analyzer{
     namespace display{
 
       AnalyzerEdit::AnalyzerEdit(QWidget * parent)
-        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), activeInterpreter()
+        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr)
       {
         this->lineNumbers = new LineNumberArea(this);
         this->setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -41,26 +41,13 @@ namespace analyzer{
         this->ClearFile();
         if (file != nullptr){
           this->file = file;
-          this->file->GetBinaryInterpreter()->RegisterObserver(this);
-          this->file->GetTextInterpreter()->RegisterObserver(this);
-          this->activeInterpreter = this->file->GetTextInterpreter();
-          if (this->activeInterpreter->HasKnownFormat()){
-            this->setPlainText(QString::fromWCharArray(this->activeInterpreter->GetFormatedText().c_str()));
-          }
-          else{
-            this->setPlainText(this->activeInterpreter->GetPlainText().c_str());
-          }
+          this->setPlainText(QString::fromWCharArray(this->file->GetTextInterpreter()->GetFormatedText().c_str()));
         }
       }
 
       void AnalyzerEdit::ClearFile()
       {
         this->setPlainText("");
-        if (this->file != nullptr){
-          this->file->GetBinaryInterpreter()->UnregisterObserver(this);
-          this->file->GetTextInterpreter()->UnregisterObserver(this);
-          this->activeInterpreter = nullptr;
-        }
       }
 
       void AnalyzerEdit::LineNumberAreaPaintEvent(QPaintEvent *event)
@@ -105,7 +92,7 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
-          this->setPlainText(this->activeInterpreter->GetPlainText().c_str());
+          this->setPlainText(QString::fromWCharArray(this->file->GetTextInterpreter()->GetFormatedText().c_str()));
         }
       }
 

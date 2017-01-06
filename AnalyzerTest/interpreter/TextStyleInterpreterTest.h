@@ -15,7 +15,7 @@ class TextStyleInterpreterTest : public testing::Test
 {
 public:
   TextStyleInterpreterTest()
-    :interpreter1(), interpreter2(), compare2("Test 100\nx")
+    :interpreter1(), interpreter2(), compare2("Test 100\nx"), compare2W(L"Test 100\nx")
   {}
 
   ~TextStyleInterpreterTest()
@@ -43,6 +43,7 @@ public:
   std::shared_ptr<analyzer::interpreter::Interpreter> interpreter1;
   std::shared_ptr<analyzer::interpreter::Interpreter> interpreter2;
   std::string compare2;
+  std::wstring compare2W;
 };
 
 TEST_F(TextStyleInterpreterTest, InitAbstract)
@@ -59,5 +60,10 @@ TEST_F(TextStyleInterpreterTest, GetPlainTextOnEmptyInterpreter)
 {
   analyzer::interpreter::TextStyleInterpreter interpreter;
   ASSERT_STREQ(interpreter.GetPlainText().c_str(), std::string("").c_str());
+}
+
+TEST_F(TextStyleInterpreterTest, GetFormatedText)
+{
+  ASSERT_STREQ(this->interpreter2->GetFormatedText().c_str(), this->compare2W.c_str());
 }
 #endif

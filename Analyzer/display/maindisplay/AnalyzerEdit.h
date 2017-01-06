@@ -53,7 +53,6 @@ namespace analyzer{
         core::File * file;
         QWidget *lineNumbers;
         AnalyzerEditHighlighter * highlighter;
-        std::shared_ptr<interpreter::Interpreter> activeInterpreter;
 
         void highlightCurrentLine();
         void updateLineNumberAreaWidth(int newBlockCount);

@@ -95,4 +95,10 @@ TEST_F(FileTest, GetBinaryInterpreter)
   ASSERT_TRUE(dynamic_cast<analyzer::interpreter::BinaryStyleInterpreter*>(file.GetBinaryInterpreter().get()));
 }
 
+TEST_F(FileTest, GetText)
+{
+  this->file1.SetFileData(fileName1, charVector);
+  ASSERT_STREQ(this->file1.GetText().c_str(), L"aaaaa");
+}
+
 #endif

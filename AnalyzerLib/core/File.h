@@ -35,6 +35,8 @@ namespace analyzer{
       const std::shared_ptr<interpreter::Interpreter> & GetTextInterpreter();
       const std::shared_ptr<interpreter::Interpreter> & GetBinaryInterpreter();
 
+      std::wstring GetText();
+
     private:
       std::shared_ptr<ByteCollection> * data;
       std::string * fileName;

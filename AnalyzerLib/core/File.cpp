@@ -100,6 +100,11 @@ namespace analyzer{
       return *this->binaryInterpreter;
     }
 
+    std::wstring File::GetText()
+    {
+      return this->textInterpreter->get()->GetFormatedText();
+    }
+
     void File::setDirectoryNames(const std::string& input, const std::string& regex)
     {
       std::regex re(regex);
