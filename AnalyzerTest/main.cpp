@@ -26,6 +26,7 @@
 #include "strategy\ResultTest.h"
 #include "strategy\xml\XMLStrategyTest.h"
 #include "core\FormatFinderTest.h"
+#include "interpreter\formatter\FormatterTest.h"
 
 namespace fs = std::tr2::sys;
 fs::path testDir;

@@ -38,6 +38,9 @@
     <Filter Include="strategy\xml">
       <UniqueIdentifier>{cbd688b9-6cf3-40ec-b26c-c86a84ff83e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interpreter\formatter">
+      <UniqueIdentifier>{78f73c97-f2ab-4035-9a7c-ba67afab6e2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -117,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="core\FormatFinder.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\formatter\Formatter.cpp">
+      <Filter>interpreter\formatter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="core\FormatFinder.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\Formatter.h">
+      <Filter>interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

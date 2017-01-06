@@ -46,6 +46,9 @@
     <Filter Include="strategy\xml">
       <UniqueIdentifier>{36b4912a-4fa6-48c9-971e-ec621a92def1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interpreter\formatter">
+      <UniqueIdentifier>{164c8c15-f0ca-4a07-939d-2e61254a840c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\FormatFinder.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\Formatter.cpp">
+      <Filter>Interpreter\formatter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\FormatFinder.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\Formatter.h">
+      <Filter>Interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\FormatterTest.h">
+      <Filter>Interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
