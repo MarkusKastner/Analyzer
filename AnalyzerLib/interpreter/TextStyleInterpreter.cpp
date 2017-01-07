@@ -32,11 +32,6 @@ namespace analyzer{
       return std::wstring(text.begin(), text.end());
     }
 
-    bool TextStyleInterpreter::HasKnownFormat()
-    {
-      return false;
-    }
-
     void TextStyleInterpreter::createGlyphs()
     {
       this->clearGlyphs();

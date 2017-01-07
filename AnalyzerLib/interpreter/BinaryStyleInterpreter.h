@@ -27,7 +27,6 @@ namespace analyzer{
 
       virtual std::string GetPlainText();
       virtual std::wstring GetFormatedText();
-      virtual bool HasKnownFormat();
 
     private:
 

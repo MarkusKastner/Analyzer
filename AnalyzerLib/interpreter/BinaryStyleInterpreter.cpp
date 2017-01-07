@@ -38,10 +38,5 @@ namespace analyzer{
       auto text(this->GetPlainText());
       return std::wstring(text.begin(), text.end());
     }
-
-    bool BinaryStyleInterpreter::HasKnownFormat()
-    {
-      return false;
-    }
   }
 }
