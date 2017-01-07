@@ -10,32 +10,17 @@ namespace analyzer{
     TextStyleInterpreter::TextStyleInterpreter()
       :InterpreterDataImpl()
     {
-
+      this->setDetailFormatter(new SimpleTextFormatter());
     }
 
     TextStyleInterpreter::TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       :InterpreterDataImpl(byteCollection)
     {
+      this->setDetailFormatter(new SimpleTextFormatter());
     }
 
     TextStyleInterpreter::~TextStyleInterpreter()
     {
-    }
-
-    std::string TextStyleInterpreter::GetPlainText()
-    {
-      std::string text;
-      auto& data = (**this->getByteCollection());
-      for (auto& byte : data){
-        text.push_back(static_cast<char>(byte->GetValue()));
-      }
-      return text;
-    }
-
-    std::wstring TextStyleInterpreter::GetFormatedText()
-    {
-      auto text(this->GetPlainText());
-      return std::wstring(text.begin(), text.end());
     }
 
     void TextStyleInterpreter::setFormatter()

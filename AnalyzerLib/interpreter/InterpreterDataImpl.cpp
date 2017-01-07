@@ -58,6 +58,11 @@ namespace analyzer{
       return *this->byteCollection;
     }
 
+    std::wstring InterpreterDataImpl::GetText()
+    {
+      return this->formatter->get()->GetText();
+    }
+
     void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify)
     {
       if (this->detailFormat != detailFormat){
@@ -86,6 +91,7 @@ namespace analyzer{
     void InterpreterDataImpl::setDetailFormatter(Formatter * formatter)
     {
       this->formatter->reset(formatter);
+      this->formatter->get()->SetData(*this->byteCollection);
     }
   }
 }

@@ -13,9 +13,6 @@ namespace analyzer{
 
       virtual std::wstring GetText();
 
-    private:
-      std::wstring getDataAsWString();
-
     };
   }
 }

@@ -20,9 +20,6 @@ namespace analyzer{
       explicit TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
       virtual ~TextStyleInterpreter();
 
-      virtual std::string GetPlainText();
-      virtual std::wstring GetFormatedText();
-
     protected:
       virtual void setFormatter();
     };

@@ -101,13 +101,13 @@ TEST_F(BinaryStyleInterpreterTest, PlainText)
 
   analyzer::interpreter::BinaryStyleInterpreter interpreter(byteCollection);
 
-  ASSERT_STREQ(interpreter.GetPlainText().c_str(), std::string("00000000 00000000").c_str());
+  ASSERT_STREQ(interpreter.GetText().c_str(), std::wstring(L"00000000 00000000").c_str());
 }
 
 TEST_F(BinaryStyleInterpreterTest, PlainTextOnEmptyByteCollection)
 {
   analyzer::interpreter::BinaryStyleInterpreter interpreter;
-  ASSERT_STREQ(interpreter.GetPlainText().c_str(), std::string("").c_str());
+  ASSERT_STREQ(interpreter.GetText().c_str(), std::wstring().c_str());
 }
 
 #endif

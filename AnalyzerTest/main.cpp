@@ -26,6 +26,7 @@
 #include "interpreter\formatter\FormatterTest.h"
 #include "interpreter\formatter\XMLFormatterTest.h"
 #include "interpreter\formatter\SimpleTextFormatterTest.h"
+#include "interpreter\formatter\BitFormatterTest.h"
 
 namespace fs = std::tr2::sys;
 fs::path testDir;

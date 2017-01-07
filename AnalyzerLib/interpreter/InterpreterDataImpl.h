@@ -31,6 +31,8 @@ namespace analyzer{
       virtual void ResetData(const std::vector<char> & data);
       virtual std::shared_ptr<analyzer::core::ByteCollection> GetData();
 
+      virtual std::wstring GetText();
+
       virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);
 
     protected:

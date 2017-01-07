@@ -105,10 +105,10 @@ namespace analyzer{
     std::wstring File::GetText()
     {
       if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
-        return this->textInterpreter->get()->GetFormatedText();
+        return this->textInterpreter->get()->GetText();
       }
       else{
-        return this->binaryInterpreter->get()->GetFormatedText();
+        return this->binaryInterpreter->get()->GetText();
       }
     }
 

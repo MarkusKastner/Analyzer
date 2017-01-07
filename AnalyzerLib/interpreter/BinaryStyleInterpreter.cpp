@@ -2,57 +2,39 @@
 
 #include "error\InterpreterException.h"
 
+#include "AnalyzerLib\interpreter\formatter\BitFormatter.h"
+
 namespace analyzer{
   namespace interpreter{
 
     BinaryStyleInterpreter::BinaryStyleInterpreter()
       :InterpreterDataImpl()
     {
+      this->setDetailFormatter(new BitFormatter());
     }
 
     BinaryStyleInterpreter::BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       : InterpreterDataImpl(byteCollection)
     {
+      this->setDetailFormatter(new BitFormatter());
     }
 
     BinaryStyleInterpreter::~BinaryStyleInterpreter()
     {
     }
 
-    std::string BinaryStyleInterpreter::GetPlainText()
-    {
-      std::string output;
-      if (this->HasData()){
-        for (auto byte : *this->getByteCollection()->get()){
-          output += byte->GetBitsAsString();
-          output += " ";
-        }
-        output.pop_back();
-      }
-      return output;
-    }
-
-    std::wstring BinaryStyleInterpreter::GetFormatedText()
-    {
-      auto text(this->GetPlainText());
-      return std::wstring(text.begin(), text.end());
-    }
-
     void BinaryStyleInterpreter::setFormatter()
     {
-      //switch (this->getDetailFormat()){
-      //case analyzer::base::DetailFormat::simpleText:
-      //  this->setDetailFormatter(new SimpleTextFormatter());
-      //  break;
-      //case analyzer::base::DetailFormat::xml:
-      //  this->setDetailFormatter(new XMLFormatter());
-      //  break;
-      //case analyzer::base::DetailFormat::pdf:
-      //  this->setDetailFormatter(new SimpleTextFormatter());
-      //  break;
-      //default:
-      //  this->setDetailFormatter(new SimpleTextFormatter());
-      //}
+      switch (this->getDetailFormat()){
+      case analyzer::base::DetailFormat::bits:
+        this->setDetailFormatter(new BitFormatter());
+        break;
+      case analyzer::base::DetailFormat::hex:
+        this->setDetailFormatter(new BitFormatter());
+        break;
+      default:
+        this->setDetailFormatter(new BitFormatter());
+      }
     }
   }
 }

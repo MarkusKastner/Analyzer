@@ -118,6 +118,9 @@
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp">
       <Filter>interpreter\formatter</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\formatter\BitFormatter.cpp">
+      <Filter>interpreter\formatter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Byte.h">
@@ -214,6 +217,9 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\formatter\SimpleTextFormatter.h">
+      <Filter>interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\BitFormatter.h">
       <Filter>interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>

@@ -100,6 +100,7 @@
     <ClCompile Include="definitions\LocalDefinition.cpp" />
     <ClCompile Include="definitions\TextDefinition.cpp" />
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
+    <ClCompile Include="interpreter\formatter\BitFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\Formatter.cpp" />
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="definitions\TextDefinition.h" />
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h" />
     <ClInclude Include="interpreter\error\InterpreterException.h" />
+    <ClInclude Include="interpreter\formatter\BitFormatter.h" />
     <ClInclude Include="interpreter\formatter\Formatter.h" />
     <ClInclude Include="interpreter\formatter\SimpleTextFormatter.h" />
     <ClInclude Include="interpreter\formatter\XMLFormatter.h" />

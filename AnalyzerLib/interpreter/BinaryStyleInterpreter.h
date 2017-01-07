@@ -24,9 +24,6 @@ namespace analyzer{
       explicit BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
       virtual ~BinaryStyleInterpreter();
 
-      virtual std::string GetPlainText();
-      virtual std::wstring GetFormatedText();
-
     protected:
       virtual void setFormatter();
 

@@ -108,7 +108,7 @@ TEST_F(FileTest, ChangeDisplayOptions)
   this->file1.SetDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
   ASSERT_STREQ(this->file1.GetText().c_str(), L"aaaaa");
   this->file1.SetDisplayOptions(analyzer::base::BaseFormat::binary, analyzer::base::DetailFormat::bits);
-  ASSERT_STREQ(this->file1.GetText().c_str(), L"01100001 01100001 01100001 01100001 01100001");
+  ASSERT_STREQ(this->file1.GetText().c_str(), L"01100001 01100001 01100001 01100001\n01100001");
 }
 
 #endif

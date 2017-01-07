@@ -129,6 +129,9 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.cpp">
       <Filter>Interpreter\formatter</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\BitFormatter.cpp">
+      <Filter>Interpreter\formatter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -294,6 +297,12 @@
       <Filter>Interpreter\formatter</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.h">
+      <Filter>Interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\BitFormatter.h">
+      <Filter>Interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\BitFormatterTest.h">
       <Filter>Interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>

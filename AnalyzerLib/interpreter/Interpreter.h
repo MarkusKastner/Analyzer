@@ -19,8 +19,7 @@ namespace analyzer{
       virtual void ResetData(const std::vector<char> & data) = 0;
       virtual std::shared_ptr<analyzer::core::ByteCollection> GetData() = 0;
 
-      virtual std::string GetPlainText() = 0;
-      virtual std::wstring GetFormatedText() = 0;
+      virtual std::wstring GetText() = 0;
 
       virtual bool HasObservers() = 0;
       virtual size_t NumberOfObservers() = 0;
