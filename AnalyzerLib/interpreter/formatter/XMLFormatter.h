@@ -42,6 +42,8 @@ namespace analyzer{
       std::wstring getDataAsWString();
       
       bool isOpenToken(const std::wstring & text);
+      bool isClosingToken(const std::wstring & text);
+
     };
   }
 }

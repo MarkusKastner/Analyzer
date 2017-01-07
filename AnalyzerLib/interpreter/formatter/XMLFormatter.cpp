@@ -75,6 +75,9 @@ namespace analyzer{
       if (this->isOpenToken(token)){
         return XMLToken(token, XMLToken::Open);
       }
+      if (this->isClosingToken(token)){
+        return XMLToken(token, XMLToken::Close);
+      }
       return XMLToken(token, XMLToken::Inline);
     }
 
@@ -97,6 +100,14 @@ namespace analyzer{
         return false;
       }
       if (text.at(1) == '!' || text.at(1) == '/' || text.at(1) == '?'){
+        return false;
+      }
+      return true;
+    }
+
+    bool XMLFormatter::isClosingToken(const std::wstring & text)
+    {
+      if (text.empty() || text.at(1) != '/' || text.at(0) != '<' || text.back() != '>'){
         return false;
       }
       return true;

@@ -53,4 +53,9 @@ TEST_F(XMLFormatterTest, getOpenToken)
   ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Open);
 }
 
+TEST_F(XMLFormatterTest, getCloseToken)
+{
+  auto token = formatter.CreateToken(L"</close>");
+  ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Close);
+}
 #endif
