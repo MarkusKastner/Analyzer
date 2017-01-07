@@ -61,9 +61,6 @@
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp">
       <Filter>interpreter</Filter>
     </ClCompile>
-    <ClCompile Include="interpreter\TextGlyph.cpp">
-      <Filter>interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="interpreter\strategy\DefaultPlainTextStrategy.cpp">
       <Filter>interpreter\strategy</Filter>
     </ClCompile>
@@ -148,9 +145,6 @@
       <Filter>interpreter</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\BinaryStyleInterpreter.h">
-      <Filter>interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\TextGlyph.h">
       <Filter>interpreter</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\strategy\DefaultPlainTextStrategy.h">

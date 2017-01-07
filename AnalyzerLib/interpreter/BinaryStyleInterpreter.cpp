@@ -13,7 +13,6 @@ namespace analyzer{
     BinaryStyleInterpreter::BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       : InterpreterDataImpl(byteCollection)
     {
-      this->createGlyphs();
     }
 
     BinaryStyleInterpreter::~BinaryStyleInterpreter()

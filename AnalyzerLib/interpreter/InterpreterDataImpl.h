@@ -11,7 +11,6 @@
 #include <mutex>
 
 #include "InterpreterObserverImpl.h"
-#include "TextGlyph.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -31,33 +30,19 @@ namespace analyzer{
       virtual void ResetData(const std::vector<char> & data);
       virtual std::shared_ptr<analyzer::core::ByteCollection> GetData();
 
-      virtual size_t NumGlyphs() const;
-      virtual std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
-
       virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);
 
     protected:
       std::shared_ptr<analyzer::core::ByteCollection> * getByteCollection();
-      void clearGlyphs();
-      void addGlyph(const std::shared_ptr<TextGlyph> & glyph);
-      std::string getPlainText();
-
-      virtual void createGlyphs();
 
       base::DetailFormat getDetailFormat();
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
-      std::vector<std::shared_ptr<TextGlyph>> * glyphs;
 
       std::recursive_mutex * dataLock;
-      std::recursive_mutex * glyphsLock;
 
       base::DetailFormat detailFormat;
-
-      void onNewData();
-      
-      void throwGlyphIndex(const size_t & index);
     };
   }
 }

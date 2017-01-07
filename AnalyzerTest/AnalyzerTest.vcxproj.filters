@@ -72,9 +72,6 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp">
       <Filter>Interpreter</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\TextGlyph.cpp">
-      <Filter>Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.cpp">
       <Filter>Interpreter\strategy</Filter>
     </ClCompile>
@@ -174,12 +171,6 @@
       <Filter>Interpreter</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h">
-      <Filter>Interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\TextGlyphTest.h">
-      <Filter>Interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\TextGlyph.h">
       <Filter>Interpreter</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\strategy\InterpreterStrategyTest.h">

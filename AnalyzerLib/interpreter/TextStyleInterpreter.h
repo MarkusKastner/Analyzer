@@ -10,7 +10,6 @@
 #include <memory>
 
 #include "InterpreterDataImpl.h"
-#include "TextGlyph.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -23,9 +22,6 @@ namespace analyzer{
 
       virtual std::string GetPlainText();
       virtual std::wstring GetFormatedText();
-
-    protected:
-      virtual void createGlyphs();
     };
   }
 }

@@ -105,7 +105,6 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.cpp" />
-    <ClCompile Include="..\AnalyzerLib\interpreter\TextGlyph.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp" />
     <ClCompile Include="..\AnalyzerLib\strategy\Result.cpp" />
@@ -143,7 +142,6 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStartegy.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\TextChangedObserver.h" />
-    <ClInclude Include="..\AnalyzerLib\interpreter\TextGlyph.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\AnalyzingStrategy.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\Result.h" />
@@ -169,7 +167,6 @@
     <ClInclude Include="interpreter\strategy\InterpreterStrategyTest.h" />
     <ClInclude Include="interpreter\TextStyleInterpreterTest.h" />
     <ClInclude Include="interpreter\TextChangedObserverTest.h" />
-    <ClInclude Include="interpreter\TextGlyphTest.h" />
     <ClInclude Include="strategy\AnalyzingStrategyTest.h" />
     <ClInclude Include="strategy\ResultTest.h" />
     <ClInclude Include="strategy\xml\XMLStrategyTest.h" />

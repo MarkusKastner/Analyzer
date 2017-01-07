@@ -107,7 +107,6 @@
     <ClCompile Include="interpreter\strategy\DefaultPlainTextStrategy.cpp" />
     <ClCompile Include="interpreter\strategy\InterpretStrategyImpl.cpp" />
     <ClCompile Include="interpreter\TextStyleInterpreter.cpp" />
-    <ClCompile Include="interpreter\TextGlyph.cpp" />
     <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
     <ClCompile Include="strategy\Result.cpp" />
     <ClCompile Include="strategy\xml\XMLStrategy.cpp" />
@@ -144,7 +143,6 @@
     <ClInclude Include="interpreter\strategy\InterpretStrategyImpl.h" />
     <ClInclude Include="interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="interpreter\TextChangedObserver.h" />
-    <ClInclude Include="interpreter\TextGlyph.h" />
     <ClInclude Include="strategy\AnalyzingStrategy.h" />
     <ClInclude Include="strategy\Result.h" />
     <ClInclude Include="strategy\xml\XMLStrategy.h" />

@@ -8,7 +8,6 @@
 
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 #include "AnalyzerLib\core\ByteCollection.h"
-#include "AnalyzerLib\interpreter\TextGlyph.h"
 #include "AnalyzerLib\interpreter\error\InterpreterException.h"
 
 class TextStyleInterpreterTest : public testing::Test

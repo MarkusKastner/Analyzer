@@ -8,7 +8,6 @@
 
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 #include "AnalyzerLib\core\ByteCollection.h"
-#include "AnalyzerLib\interpreter\TextGlyph.h"
 #include "AnalyzerLib\interpreter\error\InterpreterException.h"
 
 class BinaryStyleInterpreterTest : public testing::Test
@@ -19,7 +18,6 @@ public:
     byteCollection1(new analyzer::core::ByteCollection()), 
     byteCollection2(),
     byteCollection3(),
-    testGlyph(),
     charVector()
   {}
 
@@ -37,7 +35,7 @@ public:
 
     std::vector<std::shared_ptr<analyzer::core::Byte>> tetBytes;
     tetBytes.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(0)));
-    this->testGlyph.reset(new analyzer::interpreter::TextGlyph(tetBytes));
+
 
     this->byteCollection2.reset(new analyzer::core::ByteCollection(bytes2, numBytes2));
     this->byteCollection3.reset(new analyzer::core::ByteCollection(bytes3, numBytes3));
@@ -56,7 +54,6 @@ public:
   std::shared_ptr<analyzer::core::ByteCollection> byteCollection1;
   std::shared_ptr<analyzer::core::ByteCollection> byteCollection2;
   std::shared_ptr<analyzer::core::ByteCollection> byteCollection3;
-  std::shared_ptr<analyzer::interpreter::TextGlyph> testGlyph;
   std::vector<char> charVector;
 };
 
@@ -78,50 +75,22 @@ TEST_F(BinaryStyleInterpreterTest, CtorHasData)
   ASSERT_EQ(interpreter.HasData(), true);
 }
 
-TEST_F(BinaryStyleInterpreterTest, GetNumGlyphs)
-{
-  analyzer::interpreter::BinaryStyleInterpreter  interpreter(this->byteCollection2);
-  ASSERT_EQ(interpreter.NumGlyphs(), 10);
-}
-
-TEST_F(BinaryStyleInterpreterTest, GetGlyphAt)
-{
-  analyzer::interpreter::BinaryStyleInterpreter  interpreter(this->byteCollection2);
-  ASSERT_STREQ(interpreter.GetGlyphAt(0)->GetPlainText().c_str(), testGlyph->GetPlainText().c_str());
-}
-
-TEST_F(BinaryStyleInterpreterTest, InvalidGlyphIndex)
-{
-  std::string errorMsg;
-  try{
-    analyzer::interpreter::BinaryStyleInterpreter interpreter;
-    interpreter.GetGlyphAt(1);
-  }
-  catch(analyzer::interpreter::InterpreterException & ex){
-    errorMsg = std::string(ex.what());
-  }
-  catch (...){
-
-  }
-  ASSERT_STREQ(errorMsg.c_str(), std::string("Invalid index").c_str());
-}
-
 TEST_F(BinaryStyleInterpreterTest, ResetDataByteCollection)
 {
   analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection2);
-  size_t sizePreReset = interpreter.NumGlyphs();
+  size_t sizePreReset = interpreter.GetData()->GetSize();
   interpreter.ResetData(this->byteCollection3);
 
-  ASSERT_FALSE(interpreter.NumGlyphs() == sizePreReset);
+  ASSERT_FALSE(interpreter.GetData()->GetSize() == sizePreReset);
 }
 
 TEST_F(BinaryStyleInterpreterTest, ResetDataCharVector)
 {
   analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection2);
-  size_t sizePreReset = interpreter.NumGlyphs();
+  size_t sizePreReset = interpreter.GetData()->GetSize();
   interpreter.ResetData(this->charVector);
 
-  ASSERT_FALSE(interpreter.NumGlyphs() == sizePreReset);
+  ASSERT_FALSE(interpreter.GetData()->GetSize() == sizePreReset);
 }
 
 TEST_F(BinaryStyleInterpreterTest, PlainText)
