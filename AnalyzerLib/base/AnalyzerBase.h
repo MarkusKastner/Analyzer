@@ -33,12 +33,6 @@ namespace analyzer{
         LoadNewDataFromFile = 0
       };
 
-      enum WorkingMode
-      {
-        Binary = 0,
-        Text
-      };
-
       AnalyzerBase();
       virtual ~AnalyzerBase();
 
@@ -63,7 +57,8 @@ namespace analyzer{
       core::File * GetActiveAnalyzerFile();
       std::vector<std::string> GetFileNames();
       void SetActiveFile(const std::string & fileName);
-
+      void SetNewDisplayOptions(const BaseFormat & baseFormat, const DetailFormat & detailFormat);
+ 
     private:
       std::thread * baseThread;
       std::atomic<bool> * runBaseWorker;

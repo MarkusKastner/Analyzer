@@ -15,7 +15,6 @@
 
 namespace analyzer{
   namespace interpreter{
-    class TextChangedObserver;
     class IMEX InterpreterObserverImpl : public Interpreter
     {
     public:

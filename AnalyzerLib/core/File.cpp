@@ -3,6 +3,7 @@
 #include <regex>
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
+#include "AnalyzerLib\interpreter\TextChangedObserver.h"
 
 namespace analyzer{
   namespace core{
@@ -11,7 +12,7 @@ namespace analyzer{
       fileName(new std::string()), path(new std::vector<std::string>()),
       textInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
       binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
-      formatFinder()
+      formatFinder(), currentBaseFormat(base::BaseFormat::binary)
     {
 
     }
@@ -21,7 +22,7 @@ namespace analyzer{
       fileName(new std::string(fileName)), path(new std::vector<std::string>()),
       textInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
       binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
-      formatFinder()
+      formatFinder(), currentBaseFormat(base::BaseFormat::binary)
     {
       this->setDirectoryNames(fileName, "/");
       this->feedInterpreter();
@@ -32,7 +33,7 @@ namespace analyzer{
       fileName(new std::string(*other.fileName)), path(new std::vector<std::string>(*other.path)),
       textInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.textInterpreter)),
       binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.binaryInterpreter)),
-      formatFinder()
+      formatFinder(), currentBaseFormat(other.currentBaseFormat)
     {
     }
 
@@ -44,6 +45,7 @@ namespace analyzer{
         *this->path = *other.path;
         *this->textInterpreter = *other.textInterpreter;
         *this->binaryInterpreter = *other.binaryInterpreter;
+        this->currentBaseFormat = other.currentBaseFormat;
       }
       return *this;
     }
@@ -102,7 +104,37 @@ namespace analyzer{
 
     std::wstring File::GetText()
     {
-      return this->textInterpreter->get()->GetFormatedText();
+      if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
+        return this->textInterpreter->get()->GetFormatedText();
+      }
+      else{
+        return this->binaryInterpreter->get()->GetFormatedText();
+      }
+    }
+
+    void File::SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat)
+    {
+      if (this->currentBaseFormat != baseFormat){
+        this->currentBaseFormat = baseFormat;
+      }
+      if (this->currentBaseFormat == base::BaseFormat::text){
+        this->textInterpreter->get()->SetDetailFormat(detailFormat);
+      }
+      else if (this->currentBaseFormat == base::BaseFormat::binary){
+        this->binaryInterpreter->get()->SetDetailFormat(detailFormat);
+      }
+    }
+
+    void File::RegisterObserver(interpreter::TextChangedObserver * observer)
+    {
+      this->binaryInterpreter->get()->RegisterObserver(observer);
+      this->textInterpreter->get()->RegisterObserver(observer);
+    }
+
+    void File::UnregisterObserver(interpreter::TextChangedObserver * observer)
+    {
+      this->binaryInterpreter->get()->UnregisterObserver(observer);
+      this->textInterpreter->get()->UnregisterObserver(observer);
     }
 
     void File::setDirectoryNames(const std::string& input, const std::string& regex)

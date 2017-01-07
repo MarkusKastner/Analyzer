@@ -231,5 +231,8 @@
     <ClInclude Include="interpreter\formatter\XMLFormatter.h">
       <Filter>interpreter\formatter</Filter>
     </ClInclude>
+    <ClInclude Include="base\BaseData.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

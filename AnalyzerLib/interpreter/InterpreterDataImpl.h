@@ -34,6 +34,8 @@ namespace analyzer{
       virtual size_t NumGlyphs() const;
       virtual std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
 
+      virtual void SetDetailFormat(const base::DetailFormat & detailFormat);
+
     protected:
       std::shared_ptr<analyzer::core::ByteCollection> * getByteCollection();
       void clearGlyphs();
@@ -42,12 +44,16 @@ namespace analyzer{
 
       virtual void createGlyphs();
 
+      base::DetailFormat getDetailFormat();
+
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
       std::vector<std::shared_ptr<TextGlyph>> * glyphs;
 
       std::recursive_mutex * dataLock;
       std::recursive_mutex * glyphsLock;
+
+      base::DetailFormat detailFormat;
 
       void onNewData();
       

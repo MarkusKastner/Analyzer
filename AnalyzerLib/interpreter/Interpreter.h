@@ -5,6 +5,7 @@
 #include <string>
 
 #include "AnalyzerLib\core\ByteCollection.h"
+#include "AnalyzerLib\base\BaseData.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -30,6 +31,8 @@ namespace analyzer{
       virtual void RegisterObserver(TextChangedObserver * observer) = 0;
       virtual void UnregisterObserver(TextChangedObserver * observer) = 0;
       virtual void NotifyTextChange() = 0;
+
+      virtual void SetDetailFormat(const base::DetailFormat & detailFormat) = 0;
     };
   }
 }

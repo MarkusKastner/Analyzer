@@ -8,14 +8,14 @@ namespace analyzer{
     InterpreterDataImpl::InterpreterDataImpl()
       :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(new analyzer::core::ByteCollection())), 
       glyphs(new std::vector<std::shared_ptr<TextGlyph>>()),
-      dataLock(new std::recursive_mutex()), glyphsLock(new std::recursive_mutex())
+      dataLock(new std::recursive_mutex()), glyphsLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown)
     {
     }
 
     InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       : InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(byteCollection)), 
       glyphs(new std::vector<std::shared_ptr<TextGlyph>>()),
-      dataLock(new std::recursive_mutex()), glyphsLock(new std::recursive_mutex())
+      dataLock(new std::recursive_mutex()), glyphsLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown)
     {
     }
 
@@ -74,6 +74,14 @@ namespace analyzer{
       return this->glyphs->at(index);
     }
 
+    void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat)
+    {
+      if (this->detailFormat != detailFormat){
+        this->detailFormat = detailFormat;
+        this->NotifyTextChange();
+      }
+    }
+
     std::shared_ptr<analyzer::core::ByteCollection> * InterpreterDataImpl::getByteCollection()
     {
       std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
@@ -114,6 +122,11 @@ namespace analyzer{
         bytes.push_back(byte);
         this->addGlyph(std::shared_ptr<TextGlyph>(new TextGlyph(bytes)));
       }
+    }
+
+    base::DetailFormat InterpreterDataImpl::getDetailFormat()
+    {
+      return this->detailFormat;
     }
 
     void InterpreterDataImpl::onNewData()

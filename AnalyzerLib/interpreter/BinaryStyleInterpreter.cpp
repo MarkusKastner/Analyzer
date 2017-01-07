@@ -35,7 +35,8 @@ namespace analyzer{
 
     std::wstring BinaryStyleInterpreter::GetFormatedText()
     {
-      return std::wstring();
+      auto text(this->GetPlainText());
+      return std::wstring(text.begin(), text.end());
     }
 
     bool BinaryStyleInterpreter::HasKnownFormat()

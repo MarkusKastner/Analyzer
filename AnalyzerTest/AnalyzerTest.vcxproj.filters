@@ -317,5 +317,8 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.h">
       <Filter>Interpreter\formatter</Filter>
     </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\base\BaseData.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

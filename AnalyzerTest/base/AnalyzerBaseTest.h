@@ -266,7 +266,9 @@ TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
 
 TEST_F(AnalyzerBaseTest, displayOptionsChange)
 {
-  this->analyzerBase1.RegisterObserver(&this->observer1);
+  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
+  this->analyzerBase1.SetNewDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
+  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetText().c_str(), L"Dummy");
 }
 
 #endif

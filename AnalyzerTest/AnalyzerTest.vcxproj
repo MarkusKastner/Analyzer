@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBase.h" />
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBaseObserver.h" />
+    <ClInclude Include="..\AnalyzerLib\base\BaseData.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
     <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />

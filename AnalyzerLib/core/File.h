@@ -8,6 +8,7 @@
 #include "ByteCollection.h"
 #include "AnalyzerLib\interpreter\Interpreter.h"
 #include "AnalyzerLib\core\FormatFinder.h"
+#include "AnalyzerLib\base\BaseData.h"
 
 #if _USRDLL
 #define IMEX __declspec(dllexport)
@@ -16,7 +17,11 @@
 #endif
 
 namespace analyzer{
+  namespace interpreter{
+    class TextChangedObserver;
+  }
   namespace core{
+    
     class IMEX File
     {
     public:
@@ -37,6 +42,11 @@ namespace analyzer{
 
       std::wstring GetText();
 
+      void SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);
+
+      void RegisterObserver(interpreter::TextChangedObserver * observer);
+      void UnregisterObserver(interpreter::TextChangedObserver * observer);
+
     private:
       std::shared_ptr<ByteCollection> * data;
       std::string * fileName;
@@ -44,6 +54,7 @@ namespace analyzer{
       std::shared_ptr<interpreter::Interpreter> * textInterpreter;
       std::shared_ptr<interpreter::Interpreter> * binaryInterpreter;
       FormatFinder formatFinder;
+      base::BaseFormat currentBaseFormat;
 
       void setDirectoryNames(const std::string& input, const std::string& regex);
       void feedInterpreter();
