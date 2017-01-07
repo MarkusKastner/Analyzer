@@ -35,15 +35,18 @@ namespace analyzer{
 
     protected:
       std::shared_ptr<analyzer::core::ByteCollection> * getByteCollection();
-
       base::DetailFormat getDetailFormat();
+
+      virtual void setFormatter() = 0;
+      void setDetailFormatter(Formatter * formatter);
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
       std::recursive_mutex * dataLock;
 
       base::DetailFormat detailFormat;
-      Formatter * formatter;
+      std::unique_ptr<Formatter> * formatter;
+
     };
   }
 }

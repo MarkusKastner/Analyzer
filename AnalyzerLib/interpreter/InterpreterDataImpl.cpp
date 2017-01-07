@@ -7,13 +7,13 @@ namespace analyzer{
   namespace interpreter{
     InterpreterDataImpl::InterpreterDataImpl()
       :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(new analyzer::core::ByteCollection())), 
-      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(nullptr)
+      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(new std::unique_ptr<Formatter>())
     {
     }
 
     InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       : InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(byteCollection)), 
-      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(nullptr)
+      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(new std::unique_ptr<Formatter>())
     {
     }
 
@@ -21,9 +21,7 @@ namespace analyzer{
     {
       delete this->byteCollection;
       delete this->dataLock;
-      if (this->formatter == nullptr){
-        delete this->formatter;
-      }
+      delete this->formatter;
     }
 
     bool InterpreterDataImpl::HasData()
@@ -64,6 +62,7 @@ namespace analyzer{
     {
       if (this->detailFormat != detailFormat){
         this->detailFormat = detailFormat;
+        this->setFormatter();
         this->NotifyTextChange();
       }
       else{
@@ -82,6 +81,11 @@ namespace analyzer{
     base::DetailFormat InterpreterDataImpl::getDetailFormat()
     {
       return this->detailFormat;
+    }
+
+    void InterpreterDataImpl::setDetailFormatter(Formatter * formatter)
+    {
+      this->formatter->reset(formatter);
     }
   }
 }

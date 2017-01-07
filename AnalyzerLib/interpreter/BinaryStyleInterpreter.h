@@ -27,6 +27,9 @@ namespace analyzer{
       virtual std::string GetPlainText();
       virtual std::wstring GetFormatedText();
 
+    protected:
+      virtual void setFormatter();
+
     };
   }
 }

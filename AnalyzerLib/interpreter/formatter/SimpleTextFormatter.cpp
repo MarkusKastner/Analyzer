@@ -30,11 +30,3 @@ namespace analyzer{
     }
   }
 }
-
-/*
-
-
-
-std::string narrow = converter.to_bytes(wide_utf16_source_string);
-std::wstring wide = converter.from_bytes(narrow_utf8_source_string);
-*/
