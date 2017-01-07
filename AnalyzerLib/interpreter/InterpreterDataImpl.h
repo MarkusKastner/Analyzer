@@ -14,6 +14,7 @@
 
 namespace analyzer{
   namespace interpreter{
+    class Formatter;
     class IMEX InterpreterDataImpl : public InterpreterObserverImpl
     {
     private:
@@ -39,10 +40,10 @@ namespace analyzer{
 
     private:
       std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
-
       std::recursive_mutex * dataLock;
 
       base::DetailFormat detailFormat;
+      Formatter * formatter;
     };
   }
 }

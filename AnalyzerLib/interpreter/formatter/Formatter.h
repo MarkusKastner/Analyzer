@@ -1,11 +1,17 @@
 #ifndef FORMATTER_H
 #define FORMATTER_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include "AnalyzerLib\core\ByteCollection.h"
 
 namespace analyzer{
   namespace interpreter{
-    class Formatter
+    class IMEX Formatter
     {
     public:
       virtual ~Formatter();

@@ -1,19 +1,19 @@
 #include "InterpreterDataImpl.h"
 
 #include "error\InterpreterException.h"
+#include "AnalyzerLib\interpreter\formatter\Formatter.h"
 
 namespace analyzer{
   namespace interpreter{
-
     InterpreterDataImpl::InterpreterDataImpl()
       :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(new analyzer::core::ByteCollection())), 
-      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown)
+      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(nullptr)
     {
     }
 
     InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
       : InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(byteCollection)), 
-      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown)
+      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(nullptr)
     {
     }
 
@@ -21,6 +21,9 @@ namespace analyzer{
     {
       delete this->byteCollection;
       delete this->dataLock;
+      if (this->formatter == nullptr){
+        delete this->formatter;
+      }
     }
 
     bool InterpreterDataImpl::HasData()

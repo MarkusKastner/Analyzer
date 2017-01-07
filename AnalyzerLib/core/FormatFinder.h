@@ -1,13 +1,19 @@
 #ifndef FORMATFINDER_H
 #define FORMATFINDER_H
 
+#if _USRDLL
+#define IMEX __declspec(dllexport)
+#else
+#define IMEX __declspec(dllimport)
+#endif
+
 #include <memory>
 
 #include "AnalyzerLib\core\ByteCollection.h"
 
 namespace analyzer{
   namespace core{
-    class FormatFinder
+    class IMEX FormatFinder
     {
     public:
       enum Format
