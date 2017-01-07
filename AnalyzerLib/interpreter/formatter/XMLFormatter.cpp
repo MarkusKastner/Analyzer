@@ -44,6 +44,32 @@ namespace analyzer{
       return formatedText;
     }
 
+    std::vector<XMLFormatter::XMLToken> XMLFormatter::GetXMLToken()
+    {
+      std::vector<XMLFormatter::XMLToken> token;
+
+      for (int i = 0; i < 6; i++){
+        token.push_back(XMLToken(L"<>", XMLToken::Type::Inline));
+      }
+      //std::wstring rawText(this->getDataAsWString());
+
+      //std::wstring current;
+      //for (auto& it = rawText.begin(); it != rawText.end(); ++it){
+      //  auto letter = (*it);
+      //  if (letter == '<'){
+      //    current.clear();
+      //    current.push_back(letter);
+      //  }
+      //  else if (letter == '>'){
+      //  }
+      //  else{
+      //    current.push_back(letter);
+      //  }
+      //}
+      
+      return token;
+    }
+
     std::wstring XMLFormatter::getDataAsWString()
     {
       std::string asString; 
