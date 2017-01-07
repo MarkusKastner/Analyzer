@@ -58,4 +58,16 @@ TEST_F(XMLFormatterTest, getCloseToken)
   auto token = formatter.CreateToken(L"</close>");
   ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Close);
 }
+
+TEST_F(XMLFormatterTest, getInlineToken)
+{
+  auto token = formatter.CreateToken(L"<inline someAttr=\"0\"/>");
+  ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Inline);
+}
+
+TEST_F(XMLFormatterTest, getCommentToken)
+{
+  auto token = formatter.CreateToken(L"<!--<inline someAttr=\"0\"/>-->");
+  ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Comment);
+}
 #endif

@@ -78,7 +78,16 @@ namespace analyzer{
       if (this->isClosingToken(token)){
         return XMLToken(token, XMLToken::Close);
       }
-      return XMLToken(token, XMLToken::Inline);
+      if (this->isInlineToken(token)){
+        return XMLToken(token, XMLToken::Inline);
+      }
+      if (this->isCommentToken(token)){
+        return XMLToken(token, XMLToken::Comment);
+      }
+      if (this->isHeaderToken(token)){
+        return XMLToken(token, XMLToken::Inline);
+      }
+      return XMLToken(token, XMLToken::Value);
     }
 
     std::wstring XMLFormatter::getDataAsWString()
@@ -93,7 +102,7 @@ namespace analyzer{
 
     bool XMLFormatter::isOpenToken(const std::wstring & text)
     {
-      if (text.empty() || text.at(0) != '<'){
+      if (text.empty() || text.size() < 2 || text.at(0) != '<'){
         return false;
       }
       if (text.back() != '>' || text.at(text.size() - 2) == '/'){
@@ -111,6 +120,33 @@ namespace analyzer{
         return false;
       }
       return true;
+    }
+
+    bool XMLFormatter::isInlineToken(const std::wstring & text)
+    {
+      if (text.empty() || text.size() < 2 || text.at(text.size() - 2) != '/' || text.at(0) != '<' || text.back() != '>'){
+        return false;
+      }
+      return true;
+    }
+
+    bool XMLFormatter::isHeaderToken(const std::wstring & text)
+    {
+      if (text.empty() || text.size() < 2 || text.at(1) != '?' || text.at(0) != '<' || text.back() != '>'){
+        return false;
+      }
+      return true;
+    }
+
+    bool XMLFormatter::isCommentToken(const std::wstring & text)
+    {
+      if (text.empty() || text.size() < 7 || text.at(1) != '!' || text.at(0) != '<' || text.back() != '>'){
+        return false;
+      }
+      if (text.substr(0, 4).compare(L"<!--") == 0 && text.substr(text.size() - 4, 3).compare(L"-->")){
+        return true;
+      }
+      return false;
     }
   }
 }

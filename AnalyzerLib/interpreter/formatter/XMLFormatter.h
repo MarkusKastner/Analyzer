@@ -43,7 +43,9 @@ namespace analyzer{
       
       bool isOpenToken(const std::wstring & text);
       bool isClosingToken(const std::wstring & text);
-
+      bool isInlineToken(const std::wstring & text);
+      bool isHeaderToken(const std::wstring & text);
+      bool isCommentToken(const std::wstring & text);
     };
   }
 }
