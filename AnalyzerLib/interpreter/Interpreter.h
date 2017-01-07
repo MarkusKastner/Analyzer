@@ -32,7 +32,7 @@ namespace analyzer{
       virtual void UnregisterObserver(TextChangedObserver * observer) = 0;
       virtual void NotifyTextChange() = 0;
 
-      virtual void SetDetailFormat(const base::DetailFormat & detailFormat) = 0;
+      virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false) = 0;
     };
   }
 }

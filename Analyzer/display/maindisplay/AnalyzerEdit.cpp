@@ -41,13 +41,17 @@ namespace analyzer{
         this->ClearFile();
         if (file != nullptr){
           this->file = file;
-          this->setPlainText(QString::fromWCharArray(this->file->GetTextInterpreter()->GetFormatedText().c_str()));
+          this->file->RegisterObserver(this);
+          this->setPlainText(QString::fromWCharArray(this->file->GetText().c_str()));
         }
       }
 
       void AnalyzerEdit::ClearFile()
       {
         this->setPlainText("");
+        if (this->file != nullptr){
+          this->file->UnregisterObserver(this);
+        }
       }
 
       void AnalyzerEdit::LineNumberAreaPaintEvent(QPaintEvent *event)
@@ -92,7 +96,7 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
-          this->setPlainText(QString::fromWCharArray(this->file->GetTextInterpreter()->GetFormatedText().c_str()));
+          this->setPlainText(QString::fromWCharArray(this->file->GetText().c_str()));
         }
       }
 

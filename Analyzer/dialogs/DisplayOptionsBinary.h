@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QRadioButton>
 
+#include "AnalyzerLib\base\BaseData.h"
+
 namespace analyzer{
   namespace gui{
     class DisplayOptionsBinary : public QWidget
@@ -12,6 +14,8 @@ namespace analyzer{
     public:
       DisplayOptionsBinary(QWidget * parent = 0);
       virtual ~DisplayOptionsBinary();
+
+      base::DetailFormat GetFormat();
 
     signals:
       void DisplayOptionsChanged();

@@ -34,7 +34,7 @@ namespace analyzer{
       virtual size_t NumGlyphs() const;
       virtual std::shared_ptr<TextGlyph> GetGlyphAt(const size_t & index);
 
-      virtual void SetDetailFormat(const base::DetailFormat & detailFormat);
+      virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);
 
     protected:
       std::shared_ptr<analyzer::core::ByteCollection> * getByteCollection();

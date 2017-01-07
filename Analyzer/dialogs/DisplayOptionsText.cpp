@@ -16,6 +16,22 @@ namespace analyzer{
 
     }
 
+    base::DetailFormat DisplayOptionsText::GetFormat()
+    {
+      if (this->plainText->isChecked()){
+        return base::DetailFormat::simpleText;
+      }
+      else if (this->xmlMode->isChecked()){
+        return base::DetailFormat::xml;
+      }
+      else if (this->pdfMode->isChecked()){
+        return base::DetailFormat::pdf;
+      }
+      else{
+        return base::DetailFormat::simpleText;
+      }
+    }
+
     void DisplayOptionsText::setup()
     {
       this->setLayout(new QVBoxLayout());

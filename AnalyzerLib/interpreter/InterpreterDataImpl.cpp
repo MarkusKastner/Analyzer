@@ -74,11 +74,16 @@ namespace analyzer{
       return this->glyphs->at(index);
     }
 
-    void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat)
+    void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify)
     {
       if (this->detailFormat != detailFormat){
         this->detailFormat = detailFormat;
         this->NotifyTextChange();
+      }
+      else{
+        if (forceNotify){
+          this->NotifyTextChange();
+        }
       }
     }
 

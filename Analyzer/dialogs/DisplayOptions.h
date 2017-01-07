@@ -7,6 +7,8 @@
 #include "DisplayOptionsBinary.h"
 #include "DisplayOptionsText.h"
 
+#include "AnalyzerLib\base\BaseData.h"
+
 namespace analyzer{
   namespace gui{
     class DisplayOptions : public QWidget
@@ -15,6 +17,9 @@ namespace analyzer{
     public: 
       DisplayOptions(QWidget * parent = 0);
       virtual ~DisplayOptions();
+
+      base::BaseFormat GetBaseFormat();
+      base::DetailFormat GetDetailedFormat();
 
     signals:
       void DisplayOptionsChanged();

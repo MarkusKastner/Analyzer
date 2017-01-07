@@ -20,6 +20,26 @@ namespace analyzer{
 
     }
 
+    base::BaseFormat DisplayOptions::GetBaseFormat()
+    {
+      if (this->textMode->isChecked()){
+        return base::BaseFormat::text;
+      }
+      else{
+        return base::BaseFormat::binary;
+      }
+    }
+
+    base::DetailFormat DisplayOptions::GetDetailedFormat()
+    {
+      if (this->textMode->isChecked()){
+        return this->textOptions->GetFormat();
+      }
+      else{
+        return this->binaryOptions->GetFormat();
+      }
+    }
+
     void DisplayOptions::setup()
     {
       this->setLayout(new QVBoxLayout());

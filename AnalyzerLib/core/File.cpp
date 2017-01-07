@@ -114,14 +114,16 @@ namespace analyzer{
 
     void File::SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat)
     {
+      bool forceNotify = false;
       if (this->currentBaseFormat != baseFormat){
         this->currentBaseFormat = baseFormat;
+        forceNotify = true;
       }
       if (this->currentBaseFormat == base::BaseFormat::text){
-        this->textInterpreter->get()->SetDetailFormat(detailFormat);
+        this->textInterpreter->get()->SetDetailFormat(detailFormat, forceNotify);
       }
       else if (this->currentBaseFormat == base::BaseFormat::binary){
-        this->binaryInterpreter->get()->SetDetailFormat(detailFormat);
+        this->binaryInterpreter->get()->SetDetailFormat(detailFormat, forceNotify);
       }
     }
 

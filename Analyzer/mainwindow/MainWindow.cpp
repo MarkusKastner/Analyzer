@@ -31,12 +31,13 @@ namespace analyzer{
 
     void MainWindow::NotifyFileChange()
     {
+      this->DisplayOptionsChanged();
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
     }
 
     void MainWindow::DisplayOptionsChanged()
     {
-      
+      this->analyzerBase.SetNewDisplayOptions(this->displayOptions->GetBaseFormat(), this->displayOptions->GetDetailedFormat());
     }
 
     void MainWindow::setup()

@@ -16,6 +16,19 @@ namespace analyzer{
 
     }
 
+    base::DetailFormat DisplayOptionsBinary::GetFormat()
+    {
+      if (this->binary->isChecked()){
+        return base::DetailFormat::bits;
+      }
+      else if(this->hex->isChecked()){
+        return base::DetailFormat::hex;
+      }
+      else{
+        return base::DetailFormat::bits;
+      }
+    }
+
     void DisplayOptionsBinary::setup()
     {
       this->setLayout(new QVBoxLayout());
