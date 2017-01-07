@@ -41,4 +41,16 @@ TEST_F(XMLFormatterTest, xmlToken)
   ASSERT_EQ(token.size(), 6);
 }
 
+TEST_F(XMLFormatterTest, getHeaderAsInlineToken)
+{
+  auto token = formatter.CreateToken(L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
+  ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Inline);
+}
+
+TEST_F(XMLFormatterTest, getOpenToken)
+{
+  auto token = formatter.CreateToken(L"<open>");
+  ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Open);
+}
+
 #endif

@@ -70,6 +70,14 @@ namespace analyzer{
       return token;
     }
 
+    XMLFormatter::XMLToken XMLFormatter::CreateToken(const std::wstring & token)
+    {
+      if (this->isOpenToken(token)){
+        return XMLToken(token, XMLToken::Open);
+      }
+      return XMLToken(token, XMLToken::Inline);
+    }
+
     std::wstring XMLFormatter::getDataAsWString()
     {
       std::string asString; 
@@ -78,6 +86,20 @@ namespace analyzer{
         asString.push_back(static_cast<char>(byte->GetValue()));
       }
       return std::wstring(asString.begin(), asString.end());
+    }
+
+    bool XMLFormatter::isOpenToken(const std::wstring & text)
+    {
+      if (text.empty() || text.at(0) != '<'){
+        return false;
+      }
+      if (text.back() != '>' || text.at(text.size() - 2) == '/'){
+        return false;
+      }
+      if (text.at(1) == '!' || text.at(1) == '/' || text.at(1) == '?'){
+        return false;
+      }
+      return true;
     }
   }
 }

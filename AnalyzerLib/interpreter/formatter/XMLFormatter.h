@@ -36,10 +36,12 @@ namespace analyzer{
 
       virtual std::wstring GetText();
       std::vector<XMLToken> GetXMLToken();
-      
+      XMLToken CreateToken(const std::wstring & token);
+
     private:
       std::wstring getDataAsWString();
       
+      bool isOpenToken(const std::wstring & text);
     };
   }
 }
