@@ -15,7 +15,8 @@ public:
   XMLFormatterTest()
     : formatter(), 
     xmlHeaderB("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"),
-    xmlHeaderW(L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>")
+    xmlHeaderW(L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"),
+    cmpStrg1(L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n</tag1>")
   {
 
   }
@@ -31,6 +32,7 @@ public:
   analyzer::interpreter::XMLFormatter formatter;
   std::string xmlHeaderB;
   std::wstring xmlHeaderW;
+  std::wstring cmpStrg1;
 };
 
 TEST_F(XMLFormatterTest, xmlToken)
@@ -71,4 +73,9 @@ TEST_F(XMLFormatterTest, getCommentToken)
   ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Comment);
 }
 
+TEST_F(XMLFormatterTest, getFromatedText)
+{
+  formatter.SetData(createXMLData());
+  ASSERT_STREQ(formatter.GetText().c_str(), this->cmpStrg1.c_str());
+}
 #endif

@@ -16,52 +16,59 @@ namespace analyzer{
 
     std::wstring XMLFormatter::GetText()
     {
-      std::wstring rawText(this->getDataAsWString());
+      this->createXMLToken();
       std::wstring formatedText;
+      std::wstring tabs;
+      for (auto it = this->token->begin(); it != this->token->end(); ++it){
+        auto checkIt = it;
 
-      std::wstring currentGlyph;
-
-      for (auto& it = rawText.begin(); it != rawText.end(); ++it){
-        auto letter = (*it);
-        if (letter == '<'){
-          currentGlyph.clear();
-          currentGlyph.push_back(letter);
-        }
-        else if (letter == '>'){
-          currentGlyph.push_back(letter);
-          formatedText += currentGlyph;
-          auto testIt = it;
-          testIt++;
-          if (testIt != rawText.end() && (*testIt) == '<'){
-            formatedText.push_back('\n');
+        switch (it->GetTokenType()){
+        case XMLToken::Type::Open:
+          formatedText += it->GetText();
+          checkIt = it;
+          checkIt++;
+          if (checkIt != this->token->end() && checkIt->GetTokenType() != XMLToken::Value){
+            formatedText += '\n';
+            this->increaseTabs(tabs);
+            formatedText += tabs;
           }
+          break;
+        case XMLToken::Type::Close:
+          formatedText += it->GetText();
+          checkIt = it;
+          checkIt++;
+          if (checkIt != this->token->end()){
+            formatedText += '\n';
+            this->decreaseTabs(tabs);
+            formatedText += tabs;
+          }
+          break;
+        case XMLToken::Type::Inline:
+          formatedText += it->GetText();
+          formatedText += '\n';
+          checkIt = it;
+          checkIt++;
+          if (checkIt != this->token->end() && checkIt->GetTokenType() == XMLToken::Close){
+            this->decreaseTabs(tabs);
+          }
+          formatedText += tabs;
+          break;
+        case XMLToken::Type::Value:
+          formatedText += it->GetText();
+          break;
+        case XMLToken::Type::Comment:
+          formatedText += it->GetText();
+          formatedText += '\n';
+          break;
         }
-        else{
-          currentGlyph.push_back(letter);
-        }
-
+        
       }
       return formatedText;
     }
 
     std::vector<XMLFormatter::XMLToken> XMLFormatter::GetXMLToken()
     {
-      this->token->clear();
-      std::wstring rawText(this->getDataAsWString());
-
-      std::wstring current;
-      for (auto& it = rawText.begin(); it != rawText.end(); ++it){
-        auto letter = (*it);
-        if (letter == '<'){
-          this->onOpenChar(current, letter);
-        }
-        else if (letter == '>'){
-          this->onCloseChar(current, letter);
-        }
-        else{
-          current.push_back(letter);
-        }
-      }
+      this->createXMLToken();
       return *this->token;
     }
 
@@ -93,6 +100,29 @@ namespace analyzer{
         asString.push_back(static_cast<char>(byte->GetValue()));
       }
       return std::wstring(asString.begin(), asString.end());
+    }
+
+    void XMLFormatter::createXMLToken()
+    {
+      this->token->clear();
+      std::wstring rawText(this->getDataAsWString());
+
+      std::wstring current;
+      for (auto& it = rawText.begin(); it != rawText.end(); ++it){
+        auto letter = (*it);
+        if (letter == '\r' || letter == '\n'){
+          continue;
+        }
+        if (letter == '<'){
+          this->onOpenChar(current, letter);
+        }
+        else if (letter == '>'){
+          this->onCloseChar(current, letter);
+        }
+        else{
+          current.push_back(letter);
+        }
+      }
     }
 
     void XMLFormatter::onOpenChar(std::wstring & current, const wchar_t & letter)
@@ -160,6 +190,21 @@ namespace analyzer{
         return true;
       }
       return false;
+    }
+
+    void XMLFormatter::increaseTabs(std::wstring & tabs)
+    {
+      tabs += L"  ";
+    }
+
+    void XMLFormatter::decreaseTabs(std::wstring & tabs)
+    {
+      if (!tabs.empty()){
+        tabs.pop_back();
+      }
+      if (!tabs.empty()){
+        tabs.pop_back();
+      }
     }
   }
 }

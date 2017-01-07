@@ -42,6 +42,7 @@ namespace analyzer{
       std::wstring getDataAsWString();
       std::vector<XMLFormatter::XMLToken> * token;
 
+      void createXMLToken();
       void onOpenChar(std::wstring & current, const wchar_t & letter);
       void onCloseChar(std::wstring & current, const wchar_t & letter);
 
@@ -50,6 +51,9 @@ namespace analyzer{
       bool isInlineToken(const std::wstring & text);
       bool isHeaderToken(const std::wstring & text);
       bool isCommentToken(const std::wstring & text);
+
+      void increaseTabs(std::wstring & tabs);
+      void decreaseTabs(std::wstring & tabs);
     };
   }
 }
