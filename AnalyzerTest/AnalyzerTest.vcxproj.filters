@@ -16,9 +16,6 @@
     <Filter Include="Interpreter">
       <UniqueIdentifier>{01c7b2d7-0e80-4cbe-84cd-ae482e767e66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interpreter\strategy">
-      <UniqueIdentifier>{cbf3fc3f-6a96-4c81-8788-71bbe091948d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interpreter\error">
       <UniqueIdentifier>{2a8dfe16-f2eb-4977-83dd-54455b403ffa}</UniqueIdentifier>
     </Filter>
@@ -71,12 +68,6 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp">
       <Filter>Interpreter</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.cpp">
-      <Filter>Interpreter\strategy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.cpp">
-      <Filter>Interpreter\strategy</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterObserverImpl.cpp">
       <Filter>Interpreter</Filter>
@@ -172,21 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h">
       <Filter>Interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\strategy\InterpreterStrategyTest.h">
-      <Filter>Interpreter\strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\strategy\DefaultPlainTextStrategy.h">
-      <Filter>Interpreter\strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStartegy.h">
-      <Filter>Interpreter\strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\strategy\InterpretStrategyImpl.h">
-      <Filter>Interpreter\strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\strategy\DefaultTextTest.h">
-      <Filter>Interpreter\strategy</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\error\InterpreterException.h">
       <Filter>Interpreter\error</Filter>

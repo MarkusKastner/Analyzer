@@ -9,8 +9,6 @@
 #include "core\ByteCollectionTest.h"
 #include "interpreter\BinaryStyleInterpreterTest.h"
 #include "interpreter\TextStyleInterpreterTest.h"
-#include "interpreter\strategy\InterpreterStrategyTest.h"
-#include "interpreter\strategy\DefaultTextTest.h"
 #include "interpreter\TextChangedObserverTest.h"
 #include "base\AnalyzerBaseTest.h"
 #include "core\zip\ZIPContainerTest.h"
