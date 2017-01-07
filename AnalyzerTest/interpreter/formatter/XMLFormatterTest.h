@@ -70,4 +70,5 @@ TEST_F(XMLFormatterTest, getCommentToken)
   auto token = formatter.CreateToken(L"<!--<inline someAttr=\"0\"/>-->");
   ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Comment);
 }
+
 #endif

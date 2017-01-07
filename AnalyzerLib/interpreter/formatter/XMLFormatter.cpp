@@ -4,14 +4,14 @@ namespace analyzer{
   namespace interpreter{
 
     XMLFormatter::XMLFormatter()
-      :Formatter()
+      :Formatter(), token(new std::vector<XMLFormatter::XMLToken>())
     {
 
     }
 
     XMLFormatter::~XMLFormatter()
     {
-
+      delete this->token;
     }
 
     std::wstring XMLFormatter::GetText()
@@ -46,28 +46,23 @@ namespace analyzer{
 
     std::vector<XMLFormatter::XMLToken> XMLFormatter::GetXMLToken()
     {
-      std::vector<XMLFormatter::XMLToken> token;
+      this->token->clear();
+      std::wstring rawText(this->getDataAsWString());
 
-      for (int i = 0; i < 6; i++){
-        token.push_back(XMLToken(L"<>", XMLToken::Type::Inline));
+      std::wstring current;
+      for (auto& it = rawText.begin(); it != rawText.end(); ++it){
+        auto letter = (*it);
+        if (letter == '<'){
+          this->onOpenChar(current, letter);
+        }
+        else if (letter == '>'){
+          this->onCloseChar(current, letter);
+        }
+        else{
+          current.push_back(letter);
+        }
       }
-      //std::wstring rawText(this->getDataAsWString());
-
-      //std::wstring current;
-      //for (auto& it = rawText.begin(); it != rawText.end(); ++it){
-      //  auto letter = (*it);
-      //  if (letter == '<'){
-      //    current.clear();
-      //    current.push_back(letter);
-      //  }
-      //  else if (letter == '>'){
-      //  }
-      //  else{
-      //    current.push_back(letter);
-      //  }
-      //}
-      
-      return token;
+      return *this->token;
     }
 
     XMLFormatter::XMLToken XMLFormatter::CreateToken(const std::wstring & token)
@@ -98,6 +93,24 @@ namespace analyzer{
         asString.push_back(static_cast<char>(byte->GetValue()));
       }
       return std::wstring(asString.begin(), asString.end());
+    }
+
+    void XMLFormatter::onOpenChar(std::wstring & current, const wchar_t & letter)
+    {
+      if (!current.empty()){
+        token->push_back(this->CreateToken(current));
+        current.clear();
+      }
+      current.push_back(letter);
+    }
+
+    void XMLFormatter::onCloseChar(std::wstring & current, const wchar_t & letter)
+    {
+      current.push_back(letter);
+      if (!current.empty()){
+        token->push_back(this->CreateToken(current));
+        current.clear();
+      }
     }
 
     bool XMLFormatter::isOpenToken(const std::wstring & text)

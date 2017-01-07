@@ -40,7 +40,11 @@ namespace analyzer{
 
     private:
       std::wstring getDataAsWString();
-      
+      std::vector<XMLFormatter::XMLToken> * token;
+
+      void onOpenChar(std::wstring & current, const wchar_t & letter);
+      void onCloseChar(std::wstring & current, const wchar_t & letter);
+
       bool isOpenToken(const std::wstring & text);
       bool isClosingToken(const std::wstring & text);
       bool isInlineToken(const std::wstring & text);
