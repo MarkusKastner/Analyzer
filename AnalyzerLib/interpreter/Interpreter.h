@@ -20,6 +20,7 @@ namespace analyzer{
       virtual std::shared_ptr<analyzer::core::ByteCollection> GetData() = 0;
 
       virtual std::wstring GetText() = 0;
+      virtual std::vector<std::wstring> GetFunctionalHighlightExpressions() = 0;
 
       virtual bool HasObservers() = 0;
       virtual size_t NumberOfObservers() = 0;

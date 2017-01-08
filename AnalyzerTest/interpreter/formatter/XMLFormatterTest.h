@@ -88,4 +88,12 @@ TEST_F(XMLFormatterTest, getOpenHighlightTags)
   ASSERT_STREQ(hlTags[2].c_str(), L"<tag2");
 }
 
+TEST_F(XMLFormatterTest, getClosingHighlightTags)
+{
+  formatter.SetData(createXMLData());
+  auto hlTags = formatter.GetClosingHLTags();
+  ASSERT_STREQ(hlTags[0].c_str(), L"</tag2>");
+  ASSERT_STREQ(hlTags[1].c_str(), L"</tag1>");
+}
+
 #endif

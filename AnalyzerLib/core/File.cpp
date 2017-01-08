@@ -102,15 +102,15 @@ namespace analyzer{
       }
     }
 
-    //std::vector<std::wstring> File::GetFunctionalHighlightExpressions()
-    //{
-    //  if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
-    //    return this->textInterpreter->get()->Get();
-    //  }
-    //  else{
-    //    return this->binaryInterpreter->get()->GetText();
-    //  }
-    //}
+    std::vector<std::wstring> File::GetFunctionalHighlightExpressions()
+    {
+      if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
+        return this->textInterpreter->get()->GetFunctionalHighlightExpressions();
+      }
+      else{
+        return this->binaryInterpreter->get()->GetFunctionalHighlightExpressions();
+      }
+    }
 
     void File::SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat)
     {

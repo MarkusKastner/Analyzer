@@ -21,6 +21,7 @@ namespace analyzer{
       void SetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
       virtual std::wstring GetText() = 0;
 
+      virtual void SetHighlightingExpressions();
       void AddFunctionalHighlightingExp(const std::wstring & expression);
       virtual const std::vector<std::wstring> & GetFunctionalHighlightingExp();
 

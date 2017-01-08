@@ -38,7 +38,9 @@ namespace analyzer{
       std::vector<XMLToken> GetXMLToken();
       XMLToken CreateToken(const std::wstring & token);
 
+      virtual void SetHighlightingExpressions();
       std::vector<std::wstring> GetOpenHLTags();
+      std::vector<std::wstring> GetClosingHLTags();
 
     private:
       std::wstring getDataAsWString();

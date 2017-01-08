@@ -33,11 +33,7 @@ namespace analyzer{
         QTextCharFormat alarmFormat;
         QTextCharFormat stringFormat;
 
-        std::vector<std::wstring> getFunctionalExps();
-        std::vector<std::wstring> getWarningExps();
-        std::vector<std::wstring> getAlarmExps();
-        std::wstring getCommentStartExp();
-        std::wstring getCommentEndExp();
+        static QString toRegExp(const std::wstring & expression);
       };
     }
   }

@@ -39,7 +39,7 @@ namespace analyzer{
       const std::vector<std::string> & GetPath();
 
       std::wstring GetText();
-      //std::vector<std::wstring> GetFunctionalHighlightExpressions();
+      std::vector<std::wstring> GetFunctionalHighlightExpressions();
 
       void SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);
 

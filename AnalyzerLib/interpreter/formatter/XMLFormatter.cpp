@@ -63,6 +63,7 @@ namespace analyzer{
         }
         
       }
+      this->SetHighlightingExpressions();
       return formatedText;
     }
 
@@ -92,6 +93,18 @@ namespace analyzer{
       return XMLToken(token, XMLToken::Value);
     }
 
+    void XMLFormatter::SetHighlightingExpressions()
+    {
+      auto openTags(this->GetOpenHLTags());
+      for (auto& opexp : openTags){
+        this->AddFunctionalHighlightingExp(opexp);
+      }
+      auto closingTags(this->GetClosingHLTags());
+      for (auto& clexp : closingTags){
+        this->AddFunctionalHighlightingExp(clexp);
+      }
+    }
+
     std::vector<std::wstring> XMLFormatter::GetOpenHLTags()
     {
       if (this->token->empty() && this->getData()->GetSize() > 0){
@@ -101,6 +114,20 @@ namespace analyzer{
       for (auto& xmlToken : (*this->token)){
         if (xmlToken.GetTokenType() == XMLToken::Inline || xmlToken.GetTokenType() == XMLToken::Open){
           this->addToken(tags, xmlToken.GetText());
+        }
+      }
+      return tags;
+    }
+
+    std::vector<std::wstring> XMLFormatter::GetClosingHLTags()
+    {
+      if (this->token->empty() && this->getData()->GetSize() > 0){
+        this->createXMLToken();
+      }
+      std::vector<std::wstring> tags;
+      for (auto& xmlToken : (*this->token)){
+        if (xmlToken.GetTokenType() == XMLToken::Close){
+          tags.push_back(xmlToken.GetText());
         }
       }
       return tags;
@@ -173,7 +200,7 @@ namespace analyzer{
 
     bool XMLFormatter::isClosingToken(const std::wstring & text)
     {
-      if (text.empty() || text.at(1) != '/' || text.at(0) != '<' || text.back() != '>'){
+      if (text.empty() || text.size() < 2 || text.at(1) != '/' || text.at(0) != '<' || text.back() != '>'){
         return false;
       }
       return true;

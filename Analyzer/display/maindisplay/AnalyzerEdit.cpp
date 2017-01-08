@@ -42,7 +42,10 @@ namespace analyzer{
         if (file != nullptr){
           this->file = file;
           this->file->RegisterObserver(this);
-          this->setPlainText(QString::fromWCharArray(this->file->GetText().c_str()));
+          auto text = this->file->GetText();
+          auto hlExp = this->file->GetFunctionalHighlightExpressions();
+          this->highlighter->SetFunctionalHighlightExpressions(hlExp);
+          this->setPlainText(QString::fromWCharArray(text.c_str()));
         }
       }
 
@@ -96,8 +99,8 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
-          //this->highlighter->SetFunctionalHighlightExpressions();
           this->setPlainText(QString::fromWCharArray(this->file->GetText().c_str()));
+          this->highlighter->SetFunctionalHighlightExpressions(this->file->GetFunctionalHighlightExpressions());
         }
       }
 

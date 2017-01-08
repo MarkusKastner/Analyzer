@@ -20,6 +20,10 @@ namespace analyzer{
       *this->data = data;
     }
 
+    void Formatter::SetHighlightingExpressions()
+    {
+    }
+
     void Formatter::AddFunctionalHighlightingExp(const std::wstring & expression)
     {
       this->functionalHighlightExpressions->push_back(expression);
