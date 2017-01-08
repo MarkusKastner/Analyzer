@@ -32,6 +32,7 @@ namespace analyzer{
       virtual std::shared_ptr<analyzer::core::ByteCollection> GetData();
 
       virtual std::wstring GetText();
+      virtual std::vector<std::wstring> GetFunctionalHighlightExpressions();
 
       virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);
 

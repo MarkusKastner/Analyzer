@@ -15,6 +15,7 @@ namespace analyzer{
 
       public:
         AnalyzerEditHighlighter(QTextDocument *parent = 0);
+        void SetFunctionalHighlightExpressions(const std::vector<std::wstring> & expressions);
 
       protected:
         void highlightBlock(const QString &text) Q_DECL_OVERRIDE;

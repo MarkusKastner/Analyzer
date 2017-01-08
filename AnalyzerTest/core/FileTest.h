@@ -83,18 +83,6 @@ TEST_F(FileTest, AssignOperator)
   ASSERT_EQ(theNewfile.GetData()->GetSize(), this->byteCollection1->GetSize());
 }
 
-TEST_F(FileTest, GetTextInterpreter)
-{
-  analyzer::core::File file(fileName1, charVector);
-  ASSERT_TRUE(dynamic_cast<analyzer::interpreter::TextStyleInterpreter*>(file.GetTextInterpreter().get()));
-}
-
-TEST_F(FileTest, GetBinaryInterpreter)
-{
-  analyzer::core::File file(fileName1, charVector);
-  ASSERT_TRUE(dynamic_cast<analyzer::interpreter::BinaryStyleInterpreter*>(file.GetBinaryInterpreter().get()));
-}
-
 TEST_F(FileTest, GetText)
 {
   this->file1.SetFileData(fileName1, charVector);

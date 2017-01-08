@@ -41,4 +41,11 @@ TEST_F(FormatterTest, init)
   ASSERT_STREQ(formatter.GetText().c_str(), L"abcde");
 }
 
+TEST_F(FormatterTest, functionalHighlightingExp)
+{
+  SomeFormatter formatter;
+  formatter.AddFunctionalHighlightingExp(L"<test");
+  ASSERT_STREQ(formatter.GetFunctionalHighlightingExp()[0].c_str(), L"<test");
+}
+
 #endif

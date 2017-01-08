@@ -96,6 +96,7 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
+          //this->highlighter->SetFunctionalHighlightExpressions();
           this->setPlainText(QString::fromWCharArray(this->file->GetText().c_str()));
         }
       }

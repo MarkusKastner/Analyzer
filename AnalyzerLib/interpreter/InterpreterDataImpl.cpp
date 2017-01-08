@@ -63,6 +63,11 @@ namespace analyzer{
       return this->formatter->get()->GetText();
     }
 
+    std::vector<std::wstring> InterpreterDataImpl::GetFunctionalHighlightExpressions()
+    {
+      return this->formatter->get()->GetFunctionalHighlightingExp();
+    }
+
     void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify)
     {
       if (this->detailFormat != detailFormat){

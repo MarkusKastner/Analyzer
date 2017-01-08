@@ -37,10 +37,9 @@ namespace analyzer{
       const std::string & GetFileName();
       const std::shared_ptr<ByteCollection> & GetData();
       const std::vector<std::string> & GetPath();
-      const std::shared_ptr<interpreter::Interpreter> & GetTextInterpreter();
-      const std::shared_ptr<interpreter::Interpreter> & GetBinaryInterpreter();
 
       std::wstring GetText();
+      //std::vector<std::wstring> GetFunctionalHighlightExpressions();
 
       void SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);
 

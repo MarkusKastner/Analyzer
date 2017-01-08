@@ -18,36 +18,41 @@ namespace analyzer{
         stringFormat.setForeground(Qt::GlobalColor::gray);
         stringFormat.setFontWeight(QFont::Weight::Normal);
 
-        std::vector<std::wstring> functionals(this->getFunctionalExps());
-        std::vector<std::wstring> warnings(this->getWarningExps());
-        std::vector<std::wstring> alarms(this->getAlarmExps());
 
-        for (auto& functional : functionals){
-          HighlightingRule rule;
-          rule.pattern = QRegExp(QString::fromWCharArray(functional.c_str()));
-          rule.format = functionalFormat;
-          this->rules.append(rule);
-        }
-
-        for (auto& warning : warnings){
-          HighlightingRule rule;
-          rule.pattern = QRegExp(QString::fromWCharArray(warning.c_str()));
-          rule.format = warningFormat;
-          this->rules.append(rule);
-        }
-
-        for (auto& alarm : alarms){
-          HighlightingRule rule;
-          rule.pattern = QRegExp(QString::fromWCharArray(alarm.c_str()));
-          rule.format = alarmFormat;
-          this->rules.append(rule);
-        }
+        //for (auto& functional : functionals){
+        //  HighlightingRule rule;
+        //  rule.pattern = QRegExp(QString::fromWCharArray(functional.c_str()));
+        //  rule.format = functionalFormat;
+        //  this->rules.append(rule);
+        //}
+        //for (auto& warning : warnings){
+        //  HighlightingRule rule;
+        //  rule.pattern = QRegExp(QString::fromWCharArray(warning.c_str()));
+        //  rule.format = warningFormat;
+        //  this->rules.append(rule);
+        //}
+        //for (auto& alarm : alarms){
+        //  HighlightingRule rule;
+        //  rule.pattern = QRegExp(QString::fromWCharArray(alarm.c_str()));
+        //  rule.format = alarmFormat;
+        //  this->rules.append(rule);
+        //}
 
         HighlightingRule stringRule;
         stringRule.pattern.setPatternSyntax(QRegExp::Wildcard);
         stringRule.pattern = QRegExp("\"([^\"]*)\"");
         stringRule.format = stringFormat;
         rules.append(stringRule);
+      }
+
+      void AnalyzerEditHighlighter::SetFunctionalHighlightExpressions(const std::vector<std::wstring> & expressions)
+      {
+        for (auto& expression : expressions){
+          HighlightingRule rule;
+          rule.pattern = QRegExp(QString::fromWCharArray(expression.c_str()));
+          rule.format = functionalFormat;
+          this->rules.append(rule);
+        }
       }
 
       void AnalyzerEditHighlighter::highlightBlock(const QString &text)

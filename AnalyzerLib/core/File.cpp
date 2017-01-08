@@ -92,16 +92,6 @@ namespace analyzer{
       return *this->path;
     }
 
-    const std::shared_ptr<interpreter::Interpreter> & File::GetTextInterpreter()
-    {
-      return *this->textInterpreter;
-    }
-
-    const std::shared_ptr<interpreter::Interpreter> & File::GetBinaryInterpreter()
-    {
-      return *this->binaryInterpreter;
-    }
-
     std::wstring File::GetText()
     {
       if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
@@ -111,6 +101,16 @@ namespace analyzer{
         return this->binaryInterpreter->get()->GetText();
       }
     }
+
+    //std::vector<std::wstring> File::GetFunctionalHighlightExpressions()
+    //{
+    //  if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
+    //    return this->textInterpreter->get()->Get();
+    //  }
+    //  else{
+    //    return this->binaryInterpreter->get()->GetText();
+    //  }
+    //}
 
     void File::SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat)
     {
