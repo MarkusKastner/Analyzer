@@ -38,6 +38,8 @@ namespace analyzer{
       std::vector<XMLToken> GetXMLToken();
       XMLToken CreateToken(const std::wstring & token);
 
+      std::vector<std::wstring> GetOpenHLTags();
+
     private:
       std::wstring getDataAsWString();
       std::vector<XMLFormatter::XMLToken> * token;
@@ -54,6 +56,8 @@ namespace analyzer{
 
       void increaseTabs(std::wstring & tabs);
       void decreaseTabs(std::wstring & tabs);
+
+      void addToken(std::vector<std::wstring> & tags, const std::wstring & tokenText);
     };
   }
 }

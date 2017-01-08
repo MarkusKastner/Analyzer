@@ -73,9 +73,19 @@ TEST_F(XMLFormatterTest, getCommentToken)
   ASSERT_EQ(token.GetTokenType(), analyzer::interpreter::XMLFormatter::XMLToken::Comment);
 }
 
-TEST_F(XMLFormatterTest, getFromatedText)
+TEST_F(XMLFormatterTest, getFormatedText)
 {
   formatter.SetData(createXMLData());
   ASSERT_STREQ(formatter.GetText().c_str(), this->cmpStrg1.c_str());
 }
+
+TEST_F(XMLFormatterTest, getOpenHighlightTags)
+{
+  formatter.SetData(createXMLData());
+  auto hlTags = formatter.GetOpenHLTags();
+  ASSERT_STREQ(hlTags[0].c_str(), L"<?xml");
+  ASSERT_STREQ(hlTags[1].c_str(), L"<tag1");
+  ASSERT_STREQ(hlTags[2].c_str(), L"<tag2");
+}
+
 #endif

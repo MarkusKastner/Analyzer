@@ -92,6 +92,20 @@ namespace analyzer{
       return XMLToken(token, XMLToken::Value);
     }
 
+    std::vector<std::wstring> XMLFormatter::GetOpenHLTags()
+    {
+      if (this->token->empty() && this->getData()->GetSize() > 0){
+        this->createXMLToken();
+      }
+      std::vector<std::wstring> tags;
+      for (auto& xmlToken : (*this->token)){
+        if (xmlToken.GetTokenType() == XMLToken::Inline || xmlToken.GetTokenType() == XMLToken::Open){
+          this->addToken(tags, xmlToken.GetText());
+        }
+      }
+      return tags;
+    }
+
     std::wstring XMLFormatter::getDataAsWString()
     {
       std::string asString; 
@@ -204,6 +218,25 @@ namespace analyzer{
       }
       if (!tabs.empty()){
         tabs.pop_back();
+      }
+    }
+
+    void XMLFormatter::addToken(std::vector<std::wstring> & tags, const std::wstring & tokenText)
+    {
+      std::wstring tag(tokenText.substr(0, tokenText.find_first_of(' ')));
+      if (tag.back() == '>'){
+        tag.pop_back();
+      }
+      if (tags.empty()){
+        tags.push_back(tag);
+      }
+      else{
+        for (auto existing : tags){
+          if (existing.compare(tag) == 0){
+            return;
+          }
+        }
+        tags.push_back(tag);
       }
     }
   }
