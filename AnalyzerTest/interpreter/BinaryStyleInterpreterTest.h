@@ -107,7 +107,7 @@ TEST_F(BinaryStyleInterpreterTest, PlainText)
 
   analyzer::interpreter::BinaryStyleInterpreter interpreter(byteCollection);
 
-  ASSERT_STREQ(interpreter.GetText()->c_str(), std::wstring(L"00000000 00000000").c_str());
+  ASSERT_STREQ(interpreter.GetText()->c_str(), std::wstring(L"00000000  00000000                        [000][000]").c_str());
 }
 
 TEST_F(BinaryStyleInterpreterTest, PlainTextOnEmptyByteCollection)

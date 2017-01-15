@@ -28,6 +28,8 @@ namespace analyzer{
 
       virtual std::shared_ptr<std::wstring> GetText();
 
+    private:
+      std::string make3Digit(const unsigned char & byte);
     };
   }
 }
