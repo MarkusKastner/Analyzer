@@ -5,138 +5,56 @@
 */
 
 #include "XMLFormatter.h"
+#include <cctype>
 
 namespace analyzer{
   namespace interpreter{
 
     XMLFormatter::XMLFormatter()
-      :Formatter(), token(new std::vector<XMLFormatter::XMLToken>())
+      :Formatter(), tabs(new std::wstring())
     {
 
     }
 
     XMLFormatter::~XMLFormatter()
     {
-      delete this->token;
+      delete this->tabs;
     }
 
     std::shared_ptr<std::wstring> XMLFormatter::GetText()
     {
-      this->createXMLToken();
-      std::shared_ptr<std::wstring> formatedText(new std::wstring);
-      std::wstring tabs;
-      for (auto it = this->token->begin(); it != this->token->end(); ++it){
-        auto checkIt = it;
+      std::wstring text = this->getDataAsWString();
 
-        switch (it->GetTokenType()){
-        case XMLToken::Type::Open:
-          *formatedText += it->GetText();
-          checkIt = it;
-          checkIt++;
-          if (checkIt != this->token->end() && checkIt->GetTokenType() != XMLToken::Value){
-            *formatedText += '\n';
-            this->increaseTabs(tabs);
-            *formatedText += tabs;
-          }
-          break;
-        case XMLToken::Type::Close:
-          *formatedText += it->GetText();
-          checkIt = it;
-          checkIt++;
-          if (checkIt != this->token->end()){
-            *formatedText += '\n';
-            this->decreaseTabs(tabs);
-            *formatedText += tabs;
-          }
-          break;
-        case XMLToken::Type::Inline:
-          *formatedText += it->GetText();
-          *formatedText += '\n';
-          checkIt = it;
-          checkIt++;
-          if (checkIt != this->token->end() && checkIt->GetTokenType() == XMLToken::Close){
-            this->decreaseTabs(tabs);
-          }
-          *formatedText += tabs;
-          break;
-        case XMLToken::Type::Value:
-          *formatedText += it->GetText();
-          break;
-        case XMLToken::Type::Comment:
-          *formatedText += it->GetText();
-          *formatedText += '\n';
-          break;
-        }
-        
+      if (text.size() < 20){
+        return std::shared_ptr<std::wstring>(new std::wstring(text));
       }
-      this->SetHighlightingExpressions();
+
+      std::shared_ptr<std::wstring> formatedText(new std::wstring(text.substr(0, 20)));
+
+      bool firstTab = true;
+      for (size_t i = 20; i < text.size(); i++){
+        if (text.at(i) == '<' && text.at(i - 1) == '>'){
+          formatedText->push_back('\n');
+          size_t tagEnd = text.find_first_of('>', i);
+          wchar_t check1 = text.at(i + 1);
+          wchar_t check2 = text.at(tagEnd - 1);
+          if (text.at(i + 1) == '/' || text.at(tagEnd - 1) == '/'){
+            this->decreaseTabs();
+            *formatedText += *this->tabs;
+          }
+          else{
+            if (firstTab){
+              firstTab = false;
+            }
+            else{
+              this->increaseTabs();
+            }
+            *formatedText += *this->tabs;
+          }
+        }
+        formatedText->push_back(text.at(i));
+      }
       return formatedText;
-    }
-
-    std::vector<XMLFormatter::XMLToken> XMLFormatter::GetXMLToken()
-    {
-      this->createXMLToken();
-      return *this->token;
-    }
-
-    XMLFormatter::XMLToken XMLFormatter::CreateToken(const std::wstring & token)
-    {
-      if (this->isOpenToken(token)){
-        return XMLToken(token, XMLToken::Open);
-      }
-      if (this->isClosingToken(token)){
-        return XMLToken(token, XMLToken::Close);
-      }
-      if (this->isInlineToken(token)){
-        return XMLToken(token, XMLToken::Inline);
-      }
-      if (this->isCommentToken(token)){
-        return XMLToken(token, XMLToken::Comment);
-      }
-      if (this->isHeaderToken(token)){
-        return XMLToken(token, XMLToken::Inline);
-      }
-      return XMLToken(token, XMLToken::Value);
-    }
-
-    void XMLFormatter::SetHighlightingExpressions()
-    {
-      auto openTags(this->GetOpenHLTags());
-      for (auto& opexp : openTags){
-        this->AddFunctionalHighlightingExp(opexp);
-      }
-      auto closingTags(this->GetClosingHLTags());
-      for (auto& clexp : closingTags){
-        this->AddFunctionalHighlightingExp(clexp);
-      }
-    }
-
-    std::vector<std::wstring> XMLFormatter::GetOpenHLTags()
-    {
-      if (this->token->empty() && this->getData()->GetSize() > 0){
-        this->createXMLToken();
-      }
-      std::vector<std::wstring> tags;
-      for (auto& xmlToken : (*this->token)){
-        if (xmlToken.GetTokenType() == XMLToken::Inline || xmlToken.GetTokenType() == XMLToken::Open){
-          this->addToken(tags, xmlToken.GetText());
-        }
-      }
-      return tags;
-    }
-
-    std::vector<std::wstring> XMLFormatter::GetClosingHLTags()
-    {
-      if (this->token->empty() && this->getData()->GetSize() > 0){
-        this->createXMLToken();
-      }
-      std::vector<std::wstring> tags;
-      for (auto& xmlToken : (*this->token)){
-        if (xmlToken.GetTokenType() == XMLToken::Close){
-          tags.push_back(xmlToken.GetText());
-        }
-      }
-      return tags;
     }
 
     std::wstring XMLFormatter::getDataAsWString()
@@ -144,132 +62,27 @@ namespace analyzer{
       std::string asString; 
       auto& data = (*this->getData());
       for (auto& byte : data){
-        asString.push_back(static_cast<char>(byte->GetValue()));
+        char val = static_cast<char>(byte->GetValue());
+        if (std::iscntrl(val)){
+          continue;
+        }
+        asString.push_back(val);
       }
       return std::wstring(asString.begin(), asString.end());
     }
 
-    void XMLFormatter::createXMLToken()
+    void XMLFormatter::increaseTabs()
     {
-      this->token->clear();
-      std::wstring rawText(this->getDataAsWString());
-
-      std::wstring current;
-      for (auto& it = rawText.begin(); it != rawText.end(); ++it){
-        auto letter = (*it);
-        if (letter == '\r' || letter == '\n'){
-          continue;
-        }
-        if (letter == '<'){
-          this->onOpenChar(current, letter);
-        }
-        else if (letter == '>'){
-          this->onCloseChar(current, letter);
-        }
-        else{
-          current.push_back(letter);
-        }
-      }
+      *this->tabs += L"  ";
     }
 
-    void XMLFormatter::onOpenChar(std::wstring & current, const wchar_t & letter)
+    void XMLFormatter::decreaseTabs()
     {
-      if (!current.empty()){
-        token->push_back(this->CreateToken(current));
-        current.clear();
+      if (!this->tabs->empty()){
+        this->tabs->pop_back();
       }
-      current.push_back(letter);
-    }
-
-    void XMLFormatter::onCloseChar(std::wstring & current, const wchar_t & letter)
-    {
-      current.push_back(letter);
-      if (!current.empty()){
-        token->push_back(this->CreateToken(current));
-        current.clear();
-      }
-    }
-
-    bool XMLFormatter::isOpenToken(const std::wstring & text)
-    {
-      if (text.empty() || text.size() < 2 || text.at(0) != '<'){
-        return false;
-      }
-      if (text.back() != '>' || text.at(text.size() - 2) == '/'){
-        return false;
-      }
-      if (text.at(1) == '!' || text.at(1) == '/' || text.at(1) == '?'){
-        return false;
-      }
-      return true;
-    }
-
-    bool XMLFormatter::isClosingToken(const std::wstring & text)
-    {
-      if (text.empty() || text.size() < 2 || text.at(1) != '/' || text.at(0) != '<' || text.back() != '>'){
-        return false;
-      }
-      return true;
-    }
-
-    bool XMLFormatter::isInlineToken(const std::wstring & text)
-    {
-      if (text.empty() || text.size() < 2 || text.at(text.size() - 2) != '/' || text.at(0) != '<' || text.back() != '>'){
-        return false;
-      }
-      return true;
-    }
-
-    bool XMLFormatter::isHeaderToken(const std::wstring & text)
-    {
-      if (text.empty() || text.size() < 2 || text.at(1) != '?' || text.at(0) != '<' || text.back() != '>'){
-        return false;
-      }
-      return true;
-    }
-
-    bool XMLFormatter::isCommentToken(const std::wstring & text)
-    {
-      if (text.empty() || text.size() < 7 || text.at(1) != '!' || text.at(0) != '<' || text.back() != '>'){
-        return false;
-      }
-      if (text.substr(0, 4).compare(L"<!--") == 0 && text.substr(text.size() - 4, 3).compare(L"-->")){
-        return true;
-      }
-      return false;
-    }
-
-    void XMLFormatter::increaseTabs(std::wstring & tabs)
-    {
-      tabs += L"  ";
-    }
-
-    void XMLFormatter::decreaseTabs(std::wstring & tabs)
-    {
-      if (!tabs.empty()){
-        tabs.pop_back();
-      }
-      if (!tabs.empty()){
-        tabs.pop_back();
-      }
-    }
-
-    void XMLFormatter::addToken(std::vector<std::wstring> & tags, const std::wstring & tokenText)
-    {
-      std::wstring tag(tokenText.substr(0, tokenText.find_first_of(' ')));
-      if (tag.back() == '>'){
-        tag.pop_back();
-      }
-      if (tags.empty()){
-        tags.push_back(tag);
-      }
-      else{
-        for (auto existing : tags){
-          if (existing.compare(tag) == 0){
-            return;
-          }
-        }
-        tags.push_back(tag);
+      if (!this->tabs->empty()){
+        this->tabs->pop_back();
       }
     }
   }
