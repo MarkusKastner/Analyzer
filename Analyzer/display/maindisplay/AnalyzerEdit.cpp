@@ -44,15 +44,14 @@ namespace analyzer{
 
       void AnalyzerEdit::SetFile(core::File * file)
       {
-        this->ClearFile();
         if (file != nullptr){
+          if (this->file != nullptr && this->file->GetFileName().compare(file->GetFileName()) == 0){
+            return;
+          }
+          this->ClearFile();
           this->file = file;
           this->file->RegisterObserver(this);
-          auto text = this->file->GetText();
-          auto hlExp = this->file->GetFunctionalHighlightExpressions();
-          this->highlighter->SetFunctionalHighlightExpressions(hlExp);
-
-          this->setPlainText(QString::fromWCharArray(text->c_str()));
+          this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
         }
       }
 
@@ -103,11 +102,19 @@ namespace analyzer{
         return space;
       }
 
+      void AnalyzerEdit::SetNewDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat)
+      {
+        if (baseFormat == analyzer::base::BaseFormat::text){
+          if (detailFormat == analyzer::base::DetailFormat::xml){
+            this->highlighter->SetMode(AnalyzerEditHighlighter::Mode::xml);
+          }
+        }
+      }
+
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
           this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
-          this->highlighter->SetFunctionalHighlightExpressions(this->file->GetFunctionalHighlightExpressions());
         }
       }
 

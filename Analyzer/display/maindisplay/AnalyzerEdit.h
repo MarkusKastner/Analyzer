@@ -12,6 +12,7 @@
 
 #include "AnalyzerLib\interpreter\TextChangedObserver.h"
 #include "AnalyzerLib\core\File.h"
+#include "AnalyzerLib\base\BaseData.h"
 
 class QPaintEvent;
 class QResizeEvent;
@@ -50,6 +51,8 @@ namespace analyzer{
 
         void LineNumberAreaPaintEvent(QPaintEvent *event);
         int GetLineNumbersWidth();
+
+        void SetNewDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);
 
       protected:
         void customEvent(QEvent * evt);

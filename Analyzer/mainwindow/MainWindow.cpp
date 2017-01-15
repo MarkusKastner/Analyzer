@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #include "MainWindow.h"
 
 #include <QLayout>
@@ -38,6 +44,7 @@ namespace analyzer{
     void MainWindow::DisplayOptionsChanged()
     {
       this->analyzerBase.SetNewDisplayOptions(this->displayOptions->GetBaseFormat(), this->displayOptions->GetDetailedFormat());
+      this->analyzerEdit->SetNewDisplayOptions(this->displayOptions->GetBaseFormat(), this->displayOptions->GetDetailedFormat());
     }
 
     void MainWindow::setup()
