@@ -29,27 +29,35 @@ namespace analyzer{
         return std::shared_ptr<std::wstring>(new std::wstring(text));
       }
 
-      std::shared_ptr<std::wstring> formatedText(new std::wstring(text.substr(0, 20)));
+      size_t endHeader = text.find_first_of('>');
 
-      bool firstTab = true;
-      for (size_t i = 20; i < text.size(); i++){
+      std::shared_ptr<std::wstring> formatedText(new std::wstring(text.substr(0, endHeader + 1)));
+
+      bool firstTag = true;
+      for (size_t i = endHeader + 1; i < text.size(); i++){
+
         if (text.at(i) == '<' && text.at(i - 1) == '>'){
+
           formatedText->push_back('\n');
+
           size_t tagEnd = text.find_first_of('>', i);
+
           wchar_t check1 = text.at(i + 1);
           wchar_t check2 = text.at(tagEnd - 1);
-          if (text.at(i + 1) == '/' || text.at(tagEnd - 1) == '/'){
+
+          if (text.at(tagEnd - 1) == '/'){
+            *formatedText += *this->tabs;
+          }
+          else if (text.at(i + 1) == '/'){
             this->decreaseTabs();
             *formatedText += *this->tabs;
           }
           else{
-            if (firstTab){
-              firstTab = false;
-            }
-            else{
+            *formatedText += *this->tabs;
+            size_t tagEnd = text.find_first_of('>', i);
+            if (tagEnd + 1 < text.size() && text.at(tagEnd + 1) == '<'){
               this->increaseTabs();
             }
-            *formatedText += *this->tabs;
           }
         }
         formatedText->push_back(text.at(i));
@@ -63,7 +71,7 @@ namespace analyzer{
       auto& data = (*this->getData());
       for (auto& byte : data){
         char val = static_cast<char>(byte->GetValue());
-        if (std::iscntrl(val)){
+        if (std::iscntrl(byte->GetValue())){
           continue;
         }
         asString.push_back(val);

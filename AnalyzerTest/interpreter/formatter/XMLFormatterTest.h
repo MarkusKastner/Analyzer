@@ -22,15 +22,26 @@ public:
     : formatter(), 
     xmlHeaderB("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"),
     xmlHeaderW(L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"),
-    cmpStrg1(L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n</tag1>")
+    cmpStrg1(),
+    cmpStrg2()
   {
 
   }
 
-  std::shared_ptr<analyzer::core::ByteCollection> createXMLData()
+  std::shared_ptr<analyzer::core::ByteCollection> createXMLData1()
   {
+    cmpStrg1 = L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>";
     std::string fileData(this->xmlHeaderB);
-    fileData += "<tag1><tag2>some text</tag2></tag1>";
+    fileData += "<tag1><tag2>some text</tag2><tag3/></tag1>";
+    std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
+    return data;
+  }
+
+  std::shared_ptr<analyzer::core::ByteCollection> createXMLData2()
+  {
+    cmpStrg2 = L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag4/>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>";
+    std::string fileData(this->xmlHeaderB);
+    fileData += "<tag1><tag4/><tag2>some text</tag2><tag3/></tag1>";
     std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
     return data;
   }
@@ -39,12 +50,19 @@ public:
   std::string xmlHeaderB;
   std::wstring xmlHeaderW;
   std::wstring cmpStrg1;
+  std::wstring cmpStrg2;
 };
 
-TEST_F(XMLFormatterTest, getFormatedText)
+TEST_F(XMLFormatterTest, getFormatedText1)
 {
-  formatter.SetData(createXMLData());
+  formatter.SetData(createXMLData1());
   ASSERT_STREQ(formatter.GetText()->c_str(), this->cmpStrg1.c_str());
+}
+
+TEST_F(XMLFormatterTest, getFormatedText2)
+{
+  formatter.SetData(createXMLData2());
+  ASSERT_STREQ(formatter.GetText()->c_str(), this->cmpStrg2.c_str());
 }
 
 #endif
