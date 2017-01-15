@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef XMLFORMATTERTEST_H
 #define XMLFORMATTERTEST_H
 
@@ -76,7 +82,7 @@ TEST_F(XMLFormatterTest, getCommentToken)
 TEST_F(XMLFormatterTest, getFormatedText)
 {
   formatter.SetData(createXMLData());
-  ASSERT_STREQ(formatter.GetText().c_str(), this->cmpStrg1.c_str());
+  ASSERT_STREQ(formatter.GetText()->c_str(), this->cmpStrg1.c_str());
 }
 
 TEST_F(XMLFormatterTest, getOpenHighlightTags)

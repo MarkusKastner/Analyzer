@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #include "XMLFormatter.h"
 
 namespace analyzer{
@@ -14,51 +20,51 @@ namespace analyzer{
       delete this->token;
     }
 
-    std::wstring XMLFormatter::GetText()
+    std::shared_ptr<std::wstring> XMLFormatter::GetText()
     {
       this->createXMLToken();
-      std::wstring formatedText;
+      std::shared_ptr<std::wstring> formatedText(new std::wstring);
       std::wstring tabs;
       for (auto it = this->token->begin(); it != this->token->end(); ++it){
         auto checkIt = it;
 
         switch (it->GetTokenType()){
         case XMLToken::Type::Open:
-          formatedText += it->GetText();
+          *formatedText += it->GetText();
           checkIt = it;
           checkIt++;
           if (checkIt != this->token->end() && checkIt->GetTokenType() != XMLToken::Value){
-            formatedText += '\n';
+            *formatedText += '\n';
             this->increaseTabs(tabs);
-            formatedText += tabs;
+            *formatedText += tabs;
           }
           break;
         case XMLToken::Type::Close:
-          formatedText += it->GetText();
+          *formatedText += it->GetText();
           checkIt = it;
           checkIt++;
           if (checkIt != this->token->end()){
-            formatedText += '\n';
+            *formatedText += '\n';
             this->decreaseTabs(tabs);
-            formatedText += tabs;
+            *formatedText += tabs;
           }
           break;
         case XMLToken::Type::Inline:
-          formatedText += it->GetText();
-          formatedText += '\n';
+          *formatedText += it->GetText();
+          *formatedText += '\n';
           checkIt = it;
           checkIt++;
           if (checkIt != this->token->end() && checkIt->GetTokenType() == XMLToken::Close){
             this->decreaseTabs(tabs);
           }
-          formatedText += tabs;
+          *formatedText += tabs;
           break;
         case XMLToken::Type::Value:
-          formatedText += it->GetText();
+          *formatedText += it->GetText();
           break;
         case XMLToken::Type::Comment:
-          formatedText += it->GetText();
-          formatedText += '\n';
+          *formatedText += it->GetText();
+          *formatedText += '\n';
           break;
         }
         

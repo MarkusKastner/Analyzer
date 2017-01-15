@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef SIMPLETEXTFORMATTER_H
 #define SIMPLETEXTFORMATTER_H
 
@@ -11,7 +17,7 @@ namespace analyzer{
       SimpleTextFormatter();
       virtual ~SimpleTextFormatter();
 
-      virtual std::wstring GetText();
+      virtual std::shared_ptr<std::wstring> GetText();
 
     };
   }

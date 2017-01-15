@@ -1,3 +1,5 @@
+/** Copyright 2017 by Markus Kastner - see license details*/
+
 #ifndef RESULTTEST_H
 #define RESULTTEST_H
 

@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef FILETEST_H
 #define FILETEST_H
 
@@ -87,16 +93,16 @@ TEST_F(FileTest, GetText)
 {
   this->file1.SetFileData(fileName1, charVector);
   this->file1.SetDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
-  ASSERT_STREQ(this->file1.GetText().c_str(), L"aaaaa");
+  ASSERT_STREQ(this->file1.GetText().get()->c_str(), L"aaaaa");
 }
 
 TEST_F(FileTest, ChangeDisplayOptions)
 {
   this->file1.SetFileData(fileName1, charVector);
   this->file1.SetDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
-  ASSERT_STREQ(this->file1.GetText().c_str(), L"aaaaa");
+  ASSERT_STREQ(this->file1.GetText()->c_str(), L"aaaaa");
   this->file1.SetDisplayOptions(analyzer::base::BaseFormat::binary, analyzer::base::DetailFormat::bits);
-  ASSERT_STREQ(this->file1.GetText().c_str(), L"01100001 01100001 01100001 01100001\n01100001");
+  ASSERT_STREQ(this->file1.GetText()->c_str(), L"01100001 01100001 01100001 01100001\n01100001");
 }
 
 #endif

@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #include "File.h"
 
 #include <regex>
@@ -92,7 +98,7 @@ namespace analyzer{
       return *this->path;
     }
 
-    std::wstring File::GetText()
+    std::shared_ptr<std::wstring> File::GetText()
     {
       if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
         return this->textInterpreter->get()->GetText();

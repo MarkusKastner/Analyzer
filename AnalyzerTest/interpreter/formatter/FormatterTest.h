@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef FORMATTERTEST_H
 #define FORMATTERTEST_H
 
@@ -20,13 +26,13 @@ public:
     {}
     virtual ~SomeFormatter(){}
 
-    virtual std::wstring GetText(){ 
+    virtual std::shared_ptr<std::wstring> GetText(){
       std::string text;
       auto data = this->getData();
       for (auto& byte : (*data)){
         text.push_back(static_cast<char>(byte->GetValue()));
       }
-      return std::wstring(text.begin(), text.end()); 
+      return std::shared_ptr<std::wstring>(new std::wstring(text.begin(), text.end()));
     }
   };
 
@@ -38,7 +44,7 @@ TEST_F(FormatterTest, init)
   std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(chars, 5));
   SomeFormatter formatter;
   formatter.SetData(data);
-  ASSERT_STREQ(formatter.GetText().c_str(), L"abcde");
+  ASSERT_STREQ(formatter.GetText().get()->c_str(), L"abcde");
 }
 
 TEST_F(FormatterTest, functionalHighlightingExp)

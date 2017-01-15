@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #include "SimpleTextFormatter.h"
 
 #include <locale>
@@ -17,7 +23,7 @@ namespace analyzer{
     {
     }
 
-    std::wstring SimpleTextFormatter::GetText()
+    std::shared_ptr<std::wstring> SimpleTextFormatter::GetText()
     {
       std::string asString;
       auto& data = (*this->getData());
@@ -25,8 +31,7 @@ namespace analyzer{
         asString.push_back(static_cast<char>(byte->GetValue()));
       }
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-      std::wstring text(converter.from_bytes(asString));
-      return text;
+      return std::shared_ptr<std::wstring>(new std::wstring(converter.from_bytes(asString)));
     }
   }
 }

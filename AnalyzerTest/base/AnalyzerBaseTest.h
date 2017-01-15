@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef ANALYZERBASETEST_H
 #define ANALYZERBASETEST_H
 
@@ -268,7 +274,7 @@ TEST_F(AnalyzerBaseTest, displayOptionsChange)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
   this->analyzerBase1.SetNewDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
-  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetText().c_str(), L"Dummy");
+  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetText()->c_str(), L"Dummy");
 }
 
 #endif

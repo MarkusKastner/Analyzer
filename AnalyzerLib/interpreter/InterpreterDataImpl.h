@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef INTERPRETERDATAIMPL_H
 #define INTERPRETERDATAIMPL_H
 
@@ -31,7 +37,7 @@ namespace analyzer{
       virtual void ResetData(const std::vector<char> & data);
       virtual std::shared_ptr<analyzer::core::ByteCollection> GetData();
 
-      virtual std::wstring GetText();
+      virtual std::shared_ptr<std::wstring> GetText();
       virtual std::vector<std::wstring> GetFunctionalHighlightExpressions();
 
       virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);

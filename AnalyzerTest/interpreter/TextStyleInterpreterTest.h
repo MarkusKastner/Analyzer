@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef TEXTSTYLEINTERPRETERTEST_H
 #define TEXTSTYLEINTERPRETERTEST_H
 
@@ -51,13 +57,13 @@ TEST_F(TextStyleInterpreterTest, InitAbstract)
 
 TEST_F(TextStyleInterpreterTest, GetText)
 {
-  ASSERT_STREQ(this->interpreter2->GetText().c_str(), this->compare2.c_str());
+  ASSERT_STREQ(this->interpreter2->GetText()->c_str(), this->compare2.c_str());
 }
 
 TEST_F(TextStyleInterpreterTest, GetPlainTextOnEmptyInterpreter)
 {
   analyzer::interpreter::TextStyleInterpreter interpreter;
-  ASSERT_STREQ(interpreter.GetText().c_str(), std::wstring().c_str());
+  ASSERT_STREQ(interpreter.GetText()->c_str(), std::wstring().c_str());
 }
 
 #endif

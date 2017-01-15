@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef FILE_H
 #define FILE_H
 
@@ -38,7 +44,7 @@ namespace analyzer{
       const std::shared_ptr<ByteCollection> & GetData();
       const std::vector<std::string> & GetPath();
 
-      std::wstring GetText();
+      std::shared_ptr<std::wstring> GetText();
       std::vector<std::wstring> GetFunctionalHighlightExpressions();
 
       void SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);

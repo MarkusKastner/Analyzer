@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef XMLFORMATTER_H
 #define XMLFORMATTER_H
 
@@ -34,7 +40,7 @@ namespace analyzer{
       XMLFormatter();
       virtual ~XMLFormatter();
 
-      virtual std::wstring GetText();
+      virtual std::shared_ptr<std::wstring> GetText();
       std::vector<XMLToken> GetXMLToken();
       XMLToken CreateToken(const std::wstring & token);
 

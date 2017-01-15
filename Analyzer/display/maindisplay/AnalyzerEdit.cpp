@@ -1,3 +1,9 @@
+/* Copyright (C) 2016 - 2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #include "AnalyzerEdit.h"
 
 #include <QApplication>
@@ -45,7 +51,8 @@ namespace analyzer{
           auto text = this->file->GetText();
           auto hlExp = this->file->GetFunctionalHighlightExpressions();
           this->highlighter->SetFunctionalHighlightExpressions(hlExp);
-          this->setPlainText(QString::fromWCharArray(text.c_str()));
+
+          this->setPlainText(QString::fromWCharArray(text->c_str()));
         }
       }
 
@@ -99,7 +106,7 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
-          this->setPlainText(QString::fromWCharArray(this->file->GetText().c_str()));
+          this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
           this->highlighter->SetFunctionalHighlightExpressions(this->file->GetFunctionalHighlightExpressions());
         }
       }
