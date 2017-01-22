@@ -19,8 +19,6 @@
 
 #include <string>
 
-#include "mysql.h"
-
 #include "DefinitionSource.h"
 
 namespace analyzer{
@@ -35,7 +33,6 @@ namespace analyzer{
       virtual bool IsInitialized();
 
     private:
-      MYSQL * connection;
     };
   }
 }

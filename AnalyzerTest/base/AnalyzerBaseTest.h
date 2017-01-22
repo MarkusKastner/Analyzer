@@ -8,6 +8,7 @@
 #define ANALYZERBASETEST_H
 
 #include <gtest\gtest.h>
+#include "TestSupport.h"
 
 #include "AnalyzerLib\base\AnalyzerBase.h"
 #include "AnalyzerLib\base\AnalyzerBaseObserver.h"
@@ -44,27 +45,31 @@ public:
   };
 
   AnalyzerBaseTest()
-    :analyzerBase1(), observer1(), path1("c:/dev/test.txt"), dummyData1(), path2("c:/dev/test.zip"), path3("c:/dev/test.docx")
+    :analyzerBase1(), observer1(), path1(), dummyData1(), path2(), path3()
   {}
   ~AnalyzerBaseTest(){}
 
   void SetUp(){
+    this->path1 = std::wstring(TestSupport::GetInstance()->GetTestFilesDir() + std::wstring(L"/test.txt"));
+    this->path2 = std::wstring(TestSupport::GetInstance()->GetTestFilesDir() + std::wstring(L"/test.zip"));
+    this->path3 = std::wstring(TestSupport::GetInstance()->GetTestFilesDir() + std::wstring(L"/test.docx"));
+
     dummyData1.push_back('D');
     dummyData1.push_back('u');
     dummyData1.push_back('m');
     dummyData1.push_back('m');
     dummyData1.push_back('y');
 
-    analyzerFile.SetFileData(path1, dummyData1);
+    analyzerFile.SetFileData(std::string(this->path1.begin(), this->path1.end()), dummyData1);
   }
 
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
-  std::string path1;
+  std::wstring path1;
   std::vector<char> dummyData1;
   analyzer::core::File analyzerFile;
-  std::string path2;
-  std::string path3;
+  std::wstring path2;
+  std::wstring path3;
 };
 
 TEST_F(AnalyzerBaseTest, init)
@@ -118,7 +123,7 @@ TEST_F(AnalyzerBaseTest, EmptyHasData)
 TEST_F(AnalyzerBaseTest, LoadTxtFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
-  this->analyzerBase1.LoadFile(this->path1);
+  this->analyzerBase1.LoadFile(std::string(this->path1.begin(), this->path1.end()));
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
   ASSERT_TRUE(this->analyzerBase1.HasData());
   ASSERT_TRUE(this->observer1.FilesChanged());
@@ -178,8 +183,8 @@ TEST_F(AnalyzerBaseTest, AddFileTwice)
 TEST_F(AnalyzerBaseTest, GetFileByName)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(path1);
-  ASSERT_STREQ(file.GetFileName().c_str(), path1.c_str());
+  analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(std::string(this->path1.begin(), this->path1.end()));
+  ASSERT_STREQ(file.GetFileName().c_str(), std::string(this->path1.begin(), this->path1.end()).c_str());
 }
 
 TEST_F(AnalyzerBaseTest, TryGetInvalidFileByName)
@@ -201,14 +206,14 @@ TEST_F(AnalyzerBaseTest, TryGetInvalidFileByName)
 TEST_F(AnalyzerBaseTest, HasFile)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  ASSERT_TRUE(this->analyzerBase1.HasFile(this->path1));
+  ASSERT_TRUE(this->analyzerBase1.HasFile(std::string(this->path1.begin(), this->path1.end())));
 }
 
 TEST_F(AnalyzerBaseTest, GetFileByIndex)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
   analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(0);
-  ASSERT_STREQ(file.GetFileName().c_str(), path1.c_str());
+  ASSERT_STREQ(file.GetFileName().c_str(), std::string(this->path1.begin(), this->path1.end()).c_str());
 }
 
 TEST_F(AnalyzerBaseTest, InvalidfileIndex)
@@ -230,7 +235,7 @@ TEST_F(AnalyzerBaseTest, InvalidfileIndex)
 TEST_F(AnalyzerBaseTest, LoadZipFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
-  this->analyzerBase1.LoadFile(this->path2);
+  this->analyzerBase1.LoadFile(std::string(this->path2.begin(), this->path2.end()));
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
   ASSERT_EQ(this->analyzerBase1.FileCount(), 2);
 }
@@ -238,7 +243,7 @@ TEST_F(AnalyzerBaseTest, LoadZipFile)
 TEST_F(AnalyzerBaseTest, LoadDocxFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
-  this->analyzerBase1.LoadFile(this->path3);
+  this->analyzerBase1.LoadFile(std::string(this->path3.begin(), this->path3.end()));
   for (int i = 0; i < 100; i++){
     if (this->analyzerBase1.FileCount() != 11){
       std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -253,7 +258,7 @@ TEST_F(AnalyzerBaseTest, LoadDocxFile)
 TEST_F(AnalyzerBaseTest, GetFileNames)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
-  this->analyzerBase1.LoadFile(this->path2);
+  this->analyzerBase1.LoadFile(std::string(this->path2.begin(), this->path2.end()));
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
   std::vector<std::string> fileNames(this->analyzerBase1.GetFileNames());
   ASSERT_STREQ(fileNames.at(0).c_str(), "Erlkoenig.txt");
@@ -261,7 +266,7 @@ TEST_F(AnalyzerBaseTest, GetFileNames)
 
 TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
 {
-  this->analyzerBase1.LoadFile(this->path2);
+  this->analyzerBase1.LoadFile(std::string(this->path2.begin(), this->path2.end()));
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
   std::string defaultActive(this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName());
   this->analyzerBase1.RegisterObserver(&this->observer1);

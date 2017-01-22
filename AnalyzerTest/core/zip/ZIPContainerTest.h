@@ -8,6 +8,7 @@
 #define ZIPCONTAINERTEST_H
 
 #include <gtest/gtest.h>
+#include "TestSupport.h"
 
 #include <string>
 
@@ -27,6 +28,11 @@ public:
   }
 
   void SetUp(){
+    std::wstring filesDirW(TestSupport::GetInstance()->GetTestFilesDir());
+    std::string filesDir(filesDirW.begin(), filesDirW.end());
+
+    this->testFile1 = std::string(filesDir + std::string("/test.docx"));
+    this->testFile2 = std::string(filesDir + std::string("/test.zip"));
   }
 
   analyzer::core::ZIPContainer zipContainer1;

@@ -9,6 +9,8 @@
 #include <string>
 #include <filesystem>
 
+#include "TestSupport.h"
+
 #include "core\ByteTest.h"
 #include "core\BasicTypeTest.h"
 #include "core\WordTest.h"
@@ -34,24 +36,11 @@
 #include "interpreter\formatter\SimpleTextFormatterTest.h"
 #include "interpreter\formatter\BitFormatterTest.h"
 
-namespace fs = std::tr2::sys;
-fs::path testDir;
-
-void setupTestDir(const std::string appPath)
-{
-  fs::path app(appPath);
-  fs::path dir(std::string(app.remove_filename().string() + "/" + app.basename().c_str()));
-
-  if (!fs::exists(dir)){
-    fs::create_directory(dir);
-  }
-  testDir = dir;
-}
 
 int main(int argc, char** argv) {
 
   std::string path(argv[0]);
-  setupTestDir(path);
+  TestSupport::Initialize(path);
 
   testing::InitGoogleTest(&argc, argv);
   int ret = RUN_ALL_TESTS();

@@ -39,10 +39,10 @@ namespace analyzer{
 
     unsigned int Byte::GetBitAt(const unsigned int & index)
     {
-      if (index > ByteSize - 1){
+      if (index > ByteSize - 1) {
         throw CoreException("Bit index out of range");
       }
-      return std::bitset<ByteSize>(this->value).at(index);
+      return std::bitset<ByteSize>(this->value)[index];
     }
 
     std::string Byte::GetBitsAsString()
