@@ -52,6 +52,9 @@ namespace analyzer{
       void RegisterObserver(interpreter::TextChangedObserver * observer);
       void UnregisterObserver(interpreter::TextChangedObserver * observer);
 
+      std::vector<analyzer::base::DetailFormat> GetBinaryInterpreterOptions();
+      std::vector<analyzer::base::DetailFormat> GetTextInterpreterOptions();
+
     private:
       std::shared_ptr<ByteCollection> * data;
       std::string * fileName;

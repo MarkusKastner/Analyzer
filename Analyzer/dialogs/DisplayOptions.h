@@ -16,6 +16,9 @@
 #include "AnalyzerLib\base\BaseData.h"
 
 namespace analyzer{
+  namespace core {
+    class File;
+  }
   namespace gui{
     class DisplayOptions : public QWidget
     {
@@ -26,6 +29,8 @@ namespace analyzer{
 
       base::BaseFormat GetBaseFormat();
       base::DetailFormat GetDetailedFormat();
+
+      void SetFile(core::File * file);
 
     signals:
       void DisplayOptionsChanged();

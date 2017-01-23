@@ -34,6 +34,9 @@ public:
       this->notified = true;
     }
 
+    virtual void NotifyExInterpreter() {
+    }
+
     bool IsNotified(){
       return this->notified;
     }

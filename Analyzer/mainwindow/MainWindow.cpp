@@ -32,6 +32,7 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
+      this->displayOptions->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
       this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 

@@ -145,6 +145,21 @@ namespace analyzer{
       this->textInterpreter->get()->UnregisterObserver(observer);
     }
 
+    std::vector<analyzer::base::DetailFormat> File::GetBinaryInterpreterOptions()
+    {
+      std::vector<analyzer::base::DetailFormat> options;
+      options.push_back(base::DetailFormat::bits);
+      options.push_back(base::DetailFormat::hex);
+      return options;
+    }
+
+    std::vector<analyzer::base::DetailFormat> File::GetTextInterpreterOptions()
+    {
+      std::vector<analyzer::base::DetailFormat> options;
+      options.push_back(base::DetailFormat::simpleText);
+      return options;
+    }
+
     void File::setDirectoryNames(const std::string& input, const std::string& regex)
     {
       std::regex re(regex);

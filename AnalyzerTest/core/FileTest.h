@@ -105,4 +105,17 @@ TEST_F(FileTest, ChangeDisplayOptions)
   ASSERT_STREQ(this->file1.GetText()->c_str(), L"01100001  01100001  01100001  01100001    [097][097][097][097]");
 }
 
+TEST_F(FileTest, BinaryInterpreterOptions)
+{
+  this->file1.SetFileData(fileName1, charVector);
+  ASSERT_EQ(this->file1.GetBinaryInterpreterOptions()[0], analyzer::base::DetailFormat::bits);
+  ASSERT_EQ(this->file1.GetBinaryInterpreterOptions()[1], analyzer::base::DetailFormat::hex);
+}
+
+TEST_F(FileTest, TextInterpreterOptions)
+{
+  this->file1.SetFileData(fileName1, charVector);
+  ASSERT_EQ(this->file1.GetTextInterpreterOptions()[0], analyzer::base::DetailFormat::simpleText);
+}
+
 #endif

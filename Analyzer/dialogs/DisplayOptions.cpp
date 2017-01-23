@@ -10,6 +10,8 @@
 #include <QHBoxLayout>
 #include <QGroupBox>
 
+#include "AnalyzerLib\core\File.h"
+
 namespace analyzer{
   namespace gui{
 
@@ -44,6 +46,12 @@ namespace analyzer{
       else{
         return this->binaryOptions->GetFormat();
       }
+    }
+
+    void DisplayOptions::SetFile(core::File * file)
+    {
+      this->binaryOptions->SetInterpreterOptions(file->GetBinaryInterpreterOptions());
+      this->textOptions->SetInterpreterOptions(file->GetTextInterpreterOptions());
     }
 
     void DisplayOptions::setup()

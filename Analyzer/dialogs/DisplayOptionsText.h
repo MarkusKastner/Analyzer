@@ -23,6 +23,8 @@ namespace analyzer{
 
       base::DetailFormat GetFormat();
 
+      void SetInterpreterOptions(const std::vector<base::DetailFormat> & options);
+
     signals:
       void DisplayOptionsChanged();
 

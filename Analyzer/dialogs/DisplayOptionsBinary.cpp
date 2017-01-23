@@ -35,6 +35,22 @@ namespace analyzer{
       }
     }
 
+    void DisplayOptionsBinary::SetInterpreterOptions(const std::vector<base::DetailFormat> & options)
+    {
+      this->binary->setVisible(false);
+      this->hex->setVisible(false);
+      for (auto& option : options) {
+        switch (option) {
+        case base::DetailFormat::bits:
+          this->binary->setVisible(true);
+          break;
+        case base::DetailFormat::hex:
+          this->hex->setVisible(true);
+          break;
+        }
+      }
+    }
+
     void DisplayOptionsBinary::setup()
     {
       this->setLayout(new QVBoxLayout());
@@ -45,6 +61,10 @@ namespace analyzer{
       this->layout()->addItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
       this->binary->setChecked(true);
+
+      this->binary->setVisible(false);
+      this->hex->setVisible(false);
+
       connect(this->binary, &QRadioButton::clicked, this, &DisplayOptionsBinary::onOptionsChange);
       connect(this->hex, &QRadioButton::clicked, this, &DisplayOptionsBinary::onOptionsChange);
     }

@@ -32,6 +32,27 @@ namespace analyzer{
       }
     }
 
+    void DisplayOptionsText::SetInterpreterOptions(const std::vector<base::DetailFormat> & options)
+    {
+      this->plainText->setVisible(false);
+      this->xmlMode->setVisible(false);
+      this->pdfMode->setVisible(false);
+
+      for (auto& option : options) {
+        switch (option) {
+        case base::DetailFormat::simpleText:
+          this->plainText->setVisible(true);
+          break;
+        case base::DetailFormat::xml:
+          this->xmlMode->setVisible(true);
+          break;
+        case base::DetailFormat::pdf:
+          this->pdfMode->setVisible(true);
+          break;
+        }
+      }
+    }
+
     void DisplayOptionsText::setup()
     {
       this->setLayout(new QVBoxLayout());
@@ -44,6 +65,11 @@ namespace analyzer{
       this->layout()->addItem(new QSpacerItem(0, 10, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
       this->plainText->setChecked(true);
+
+      this->plainText->setVisible(false);
+      this->xmlMode->setVisible(false);
+      this->pdfMode->setVisible(false);
+      
       connect(this->plainText, &QRadioButton::clicked, this, &DisplayOptionsText::onOptionsChange);
       connect(this->xmlMode, &QRadioButton::clicked, this, &DisplayOptionsText::onOptionsChange);
       connect(this->pdfMode, &QRadioButton::clicked, this, &DisplayOptionsText::onOptionsChange);
