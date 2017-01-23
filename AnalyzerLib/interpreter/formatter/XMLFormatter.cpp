@@ -29,9 +29,10 @@ namespace analyzer{
         return std::shared_ptr<std::wstring>(new std::wstring(text));
       }
 
+      size_t startHeader = text.find_first_of('<');
       size_t endHeader = text.find_first_of('>');
 
-      std::shared_ptr<std::wstring> formatedText(new std::wstring(text.substr(0, endHeader + 1)));
+      std::shared_ptr<std::wstring> formatedText(new std::wstring(text.substr(startHeader, endHeader - startHeader + 1)));
 
       bool firstTag = true;
       for (size_t i = endHeader + 1; i < text.size(); i++){
@@ -67,14 +68,19 @@ namespace analyzer{
 
     std::wstring XMLFormatter::getDataAsWString()
     {
-      std::string asString; 
+      std::string asString;
+      char lastVal = 0;
       auto& data = (*this->getData());
       for (auto& byte : data){
         char val = static_cast<char>(byte->GetValue());
         if (std::iscntrl(byte->GetValue())){
           continue;
         }
+        if (lastVal == '>' && val == ' ') {
+          continue;
+        }
         asString.push_back(val);
+        lastVal = val;
       }
       return std::wstring(asString.begin(), asString.end());
     }
