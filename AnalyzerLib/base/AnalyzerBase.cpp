@@ -7,6 +7,7 @@
 #include "AnalyzerBase.h"
 
 #include <fstream>
+#include <filesystem>
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
@@ -14,6 +15,8 @@
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 #include "AnalyzerBaseObserver.h"
 #include "AnalyzerLib\core\zip\ZIPContainer.h"
+
+namespace fs = std::tr2::sys;
 
 namespace analyzer{
   namespace base{
@@ -298,8 +301,10 @@ namespace analyzer{
 
       data.reserve(fileSize);
       data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-      core::File analyzerFile;
-      analyzerFile.SetFileData(*this->activeFilePath, data);
+      fs::path path(*this->activeFilePath);
+      std::wstring fileName(path.filename().c_str());
+
+      core::File analyzerFile(std::string(fileName.begin(), fileName.end()), data);
       this->AddAnalyzerFile(analyzerFile);
       this->notifyFilesChange();
     }

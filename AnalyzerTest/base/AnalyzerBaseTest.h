@@ -63,6 +63,17 @@ public:
     analyzerFile.SetFileData(std::string(this->path1.begin(), this->path1.end()), dummyData1);
   }
 
+  void waitUntilFileCountEquals(const int & targetFileCount){
+    for (int i = 0; i < 60; i++) {
+      if (this->analyzerBase1.FileCount() != targetFileCount) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      }
+      else {
+        break;
+      }
+    }
+  }
+
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
   std::wstring path1;
@@ -124,7 +135,7 @@ TEST_F(AnalyzerBaseTest, LoadTxtFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.LoadFile(std::string(this->path1.begin(), this->path1.end()));
-  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  this->waitUntilFileCountEquals(1);
   ASSERT_TRUE(this->analyzerBase1.HasData());
   ASSERT_TRUE(this->observer1.FilesChanged());
 }
@@ -236,7 +247,7 @@ TEST_F(AnalyzerBaseTest, LoadZipFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.LoadFile(std::string(this->path2.begin(), this->path2.end()));
-  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  this->waitUntilFileCountEquals(2);
   ASSERT_EQ(this->analyzerBase1.FileCount(), 2);
 }
 
@@ -244,14 +255,7 @@ TEST_F(AnalyzerBaseTest, LoadDocxFile)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.LoadFile(std::string(this->path3.begin(), this->path3.end()));
-  for (int i = 0; i < 100; i++){
-    if (this->analyzerBase1.FileCount() != 11){
-      std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    }
-    else{
-      break;
-    }
-  }
+  this->waitUntilFileCountEquals(11);
   ASSERT_EQ(this->analyzerBase1.FileCount(), 11);
 }
 
@@ -259,7 +263,7 @@ TEST_F(AnalyzerBaseTest, GetFileNames)
 {
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.LoadFile(std::string(this->path2.begin(), this->path2.end()));
-  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  this->waitUntilFileCountEquals(2);
   std::vector<std::string> fileNames(this->analyzerBase1.GetFileNames());
   ASSERT_STREQ(fileNames.at(0).c_str(), "Erlkoenig.txt");
 }
@@ -267,7 +271,7 @@ TEST_F(AnalyzerBaseTest, GetFileNames)
 TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
 {
   this->analyzerBase1.LoadFile(std::string(this->path2.begin(), this->path2.end()));
-  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  this->waitUntilFileCountEquals(2);
   std::string defaultActive(this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName());
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.SetActiveFile("Zauberlehrling.txt");
@@ -282,4 +286,10 @@ TEST_F(AnalyzerBaseTest, displayOptionsChange)
   ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetText()->c_str(), L"Dummy");
 }
 
+TEST_F(AnalyzerBaseTest, fileNameWithoutPath) 
+{
+  this->analyzerBase1.LoadFile(std::string(this->path1.begin(), this->path1.end()));
+  this->waitUntilFileCountEquals(1);
+  ASSERT_STREQ(this->analyzerBase1.GetFileNames()[0].c_str(), "test.txt");
+}
 #endif
