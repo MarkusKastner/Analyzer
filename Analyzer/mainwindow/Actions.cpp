@@ -26,8 +26,16 @@ namespace analyzer{
 
     void Actions::OnOpen()
     {
-      QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Read File")));
+      QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Open Document")));
+      if (this->analyzerBase.HasData()) {
+        this->analyzerBase.CloseDocument();
+      }
       this->analyzerBase.OpenDocument(fileName.toStdString());
+    }
+
+    void Actions::OnClose()
+    {
+      this->analyzerBase.CloseDocument();
     }
 
     void Actions::throwMainWindow()

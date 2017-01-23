@@ -32,7 +32,7 @@ namespace analyzer{
       ~MainWindow();
 
       virtual void NotifyInterprterChange();
-      virtual void NotifyFileChange();
+      virtual void NotifyDocumentChange();
 
       void DisplayOptionsChanged();
 

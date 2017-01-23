@@ -34,10 +34,16 @@ namespace analyzer{
         class EditEvent : public QEvent
         {
         public:
-          EditEvent()
-            :QEvent(Type::User)
+          enum Action{ clear, dataChange, exInterpreter };
+          EditEvent(const Action & action)
+            :QEvent(Type::User), action(action)
           {}
+
+          const Action & GetAction() { return this->action; }
           virtual ~EditEvent(){}
+        
+        private:
+          Action action;
         };
 
       public:
@@ -45,6 +51,7 @@ namespace analyzer{
         virtual ~AnalyzerEdit();
 
         virtual void NotifyDataChanged();
+        virtual void NotifyExInterpreter();
 
         void SetFile(core::File * file);
         void ClearFile();
@@ -60,8 +67,11 @@ namespace analyzer{
 
       private:
         core::File * file;
-        QWidget *lineNumbers;
+        QWidget * lineNumbers;
         AnalyzerEditHighlighter * highlighter;
+        bool interpreterDeleted;
+
+        void clearFile();
 
         void highlightCurrentLine();
         void updateLineNumberAreaWidth(int newBlockCount);

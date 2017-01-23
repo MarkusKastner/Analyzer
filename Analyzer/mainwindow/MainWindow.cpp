@@ -35,10 +35,11 @@ namespace analyzer{
       this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
-    void MainWindow::NotifyFileChange()
+    void MainWindow::NotifyDocumentChange()
     {
       this->DisplayOptionsChanged();
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
+      this->analyzerEdit->ClearFile();
     }
 
     void MainWindow::DisplayOptionsChanged()
@@ -76,6 +77,7 @@ namespace analyzer{
     void MainWindow::connectUI()
     {
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
+      connect(this->ui.actionClose, &QAction::triggered, this->actions.get(), &Actions::OnClose);
       connect(this->documentStructure, &DocumentStructure::ActiveFileChanged, this, &MainWindow::activeFileChanged);
       connect(this->displayOptions, &DisplayOptions::DisplayOptionsChanged, this, &MainWindow::DisplayOptionsChanged);
     }

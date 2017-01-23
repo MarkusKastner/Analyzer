@@ -112,6 +112,7 @@ namespace analyzer{
 
     void AnalyzerBase::CloseDocument()
     {
+      *this->documentPath = "";
       this->files->clear();
       this->notifyFilesChange();
     }
@@ -288,7 +289,7 @@ namespace analyzer{
       else{
         this->loadSimpleFile();
       }
-      
+      this->notifyFilesChange();
     }
 
     void AnalyzerBase::loadSimpleFile()
@@ -312,7 +313,6 @@ namespace analyzer{
 
       core::File analyzerFile(std::string(fileName.begin(), fileName.end()), data);
       this->AddAnalyzerFile(analyzerFile);
-      this->notifyFilesChange();
     }
 
     void AnalyzerBase::loadContainer()
@@ -324,7 +324,6 @@ namespace analyzer{
           this->AddAnalyzerFile(zip.GetFileAt(i));
         }
       }
-      this->notifyFilesChange();
     }
 
     void AnalyzerBase::notifyInterpreterChange()
@@ -337,7 +336,7 @@ namespace analyzer{
     void AnalyzerBase::notifyFilesChange()
     {
       for (auto observer : *this->baseObservers){
-        observer->NotifyFileChange();
+        observer->NotifyDocumentChange();
       }
     }
 

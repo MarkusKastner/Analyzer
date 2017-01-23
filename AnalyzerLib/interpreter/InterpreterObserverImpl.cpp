@@ -18,6 +18,7 @@ namespace analyzer{
 
     InterpreterObserverImpl::~InterpreterObserverImpl()
     {
+      this->notifyExInterpreter();
       delete this->textChangeObservers;
     }
 
@@ -57,6 +58,13 @@ namespace analyzer{
     {
       for (auto observer : *this->textChangeObservers){
         observer->NotifyDataChanged();
+      }
+    }
+
+    void InterpreterObserverImpl::notifyExInterpreter()
+    {
+      for (auto observer : *this->textChangeObservers) {
+        observer->NotifyExInterpreter();
       }
     }
 

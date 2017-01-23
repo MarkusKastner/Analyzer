@@ -30,7 +30,7 @@ public:
     virtual void NotifyInterprterChange(){
       this->interpreterChanged = true;
     }
-    virtual void NotifyFileChange(){
+    virtual void NotifyDocumentChange(){
       this->filesChanged = true;
     }
     bool InterpreterChanged(){

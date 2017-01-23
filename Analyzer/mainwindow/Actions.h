@@ -22,6 +22,7 @@ namespace analyzer{
       virtual ~Actions();
 
       void OnOpen();
+      void OnClose();
 
     private:
       MainWindow * mainWindow;

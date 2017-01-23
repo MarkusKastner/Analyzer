@@ -38,6 +38,7 @@ namespace analyzer{
     private:
       std::vector<TextChangedObserver*> * textChangeObservers;
 
+      void notifyExInterpreter();
       void throwInvalidObserver(TextChangedObserver * observer);
     };
   }

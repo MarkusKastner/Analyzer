@@ -13,7 +13,7 @@ namespace analyzer{
     {
     public:
       virtual void NotifyInterprterChange() = 0;
-      virtual void NotifyFileChange() = 0;
+      virtual void NotifyDocumentChange() = 0;
     };
   }
 }

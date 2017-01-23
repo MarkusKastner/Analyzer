@@ -19,6 +19,7 @@ namespace analyzer{
     {
     public:
       virtual void NotifyDataChanged() = 0;
+      virtual void NotifyExInterpreter() = 0;
     };
   }
 }

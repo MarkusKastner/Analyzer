@@ -19,7 +19,7 @@ namespace analyzer{
     namespace display{
 
       AnalyzerEdit::AnalyzerEdit(QWidget * parent)
-        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr)
+        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), interpreterDeleted(false)
       {
         this->lineNumbers = new LineNumberArea(this);
         this->setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -39,7 +39,12 @@ namespace analyzer{
       
       void AnalyzerEdit::NotifyDataChanged()
       {
-        QApplication::postEvent(this, new EditEvent());
+        QApplication::postEvent(this, new EditEvent(EditEvent::Action::dataChange));
+      }
+
+      void AnalyzerEdit::NotifyExInterpreter()
+      {
+        QApplication::postEvent(this, new EditEvent(EditEvent::Action::exInterpreter));
       }
 
       void AnalyzerEdit::SetFile(core::File * file)
@@ -48,19 +53,17 @@ namespace analyzer{
           if (this->file != nullptr && this->file->GetFileName().compare(file->GetFileName()) == 0){
             return;
           }
-          this->ClearFile();
+          this->clearFile();
           this->file = file;
           this->file->RegisterObserver(this);
+          this->interpreterDeleted = false;
           this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
         }
       }
 
       void AnalyzerEdit::ClearFile()
       {
-        this->setPlainText("");
-        if (this->file != nullptr){
-          this->file->UnregisterObserver(this);
-        }
+        QApplication::postEvent(this, new EditEvent(EditEvent::Action::clear));
       }
 
       void AnalyzerEdit::LineNumberAreaPaintEvent(QPaintEvent *event)
@@ -114,7 +117,18 @@ namespace analyzer{
       void AnalyzerEdit::customEvent(QEvent * evt)
       {
         if (dynamic_cast<EditEvent*>(evt)){
-          this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
+          EditEvent * editEvt = dynamic_cast<EditEvent*>(evt);
+          switch (editEvt->GetAction()) {
+          case EditEvent::Action::dataChange:
+            this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
+            break;
+          case EditEvent::Action::clear:
+            this->clearFile();
+            break;
+          case EditEvent::Action::exInterpreter:
+            this->interpreterDeleted = true;
+            break;
+          }
         }
       }
 
@@ -124,6 +138,17 @@ namespace analyzer{
 
         QRect cr = contentsRect();
         lineNumbers->setGeometry(QRect(cr.left(), cr.top(), this->GetLineNumbersWidth(), cr.height()));
+      }
+
+      void AnalyzerEdit::clearFile()
+      {
+        this->setPlainText("");
+        if (this->file != nullptr) {
+          if (!this->interpreterDeleted) {
+            this->file->UnregisterObserver(this);
+          }
+          this->file = nullptr;
+        }
       }
 
       void AnalyzerEdit::highlightCurrentLine()
