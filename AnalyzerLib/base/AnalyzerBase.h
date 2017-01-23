@@ -65,6 +65,7 @@ namespace analyzer{
       void SetActiveFile(const std::string & fileName);
       void SetNewDisplayOptions(const BaseFormat & baseFormat, const DetailFormat & detailFormat);
  
+      void CloseDocument();
     private:
       std::thread * baseThread;
       std::atomic<bool> * runBaseWorker;

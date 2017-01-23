@@ -292,4 +292,13 @@ TEST_F(AnalyzerBaseTest, fileNameWithoutPath)
   this->waitUntilFileCountEquals(1);
   ASSERT_STREQ(this->analyzerBase1.GetFileNames()[0].c_str(), "test.txt");
 }
+
+TEST_F(AnalyzerBaseTest, closeDocument)
+{
+  this->analyzerBase1.LoadFile(std::string(this->path1.begin(), this->path1.end()));
+  this->waitUntilFileCountEquals(1);
+  this->analyzerBase1.CloseDocument();
+
+  ASSERT_FALSE(this->analyzerBase1.HasFiles());
+}
 #endif

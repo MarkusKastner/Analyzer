@@ -222,6 +222,12 @@ namespace analyzer{
       }
     }
 
+    void AnalyzerBase::CloseDocument()
+    {
+      this->files->clear();
+      this->notifyFilesChange();
+    }
+
     void AnalyzerBase::baseWorker()
     {
       std::unique_lock<std::mutex> lock(*this->waitLock);
