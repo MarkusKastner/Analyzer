@@ -157,6 +157,10 @@ namespace analyzer{
     {
       std::vector<analyzer::base::DetailFormat> options;
       options.push_back(base::DetailFormat::simpleText);
+      interpreter::TextStyleInterpreter * textInterpreter = dynamic_cast<interpreter::TextStyleInterpreter*>(this->textInterpreter->get());
+      if (textInterpreter->IsXML()) {
+        options.push_back(base::DetailFormat::xml);
+      }
       return options;
     }
 

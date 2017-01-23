@@ -22,9 +22,13 @@ class FileTest : public testing::Test
 {
 public:
   FileTest()
-    : file1(), charVector(), fileName1("test.txt"), byteCollection1()
+    : file1(), charVector(), fileName1("test.txt"), byteCollection1(), xmlHeader(nullptr)
   {}
-  virtual ~FileTest(){}
+  virtual ~FileTest(){
+    if (this->xmlHeader != nullptr) {
+      delete this->xmlHeader;
+    }
+  }
 
   void SetUp(){
     for (int i = 0; i < 4; i++){
@@ -32,12 +36,15 @@ public:
     }
 
     byteCollection1.reset(new analyzer::core::ByteCollection(this->charVector));
+
+    this->xmlHeader = new std::vector<char>{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
   }
 
   analyzer::core::File file1;
   std::vector<char> charVector;
   std::string fileName1;
   std::shared_ptr<analyzer::core::ByteCollection> byteCollection1;
+  std::vector<char> * xmlHeader;
 };
 
 TEST_F(FileTest, Init)
@@ -116,6 +123,12 @@ TEST_F(FileTest, TextInterpreterOptions)
 {
   this->file1.SetFileData(fileName1, charVector);
   ASSERT_EQ(this->file1.GetTextInterpreterOptions()[0], analyzer::base::DetailFormat::simpleText);
+}
+
+TEST_F(FileTest, xmlRecognition)
+{
+  this->file1.SetFileData("someXML.xml", *this->xmlHeader);
+  ASSERT_EQ(this->file1.GetTextInterpreterOptions()[1], analyzer::base::DetailFormat::xml);
 }
 
 #endif

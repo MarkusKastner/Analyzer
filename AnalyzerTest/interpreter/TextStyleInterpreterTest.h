@@ -66,4 +66,12 @@ TEST_F(TextStyleInterpreterTest, GetPlainTextOnEmptyInterpreter)
   ASSERT_STREQ(interpreter.GetText()->c_str(), std::wstring().c_str());
 }
 
+TEST_F(TextStyleInterpreterTest, isXML)
+{
+  std::vector<char> xmlHeader{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
+  std::shared_ptr<analyzer::core::ByteCollection> byteCollectionXML(new analyzer::core::ByteCollection(xmlHeader));
+  analyzer::interpreter::TextStyleInterpreter interpreter(byteCollectionXML);
+  ASSERT_TRUE(interpreter.IsXML());
+}
+
 #endif

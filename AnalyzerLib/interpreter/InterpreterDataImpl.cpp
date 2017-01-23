@@ -48,6 +48,7 @@ namespace analyzer{
     {
       { std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
       *this->byteCollection = data;
+      this->formatter->get()->SetData(*this->byteCollection);
       }
     }
 

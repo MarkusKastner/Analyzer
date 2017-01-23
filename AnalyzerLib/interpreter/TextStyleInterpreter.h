@@ -26,6 +26,8 @@ namespace analyzer{
       explicit TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
       virtual ~TextStyleInterpreter();
 
+      bool IsXML();
+
     protected:
       virtual void setFormatter();
     };

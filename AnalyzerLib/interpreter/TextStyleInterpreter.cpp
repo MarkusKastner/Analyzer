@@ -29,6 +29,21 @@ namespace analyzer{
     {
     }
 
+    bool TextStyleInterpreter::IsXML()
+    {
+      auto text(this->GetText());
+      if (text->size() < 21) {
+        return false;
+      }
+      size_t startIndex = text->find(L"<?xml version=");
+      if (startIndex < text->size()) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     void TextStyleInterpreter::setFormatter()
     {
       switch (this->getDetailFormat()){
