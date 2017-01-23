@@ -27,7 +27,7 @@ namespace analyzer{
     void Actions::OnOpen()
     {
       QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Read File")));
-      this->analyzerBase.LoadFile(fileName.toStdString());
+      this->analyzerBase.OpenDocument(fileName.toStdString());
     }
 
     void Actions::throwMainWindow()

@@ -49,7 +49,9 @@ namespace analyzer{
       void RegisterObserver(AnalyzerBaseObserver * observer);
       void UnregisterObserver(AnalyzerBaseObserver * observer);
 
-      void LoadFile(const std::string & path);
+      void OpenDocument(const std::string & path);
+      void CloseDocument();
+
       bool HasData();
 
       void Rethrow();
@@ -65,7 +67,6 @@ namespace analyzer{
       void SetActiveFile(const std::string & fileName);
       void SetNewDisplayOptions(const BaseFormat & baseFormat, const DetailFormat & detailFormat);
  
-      void CloseDocument();
     private:
       std::thread * baseThread;
       std::atomic<bool> * runBaseWorker;
@@ -75,7 +76,7 @@ namespace analyzer{
 
       std::queue<Task> * workTasks;
 
-      std::string * activeFilePath;
+      std::string * documentPath;
       std::vector<AnalyzerBaseObserver*> * baseObservers;
       
       std::recursive_mutex * workTasksLock;

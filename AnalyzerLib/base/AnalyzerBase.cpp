@@ -25,7 +25,7 @@ namespace analyzer{
       workCondition(new std::condition_variable()), waitLock(new std::mutex),
       workerException(new std::exception_ptr()),
       workTasks(new std::queue<Task>()),
-      activeFilePath(new std::string()),
+      documentPath(new std::string()),
       baseObservers(new std::vector<AnalyzerBaseObserver*>()),
       workTasksLock(new std::recursive_mutex()),
       files(new std::vector<core::File>()), filesLock(new std::recursive_mutex())
@@ -47,7 +47,7 @@ namespace analyzer{
       delete this->waitLock;
       delete this->workTasks;
       delete this->runBaseWorker;
-      delete this->activeFilePath;
+      delete this->documentPath;
       delete this->baseObservers;
       delete this->workTasksLock;
       delete this->files;
@@ -56,9 +56,9 @@ namespace analyzer{
 
     bool AnalyzerBase::HasActivefile()
     {
-      if (!this->activeFilePath->empty() && !this->files->empty()){
+      if (!this->documentPath->empty() && !this->files->empty()){
         for (auto& file : *this->files){
-          if (file.GetFileName().compare(*this->activeFilePath) == 0){
+          if (file.GetFileName().compare(*this->documentPath) == 0){
             return true;
           }
         }
@@ -69,7 +69,7 @@ namespace analyzer{
     core::File * AnalyzerBase::CurrentFile()
     {
       for (auto& file : *this->files){
-        if (file.GetFileName().compare(*this->activeFilePath) == 0){
+        if (file.GetFileName().compare(*this->documentPath) == 0){
           return &file;
         }
       }
@@ -103,11 +103,17 @@ namespace analyzer{
       }
     }
 
-    void AnalyzerBase::LoadFile(const std::string & path)
+    void AnalyzerBase::OpenDocument(const std::string & path)
     {
-      *this->activeFilePath = path;
+      *this->documentPath = path;
       this->addTask(Task::LoadNewDataFromFile);
       this->workCondition->notify_one();
+    }
+
+    void AnalyzerBase::CloseDocument()
+    {
+      this->files->clear();
+      this->notifyFilesChange();
     }
 
     bool AnalyzerBase::HasData()
@@ -132,7 +138,7 @@ namespace analyzer{
       }
       this->files->push_back(file);
       if (this->files->size() == 1){
-        *this->activeFilePath = file.GetFileName();
+        *this->documentPath = file.GetFileName();
       }
     }
 
@@ -185,7 +191,7 @@ namespace analyzer{
     {
       std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       for (auto& exisiting : *this->files){
-        if (exisiting.GetFileName().compare(*this->activeFilePath) == 0){
+        if (exisiting.GetFileName().compare(*this->documentPath) == 0){
           return &exisiting;
         }
       }
@@ -207,7 +213,7 @@ namespace analyzer{
       std::lock_guard<std::recursive_mutex> lock(*this->filesLock);
       for (auto& exisiting : *this->files){
         if (exisiting.GetFileName().compare(fileName) == 0){
-          *this->activeFilePath = fileName;
+          *this->documentPath = fileName;
           this->notifyInterpreterChange();
           return;
         }
@@ -220,12 +226,6 @@ namespace analyzer{
       for (auto& file : (*this->files)){
         file.SetDisplayOptions(baseFormat, detailFormat);
       }
-    }
-
-    void AnalyzerBase::CloseDocument()
-    {
-      this->files->clear();
-      this->notifyFilesChange();
     }
 
     void AnalyzerBase::baseWorker()
@@ -273,10 +273,10 @@ namespace analyzer{
     void AnalyzerBase::loadFile()
     {
       std::string fileType;
-      size_t p = this->activeFilePath->find_last_of('.');
+      size_t p = this->documentPath->find_last_of('.');
       if (p != 0){
-        size_t endingLen = this->activeFilePath->length() - p;
-        fileType = this->activeFilePath->substr(p + 1, endingLen);
+        size_t endingLen = this->documentPath->length() - p;
+        fileType = this->documentPath->substr(p + 1, endingLen);
       }
 
       if (fileType.compare("zip") == 0){
@@ -293,9 +293,9 @@ namespace analyzer{
 
     void AnalyzerBase::loadSimpleFile()
     {
-      std::ifstream file(this->activeFilePath->c_str(), std::ios::binary);
+      std::ifstream file(this->documentPath->c_str(), std::ios::binary);
       if (file.bad() || !file.is_open()){
-        throw AnalyzerBaseException("Cannot open " + *this->activeFilePath);
+        throw AnalyzerBaseException("Cannot open " + *this->documentPath);
       }
 
       std::vector<char> data;
@@ -307,7 +307,7 @@ namespace analyzer{
 
       data.reserve(fileSize);
       data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-      fs::path path(*this->activeFilePath);
+      fs::path path(*this->documentPath);
       std::wstring fileName(path.filename().c_str());
 
       core::File analyzerFile(std::string(fileName.begin(), fileName.end()), data);
@@ -318,7 +318,7 @@ namespace analyzer{
     void AnalyzerBase::loadContainer()
     {
       core::ZIPContainer zip;
-      zip.Open(*this->activeFilePath);
+      zip.Open(*this->documentPath);
       if (zip.HasContent()){
         for (size_t i = 0; i < zip.GetFileCount(); i++){
           this->AddAnalyzerFile(zip.GetFileAt(i));
