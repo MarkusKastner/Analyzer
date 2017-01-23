@@ -53,11 +53,7 @@ namespace analyzer{
           if (this->file != nullptr && this->file->GetFileName().compare(file->GetFileName()) == 0){
             return;
           }
-          this->clearFile();
-          this->file = file;
-          this->file->RegisterObserver(this);
-          this->interpreterDeleted = false;
-          this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
+          this->arrangeNewFile(file);
         }
       }
 
@@ -140,6 +136,15 @@ namespace analyzer{
         lineNumbers->setGeometry(QRect(cr.left(), cr.top(), this->GetLineNumbersWidth(), cr.height()));
       }
 
+      void AnalyzerEdit::arrangeNewFile(core::File * file)
+      {
+        this->clearFile();
+        this->file = file;
+        this->file->RegisterObserver(this);
+        this->interpreterDeleted = false;
+        this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
+      }
+
       void AnalyzerEdit::clearFile()
       {
         this->setPlainText("");
@@ -158,7 +163,7 @@ namespace analyzer{
         if (!isReadOnly()) {
           QTextEdit::ExtraSelection selection;
 
-          QColor lineColor = QColor(Qt::yellow).lighter(160);
+          QColor lineColor = QColor(Qt::GlobalColor::cyan).lighter(160);
 
           selection.format.setBackground(lineColor);
           selection.format.setProperty(QTextFormat::FullWidthSelection, true);

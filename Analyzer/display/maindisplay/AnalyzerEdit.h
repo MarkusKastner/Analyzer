@@ -71,6 +71,7 @@ namespace analyzer{
         AnalyzerEditHighlighter * highlighter;
         bool interpreterDeleted;
 
+        void arrangeNewFile(core::File * file);
         void clearFile();
 
         void highlightCurrentLine();
