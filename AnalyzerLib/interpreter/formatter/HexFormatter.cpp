@@ -61,7 +61,7 @@ namespace analyzer {
     void HexFormatter::append(const std::shared_ptr<std::wstring> & text)
     {
       text->append(*this->hex);
-      text->append(*this->space);
+      text->append(L"\t");
       text->append(*this->exp);
       text->append(L"\n");
 

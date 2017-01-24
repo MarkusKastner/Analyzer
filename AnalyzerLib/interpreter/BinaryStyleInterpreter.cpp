@@ -9,6 +9,7 @@
 #include "error\InterpreterException.h"
 
 #include "AnalyzerLib\interpreter\formatter\BitFormatter.h"
+#include "AnalyzerLib\interpreter\formatter\HexFormatter.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -36,7 +37,7 @@ namespace analyzer{
         this->setDetailFormatter(new BitFormatter());
         break;
       case analyzer::base::DetailFormat::hex:
-        this->setDetailFormatter(new BitFormatter());
+        this->setDetailFormatter(new HexFormatter());
         break;
       default:
         this->setDetailFormatter(new BitFormatter());

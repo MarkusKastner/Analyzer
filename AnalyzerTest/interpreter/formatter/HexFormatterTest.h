@@ -22,7 +22,7 @@ public:
     char chars[] = { 255, 127, 42, 9, 13 , 32, 100, 199 };
     data.reset(new analyzer::core::ByteCollection(chars, 8));
 
-    cmpStr = L"ff  7f  2a  9  d  20  64  c7    [ÿ][DEL][*][HT][CR][SPACE][d][Ç]";
+    cmpStr = L"ff  7f  2a  9  d  20  64  c7  \t[ÿ][DEL][*][HT][CR][SPACE][d][Ç]";
   }
 
   std::shared_ptr<analyzer::core::ByteCollection> data;
