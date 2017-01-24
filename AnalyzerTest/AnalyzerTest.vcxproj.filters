@@ -135,6 +135,9 @@
     <ClCompile Include="TestSupport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.cpp">
+      <Filter>Interpreter\formatter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ByteTest.h">
@@ -310,6 +313,12 @@
     </ClInclude>
     <ClInclude Include="TestSupport.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\HexFormatterTest.h">
+      <Filter>Interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.h">
+      <Filter>Interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

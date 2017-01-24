@@ -179,6 +179,7 @@
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp" />
     <ClCompile Include="interpreter\formatter\BitFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\Formatter.cpp" />
+    <ClCompile Include="interpreter\formatter\HexFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
     <ClCompile Include="interpreter\InterpreterDataImpl.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="interpreter\error\InterpreterException.h" />
     <ClInclude Include="interpreter\formatter\BitFormatter.h" />
     <ClInclude Include="interpreter\formatter\Formatter.h" />
+    <ClInclude Include="interpreter\formatter\HexFormatter.h" />
     <ClInclude Include="interpreter\formatter\SimpleTextFormatter.h" />
     <ClInclude Include="interpreter\formatter\XMLFormatter.h" />
     <ClInclude Include="interpreter\Interpreter.h" />

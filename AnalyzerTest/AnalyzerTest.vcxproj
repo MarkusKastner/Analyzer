@@ -179,6 +179,7 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\BitFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\Formatter.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterDataImpl.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\error\InterpreterException.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\BitFormatter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\Formatter.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
@@ -241,6 +243,7 @@
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h" />
     <ClInclude Include="interpreter\formatter\BitFormatterTest.h" />
     <ClInclude Include="interpreter\formatter\FormatterTest.h" />
+    <ClInclude Include="interpreter\formatter\HexFormatterTest.h" />
     <ClInclude Include="interpreter\formatter\SimpleTextFormatterTest.h" />
     <ClInclude Include="interpreter\formatter\XMLFormatterTest.h" />
     <ClInclude Include="interpreter\TextStyleInterpreterTest.h" />
