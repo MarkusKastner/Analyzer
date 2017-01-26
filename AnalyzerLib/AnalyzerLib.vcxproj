@@ -185,6 +185,8 @@
     <ClCompile Include="interpreter\InterpreterDataImpl.cpp" />
     <ClCompile Include="interpreter\InterpreterObserverImpl.cpp" />
     <ClCompile Include="interpreter\TextStyleInterpreter.cpp" />
+    <ClCompile Include="network\CrossSock.cpp" />
+    <ClCompile Include="service\Update.cpp" />
     <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
     <ClCompile Include="strategy\Result.cpp" />
     <ClCompile Include="strategy\xml\XMLStrategy.cpp" />
@@ -221,6 +223,8 @@
     <ClInclude Include="interpreter\InterpreterObserverImpl.h" />
     <ClInclude Include="interpreter\TextStyleInterpreter.h" />
     <ClInclude Include="interpreter\TextChangedObserver.h" />
+    <ClInclude Include="network\CrossSock.h" />
+    <ClInclude Include="service\Update.h" />
     <ClInclude Include="strategy\AnalyzingStrategy.h" />
     <ClInclude Include="strategy\Result.h" />
     <ClInclude Include="strategy\xml\XMLStrategy.h" />

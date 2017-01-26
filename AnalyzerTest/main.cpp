@@ -36,6 +36,7 @@
 #include "interpreter\formatter\SimpleTextFormatterTest.h"
 #include "interpreter\formatter\BitFormatterTest.h"
 #include "interpreter\formatter\HexFormatterTest.h"
+#include "service\UpdateTest.h"
 
 int main(int argc, char** argv) {
 

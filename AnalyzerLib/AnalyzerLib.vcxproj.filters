@@ -38,6 +38,12 @@
     <Filter Include="interpreter\formatter">
       <UniqueIdentifier>{78f73c97-f2ab-4035-9a7c-ba67afab6e2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="service">
+      <UniqueIdentifier>{06e3e1d1-a339-43bf-8611-9bdbc45f1044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="network">
+      <UniqueIdentifier>{e63bfbf9-e200-4f2f-ab6c-1594ef0bf795}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Byte.cpp">
@@ -123,6 +129,12 @@
     </ClCompile>
     <ClCompile Include="interpreter\formatter\HexFormatter.cpp">
       <Filter>interpreter\formatter</Filter>
+    </ClCompile>
+    <ClCompile Include="service\Update.cpp">
+      <Filter>service</Filter>
+    </ClCompile>
+    <ClCompile Include="network\CrossSock.cpp">
+      <Filter>network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="interpreter\formatter\HexFormatter.h">
       <Filter>interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="service\Update.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="network\CrossSock.h">
+      <Filter>network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

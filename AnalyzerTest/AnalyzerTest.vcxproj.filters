@@ -46,6 +46,9 @@
     <Filter Include="Interpreter\formatter">
       <UniqueIdentifier>{164c8c15-f0ca-4a07-939d-2e61254a840c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="service">
+      <UniqueIdentifier>{9a83a395-1993-48cd-9605-fdad30341809}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.cpp">
       <Filter>Interpreter\formatter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\service\Update.cpp">
+      <Filter>service</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +325,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.h">
       <Filter>Interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="service\UpdateTest.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\service\Update.h">
+      <Filter>service</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
