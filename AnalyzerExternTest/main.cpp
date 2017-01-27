@@ -9,6 +9,7 @@
 #include <string>
 #include <filesystem>
 
+#include "network\CrossSockTest.h"
 
 int main(int argc, char** argv) {
 
