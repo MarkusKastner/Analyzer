@@ -26,6 +26,7 @@ TEST_F(CrossSockTest, serverResponse)
 {
   this->crossSock.Connect("www.marscode.at", 80);
   std::string webside(this->crossSock.GetSide());
+  size_t offset = webside.find(std::string("Analyzer"));
   ASSERT_FALSE(webside.empty());
 }
 

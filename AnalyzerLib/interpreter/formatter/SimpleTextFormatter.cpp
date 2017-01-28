@@ -30,8 +30,7 @@ namespace analyzer{
       for (auto& byte : data){
         asString.push_back(static_cast<char>(byte->GetValue()));
       }
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-      return std::shared_ptr<std::wstring>(new std::wstring(converter.from_bytes(asString)));
+      return std::shared_ptr<std::wstring>(new std::wstring(asString.begin(), asString.end()));
     }
   }
 }
