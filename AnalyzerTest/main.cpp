@@ -13,7 +13,6 @@
 
 #include "core\ByteTest.h"
 #include "core\BasicTypeTest.h"
-#include "core\WordTest.h"
 #include "core\ByteCollectionTest.h"
 #include "interpreter\BinaryStyleInterpreterTest.h"
 #include "interpreter\TextStyleInterpreterTest.h"

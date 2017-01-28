@@ -63,9 +63,6 @@
     <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\core\Word.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp">
       <Filter>core</Filter>
     </ClCompile>
@@ -159,12 +156,6 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\BasicTypeTest.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\WordTest.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\core\Word.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="core\ByteCollectionTest.h">
