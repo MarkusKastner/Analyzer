@@ -40,6 +40,8 @@ namespace analyzer{
       void SetFileData(const std::string & fileName, const std::vector<char> & data);
       bool IsLoaded();
 
+      size_t GetSize();
+
       const std::string & GetFileName();
       const std::shared_ptr<ByteCollection> & GetData();
       const std::vector<std::string> & GetPath();

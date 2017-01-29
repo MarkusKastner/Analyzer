@@ -63,7 +63,7 @@ TEST_F(FileTest, SetFileData)
   this->file1.SetFileData(fileName1, charVector);
 
   ASSERT_STREQ(this->file1.GetFileName().c_str(), this->fileName1.c_str());
-  ASSERT_EQ(this->file1.GetData()->GetSize(), this->byteCollection1->GetSize());
+  ASSERT_EQ(this->file1.GetSize(), charVector.size());
 }
 
 TEST_F(FileTest, SetFileNameWithPath)

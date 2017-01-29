@@ -83,6 +83,11 @@ namespace analyzer{
       }
     }
 
+    size_t File::GetSize()
+    {
+      return this->data->get()->GetSize();
+    }
+
     const std::string & File::GetFileName()
     {
       return *this->fileName;
