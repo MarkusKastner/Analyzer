@@ -14,7 +14,6 @@
 #include <memory>
 
 #include "AnalyzerLib\core\File.h"
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 
@@ -22,7 +21,7 @@ class FileTest : public testing::Test
 {
 public:
   FileTest()
-    : file1(), charVector(), fileName1("test.txt"), byteCollection1(), xmlHeader(nullptr)
+    : file1(), charVector(), fileName1("test.txt"), xmlHeader(nullptr)
   {}
   virtual ~FileTest(){
     if (this->xmlHeader != nullptr) {
@@ -35,15 +34,12 @@ public:
       this->charVector.push_back('a');
     }
 
-    byteCollection1.reset(new analyzer::core::ByteCollection(this->charVector));
-
     this->xmlHeader = new std::vector<char>{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
   }
 
   analyzer::core::File file1;
   std::vector<char> charVector;
   std::string fileName1;
-  std::shared_ptr<analyzer::core::ByteCollection> byteCollection1;
   std::vector<char> * xmlHeader;
 };
 
