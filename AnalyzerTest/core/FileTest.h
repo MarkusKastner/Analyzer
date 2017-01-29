@@ -82,7 +82,7 @@ TEST_F(FileTest, CpyCtor)
   analyzer::core::File theNewfile(this->file1);
 
   ASSERT_STREQ(theNewfile.GetFileName().c_str(), this->fileName1.c_str());
-  ASSERT_EQ(theNewfile.GetData()->GetSize(), this->byteCollection1->GetSize());
+  ASSERT_EQ(theNewfile.GetSize(), this->charVector.size());
 }
 
 TEST_F(FileTest, AssignOperator)
