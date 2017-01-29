@@ -26,26 +26,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -163,12 +163,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\AnalyzerBase.cpp" />
-    <ClCompile Include="core\BasicType.cpp" />
-    <ClCompile Include="core\Byte.cpp" />
-    <ClCompile Include="core\ByteCollection.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
-    <ClCompile Include="core\FormatFinder.cpp" />
     <ClCompile Include="core\zip\miniz.c" />
     <ClCompile Include="core\zip\ZIPContainer.cpp" />
     <ClCompile Include="definitions\Definition.cpp" />
@@ -198,12 +194,8 @@
     <ClInclude Include="base\BaseData.h" />
     <ClInclude Include="base\error\AnalyzerBaseException.h" />
     <ClInclude Include="base\error\DBException.h" />
-    <ClInclude Include="core\BasicType.h" />
-    <ClInclude Include="core\Byte.h" />
-    <ClInclude Include="core\ByteCollection.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
-    <ClInclude Include="core\FormatFinder.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
     <ClInclude Include="definitions\Definition.h" />
     <ClInclude Include="definitions\DefinitionDB.h" />

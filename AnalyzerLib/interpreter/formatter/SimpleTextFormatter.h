@@ -15,6 +15,7 @@ namespace analyzer{
     {
     public:
       SimpleTextFormatter();
+      explicit SimpleTextFormatter(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~SimpleTextFormatter();
 
       virtual std::shared_ptr<std::wstring> GetText();

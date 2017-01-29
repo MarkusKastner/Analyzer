@@ -77,7 +77,7 @@ public:
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
   std::wstring path1;
-  std::vector<char> dummyData1;
+  std::vector<unsigned char> dummyData1;
   analyzer::core::File analyzerFile;
   std::wstring path2;
   std::wstring path3;

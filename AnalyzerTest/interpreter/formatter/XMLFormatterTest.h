@@ -12,7 +12,6 @@
 #include <memory>
 #include <string>
 
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\formatter\XMLFormatter.h"
 
 class XMLFormatterTest : public testing::Test
@@ -28,21 +27,21 @@ public:
 
   }
 
-  std::shared_ptr<analyzer::core::ByteCollection> createXMLData1()
+  std::shared_ptr<std::vector<unsigned char>> createXMLData1()
   {
     cmpStrg1 = L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>";
     std::string fileData(this->xmlHeaderB);
     fileData += "<tag1><tag2>some text</tag2><tag3/></tag1>";
-    std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
+    std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
     return data;
   }
 
-  std::shared_ptr<analyzer::core::ByteCollection> createXMLData2()
+  std::shared_ptr<std::vector<unsigned char>> createXMLData2()
   {
     cmpStrg2 = L"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag4/>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>";
     std::string fileData(this->xmlHeaderB);
     fileData += "<tag1><tag4/><tag2>some text</tag2><tag3/></tag1>";
-    std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
+    std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
     return data;
   }
 

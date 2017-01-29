@@ -20,7 +20,7 @@ namespace analyzer{
     }
 
 
-    void XMLStrategy::analyze(const std::shared_ptr<definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data)
+    void XMLStrategy::analyze(const std::shared_ptr<definition::DefinitionSource> & definitions, const std::shared_ptr<std::vector<unsigned char>> & data)
     {
 
     }

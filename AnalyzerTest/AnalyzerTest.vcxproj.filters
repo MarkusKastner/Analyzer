@@ -54,17 +54,8 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\core\Byte.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp">
       <Filter>core\error</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp">
-      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp">
       <Filter>Interpreter</Filter>
@@ -117,9 +108,6 @@
     <ClCompile Include="..\AnalyzerLib\strategy\xml\XMLStrategy.cpp">
       <Filter>strategy\xml</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\core\FormatFinder.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\Formatter.cpp">
       <Filter>Interpreter\formatter</Filter>
     </ClCompile>
@@ -143,26 +131,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\ByteTest.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\core\Byte.h">
-      <Filter>core</Filter>
-    </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
       <Filter>core\error</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\core\BasicType.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\BasicTypeTest.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\ByteCollectionTest.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h">
-      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h">
       <Filter>Interpreter</Filter>
@@ -274,12 +244,6 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\strategy\xml\XMLStrategy.h">
       <Filter>strategy\xml</Filter>
-    </ClInclude>
-    <ClInclude Include="core\FormatFinderTest.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\core\FormatFinder.h">
-      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\Formatter.h">
       <Filter>Interpreter\formatter</Filter>

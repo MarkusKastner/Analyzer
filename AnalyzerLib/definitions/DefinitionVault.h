@@ -7,19 +7,13 @@
 #ifndef DEFINITIONVAULT_H
 #define DEFINITIONVAULT_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include <memory>
 #include <vector>
 #include "DefinitionSource.h"
 
 namespace analyzer{
   namespace definition{
-    class IMEX DefinitionVault
+    class DefinitionVault
     {
     public:
       DefinitionVault();

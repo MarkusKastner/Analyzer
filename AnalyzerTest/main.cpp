@@ -11,9 +11,6 @@
 
 #include "TestSupport.h"
 
-#include "core\ByteTest.h"
-#include "core\BasicTypeTest.h"
-#include "core\ByteCollectionTest.h"
 #include "interpreter\BinaryStyleInterpreterTest.h"
 #include "interpreter\TextStyleInterpreterTest.h"
 #include "interpreter\TextChangedObserverTest.h"
@@ -29,7 +26,6 @@
 #include "strategy\AnalyzingStrategyTest.h"
 #include "strategy\ResultTest.h"
 #include "strategy\xml\XMLStrategyTest.h"
-#include "core\FormatFinderTest.h"
 #include "interpreter\formatter\FormatterTest.h"
 #include "interpreter\formatter\XMLFormatterTest.h"
 #include "interpreter\formatter\SimpleTextFormatterTest.h"

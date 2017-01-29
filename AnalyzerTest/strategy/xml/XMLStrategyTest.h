@@ -10,14 +10,14 @@
 #include <gtest\gtest.h>
 
 #include <memory>
+#include <vector>
 
 #include "AnalyzerLib\strategy\xml\XMLStrategy.h"
-#include "AnalyzerLib\core\ByteCollection.h"
 
 #include "AnalyzerLib\definitions\Definition.h"
 #include "AnalyzerLib\definitions\DefinitionSource.h"
 
-std::shared_ptr<analyzer::core::ByteCollection> createXMLData();
+std::shared_ptr<std::vector<unsigned char>> createXMLData();
 
 class XMLStrategyTest : public testing::Test
 {
@@ -43,7 +43,7 @@ public:
 
   analyzer::strategy::XMLStrategy xmlStrategy;
   std::shared_ptr<analyzer::definition::DefinitionSource> defSource;
-  std::shared_ptr<analyzer::core::ByteCollection> data;
+  std::shared_ptr<std::vector<unsigned char>> data;
 };
 
 TEST_F(XMLStrategyTest, init)
@@ -52,7 +52,7 @@ TEST_F(XMLStrategyTest, init)
 
 }
 
-std::shared_ptr<analyzer::core::ByteCollection> createXMLData()
+std::shared_ptr<std::vector<unsigned char>> createXMLData()
 {
   std::string fileData;
   fileData += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>";
@@ -64,7 +64,7 @@ std::shared_ptr<analyzer::core::ByteCollection> createXMLData()
   fileData += "<unknown2>this is the unknown2 test</unknown2>";
   fileData += "</someDoc>";
 
-  std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
   return data;
 }
 #endif

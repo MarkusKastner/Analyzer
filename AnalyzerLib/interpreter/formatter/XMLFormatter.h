@@ -15,12 +15,13 @@ namespace analyzer{
     {
     public:
       XMLFormatter();
+      explicit XMLFormatter(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~XMLFormatter();
 
       virtual std::shared_ptr<std::wstring> GetText();
 
     private:
-      std::wstring * tabs;
+      std::wstring tabs;
       std::wstring getDataAsWString();
 
       void increaseTabs();

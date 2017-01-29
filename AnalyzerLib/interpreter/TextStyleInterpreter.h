@@ -7,23 +7,18 @@
 #ifndef TEXTSTYLEINTERPRETER_H
 #define TEXTSTYLEINTERPRETER_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include <memory>
+#include <vector>
 
 #include "InterpreterDataImpl.h"
 
 namespace analyzer{
   namespace interpreter{
-    class IMEX TextStyleInterpreter : public InterpreterDataImpl
+    class TextStyleInterpreter : public InterpreterDataImpl
     {
     public:
       TextStyleInterpreter();
-      explicit TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
+      explicit TextStyleInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~TextStyleInterpreter();
 
       bool IsXML();

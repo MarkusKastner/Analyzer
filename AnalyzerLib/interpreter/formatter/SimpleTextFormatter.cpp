@@ -19,6 +19,11 @@ namespace analyzer{
 
     }
 
+    SimpleTextFormatter::SimpleTextFormatter(const std::shared_ptr<std::vector<unsigned char>>& data)
+      :Formatter(data)
+    {
+    }
+
     SimpleTextFormatter::~SimpleTextFormatter()
     {
     }
@@ -28,7 +33,7 @@ namespace analyzer{
       std::string asString;
       auto& data = (*this->getData());
       for (auto& byte : data){
-        asString.push_back(static_cast<char>(byte->GetValue()));
+        asString.push_back(static_cast<char>(byte));
       }
       return std::shared_ptr<std::wstring>(new std::wstring(asString.begin(), asString.end()));
     }

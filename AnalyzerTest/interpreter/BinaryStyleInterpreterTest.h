@@ -13,100 +13,73 @@
 #include <memory>
 
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\error\InterpreterException.h"
 
 class BinaryStyleInterpreterTest : public testing::Test
 {
 public:
   BinaryStyleInterpreterTest()
-    : bytes2(nullptr), numBytes2(10), bytes3(nullptr), numBytes3(5),
-    byteCollection1(new analyzer::core::ByteCollection()), 
-    byteCollection2(),
-    byteCollection3(),
-    charVector()
+    : data1(new std::vector<unsigned char>()), data2(new std::vector<unsigned char>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })), data3(new std::vector<unsigned char>({ 0, 1, 2, 3, 4 })),
+    charVector(new std::vector<unsigned char>())
   {}
 
   ~BinaryStyleInterpreterTest()
   {
-    if (this->bytes2 != nullptr){
-      delete[] this->bytes2;
-      this->bytes2 = nullptr;
-    }
   }
 
   void SetUp(){
-    this->bytes2 = new char[numBytes2]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    this->bytes3 = new char[numBytes3]{0, 1, 2, 3, 4};
-
-    std::vector<std::shared_ptr<analyzer::core::Byte>> tetBytes;
-    tetBytes.push_back(std::shared_ptr<analyzer::core::Byte>(new analyzer::core::Byte(0)));
-
-
-    this->byteCollection2.reset(new analyzer::core::ByteCollection(bytes2, numBytes2));
-    this->byteCollection3.reset(new analyzer::core::ByteCollection(bytes3, numBytes3));
-
     for (int i = 0; i < 5; i++){
-      this->charVector.push_back('a');
+      this->charVector->push_back('a');
     }
   }
 
-  char * bytes2;
-  size_t numBytes2;
-
-  char * bytes3;
-  size_t numBytes3;
-
-  std::shared_ptr<analyzer::core::ByteCollection> byteCollection1;
-  std::shared_ptr<analyzer::core::ByteCollection> byteCollection2;
-  std::shared_ptr<analyzer::core::ByteCollection> byteCollection3;
-  std::vector<char> charVector;
+  std::shared_ptr<std::vector<unsigned char>> data1;
+  std::shared_ptr<std::vector<unsigned char>> data2;
+  std::shared_ptr<std::vector<unsigned char>> data3;
+  std::shared_ptr<std::vector<unsigned char>> charVector;
 };
 
 TEST_F(BinaryStyleInterpreterTest, AbstractImplEmptyOnDefaultCtor)
 {
   std::unique_ptr<analyzer::interpreter::Interpreter> interpreter(new analyzer::interpreter::BinaryStyleInterpreter());
-  ASSERT_EQ(interpreter->HasData(), false);
+  ASSERT_FALSE(interpreter->HasData());
 }
 
 TEST_F(BinaryStyleInterpreterTest, CtorEmptyByteCollection)
 {
-  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection1);
-  ASSERT_EQ(interpreter.HasData(), false);
+  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->data1);
+  ASSERT_FALSE(interpreter.HasData());
 }
 
 TEST_F(BinaryStyleInterpreterTest, CtorHasData)
 {
-  analyzer::interpreter::BinaryStyleInterpreter  interpreter(this->byteCollection2);
+  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->data2);
   ASSERT_EQ(interpreter.HasData(), true);
 }
 
 TEST_F(BinaryStyleInterpreterTest, ResetDataByteCollection)
 {
-  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection2);
-  size_t sizePreReset = interpreter.GetData()->GetSize();
-  interpreter.ResetData(this->byteCollection3);
+  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->data2);
+  size_t sizePreReset = interpreter.GetData()->size();
+  interpreter.ResetData(this->data3);
 
-  ASSERT_FALSE(interpreter.GetData()->GetSize() == sizePreReset);
+  ASSERT_FALSE(interpreter.GetData()->size() == sizePreReset);
 }
 
 TEST_F(BinaryStyleInterpreterTest, ResetDataCharVector)
 {
-  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->byteCollection2);
-  size_t sizePreReset = interpreter.GetData()->GetSize();
+  analyzer::interpreter::BinaryStyleInterpreter interpreter(this->data2);
+  size_t sizePreReset = interpreter.GetData()->size();
   interpreter.ResetData(this->charVector);
 
-  ASSERT_FALSE(interpreter.GetData()->GetSize() == sizePreReset);
+  ASSERT_FALSE(interpreter.GetData()->size() == sizePreReset);
 }
 
 TEST_F(BinaryStyleInterpreterTest, PlainText)
 {
-  const char bytes[2] { 0, 0 };
-
-  std::shared_ptr<analyzer::core::ByteCollection> byteCollection(new analyzer::core::ByteCollection(bytes, 2));
-
-  analyzer::interpreter::BinaryStyleInterpreter interpreter(byteCollection);
-
+  std::shared_ptr<std::vector<unsigned char>> bytes(new std::vector<unsigned char>({ 0, 0 }));
+  
+  analyzer::interpreter::BinaryStyleInterpreter interpreter(bytes);
   ASSERT_STREQ(interpreter.GetText()->c_str(), std::wstring(L"00000000  00000000                        [000][000]").c_str());
 }
 

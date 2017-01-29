@@ -12,21 +12,21 @@
 #include <memory>
 #include <string>
 
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\formatter\BitFormatter.h"
 
 class BitFormatterTest : public testing::Test
 {
 public:
+  BitFormatterTest()
+    :data(new std::vector<unsigned char>({ 1, 2, 3, 4, 5 }))
+  {}
   void SetUp(){
-    char chars[] = { 1, 2, 3, 4, 5 };
-    data.reset(new analyzer::core::ByteCollection(chars, 5));
 
     cmpStr = L"00000001  00000010  00000011  00000100    [001][002][003][004]\n";
     cmpStr += L"00000101                                  [005]";
   }
 
-  std::shared_ptr<analyzer::core::ByteCollection> data;
+  std::shared_ptr<std::vector<unsigned char>> data;
   std::wstring cmpStr;
 };
 

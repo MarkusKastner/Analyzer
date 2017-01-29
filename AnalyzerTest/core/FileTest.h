@@ -21,12 +21,9 @@ class FileTest : public testing::Test
 {
 public:
   FileTest()
-    : file1(), charVector(), fileName1("test.txt"), xmlHeader(nullptr)
+    : file1(), charVector(), fileName1("test.txt"), xmlHeader()
   {}
   virtual ~FileTest(){
-    if (this->xmlHeader != nullptr) {
-      delete this->xmlHeader;
-    }
   }
 
   void SetUp(){
@@ -34,13 +31,13 @@ public:
       this->charVector.push_back('a');
     }
 
-    this->xmlHeader = new std::vector<char>{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
+    this->xmlHeader = std::vector<unsigned char>{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
   }
 
   analyzer::core::File file1;
-  std::vector<char> charVector;
+  std::vector<unsigned char> charVector;
   std::string fileName1;
-  std::vector<char> * xmlHeader;
+  std::vector<unsigned char> xmlHeader;
 };
 
 TEST_F(FileTest, Init)
@@ -123,7 +120,7 @@ TEST_F(FileTest, TextInterpreterOptions)
 
 TEST_F(FileTest, xmlRecognition)
 {
-  this->file1.SetFileData("someXML.xml", *this->xmlHeader);
+  this->file1.SetFileData("someXML.xml", this->xmlHeader);
   ASSERT_EQ(this->file1.GetTextInterpreterOptions()[1], analyzer::base::DetailFormat::xml);
 }
 

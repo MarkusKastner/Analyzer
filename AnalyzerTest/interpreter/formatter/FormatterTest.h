@@ -12,7 +12,6 @@
 #include <memory>
 #include <string>
 
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\formatter\Formatter.h"
 
 class FormatterTest : public testing::Test
@@ -24,13 +23,18 @@ public:
     SomeFormatter()
       :analyzer::interpreter::Formatter()
     {}
+
+    SomeFormatter(const std::shared_ptr<std::vector<unsigned char>> & data)
+      :analyzer::interpreter::Formatter(data)
+    {}
+
     virtual ~SomeFormatter(){}
 
     virtual std::shared_ptr<std::wstring> GetText(){
       std::string text;
       auto data = this->getData();
       for (auto& byte : (*data)){
-        text.push_back(static_cast<char>(byte->GetValue()));
+        text.push_back(static_cast<char>(byte));
       }
       return std::shared_ptr<std::wstring>(new std::wstring(text.begin(), text.end()));
     }
@@ -40,10 +44,16 @@ public:
 
 TEST_F(FormatterTest, init)
 {
-  char chars[] = { 'a', 'b', 'c', 'd', 'e' };
-  std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(chars, 5));
+  std::shared_ptr<std::vector<unsigned char>> data (new std::vector<unsigned char>({ 'a', 'b', 'c', 'd', 'e' }));
   SomeFormatter formatter;
   formatter.SetData(data);
+  ASSERT_STREQ(formatter.GetText().get()->c_str(), L"abcde");
+}
+
+TEST_F(FormatterTest, initWithData)
+{
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>({ 'a', 'b', 'c', 'd', 'e' }));
+  SomeFormatter formatter(data);
   ASSERT_STREQ(formatter.GetText().get()->c_str(), L"abcde");
 }
 

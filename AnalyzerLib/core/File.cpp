@@ -7,50 +7,38 @@
 #include "File.h"
 
 #include <regex>
-#include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
-#include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 #include "AnalyzerLib\interpreter\TextChangedObserver.h"
 
 namespace analyzer{
   namespace core{
     File::File()
-      : data(new std::shared_ptr<ByteCollection>(new ByteCollection())), 
-      fileName(new std::string()), path(new std::vector<std::string>()),
-      textInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
-      binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
-      formatFinder(), currentBaseFormat(base::BaseFormat::binary)
+      : data(new std::vector<unsigned char>()), fileName(), path(),
+      textInterpreter(), binaryInterpreter(), currentBaseFormat(base::BaseFormat::binary)
     {
 
     }
 
-    File::File(const std::string & fileName, const std::vector<char> & data)
-      : data(new std::shared_ptr<ByteCollection>(new ByteCollection(data))), 
-      fileName(new std::string(fileName)), path(new std::vector<std::string>()),
-      textInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::TextStyleInterpreter())),
-      binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(new interpreter::BinaryStyleInterpreter())),
-      formatFinder(), currentBaseFormat(base::BaseFormat::binary)
+    File::File(const std::string & fileName, const std::vector<unsigned char> & data)
+      : data(new std::vector<unsigned char>(data)), fileName(fileName), path(),
+      textInterpreter(), binaryInterpreter(), currentBaseFormat(base::BaseFormat::binary)
     {
       this->setDirectoryNames(fileName, "/");
       this->feedInterpreter();
     }
 
     File::File(const File& other)
-      : data(new std::shared_ptr<ByteCollection>(*other.data)), 
-      fileName(new std::string(*other.fileName)), path(new std::vector<std::string>(*other.path)),
-      textInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.textInterpreter)),
-      binaryInterpreter(new std::shared_ptr<interpreter::Interpreter>(*other.binaryInterpreter)),
-      formatFinder(), currentBaseFormat(other.currentBaseFormat)
+      : data(other.data),
+      fileName(other.fileName), path(other.path),
+      textInterpreter(data), binaryInterpreter(data), currentBaseFormat(other.currentBaseFormat)
     {
     }
 
     File& File::operator=(const File & other)
     {
       if (this != &other){
-        *this->data = *other.data;
-        *this->fileName = *other.fileName;
-        *this->path = *other.path;
-        *this->textInterpreter = *other.textInterpreter;
-        *this->binaryInterpreter = *other.binaryInterpreter;
+        this->data = other.data;
+        this->fileName = other.fileName;
+        this->path = other.path;
         this->currentBaseFormat = other.currentBaseFormat;
       }
       return *this;
@@ -58,24 +46,19 @@ namespace analyzer{
 
     File::~File()
     {
-      delete this->data;
-      delete this->fileName;
-      delete this->path;
-      delete this->textInterpreter;
-      delete this->binaryInterpreter;
     }
 
-    void File::SetFileData(const std::string & fileName, const std::vector<char> & data)
+    void File::SetFileData(const std::string & fileName, const std::vector<unsigned char> & data)
     {
-      this->data->reset(new ByteCollection(data));
-      *this->fileName = fileName;
+      this->data.reset(new std::vector<unsigned char>(data));
+      this->fileName = fileName;
       this->setDirectoryNames(fileName, "/");
       this->feedInterpreter();
     }
 
     bool File::IsLoaded()
     {
-      if (this->data->get()->GetSize() > 0 && !this->fileName->empty()){
+      if (this->data.get()->size() > 0 && !this->fileName.empty()){
         return true;
       }
       else{
@@ -85,41 +68,41 @@ namespace analyzer{
 
     size_t File::GetSize()
     {
-      return this->data->get()->GetSize();
+      return this->data.get()->size();
     }
 
     const std::string & File::GetFileName()
     {
-      return *this->fileName;
+      return this->fileName;
     }
 
-    const std::shared_ptr<ByteCollection> & File::GetData()
+    const std::shared_ptr<std::vector<unsigned char>> & File::GetData()
     {
-      return *this->data;
+      return this->data;
     }
 
     const std::vector<std::string> & File::GetPath()
     {
-      return *this->path;
+      return this->path;
     }
 
     std::shared_ptr<std::wstring> File::GetText()
     {
       if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
-        return this->textInterpreter->get()->GetText();
+        return this->textInterpreter.GetText();
       }
       else{
-        return this->binaryInterpreter->get()->GetText();
+        return this->binaryInterpreter.GetText();
       }
     }
 
     std::vector<std::wstring> File::GetFunctionalHighlightExpressions()
     {
       if (this->currentBaseFormat == analyzer::base::BaseFormat::text){
-        return this->textInterpreter->get()->GetFunctionalHighlightExpressions();
+        return this->textInterpreter.GetFunctionalHighlightExpressions();
       }
       else{
-        return this->binaryInterpreter->get()->GetFunctionalHighlightExpressions();
+        return this->binaryInterpreter.GetFunctionalHighlightExpressions();
       }
     }
 
@@ -131,23 +114,23 @@ namespace analyzer{
         forceNotify = true;
       }
       if (this->currentBaseFormat == base::BaseFormat::text){
-        this->textInterpreter->get()->SetDetailFormat(detailFormat, forceNotify);
+        this->textInterpreter.SetDetailFormat(detailFormat, forceNotify);
       }
       else if (this->currentBaseFormat == base::BaseFormat::binary){
-        this->binaryInterpreter->get()->SetDetailFormat(detailFormat, forceNotify);
+        this->binaryInterpreter.SetDetailFormat(detailFormat, forceNotify);
       }
     }
 
     void File::RegisterObserver(interpreter::TextChangedObserver * observer)
     {
-      this->binaryInterpreter->get()->RegisterObserver(observer);
-      this->textInterpreter->get()->RegisterObserver(observer);
+      this->binaryInterpreter.RegisterObserver(observer);
+      this->textInterpreter.RegisterObserver(observer);
     }
 
     void File::UnregisterObserver(interpreter::TextChangedObserver * observer)
     {
-      this->binaryInterpreter->get()->UnregisterObserver(observer);
-      this->textInterpreter->get()->UnregisterObserver(observer);
+      this->binaryInterpreter.UnregisterObserver(observer);
+      this->textInterpreter.UnregisterObserver(observer);
     }
 
     std::vector<analyzer::base::DetailFormat> File::GetBinaryInterpreterOptions()
@@ -162,8 +145,8 @@ namespace analyzer{
     {
       std::vector<analyzer::base::DetailFormat> options;
       options.push_back(base::DetailFormat::simpleText);
-      interpreter::TextStyleInterpreter * textInterpreter = dynamic_cast<interpreter::TextStyleInterpreter*>(this->textInterpreter->get());
-      if (textInterpreter->IsXML()) {
+
+      if (this->textInterpreter.IsXML()) {
         options.push_back(base::DetailFormat::xml);
       }
       return options;
@@ -177,13 +160,13 @@ namespace analyzer{
       if (parts.size() > 0){
         parts.erase(parts.begin() + parts.size() - 1);
       }
-      *this->path = parts;
+      this->path = parts;
     }
 
     void File::feedInterpreter()
     {
-      this->textInterpreter->get()->ResetData(*this->data);
-      this->binaryInterpreter->get()->ResetData(*this->data);
+      this->textInterpreter.ResetData(this->data);
+      this->binaryInterpreter.ResetData(this->data);
     }
   }
 }

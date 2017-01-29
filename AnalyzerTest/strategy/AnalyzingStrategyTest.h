@@ -11,14 +11,14 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "AnalyzerLib\strategy\AnalyzingStrategy.h"
 #include "AnalyzerLib\strategy\Result.h"
 #include "AnalyzerLib\definitions\Definition.h"
 #include "AnalyzerLib\definitions\DefinitionSource.h"
-#include "AnalyzerLib\core\ByteCollection.h"
 
-std::shared_ptr<analyzer::core::ByteCollection> createData();
+std::shared_ptr<std::vector<unsigned char>> createData();
 std::vector<std::wstring> findTags(const std::wstring & text);
 
 class AnalyzingStrategyTest : public testing::Test
@@ -73,12 +73,12 @@ public:
       :analyzer::strategy::AnalyzingStrategy()
     {}
     virtual ~SomeAnalyzingStrategy(){}
-    virtual void analyze(const std::shared_ptr<analyzer::definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data){
+    virtual void analyze(const std::shared_ptr<analyzer::definition::DefinitionSource> & definitions, const std::shared_ptr<std::vector<unsigned char>> & data){
       std::this_thread::sleep_for(std::chrono::milliseconds(200));
       
       std::string text;
       for (auto& byte : (*data)){
-        text += static_cast<char>(byte->GetValue());
+        text += static_cast<char>(byte);
       }
       
       std::wstring textW(text.begin(), text.end());
@@ -140,7 +140,7 @@ public:
   SomeAnalyzingStrategy strategy;
   SomeAnalyzingStrategy strategy2;
   std::shared_ptr<analyzer::definition::DefinitionSource> defSource;
-  std::shared_ptr<analyzer::core::ByteCollection> data;
+  std::shared_ptr<std::vector<unsigned char>> data;
 };
 
 TEST_F(AnalyzingStrategyTest, definitions)
@@ -174,7 +174,7 @@ TEST_F(AnalyzingStrategyTest, results)
   ASSERT_EQ(strategy2.GetResults().size(), 5);
 }
 
-std::shared_ptr<analyzer::core::ByteCollection> createData()
+std::shared_ptr<std::vector<unsigned char>> createData()
 {
   std::string fileData;
 
@@ -184,7 +184,7 @@ std::shared_ptr<analyzer::core::ByteCollection> createData()
   fileData += "<unknown1>this is the unknown1 test</unknown1>";
   fileData += "<unknown2>this is the unknown2 test</unknown2>";
 
-  std::shared_ptr<analyzer::core::ByteCollection> data(new analyzer::core::ByteCollection(fileData.c_str(), fileData.size()));
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
   return data;
 }
 

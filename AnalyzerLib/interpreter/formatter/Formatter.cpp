@@ -10,20 +10,24 @@ namespace analyzer{
   namespace interpreter{
     Formatter::~Formatter()
     {
-      delete this->data;
-      delete this->functionalHighlightExpressions;
     }
 
     Formatter::Formatter()
-      : data(new std::shared_ptr<analyzer::core::ByteCollection>()), 
-      functionalHighlightExpressions(new std::vector<std::wstring>)
+      : data(new std::vector<unsigned char>()),
+      functionalHighlightExpressions()
     {
 
     }
 
-    void Formatter::SetData(const std::shared_ptr<analyzer::core::ByteCollection> & data)
+    Formatter::Formatter(const std::shared_ptr<std::vector<unsigned char>> & data)
+      : data(data),
+      functionalHighlightExpressions()
     {
-      *this->data = data;
+    }
+
+    void Formatter::SetData(const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      this->data = data;
     }
 
     void Formatter::SetHighlightingExpressions()
@@ -32,17 +36,17 @@ namespace analyzer{
 
     void Formatter::AddFunctionalHighlightingExp(const std::wstring & expression)
     {
-      this->functionalHighlightExpressions->push_back(expression);
+      this->functionalHighlightExpressions.push_back(expression);
     }
 
     const std::vector<std::wstring> & Formatter::GetFunctionalHighlightingExp()
     {
-      return *this->functionalHighlightExpressions;
+      return this->functionalHighlightExpressions;
     }
 
-    const std::shared_ptr<analyzer::core::ByteCollection> & Formatter::getData()
+    const std::shared_ptr<std::vector<unsigned char>> & Formatter::getData()
     {
-      return *this->data;
+      return this->data;
     }
   }
 }

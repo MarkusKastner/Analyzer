@@ -7,12 +7,6 @@
 #ifndef INTERPRETEROBSERVERIMPL_H
 #define INTERPRETEROBSERVERIMPL_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include <memory>
 #include <string>
 
@@ -21,7 +15,7 @@
 
 namespace analyzer{
   namespace interpreter{
-    class IMEX InterpreterObserverImpl : public Interpreter
+    class InterpreterObserverImpl : public Interpreter
     {
     public:
       virtual ~InterpreterObserverImpl();
@@ -36,7 +30,7 @@ namespace analyzer{
       InterpreterObserverImpl();
 
     private:
-      std::vector<TextChangedObserver*> * textChangeObservers;
+      std::vector<TextChangedObserver*> textChangeObservers;
 
       void notifyExInterpreter();
       void throwInvalidObserver(TextChangedObserver * observer);

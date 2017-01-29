@@ -46,17 +46,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\Byte.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="core\error\CoreException.cpp">
       <Filter>core\error</Filter>
-    </ClCompile>
-    <ClCompile Include="core\BasicType.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\ByteCollection.cpp">
-      <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp">
       <Filter>interpreter</Filter>
@@ -109,9 +100,6 @@
     <ClCompile Include="strategy\xml\XMLStrategy.cpp">
       <Filter>strategy\xml</Filter>
     </ClCompile>
-    <ClCompile Include="core\FormatFinder.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="interpreter\formatter\Formatter.cpp">
       <Filter>interpreter\formatter</Filter>
     </ClCompile>
@@ -135,17 +123,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\Byte.h">
-      <Filter>core</Filter>
-    </ClInclude>
     <ClInclude Include="core\error\CoreException.h">
       <Filter>core\error</Filter>
-    </ClInclude>
-    <ClInclude Include="core\BasicType.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="core\ByteCollection.h">
-      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\Interpreter.h">
       <Filter>interpreter</Filter>
@@ -212,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="strategy\xml\XMLStrategy.h">
       <Filter>strategy\xml</Filter>
-    </ClInclude>
-    <ClInclude Include="core\FormatFinder.h">
-      <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\formatter\Formatter.h">
       <Filter>interpreter\formatter</Filter>

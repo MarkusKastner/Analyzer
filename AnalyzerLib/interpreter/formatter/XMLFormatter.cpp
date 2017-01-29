@@ -11,14 +11,18 @@ namespace analyzer{
   namespace interpreter{
 
     XMLFormatter::XMLFormatter()
-      :Formatter(), tabs(new std::wstring())
+      :Formatter(), tabs()
     {
 
     }
 
+    XMLFormatter::XMLFormatter(const std::shared_ptr<std::vector<unsigned char>>& data)
+      :Formatter(data)
+    {
+    }
+
     XMLFormatter::~XMLFormatter()
     {
-      delete this->tabs;
     }
 
     std::shared_ptr<std::wstring> XMLFormatter::GetText()
@@ -47,14 +51,14 @@ namespace analyzer{
           wchar_t check2 = text.at(tagEnd - 1);
 
           if (text.at(tagEnd - 1) == '/'){
-            *formatedText += *this->tabs;
+            *formatedText += this->tabs;
           }
           else if (text.at(i + 1) == '/'){
             this->decreaseTabs();
-            *formatedText += *this->tabs;
+            *formatedText += this->tabs;
           }
           else{
-            *formatedText += *this->tabs;
+            *formatedText += this->tabs;
             size_t tagEnd = text.find_first_of('>', i);
             if (tagEnd + 1 < text.size() && text.at(tagEnd + 1) == '<'){
               this->increaseTabs();
@@ -72,8 +76,8 @@ namespace analyzer{
       char lastVal = 0;
       auto& data = (*this->getData());
       for (auto& byte : data){
-        char val = static_cast<char>(byte->GetValue());
-        if (std::iscntrl(byte->GetValue())){
+        char val = static_cast<char>(byte);
+        if (std::iscntrl(byte)){
           continue;
         }
         if (lastVal == '>' && val == ' ') {
@@ -87,16 +91,16 @@ namespace analyzer{
 
     void XMLFormatter::increaseTabs()
     {
-      *this->tabs += L"  ";
+      this->tabs += L"  ";
     }
 
     void XMLFormatter::decreaseTabs()
     {
-      if (!this->tabs->empty()){
-        this->tabs->pop_back();
+      if (!this->tabs.empty()){
+        this->tabs.pop_back();
       }
-      if (!this->tabs->empty()){
-        this->tabs->pop_back();
+      if (!this->tabs.empty()){
+        this->tabs.pop_back();
       }
     }
   }

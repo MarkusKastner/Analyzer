@@ -13,15 +13,18 @@ namespace analyzer {
   namespace interpreter {
 
     HexFormatter::HexFormatter()
-      :Formatter(), space(new std::wstring(L"  ")), exp(new std::wstring()), hex(new std::wstring())
+      :Formatter(), space(L"  "), exp(), hex()
+    {
+    }
+
+    HexFormatter::HexFormatter(const std::shared_ptr<std::vector<unsigned char>>& data)
+      :Formatter(data)
     {
     }
 
     HexFormatter::~HexFormatter()
     {
-      delete this->hex;
-      delete this->space;
-      delete this->exp;
+
     }
 
     std::shared_ptr<std::wstring> HexFormatter::GetText()
@@ -29,18 +32,18 @@ namespace analyzer {
       auto& data = (*this->getData());
       std::shared_ptr<std::wstring> text(new std::wstring());
 
-      if (data.GetSize() == 0) {
+      if (data.size() == 0) {
         return text;
       }
       int byteCounter = 0;
 
       for (auto& byte : data) {
-        *this->hex += this->char2Hex(byte->GetValue());
-        *this->hex += *this->space;
+        this->hex += this->char2Hex(byte);
+        this->hex += this->space;
 
-        *this->exp += L"[";
-        *this->exp += this->char2Expression(byte->GetValue());
-        *this->exp += L"]";
+        this->exp += L"[";
+        this->exp += this->char2Expression(byte);
+        this->exp += L"]";
         byteCounter++;
 
         if (byteCounter >= 8) {
@@ -60,13 +63,13 @@ namespace analyzer {
 
     void HexFormatter::append(const std::shared_ptr<std::wstring> & text)
     {
-      text->append(*this->hex);
+      text->append(this->hex);
       text->append(L"\t");
-      text->append(*this->exp);
+      text->append(this->exp);
       text->append(L"\n");
 
-      this->hex->clear();
-      this->exp->clear();
+      this->hex.clear();
+      this->exp.clear();
     }
 
     std::wstring HexFormatter::char2Hex(const unsigned char & value)

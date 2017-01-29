@@ -19,8 +19,8 @@ namespace analyzer{
       this->setDetailFormatter(new SimpleTextFormatter());
     }
 
-    TextStyleInterpreter::TextStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
-      :InterpreterDataImpl(byteCollection)
+    TextStyleInterpreter::TextStyleInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data)
+      :InterpreterDataImpl(data)
     {
       this->setDetailFormatter(new SimpleTextFormatter());
     }
@@ -48,16 +48,16 @@ namespace analyzer{
     {
       switch (this->getDetailFormat()){
       case analyzer::base::DetailFormat::simpleText:
-        this->setDetailFormatter(new SimpleTextFormatter());
+        this->setDetailFormatter(new SimpleTextFormatter(this->GetData()));
         break;
       case analyzer::base::DetailFormat::xml:
-        this->setDetailFormatter(new XMLFormatter());
+        this->setDetailFormatter(new XMLFormatter(this->GetData()));
         break;
       case analyzer::base::DetailFormat::pdf:
-        this->setDetailFormatter(new SimpleTextFormatter());
+        this->setDetailFormatter(new SimpleTextFormatter(this->GetData()));
         break;
       default:
-        this->setDetailFormatter(new SimpleTextFormatter());
+        this->setDetailFormatter(new SimpleTextFormatter(this->GetData()));
       }
     }
   }

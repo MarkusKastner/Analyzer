@@ -7,11 +7,6 @@
 #ifndef DEFINITIONDB_H
 #define DEFINITIONDB_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
 
 #ifdef _WIN32
 #include <WinSock2.h>
@@ -23,7 +18,7 @@
 
 namespace analyzer{
   namespace definition{
-    class IMEX DefinitionDB : public DefinitionSource
+    class DefinitionDB : public DefinitionSource
     {
     public:
       DefinitionDB();

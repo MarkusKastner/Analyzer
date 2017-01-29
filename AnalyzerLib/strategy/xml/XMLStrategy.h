@@ -7,6 +7,9 @@
 #ifndef XMLSTRATEGY_H
 #define XMLSTRATEGY_H
 
+#include <memory>
+#include <vector>
+
 #include "AnalyzerLib\strategy\AnalyzingStrategy.h"
 
 namespace analyzer{
@@ -18,7 +21,7 @@ namespace analyzer{
       virtual ~XMLStrategy();
 
     protected:
-      virtual void analyze(const std::shared_ptr<definition::DefinitionSource> & definitions, const std::shared_ptr<analyzer::core::ByteCollection> & data);
+      virtual void analyze(const std::shared_ptr<definition::DefinitionSource> & definitions, const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual bool compareResult(const std::shared_ptr<Result> & result1, const std::shared_ptr<Result> & result2);
     };
   }

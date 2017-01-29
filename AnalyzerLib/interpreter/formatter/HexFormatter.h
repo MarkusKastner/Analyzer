@@ -7,12 +7,6 @@
 #ifndef HEXFORMATTER_H
 #define HEXFORMATTER_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include "Formatter.h"
 
 #include <memory>
@@ -20,18 +14,19 @@
 
 namespace analyzer {
   namespace interpreter {
-    class IMEX HexFormatter : public Formatter
+    class HexFormatter : public Formatter
     {
     public:
       HexFormatter();
+      explicit HexFormatter(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~HexFormatter();
 
       virtual std::shared_ptr<std::wstring> GetText();
 
     private:
-      std::wstring * space;
-      std::wstring * exp;
-      std::wstring * hex;
+      std::wstring space;
+      std::wstring exp;
+      std::wstring hex;
 
       void append(const std::shared_ptr<std::wstring> & text);
       std::wstring char2Hex(const unsigned char & value);

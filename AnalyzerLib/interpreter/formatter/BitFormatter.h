@@ -7,12 +7,6 @@
 #ifndef BITFORMATTER_H
 #define BITFORMATTER_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include "Formatter.h"
 
 #include <memory>
@@ -20,10 +14,11 @@
 
 namespace analyzer{
   namespace interpreter{
-    class IMEX BitFormatter : public Formatter
+    class BitFormatter : public Formatter
     {
     public:
       BitFormatter();
+      explicit BitFormatter(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~BitFormatter();
 
       virtual std::shared_ptr<std::wstring> GetText();

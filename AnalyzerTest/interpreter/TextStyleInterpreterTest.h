@@ -13,7 +13,6 @@
 #include <memory>
 
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\error\InterpreterException.h"
 
 class TextStyleInterpreterTest : public testing::Test
@@ -29,20 +28,19 @@ public:
   void SetUp(){
     this->interpreter1.reset(new analyzer::interpreter::TextStyleInterpreter());
 
-    std::vector<char> data2;
-    data2.push_back('T');
-    data2.push_back('e');
-    data2.push_back('s');
-    data2.push_back('t');
-    data2.push_back(' ');
-    data2.push_back('1');
-    data2.push_back('0');
-    data2.push_back('0');
-    data2.push_back('\n');
-    data2.push_back('x');
+    std::shared_ptr<std::vector<unsigned char>> data2(new std::vector<unsigned char>());
+    data2->push_back('T');
+    data2->push_back('e');
+    data2->push_back('s');
+    data2->push_back('t');
+    data2->push_back(' ');
+    data2->push_back('1');
+    data2->push_back('0');
+    data2->push_back('0');
+    data2->push_back('\n');
+    data2->push_back('x');
 
-    std::shared_ptr<analyzer::core::ByteCollection> byteCollection2(new analyzer::core::ByteCollection(data2));
-    this->interpreter2.reset(new analyzer::interpreter::TextStyleInterpreter(byteCollection2));
+    this->interpreter2.reset(new analyzer::interpreter::TextStyleInterpreter(data2));
   }
 
   std::shared_ptr<analyzer::interpreter::Interpreter> interpreter1;
@@ -68,9 +66,8 @@ TEST_F(TextStyleInterpreterTest, GetPlainTextOnEmptyInterpreter)
 
 TEST_F(TextStyleInterpreterTest, isXML)
 {
-  std::vector<char> xmlHeader{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
-  std::shared_ptr<analyzer::core::ByteCollection> byteCollectionXML(new analyzer::core::ByteCollection(xmlHeader));
-  analyzer::interpreter::TextStyleInterpreter interpreter(byteCollectionXML);
+  std::shared_ptr<std::vector<unsigned char>> xmlHeader(new std::vector<unsigned char>({ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' }));
+  analyzer::interpreter::TextStyleInterpreter interpreter(xmlHeader);
   ASSERT_TRUE(interpreter.IsXML());
 }
 

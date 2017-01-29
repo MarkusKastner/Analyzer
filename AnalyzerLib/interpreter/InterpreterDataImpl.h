@@ -7,21 +7,16 @@
 #ifndef INTERPRETERDATAIMPL_H
 #define INTERPRETERDATAIMPL_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include <memory>
 #include <mutex>
 
 #include "InterpreterObserverImpl.h"
+#include "AnalyzerLib\interpreter\formatter\Formatter.h"
 
 namespace analyzer{
   namespace interpreter{
     class Formatter;
-    class IMEX InterpreterDataImpl : public InterpreterObserverImpl
+    class InterpreterDataImpl : public InterpreterObserverImpl
     {
     private:
       InterpreterDataImpl(const InterpreterDataImpl&){}
@@ -29,13 +24,13 @@ namespace analyzer{
 
     public:
       InterpreterDataImpl();
-      explicit InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection);
+      explicit InterpreterDataImpl(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~InterpreterDataImpl();
 
       virtual bool HasData();
-      virtual void ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data);
-      virtual void ResetData(const std::vector<char> & data);
-      virtual std::shared_ptr<analyzer::core::ByteCollection> GetData();
+
+      virtual void ResetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      virtual std::shared_ptr<std::vector<unsigned char>> GetData();
 
       virtual std::shared_ptr<std::wstring> GetText();
       virtual std::vector<std::wstring> GetFunctionalHighlightExpressions();
@@ -43,18 +38,17 @@ namespace analyzer{
       virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);
 
     protected:
-      std::shared_ptr<analyzer::core::ByteCollection> * getByteCollection();
       base::DetailFormat getDetailFormat();
 
       virtual void setFormatter() = 0;
       void setDetailFormatter(Formatter * formatter);
 
     private:
-      std::shared_ptr<analyzer::core::ByteCollection> * byteCollection;
-      std::recursive_mutex * dataLock;
+      std::shared_ptr<std::vector<unsigned char>> data;
+      std::recursive_mutex dataLock;
 
       base::DetailFormat detailFormat;
-      std::unique_ptr<Formatter> * formatter;
+      std::unique_ptr<Formatter> formatter;
 
     };
   }

@@ -12,18 +12,19 @@
 #include <memory>
 #include <string>
 
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\formatter\SimpleTextFormatter.h"
 
 class SimpleTextFormatterTest : public testing::Test
 {
 public:
+  SimpleTextFormatterTest()
+    : data(new std::vector<unsigned char>({ 'a', 'b', 'c', 'd', 'e', '~' }))
+  {}
+
   void SetUp(){
-    char chars[] = { 'a', 'b', 'c', 'd', 'e', '~' };
-    data.reset(new analyzer::core::ByteCollection(chars, 6));
   }
 
-  std::shared_ptr<analyzer::core::ByteCollection> data;
+  std::shared_ptr<std::vector<unsigned char>> data;
 };
 
 TEST_F(SimpleTextFormatterTest, formatSimpleText)

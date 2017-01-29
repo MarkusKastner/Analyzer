@@ -7,12 +7,6 @@
 #ifndef ANALYZERBASE_H
 #define ANALYZERBASE_H
 
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
-
 #include <memory>
 #include <vector>
 #include <thread>
@@ -30,7 +24,7 @@ namespace analyzer{
   }
   namespace base{
     class AnalyzerBaseObserver;
-    class IMEX AnalyzerBase
+    class AnalyzerBase
     {
     public:
 
@@ -69,20 +63,20 @@ namespace analyzer{
  
     private:
       std::thread * baseThread;
-      std::atomic<bool> * runBaseWorker;
-      std::condition_variable * workCondition;
-      std::mutex * waitLock;
-      std::exception_ptr * workerException;
+      std::atomic<bool> runBaseWorker;
+      std::condition_variable workCondition;
+      std::mutex waitLock;
+      std::exception_ptr workerException;
 
-      std::queue<Task> * workTasks;
+      std::queue<Task> workTasks;
 
-      std::string * documentPath;
-      std::vector<AnalyzerBaseObserver*> * baseObservers;
+      std::string documentPath;
+      std::vector<AnalyzerBaseObserver*> baseObservers;
       
-      std::recursive_mutex * workTasksLock;
+      std::recursive_mutex workTasksLock;
       
-      std::vector<core::File> * files;
-      std::recursive_mutex * filesLock;
+      std::vector<core::File> files;
+      std::recursive_mutex filesLock;
 
       void baseWorker();
       bool hasTask();

@@ -41,7 +41,7 @@ namespace analyzer{
           unsigned int numFiles = mz_zip_reader_get_num_files(&zip_archive);
 
           for (unsigned int i = 0; i < numFiles; i++){
-            std::vector<char> data;
+            std::vector<unsigned char> data;
             mz_zip_archive_file_stat file_stat;
             if (!mz_zip_reader_file_stat(&zip_archive, i, &file_stat)){
               throw CoreException("mz_zip_reader_file_stat() failed!\n");

@@ -11,7 +11,6 @@
 
 #include "AnalyzerLib\interpreter\TextChangedObserver.h"
 #include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
-#include "AnalyzerLib\core\ByteCollection.h"
 
 class TextChangedObserverTest : public testing::Test
 {

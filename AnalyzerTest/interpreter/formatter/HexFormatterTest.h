@@ -12,20 +12,20 @@
 #include <memory>
 #include <string>
 
-#include "AnalyzerLib\core\ByteCollection.h"
 #include "AnalyzerLib\interpreter\formatter\HexFormatter.h"
 
 class HexFormatterTest : public testing::Test
 {
 public:
+  HexFormatterTest()
+    :data(new std::vector<unsigned char>({ 255, 127, 42, 9, 13 , 32, 100, 199 }))
+  {}
+  virtual ~HexFormatterTest() {}
   void SetUp() {
-    char chars[] = { 255, 127, 42, 9, 13 , 32, 100, 199 };
-    data.reset(new analyzer::core::ByteCollection(chars, 8));
-
     cmpStr = L"ff  7f  2a  9  d  20  64  c7  \t[ÿ][DEL][*][HT][CR][SPACE][d][Ç]";
   }
 
-  std::shared_ptr<analyzer::core::ByteCollection> data;
+  std::shared_ptr<std::vector<unsigned char>> data;
   std::wstring cmpStr;
 };
 

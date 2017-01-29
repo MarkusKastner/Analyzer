@@ -12,43 +12,42 @@ namespace analyzer{
   namespace interpreter{
 
     InterpreterObserverImpl::InterpreterObserverImpl()
-      : textChangeObservers(new std::vector<TextChangedObserver*>())
+      : textChangeObservers()
     {
     }
 
     InterpreterObserverImpl::~InterpreterObserverImpl()
     {
       this->notifyExInterpreter();
-      delete this->textChangeObservers;
     }
 
     bool InterpreterObserverImpl::HasObservers()
     {
-      return !this->textChangeObservers->empty();
+      return !this->textChangeObservers.empty();
     }
 
     size_t InterpreterObserverImpl::NumberOfObservers()
     {
-      return this->textChangeObservers->size();
+      return this->textChangeObservers.size();
     }
 
     void InterpreterObserverImpl::RegisterObserver(TextChangedObserver * observer)
     {
       this->throwInvalidObserver(observer);
-      for (auto it = this->textChangeObservers->begin(); it != textChangeObservers->end(); ++it){
+      for (auto it = this->textChangeObservers.begin(); it != textChangeObservers.end(); ++it){
         if (*it == observer){
           return;
         }
       }
-      this->textChangeObservers->push_back(observer);
+      this->textChangeObservers.push_back(observer);
     }
 
     void InterpreterObserverImpl::UnregisterObserver(TextChangedObserver * observer)
     {
       this->throwInvalidObserver(observer);
-      for (auto it = this->textChangeObservers->begin(); it != textChangeObservers->end(); ++it){
+      for (auto it = this->textChangeObservers.begin(); it != textChangeObservers.end(); ++it){
         if (*it == observer){
-          this->textChangeObservers->erase(it);
+          this->textChangeObservers.erase(it);
           return;
         }
       }
@@ -56,14 +55,14 @@ namespace analyzer{
 
     void InterpreterObserverImpl::NotifyTextChange()
     {
-      for (auto observer : *this->textChangeObservers){
+      for (auto observer : this->textChangeObservers){
         observer->NotifyDataChanged();
       }
     }
 
     void InterpreterObserverImpl::notifyExInterpreter()
     {
-      for (auto observer : *this->textChangeObservers) {
+      for (auto observer : this->textChangeObservers) {
         observer->NotifyExInterpreter();
       }
     }

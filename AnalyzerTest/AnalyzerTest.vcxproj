@@ -161,12 +161,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
-    <ClCompile Include="..\AnalyzerLib\core\BasicType.cpp" />
-    <ClCompile Include="..\AnalyzerLib\core\Byte.cpp" />
-    <ClCompile Include="..\AnalyzerLib\core\ByteCollection.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
-    <ClCompile Include="..\AnalyzerLib\core\FormatFinder.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\zip\miniz.c" />
     <ClCompile Include="..\AnalyzerLib\core\zip\ZIPContainer.cpp" />
     <ClCompile Include="..\AnalyzerLib\definitions\Definition.cpp" />
@@ -197,12 +193,8 @@
     <ClInclude Include="..\AnalyzerLib\base\BaseData.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
-    <ClInclude Include="..\AnalyzerLib\core\BasicType.h" />
-    <ClInclude Include="..\AnalyzerLib\core\Byte.h" />
-    <ClInclude Include="..\AnalyzerLib\core\ByteCollection.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
-    <ClInclude Include="..\AnalyzerLib\core\FormatFinder.h" />
     <ClInclude Include="..\AnalyzerLib\core\zip\ZIPContainer.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\Definition.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\DefinitionDB.h" />
@@ -227,11 +219,7 @@
     <ClInclude Include="..\AnalyzerLib\strategy\Result.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\xml\XMLStrategy.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />
-    <ClInclude Include="core\BasicTypeTest.h" />
-    <ClInclude Include="core\ByteCollectionTest.h" />
-    <ClInclude Include="core\ByteTest.h" />
     <ClInclude Include="core\FileTest.h" />
-    <ClInclude Include="core\FormatFinderTest.h" />
     <ClInclude Include="core\zip\ZIPContainerTest.h" />
     <ClInclude Include="definitions\DefinitionDBTest.h" />
     <ClInclude Include="definitions\DefinitionSourceTest.h" />

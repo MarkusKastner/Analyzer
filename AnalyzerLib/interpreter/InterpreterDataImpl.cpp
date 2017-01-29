@@ -7,36 +7,32 @@
 #include "InterpreterDataImpl.h"
 
 #include "error\InterpreterException.h"
-#include "AnalyzerLib\interpreter\formatter\Formatter.h"
 
 namespace analyzer{
   namespace interpreter{
     InterpreterDataImpl::InterpreterDataImpl()
-      :InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(new analyzer::core::ByteCollection())), 
-      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(new std::unique_ptr<Formatter>())
+      :InterpreterObserverImpl(), data(new std::vector<unsigned char>()),
+      dataLock(), detailFormat(base::DetailFormat::unknown), formatter()
     {
     }
 
-    InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
-      : InterpreterObserverImpl(), byteCollection(new std::shared_ptr<analyzer::core::ByteCollection>(byteCollection)), 
-      dataLock(new std::recursive_mutex()), detailFormat(base::DetailFormat::unknown), formatter(new std::unique_ptr<Formatter>())
+    InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<std::vector<unsigned char>> & data)
+      : InterpreterObserverImpl(), data(data),
+      dataLock(), detailFormat(base::DetailFormat::unknown), formatter()
     {
     }
 
     InterpreterDataImpl::~InterpreterDataImpl()
     {
-      delete this->byteCollection;
-      delete this->dataLock;
-      delete this->formatter;
     }
 
     bool InterpreterDataImpl::HasData()
     {
-      std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
-      if (!(*this->byteCollection)){
+      std::lock_guard<std::recursive_mutex> lock(this->dataLock);
+      if (!(this->data)){
         return false;
       }
-      if ((*this->byteCollection)->GetSize() == 0){
+      if ((this->data)->size() == 0){
         return false;
       }
       else{
@@ -44,35 +40,28 @@ namespace analyzer{
       }
     }
 
-    void InterpreterDataImpl::ResetData(const std::shared_ptr<analyzer::core::ByteCollection> & data)
+    void InterpreterDataImpl::ResetData(const std::shared_ptr<std::vector<unsigned char>> & data)
     {
-      { std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
-      *this->byteCollection = data;
-      this->formatter->get()->SetData(*this->byteCollection);
+      { std::lock_guard<std::recursive_mutex> lock(this->dataLock);
+      this->data = data;
+      this->formatter->SetData(this->data);
       }
     }
 
-    void InterpreterDataImpl::ResetData(const std::vector<char> & data)
+    std::shared_ptr<std::vector<unsigned char>> InterpreterDataImpl::GetData()
     {
-      { std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
-      this->byteCollection->reset(new core::ByteCollection(data));
-      }
-    }
-
-    std::shared_ptr<analyzer::core::ByteCollection> InterpreterDataImpl::GetData()
-    {
-      std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
-      return *this->byteCollection;
+      std::lock_guard<std::recursive_mutex> lock(this->dataLock);
+      return this->data;
     }
 
     std::shared_ptr<std::wstring> InterpreterDataImpl::GetText()
     {
-      return this->formatter->get()->GetText();
+      return this->formatter->GetText();
     }
 
     std::vector<std::wstring> InterpreterDataImpl::GetFunctionalHighlightExpressions()
     {
-      return this->formatter->get()->GetFunctionalHighlightingExp();
+      return this->formatter->GetFunctionalHighlightingExp();
     }
 
     void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify)
@@ -89,12 +78,6 @@ namespace analyzer{
       }
     }
 
-    std::shared_ptr<analyzer::core::ByteCollection> * InterpreterDataImpl::getByteCollection()
-    {
-      std::lock_guard<std::recursive_mutex> lock(*this->dataLock);
-      return this->byteCollection;
-    }
-
     base::DetailFormat InterpreterDataImpl::getDetailFormat()
     {
       return this->detailFormat;
@@ -102,8 +85,8 @@ namespace analyzer{
 
     void InterpreterDataImpl::setDetailFormatter(Formatter * formatter)
     {
-      this->formatter->reset(formatter);
-      this->formatter->get()->SetData(*this->byteCollection);
+      this->formatter.reset(formatter);
+      this->formatter->SetData(this->data);
     }
   }
 }

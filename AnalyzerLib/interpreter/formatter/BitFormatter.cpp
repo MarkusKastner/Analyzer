@@ -9,12 +9,18 @@
 #include <locale>
 #include <codecvt>
 #include <string>
+#include <bitset>
 
 namespace analyzer{
   namespace interpreter{
 
     BitFormatter::BitFormatter()
       :Formatter()
+    {
+    }
+
+    BitFormatter::BitFormatter(const std::shared_ptr<std::vector<unsigned char>>& data)
+      :Formatter(data)
     {
     }
 
@@ -26,7 +32,7 @@ namespace analyzer{
     {
       auto& data = (*this->getData());
 
-      if (data.GetSize() == 0){
+      if (data.size() == 0){
         return std::shared_ptr<std::wstring>(new std::wstring());
       }
       int byteCounter = 0;
@@ -36,8 +42,8 @@ namespace analyzer{
 
       for (auto& byte : data){
       
-        asString += byte->GetBitsAsString();
-        valueString += std::string('[' + this->make3Digit(byte->GetValue()) + ']');
+        asString += std::bitset<8>(byte).to_string();
+        valueString += std::string('[' + this->make3Digit(byte) + ']');
 
         byteCounter++;
         

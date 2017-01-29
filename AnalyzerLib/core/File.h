@@ -11,39 +11,31 @@
 #include <vector>
 #include <memory>
 
-#include "ByteCollection.h"
-#include "AnalyzerLib\interpreter\Interpreter.h"
-#include "AnalyzerLib\core\FormatFinder.h"
+#include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
+#include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 #include "AnalyzerLib\base\BaseData.h"
-
-#if _USRDLL
-#define IMEX __declspec(dllexport)
-#else
-#define IMEX __declspec(dllimport)
-#endif
 
 namespace analyzer{
   namespace interpreter{
     class TextChangedObserver;
   }
   namespace core{
-    
-    class IMEX File
+    class File
     {
     public:
       File();
-      explicit File(const std::string & fileName, const std::vector<char> & data);
+      explicit File(const std::string & fileName, const std::vector<unsigned char> & data);
       File(const File & other);
       File& operator=(const File & other);
       virtual ~File();
 
-      void SetFileData(const std::string & fileName, const std::vector<char> & data);
+      void SetFileData(const std::string & fileName, const std::vector<unsigned char> & data);
       bool IsLoaded();
 
       size_t GetSize();
 
       const std::string & GetFileName();
-      const std::shared_ptr<ByteCollection> & GetData();
+      const std::shared_ptr<std::vector<unsigned char>> & GetData();
       const std::vector<std::string> & GetPath();
 
       std::shared_ptr<std::wstring> GetText();
@@ -58,12 +50,11 @@ namespace analyzer{
       std::vector<analyzer::base::DetailFormat> GetTextInterpreterOptions();
 
     private:
-      std::shared_ptr<ByteCollection> * data;
-      std::string * fileName;
-      std::vector<std::string> * path;
-      std::shared_ptr<interpreter::Interpreter> * textInterpreter;
-      std::shared_ptr<interpreter::Interpreter> * binaryInterpreter;
-      FormatFinder formatFinder;
+      std::shared_ptr<std::vector<unsigned char>> data;
+      std::string fileName;
+      std::vector<std::string> path;
+      interpreter::TextStyleInterpreter textInterpreter;
+      interpreter::BinaryStyleInterpreter binaryInterpreter;
       base::BaseFormat currentBaseFormat;
 
       void setDirectoryNames(const std::string& input, const std::string& regex);

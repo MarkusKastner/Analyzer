@@ -20,8 +20,8 @@ namespace analyzer{
       this->setDetailFormatter(new BitFormatter());
     }
 
-    BinaryStyleInterpreter::BinaryStyleInterpreter(const std::shared_ptr<analyzer::core::ByteCollection> & byteCollection)
-      : InterpreterDataImpl(byteCollection)
+    BinaryStyleInterpreter::BinaryStyleInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data)
+      : InterpreterDataImpl(data)
     {
       this->setDetailFormatter(new BitFormatter());
     }
@@ -34,13 +34,13 @@ namespace analyzer{
     {
       switch (this->getDetailFormat()){
       case analyzer::base::DetailFormat::bits:
-        this->setDetailFormatter(new BitFormatter());
+        this->setDetailFormatter(new BitFormatter(this->GetData()));
         break;
       case analyzer::base::DetailFormat::hex:
-        this->setDetailFormatter(new HexFormatter());
+        this->setDetailFormatter(new HexFormatter(this->GetData()));
         break;
       default:
-        this->setDetailFormatter(new BitFormatter());
+        this->setDetailFormatter(new BitFormatter(this->GetData()));
       }
     }
   }
