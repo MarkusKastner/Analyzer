@@ -22,6 +22,9 @@
 namespace analyzer{
   namespace gui{
     class DocumentStructure;
+    class AnalyzeDock;
+    class BinaryDock;
+    class OutputDock;
     class MainWindow : public QMainWindow, public base::AnalyzerBaseObserver
     {
       Q_OBJECT
@@ -41,9 +44,9 @@ namespace analyzer{
       base::AnalyzerBase & analyzerBase;
       gui::display::AnalyzerEdit * analyzerEdit;
 
-      QDockWidget * analyzeDock;
-      QDockWidget * outputDock;
-      QDockWidget * binaryDock;
+      AnalyzeDock * analyzeDock;
+      OutputDock * outputDock;
+      BinaryDock * binaryDock;
       DocumentStructure * documentStructure;
 
       void setup();

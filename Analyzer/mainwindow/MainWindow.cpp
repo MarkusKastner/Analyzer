@@ -10,6 +10,9 @@
 
 #include "application\error\AppException.h"
 #include "dialogs\DocumentStructure.h"
+#include "dialogs\AnalyzeDock.h"
+#include "dialogs\OutputDock.h"
+#include "dialogs\BinaryDock.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
 
@@ -60,9 +63,9 @@ namespace analyzer{
 
     void MainWindow::setupDialogs()
     {
-      this->analyzeDock = new QDockWidget(tr("Analyze"), this);
-      this->outputDock = new QDockWidget(tr("Output"), this);
-      this->binaryDock = new QDockWidget(tr("Binary View"), this);
+      this->analyzeDock = new AnalyzeDock(this);
+      this->outputDock = new OutputDock(this);
+      this->binaryDock = new BinaryDock(this);
 
       this->analyzeDock->setAllowedAreas(Qt::AllDockWidgetAreas);
       this->outputDock->setAllowedAreas(Qt::AllDockWidgetAreas);
