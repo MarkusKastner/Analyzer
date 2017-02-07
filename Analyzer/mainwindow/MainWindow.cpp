@@ -9,7 +9,6 @@
 #include <QLayout>
 
 #include "application\error\AppException.h"
-#include "dialogs\DisplayOptions.h"
 #include "dialogs\DocumentStructure.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
@@ -19,7 +18,8 @@ namespace analyzer{
 
     MainWindow::MainWindow(base::AnalyzerBase & analyzerBase, QWidget *parent)
       : QMainWindow(parent), actions(), analyzerBase(analyzerBase), analyzerEdit(nullptr), 
-      displayOptionsDock(nullptr), documentStructure(nullptr), displayOptions(nullptr)
+      analyzeDock(nullptr), outputDock(nullptr), binaryDock(nullptr),
+      documentStructure(nullptr)
     {
       ui.setupUi(this);
       this->setup();
@@ -32,21 +32,17 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
-      this->displayOptions->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
       this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
     void MainWindow::NotifyDocumentChange()
     {
-      this->DisplayOptionsChanged();
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
       this->analyzerEdit->ClearFile();
     }
 
     void MainWindow::DisplayOptionsChanged()
     {
-      this->analyzerBase.SetNewDisplayOptions(this->displayOptions->GetBaseFormat(), this->displayOptions->GetDetailedFormat());
-      this->analyzerEdit->SetNewDisplayOptions(this->displayOptions->GetBaseFormat(), this->displayOptions->GetDetailedFormat());
     }
 
     void MainWindow::setup()
@@ -64,12 +60,17 @@ namespace analyzer{
 
     void MainWindow::setupDialogs()
     {
-      this->displayOptionsDock = new QDockWidget(tr("display options"), this);
-      this->displayOptionsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+      this->analyzeDock = new QDockWidget(tr("Analyze"), this);
+      this->outputDock = new QDockWidget(tr("Output"), this);
+      this->binaryDock = new QDockWidget(tr("Binary View"), this);
 
-      this->displayOptions = new DisplayOptions(this->displayOptionsDock);
-      this->displayOptionsDock->setWidget(this->displayOptions);
-      this->addDockWidget(Qt::RightDockWidgetArea, this->displayOptionsDock);
+      this->analyzeDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+      this->outputDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+      this->binaryDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+
+      this->addDockWidget(Qt::RightDockWidgetArea, this->analyzeDock);
+      this->addDockWidget(Qt::BottomDockWidgetArea, this->outputDock);
+      this->addDockWidget(Qt::BottomDockWidgetArea, this->binaryDock);
 
       this->documentStructure = new DocumentStructure(tr("document structure"), this);
       this->addDockWidget(Qt::LeftDockWidgetArea, this->documentStructure);
@@ -80,7 +81,6 @@ namespace analyzer{
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
       connect(this->ui.actionClose, &QAction::triggered, this->actions.get(), &Actions::OnClose);
       connect(this->documentStructure, &DocumentStructure::ActiveFileChanged, this, &MainWindow::activeFileChanged);
-      connect(this->displayOptions, &DisplayOptions::DisplayOptionsChanged, this, &MainWindow::DisplayOptionsChanged);
     }
 
     void MainWindow::activeFileChanged(const std::string & fileName)
