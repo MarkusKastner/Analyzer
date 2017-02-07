@@ -10,6 +10,9 @@ namespace analyzer {
     public:
       BinaryDock(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = Qt::WindowFlags());
       virtual ~BinaryDock();
+
+    private:
+      void setup();
     };
   }
 }

@@ -10,6 +10,9 @@ namespace analyzer {
     public:
       AnalyzeDock(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = Qt::WindowFlags());
       virtual ~AnalyzeDock();
+
+    private:
+      void setup();
     };
   }
 }
