@@ -14,7 +14,7 @@
 namespace analyzer{
   namespace gui{
     DocumentStructure::DocumentStructure(const QString & title, QWidget * parent)
-      :QDockWidget(title, parent), baseWidget(nullptr), fileTree(nullptr)
+      :QDockWidget(title, parent), fileTree(nullptr)
     {
       this->setup();
     }
@@ -39,12 +39,13 @@ namespace analyzer{
     void DocumentStructure::setup()
     {
       this->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-      this->baseWidget = new QWidget();
-      this->setWidget(this->baseWidget);
-      this->baseWidget->setLayout(new QVBoxLayout());
+      this->layout()->setContentsMargins(1, 1, 1, 1);
+      this->setWidget(new QWidget());
+      this->widget()->setLayout(new QVBoxLayout());
+      this->widget()->layout()->setContentsMargins(1, 1, 1, 1);
 
-      this->fileTree = new QTreeWidget(this->baseWidget);
-      this->baseWidget->layout()->addWidget(this->fileTree);
+      this->fileTree = new QTreeWidget(this->widget());
+      this->widget()->layout()->addWidget(this->fileTree);
       this->fileTree->setHeaderHidden(true);
       connect(this->fileTree, &QTreeWidget::itemClicked, this, &DocumentStructure::onItemChanged);
     }

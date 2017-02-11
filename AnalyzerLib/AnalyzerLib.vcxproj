@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="base\AnalyzerBase.h" />
     <ClInclude Include="base\AnalyzerBaseObserver.h" />
+    <ClInclude Include="base\AnalyzingOptions.h" />
     <ClInclude Include="base\BaseData.h" />
     <ClInclude Include="base\error\AnalyzerBaseException.h" />
     <ClInclude Include="base\error\DBException.h" />

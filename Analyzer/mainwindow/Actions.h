@@ -23,6 +23,8 @@ namespace analyzer{
 
       void OnOpen();
       void OnClose();
+      void OnStartAnalyzing();
+      void OnStopAnalyzing();
 
     private:
       MainWindow * mainWindow;

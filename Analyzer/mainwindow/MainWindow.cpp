@@ -13,6 +13,7 @@
 #include "dialogs\AnalyzeDock.h"
 #include "dialogs\OutputDock.h"
 #include "dialogs\BinaryDock.h"
+#include "AnalyzerTab.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
 
@@ -20,7 +21,7 @@ namespace analyzer{
   namespace gui{
 
     MainWindow::MainWindow(base::AnalyzerBase & analyzerBase, QWidget *parent)
-      : QMainWindow(parent), actions(), analyzerBase(analyzerBase), analyzerEdit(nullptr), 
+      : QMainWindow(parent), actions(), analyzerBase(analyzerBase), tabWidget(nullptr),
       analyzeDock(nullptr), outputDock(nullptr), binaryDock(nullptr),
       documentStructure(nullptr)
     {
@@ -35,13 +36,33 @@ namespace analyzer{
 
     void MainWindow::NotifyInterprterChange()
     {
-      this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
+      //this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
     void MainWindow::NotifyDocumentChange()
     {
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
-      this->analyzerEdit->ClearFile();
+      //this->analyzerEdit->ClearFile();
+    }
+
+    void MainWindow::AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical)
+    {
+      this->binaryDock->AddLine(hex, binary, ascii, numerical);
+    }
+
+    void MainWindow::ClearBinaryView()
+    {
+      this->binaryDock->Clear();
+    }
+
+    void MainWindow::AddOutputMessage(const std::string & message)
+    {
+      this->outputDock->AddMessage(message);
+    }
+
+    void MainWindow::SetAvailableAnalyzingOptions(const base::AnalyzingOptions & analyzingOptions)
+    {
+      this->analyzeDock->SetOptions(analyzingOptions);
     }
 
     void MainWindow::DisplayOptionsChanged()
@@ -52,9 +73,12 @@ namespace analyzer{
     {
       this->analyzerBase.RegisterObserver(this);
 
-      this->analyzerEdit = new gui::display::AnalyzerEdit();
-      this->setCentralWidget(this->analyzerEdit);
-      
+      this->tabWidget = new AnalyzerTab(this);
+
+      //this->analyzerEdit = new gui::display::AnalyzerEdit();
+      //this->setCentralWidget(this->analyzerEdit);
+      this->setCentralWidget(this->tabWidget);
+
       this->setupDialogs();
 
       this->actions.reset(new Actions(this, this->analyzerBase));
@@ -83,12 +107,82 @@ namespace analyzer{
     {
       connect(this->ui.actionOpen, &QAction::triggered, this->actions.get(), &Actions::OnOpen);
       connect(this->ui.actionClose, &QAction::triggered, this->actions.get(), &Actions::OnClose);
+      connect(this->ui.actionStart_Analyzing, &QAction::triggered, this->actions.get(), &Actions::OnStartAnalyzing);
+      connect(this->ui.actionStop_Analyzing, &QAction::triggered, this->actions.get(), &Actions::OnStopAnalyzing);
+      connect(this->ui.actionDocumentStructure, &QAction::toggled, this, &MainWindow::onDocStructureToggled);
+      connect(this->ui.actionOutput, &QAction::toggled, this, &MainWindow::onOutputToggled);
+      connect(this->ui.actionAnalyze, &QAction::toggled, this, &MainWindow::onAnalyzeToggled);
+      connect(this->ui.actionBinary_View, &QAction::toggled, this, &MainWindow::onBinViewToggled);
+      connect(this->documentStructure, &DocumentStructure::visibilityChanged, this, &MainWindow::onDocViewVisibility);
+      connect(this->outputDock, &DocumentStructure::visibilityChanged, this, &MainWindow::onOutputViewVisibility);
+      connect(this->analyzeDock, &DocumentStructure::visibilityChanged, this, &MainWindow::onAnalyzeViewVisibility);
+      connect(this->binaryDock, &DocumentStructure::visibilityChanged, this, &MainWindow::onBinaryViewVisibility);
       connect(this->documentStructure, &DocumentStructure::ActiveFileChanged, this, &MainWindow::activeFileChanged);
     }
 
     void MainWindow::activeFileChanged(const std::string & fileName)
     {
       this->analyzerBase.SetActiveFile(fileName);
+    }
+
+    void MainWindow::onDocStructureToggled(bool visible)
+    {
+      if (this->documentStructure->isHidden() && visible) {
+        this->documentStructure->show();
+      }
+      else if (!this->documentStructure->isHidden() && !visible) {
+        this->documentStructure->hide();
+      }
+    }
+
+    void MainWindow::onOutputToggled(bool visible)
+    {
+      if (this->outputDock->isHidden() && visible) {
+        this->outputDock->show();
+      }
+      else if (!this->outputDock->isHidden() && !visible) {
+        this->outputDock->hide();
+      }
+    }
+
+    void MainWindow::onAnalyzeToggled(bool visible)
+    {
+      if (this->analyzeDock->isHidden() && visible) {
+        this->analyzeDock->show();
+      }
+      else if (!this->analyzeDock->isHidden() && !visible) {
+        this->analyzeDock->hide();
+      }
+    }
+
+    void MainWindow::onBinViewToggled(bool visible)
+    {
+      if (this->binaryDock->isHidden() && visible) {
+        this->binaryDock->show();
+      }
+      else if (!this->binaryDock->isHidden() && !visible) {
+        this->binaryDock->hide();
+      }
+    }
+
+    void MainWindow::onDocViewVisibility(bool visible)
+    {
+      this->ui.actionDocumentStructure->setChecked(visible);
+    }
+
+    void MainWindow::onOutputViewVisibility(bool visible)
+    {
+      this->ui.actionOutput->setChecked(visible);
+    }
+
+    void MainWindow::onAnalyzeViewVisibility(bool visible)
+    {
+      this->ui.actionAnalyze->setChecked(visible);
+    }
+
+    void MainWindow::onBinaryViewVisibility(bool visible)
+    {
+      this->ui.actionBinary_View->setChecked(visible);
     }
   }
 }

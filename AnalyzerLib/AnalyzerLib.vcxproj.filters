@@ -216,5 +216,8 @@
     <ClInclude Include="network\CrossSock.h">
       <Filter>network</Filter>
     </ClInclude>
+    <ClInclude Include="base\AnalyzingOptions.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

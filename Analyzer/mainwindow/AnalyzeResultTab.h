@@ -4,29 +4,28 @@
 * Written by Markus Kastner <markus.kastner@marscode.at>
 */
 
-#ifndef OUTPUTDOCK_H
-#define OUTPUTDOCK_H
+#ifndef ANALYZERESULTTAB_H
+#define ANALYZERESULTTAB_H
 
-#include <QDockWidget>
+#include <QWidget>
 #include <QTextEdit>
-#include <string>
 
 namespace analyzer {
   namespace gui {
-    class OutputDock : public QDockWidget
+    class AnalyzerTab;
+    class AnalyzeResultTab : public QWidget
     {
+    private:
+      AnalyzeResultTab() {}
     public:
-      OutputDock(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = Qt::WindowFlags());
-      virtual ~OutputDock();
-
-      void AddMessage(const std::string & message);
-      void Clear();
+      explicit AnalyzeResultTab(AnalyzerTab * parent);
+      virtual ~AnalyzeResultTab();
 
     private:
-      QTextEdit * output;
+      QTextEdit * textEdit;
       void setup();
+
     };
   }
 }
-
 #endif

@@ -55,7 +55,6 @@ namespace analyzer{
       void customEvent(QEvent * evt);
 
     private:
-      QWidget * baseWidget;
       QTreeWidget * fileTree;
 
       void setup();

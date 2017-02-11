@@ -38,6 +38,14 @@ namespace analyzer{
       this->analyzerBase.CloseDocument();
     }
 
+    void Actions::OnStartAnalyzing()
+    {
+    }
+
+    void Actions::OnStopAnalyzing()
+    {
+    }
+
     void Actions::throwMainWindow()
     {
       if (nullptr == this->mainWindow){

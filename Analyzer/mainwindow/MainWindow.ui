@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>638</width>
-    <height>526</height>
+    <width>944</width>
+    <height>647</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>638</width>
+     <width>944</width>
      <height>21</height>
     </rect>
    </property>
@@ -34,26 +34,55 @@
     <property name="title">
      <string>Analyzer</string>
     </property>
+    <addaction name="actionStart_Analyzing"/>
+    <addaction name="actionStop_Analyzing"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
      <string>View</string>
     </property>
-    <addaction name="actionDisplayOptions"/>
+    <widget class="QMenu" name="menuWindows">
+     <property name="title">
+      <string>Windows</string>
+     </property>
+     <addaction name="actionDocumentStructure"/>
+     <addaction name="actionOutput"/>
+     <addaction name="actionAnalyze"/>
+     <addaction name="actionBinary_View"/>
+    </widget>
+    <addaction name="menuWindows"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAnalyzer"/>
    <addaction name="menuView"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar_file">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionClose"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar_analyzer">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionStart_Analyzing"/>
+   <addaction name="actionStop_Analyzing"/>
+  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
@@ -77,6 +106,60 @@
   <action name="actionClose">
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionStart_Analyzing">
+   <property name="text">
+    <string>Start Analyzing</string>
+   </property>
+  </action>
+  <action name="actionStop_Analyzing">
+   <property name="text">
+    <string>Stop Analyzing</string>
+   </property>
+  </action>
+  <action name="actionDocumentStructure">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>DocumentStructure</string>
+   </property>
+  </action>
+  <action name="actionOutput">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Output</string>
+   </property>
+  </action>
+  <action name="actionAnalyze">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Analyze</string>
+   </property>
+  </action>
+  <action name="actionBinary_View">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Binary View</string>
    </property>
   </action>
  </widget>

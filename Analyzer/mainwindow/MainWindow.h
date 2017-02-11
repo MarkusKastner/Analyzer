@@ -13,9 +13,9 @@
 #include <memory>
 
 #include <QDockWidget>
+#include <QTabWidget>
 
 #include "Actions.h"
-#include "display\maindisplay\AnalyzerEdit.h"
 #include "AnalyzerLib\base\AnalyzerBase.h"
 #include "AnalyzerLib\base\AnalyzerBaseObserver.h"
 
@@ -25,6 +25,7 @@ namespace analyzer{
     class AnalyzeDock;
     class BinaryDock;
     class OutputDock;
+    class AnalyzerTab;
     class MainWindow : public QMainWindow, public base::AnalyzerBaseObserver
     {
       Q_OBJECT
@@ -35,6 +36,10 @@ namespace analyzer{
 
       virtual void NotifyInterprterChange();
       virtual void NotifyDocumentChange();
+      virtual void AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical);
+      virtual void ClearBinaryView();
+      virtual void AddOutputMessage(const std::string & message);
+      virtual void SetAvailableAnalyzingOptions(const base::AnalyzingOptions & analyzingOptions);
 
       void DisplayOptionsChanged();
 
@@ -42,7 +47,8 @@ namespace analyzer{
       Ui::MainWindow ui;
       std::unique_ptr<Actions> actions;
       base::AnalyzerBase & analyzerBase;
-      gui::display::AnalyzerEdit * analyzerEdit;
+      AnalyzerTab * tabWidget;
+      //gui::display::AnalyzerEdit * analyzerEdit;
 
       AnalyzeDock * analyzeDock;
       OutputDock * outputDock;
@@ -55,6 +61,14 @@ namespace analyzer{
       void connectUI();
 
       void activeFileChanged(const std::string & fileName);
+      void onDocStructureToggled(bool visible);
+      void onOutputToggled(bool visible);
+      void onAnalyzeToggled(bool visible);
+      void onBinViewToggled(bool visible);
+      void onDocViewVisibility(bool visible);
+      void onOutputViewVisibility(bool visible);
+      void onAnalyzeViewVisibility(bool visible);
+      void onBinaryViewVisibility(bool visible);
     };
   }
 }

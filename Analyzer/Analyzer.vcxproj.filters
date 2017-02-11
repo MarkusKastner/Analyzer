@@ -107,6 +107,18 @@
     <ClCompile Include="dialogs\OutputDock.cpp">
       <Filter>dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="mainwindow\AnalyzerTab.cpp">
+      <Filter>mainwindow</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow\AnalyzeResultTab.cpp">
+      <Filter>mainwindow</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow\ViewTab.cpp">
+      <Filter>mainwindow</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\BinaryListView.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -125,6 +137,18 @@
       <Filter>dialogs</Filter>
     </ClInclude>
     <ClInclude Include="dialogs\OutputDock.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="mainwindow\AnalyzerTab.h">
+      <Filter>mainwindow</Filter>
+    </ClInclude>
+    <ClInclude Include="mainwindow\AnalyzeResultTab.h">
+      <Filter>mainwindow</Filter>
+    </ClInclude>
+    <ClInclude Include="mainwindow\ViewTab.h">
+      <Filter>mainwindow</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\BinaryListView.h">
       <Filter>dialogs</Filter>
     </ClInclude>
   </ItemGroup>
