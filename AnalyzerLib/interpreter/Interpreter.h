@@ -15,8 +15,6 @@
 
 namespace analyzer{
   namespace interpreter{
-    class TextChangedObserver;
-    class TextGlyph;
     class Interpreter
     {
     public:

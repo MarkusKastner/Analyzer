@@ -10,7 +10,6 @@
 #include <filesystem>
 
 #include "TestSupport.h"
-
 #include "base\AnalyzerBaseTest.h"
 #include "core\zip\ZIPContainerTest.h"
 #include "core\FileTest.h"
@@ -29,6 +28,7 @@
 #include "interpreter\formatter\BitFormatterTest.h"
 #include "interpreter\formatter\HexFormatterTest.h"
 #include "service\UpdateTest.h"
+#include "interpreter\InterpreterFactoyTest.h"
 
 int main(int argc, char** argv) {
 

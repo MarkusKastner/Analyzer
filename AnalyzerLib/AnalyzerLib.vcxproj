@@ -178,6 +178,7 @@
     <ClCompile Include="interpreter\formatter\HexFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
+    <ClCompile Include="interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
     <ClCompile Include="service\Update.cpp" />
     <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="interpreter\formatter\SimpleTextFormatter.h" />
     <ClInclude Include="interpreter\formatter\XMLFormatter.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
+    <ClInclude Include="interpreter\InterpreterFactory.h" />
     <ClInclude Include="network\CrossSock.h" />
     <ClInclude Include="service\Update.h" />
     <ClInclude Include="strategy\AnalyzingStrategy.h" />

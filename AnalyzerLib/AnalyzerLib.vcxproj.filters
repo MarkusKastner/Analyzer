@@ -109,6 +109,9 @@
     <ClCompile Include="network\CrossSock.cpp">
       <Filter>network</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\InterpreterFactory.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -191,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="base\AnalyzingOptions.h">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\InterpreterFactory.h">
+      <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
