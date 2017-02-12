@@ -325,13 +325,6 @@ TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
   ASSERT_TRUE(this->observer1.HasFileChanged());
 }
 
-TEST_F(AnalyzerBaseTest, displayOptionsChange)
-{
-  this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  this->analyzerBase1.SetNewDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
-  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetText()->c_str(), L"Dummy");
-}
-
 TEST_F(AnalyzerBaseTest, fileNameWithoutPath) 
 {
   this->analyzerBase1.OpenDocument(std::string(this->path1.begin(), this->path1.end()));

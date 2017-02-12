@@ -38,27 +38,13 @@ namespace analyzer{
       const std::shared_ptr<std::vector<unsigned char>> & GetData();
       const std::vector<std::string> & GetPath();
 
-      std::shared_ptr<std::wstring> GetText();
-      std::vector<std::wstring> GetFunctionalHighlightExpressions();
-
-      void SetDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);
-
-      void RegisterObserver(interpreter::TextChangedObserver * observer);
-      void UnregisterObserver(interpreter::TextChangedObserver * observer);
-
-      std::vector<analyzer::base::DetailFormat> GetBinaryInterpreterOptions();
-      std::vector<analyzer::base::DetailFormat> GetTextInterpreterOptions();
-
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string fileName;
       std::vector<std::string> path;
-      interpreter::TextStyleInterpreter textInterpreter;
-      interpreter::BinaryStyleInterpreter binaryInterpreter;
-      base::BaseFormat currentBaseFormat;
+      std::shared_ptr<interpreter::Interpreter> interpreter;
 
       void setDirectoryNames(const std::string& input, const std::string& regex);
-      void feedInterpreter();
     };
   }
 }

@@ -89,39 +89,9 @@ TEST_F(FileTest, AssignOperator)
   ASSERT_EQ(theNewfile.GetSize(), this->charVector.size());
 }
 
-TEST_F(FileTest, GetText)
-{
-  this->file1.SetFileData(fileName1, charVector);
-  this->file1.SetDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
-  ASSERT_STREQ(this->file1.GetText().get()->c_str(), L"aaaa");
-}
-
-TEST_F(FileTest, ChangeDisplayOptions)
-{
-  this->file1.SetFileData(fileName1, charVector);
-  this->file1.SetDisplayOptions(analyzer::base::BaseFormat::text, analyzer::base::DetailFormat::simpleText);
-  ASSERT_STREQ(this->file1.GetText()->c_str(), L"aaaa");
-  this->file1.SetDisplayOptions(analyzer::base::BaseFormat::binary, analyzer::base::DetailFormat::bits);
-  ASSERT_STREQ(this->file1.GetText()->c_str(), L"01100001  01100001  01100001  01100001    [097][097][097][097]");
-}
-
-TEST_F(FileTest, BinaryInterpreterOptions)
-{
-  this->file1.SetFileData(fileName1, charVector);
-  ASSERT_EQ(this->file1.GetBinaryInterpreterOptions()[0], analyzer::base::DetailFormat::bits);
-  ASSERT_EQ(this->file1.GetBinaryInterpreterOptions()[1], analyzer::base::DetailFormat::hex);
-}
-
-TEST_F(FileTest, TextInterpreterOptions)
-{
-  this->file1.SetFileData(fileName1, charVector);
-  ASSERT_EQ(this->file1.GetTextInterpreterOptions()[0], analyzer::base::DetailFormat::simpleText);
-}
-
 TEST_F(FileTest, xmlRecognition)
 {
   this->file1.SetFileData("someXML.xml", this->xmlHeader);
-  ASSERT_EQ(this->file1.GetTextInterpreterOptions()[1], analyzer::base::DetailFormat::xml);
 }
 
 #endif

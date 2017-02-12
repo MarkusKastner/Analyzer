@@ -212,13 +212,6 @@ namespace analyzer{
       throw AnalyzerBaseException("unknown file");
     }
 
-    void AnalyzerBase::SetNewDisplayOptions(const BaseFormat & baseFormat, const DetailFormat & detailFormat)
-    {
-      for (auto& file : (this->files)){
-        file.SetDisplayOptions(baseFormat, detailFormat);
-      }
-    }
-
     void AnalyzerBase::baseWorker()
     {
       std::unique_lock<std::mutex> lock(this->waitLock);

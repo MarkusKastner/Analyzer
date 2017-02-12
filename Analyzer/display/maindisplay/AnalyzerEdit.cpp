@@ -116,7 +116,7 @@ namespace analyzer{
           EditEvent * editEvt = dynamic_cast<EditEvent*>(evt);
           switch (editEvt->GetAction()) {
           case EditEvent::Action::dataChange:
-            this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
+            
             break;
           case EditEvent::Action::clear:
             this->clearFile();
@@ -140,9 +140,7 @@ namespace analyzer{
       {
         this->clearFile();
         this->file = file;
-        this->file->RegisterObserver(this);
         this->interpreterDeleted = false;
-        this->setPlainText(QString::fromWCharArray(this->file->GetText()->c_str()));
       }
 
       void AnalyzerEdit::clearFile()
@@ -150,7 +148,6 @@ namespace analyzer{
         this->setPlainText("");
         if (this->file != nullptr) {
           if (!this->interpreterDeleted) {
-            this->file->UnregisterObserver(this);
           }
           this->file = nullptr;
         }
