@@ -112,6 +112,9 @@
     <ClCompile Include="interpreter\InterpreterFactory.cpp">
       <Filter>interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\ASCIIInterpreter.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -196,6 +199,9 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\InterpreterFactory.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\ASCIIInterpreter.h">
       <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>

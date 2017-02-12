@@ -120,6 +120,9 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterFactory.cpp">
       <Filter>Interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\ASCIIInterpreter.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -258,6 +261,12 @@
       <Filter>Interpreter</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterFactory.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\ASCIIInterpreter.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\ASCIIInterpreterTest.h">
       <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>

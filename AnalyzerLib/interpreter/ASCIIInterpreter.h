@@ -1,0 +1,25 @@
+/* Copyright (C) 2016-2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
+#ifndef ASCIIINTERPRETER_H
+#define ASCIIINTERPRETER_H
+
+#include "Interpreter.h"
+
+namespace analyzer {
+  namespace interpreter {
+    class ASCIIInterpreter : public Interpreter
+    {
+    public:
+      ASCIIInterpreter();
+      virtual ~ASCIIInterpreter();
+
+      virtual bool HasData();
+    };
+  }
+}
+
+#endif

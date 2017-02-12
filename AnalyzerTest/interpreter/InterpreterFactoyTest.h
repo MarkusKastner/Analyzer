@@ -24,4 +24,5 @@ TEST_F(IntepreterFactoryTest, emptyData)
 {
   ASSERT_EQ(this->intepreterFactory.CreateInterpreter(std::shared_ptr<std::vector<unsigned char>>()), nullptr);
 }
+
 #endif

@@ -29,6 +29,7 @@
 #include "interpreter\formatter\HexFormatterTest.h"
 #include "service\UpdateTest.h"
 #include "interpreter\InterpreterFactoyTest.h"
+#include "interpreter\ASCIIInterpreterTest.h"
 
 int main(int argc, char** argv) {
 
