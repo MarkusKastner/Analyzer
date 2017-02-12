@@ -20,6 +20,7 @@ namespace analyzer {
     public:
       explicit AnalyzeResultTab(AnalyzerTab * parent);
       virtual ~AnalyzeResultTab();
+      QTextEdit * GetResultTextEdit();
 
     private:
       QTextEdit * textEdit;

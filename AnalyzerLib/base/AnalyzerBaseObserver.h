@@ -14,12 +14,12 @@ namespace analyzer{
     class AnalyzerBaseObserver
     {
     public:
-      virtual void NotifyInterprterChange() = 0;
       virtual void NotifyDocumentChange() = 0;
       virtual void AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical) = 0;
       virtual void ClearBinaryView() = 0;
       virtual void AddOutputMessage(const std::string & message) = 0;
       virtual void SetAvailableAnalyzingOptions(const base::AnalyzingOptions & analyzingOptions) = 0;
+      virtual void FileChange() = 0;
     };
   }
 }

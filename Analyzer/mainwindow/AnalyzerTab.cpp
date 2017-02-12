@@ -20,6 +20,16 @@ namespace analyzer {
     {
     }
 
+    display::AnalyzerEdit * AnalyzerTab::GetAnalyzerEdit()
+    {
+      return this->viewTab->GetAnalyzerEdit();
+    }
+
+    QTextEdit * AnalyzerTab::GetResultTextEdit()
+    {
+      return this->resultTab->GetResultTextEdit();
+    }
+
     void AnalyzerTab::setup()
     {
       this->viewTab = new ViewTab(this);

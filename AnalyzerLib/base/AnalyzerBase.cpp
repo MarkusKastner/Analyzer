@@ -205,7 +205,7 @@ namespace analyzer{
       for (auto& exisiting : this->files){
         if (exisiting.GetFileName().compare(fileName) == 0){
           this->documentPath = fileName;
-          this->notifyInterpreterChange();
+          this->activeFileChanged();
           return;
         }
       }
@@ -316,17 +316,17 @@ namespace analyzer{
       }
     }
 
-    void AnalyzerBase::notifyInterpreterChange()
-    {
-      for (auto observer : this->baseObservers){
-        observer->NotifyInterprterChange();
-      }
-    }
-
     void AnalyzerBase::notifyFilesChange()
     {
       for (auto observer : this->baseObservers){
         observer->NotifyDocumentChange();
+      }
+    }
+
+    void AnalyzerBase::activeFileChanged()
+    {
+      for (auto observer : this->baseObservers) {
+        observer->FileChange();
       }
     }
 

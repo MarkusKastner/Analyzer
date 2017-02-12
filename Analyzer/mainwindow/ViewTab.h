@@ -24,6 +24,8 @@ namespace analyzer {
       explicit ViewTab(AnalyzerTab * parent);
       virtual ~ViewTab();
 
+      display::AnalyzerEdit * GetAnalyzerEdit();
+
     private:
       display::AnalyzerEdit * analyzerEdit;
 

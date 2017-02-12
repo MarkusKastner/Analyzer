@@ -23,25 +23,70 @@ public:
   {
   public:
     SomeObserver()
-      :interpreterChanged(false), filesChanged(false)
+      :docChanged(false), binViewCleared(false), fileChanged(false),
+      hex(), binary(), ascii(), numerical(), outputMsg(), analyzingOptions()
     {}
     ~SomeObserver(){}
 
-    virtual void NotifyInterprterChange(){
-      this->interpreterChanged = true;
-    }
     virtual void NotifyDocumentChange(){
-      this->filesChanged = true;
+      this->docChanged = true;
     }
-    bool InterpreterChanged(){
-      return this->interpreterChanged;
+
+    virtual void AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical) {
+      this->hex = hex;
+      this->binary = binary;
+      this->ascii = ascii;
+      this->numerical = numerical;
     }
-    bool FilesChanged(){
-      return this->filesChanged;
+
+    virtual void ClearBinaryView() {
+      this->binViewCleared = true;
     }
+
+    virtual void AddOutputMessage(const std::string & message) {
+      this->outputMsg = message;
+    }
+
+    virtual void SetAvailableAnalyzingOptions(const analyzer::base::AnalyzingOptions & analyzingOptions) {
+      this->analyzingOptions = analyzingOptions;
+    }
+
+    virtual void FileChange() {
+      this->fileChanged = true;
+    }
+
+    bool DocChanged(){
+      return docChanged;
+    }
+
+    bool BinViewCleared() {
+      return this->binViewCleared;
+    }
+
+    bool HasFileChanged() {
+      return this->fileChanged;
+    }
+
+    std::string Hex() { return this->hex; }
+    std::string Binary() { return this->binary; }
+    std::string Ascii() { return this->ascii; }
+    std::string Numerical() { return this->numerical; }
+    std::string OutputMsg() { return this->outputMsg; }
+
+    analyzer::base::AnalyzingOptions AnalyzingOptions() {
+       return this->analyzingOptions;
+    }
+
   private:
-    bool interpreterChanged;
-    bool filesChanged;
+    bool docChanged;
+    bool binViewCleared;
+    bool fileChanged;
+    std::string hex;
+    std::string binary;
+    std::string ascii;
+    std::string numerical;
+    std::string outputMsg;
+    analyzer::base::AnalyzingOptions analyzingOptions;
   };
 
   AnalyzerBaseTest()
@@ -81,6 +126,7 @@ public:
   analyzer::core::File analyzerFile;
   std::wstring path2;
   std::wstring path3;
+
 };
 
 TEST_F(AnalyzerBaseTest, init)
@@ -137,7 +183,7 @@ TEST_F(AnalyzerBaseTest, LoadTxtFile)
   this->analyzerBase1.OpenDocument(std::string(this->path1.begin(), this->path1.end()));
   this->waitUntilFileCountEquals(1);
   ASSERT_TRUE(this->analyzerBase1.HasData());
-  ASSERT_TRUE(this->observer1.FilesChanged());
+  ASSERT_TRUE(this->observer1.DocChanged());
 }
 
 TEST_F(AnalyzerBaseTest, InvalidFile)
@@ -276,7 +322,7 @@ TEST_F(AnalyzerBaseTest, SetActiveAnalyzerFile)
   this->analyzerBase1.RegisterObserver(&this->observer1);
   this->analyzerBase1.SetActiveFile("Zauberlehrling.txt");
   ASSERT_STRNE(defaultActive.c_str(), this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName().c_str());
-  ASSERT_TRUE(this->observer1.InterpreterChanged());
+  ASSERT_TRUE(this->observer1.HasFileChanged());
 }
 
 TEST_F(AnalyzerBaseTest, displayOptionsChange)

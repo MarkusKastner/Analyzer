@@ -87,8 +87,8 @@ namespace analyzer{
       void loadSimpleFile();
       void loadContainer();
 
-      void notifyInterpreterChange();
       void notifyFilesChange();
+      void activeFileChanged();
 
       void throwInvalidObserver(AnalyzerBaseObserver * observer);
     };

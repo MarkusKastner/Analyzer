@@ -9,8 +9,12 @@
 
 #include <QTabWidget>
 
+class QTextEdit;
 namespace analyzer {
   namespace gui {
+    namespace display {
+      class AnalyzerEdit;
+    }
     class ViewTab;
     class AnalyzeResultTab;
 
@@ -22,6 +26,9 @@ namespace analyzer {
     public:
       explicit AnalyzerTab(QWidget * parent = nullptr);
       virtual ~AnalyzerTab();
+
+      display::AnalyzerEdit * GetAnalyzerEdit();
+      QTextEdit * GetResultTextEdit();
 
     private:
       ViewTab * viewTab;

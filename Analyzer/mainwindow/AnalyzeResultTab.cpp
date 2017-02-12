@@ -22,6 +22,11 @@ namespace analyzer {
     {
     }
 
+    QTextEdit * AnalyzeResultTab::GetResultTextEdit()
+    {
+      return this->textEdit;
+    }
+
     void AnalyzeResultTab::setup()
     {
       this->setLayout(new QVBoxLayout());

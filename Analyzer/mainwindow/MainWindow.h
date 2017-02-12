@@ -34,21 +34,18 @@ namespace analyzer{
       MainWindow(base::AnalyzerBase & analyzerBase, QWidget *parent = 0);
       ~MainWindow();
 
-      virtual void NotifyInterprterChange();
       virtual void NotifyDocumentChange();
       virtual void AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical);
       virtual void ClearBinaryView();
       virtual void AddOutputMessage(const std::string & message);
       virtual void SetAvailableAnalyzingOptions(const base::AnalyzingOptions & analyzingOptions);
-
-      void DisplayOptionsChanged();
+      virtual void FileChange();
 
     private:
       Ui::MainWindow ui;
       std::unique_ptr<Actions> actions;
       base::AnalyzerBase & analyzerBase;
       AnalyzerTab * tabWidget;
-      //gui::display::AnalyzerEdit * analyzerEdit;
 
       AnalyzeDock * analyzeDock;
       OutputDock * outputDock;

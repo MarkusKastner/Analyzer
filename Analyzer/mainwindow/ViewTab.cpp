@@ -24,6 +24,11 @@ namespace analyzer {
     {
     }
 
+    display::AnalyzerEdit * ViewTab::GetAnalyzerEdit()
+    {
+      return this->analyzerEdit;
+    }
+
     void ViewTab::setup()
     {
       this->setLayout(new QVBoxLayout());

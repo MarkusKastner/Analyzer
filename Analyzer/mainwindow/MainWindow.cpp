@@ -13,6 +13,8 @@
 #include "dialogs\AnalyzeDock.h"
 #include "dialogs\OutputDock.h"
 #include "dialogs\BinaryDock.h"
+#include "display\maindisplay\AnalyzerEdit.h"
+
 #include "AnalyzerTab.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
@@ -34,15 +36,10 @@ namespace analyzer{
       this->analyzerBase.UnregisterObserver(this);
     }
 
-    void MainWindow::NotifyInterprterChange()
-    {
-      //this->analyzerEdit->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
-    }
-
     void MainWindow::NotifyDocumentChange()
     {
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
-      //this->analyzerEdit->ClearFile();
+      this->tabWidget->GetAnalyzerEdit()->ClearFile();
     }
 
     void MainWindow::AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical)
@@ -65,8 +62,9 @@ namespace analyzer{
       this->analyzeDock->SetOptions(analyzingOptions);
     }
 
-    void MainWindow::DisplayOptionsChanged()
+    void MainWindow::FileChange()
     {
+      this->tabWidget->GetAnalyzerEdit()->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
     void MainWindow::setup()
@@ -74,9 +72,6 @@ namespace analyzer{
       this->analyzerBase.RegisterObserver(this);
 
       this->tabWidget = new AnalyzerTab(this);
-
-      //this->analyzerEdit = new gui::display::AnalyzerEdit();
-      //this->setCentralWidget(this->analyzerEdit);
       this->setCentralWidget(this->tabWidget);
 
       this->setupDialogs();
