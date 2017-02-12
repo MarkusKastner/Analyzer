@@ -15,7 +15,6 @@
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
-#include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 
 class FileTest : public testing::Test
 {

@@ -11,7 +11,6 @@
 
 #include "TestSupport.h"
 
-#include "interpreter\BinaryStyleInterpreterTest.h"
 #include "interpreter\TextStyleInterpreterTest.h"
 #include "base\AnalyzerBaseTest.h"
 #include "core\zip\ZIPContainerTest.h"

@@ -57,9 +57,6 @@
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp">
       <Filter>core\error</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.cpp">
-      <Filter>Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp">
       <Filter>base</Filter>
     </ClCompile>
@@ -130,12 +127,6 @@
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
       <Filter>core\error</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\BinaryStyleInterpreterTest.h">
-      <Filter>Interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\BinaryStyleInterpreter.h">
-      <Filter>Interpreter</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h">
       <Filter>Interpreter</Filter>

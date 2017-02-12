@@ -12,7 +12,6 @@
 #include <memory>
 
 #include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
-#include "AnalyzerLib\interpreter\BinaryStyleInterpreter.h"
 #include "AnalyzerLib\base\BaseData.h"
 
 namespace analyzer{

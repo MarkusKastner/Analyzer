@@ -49,12 +49,6 @@
     <ClCompile Include="core\error\CoreException.cpp">
       <Filter>core\error</Filter>
     </ClCompile>
-    <ClCompile Include="interpreter\BinaryStyleInterpreter.cpp">
-      <Filter>interpreter</Filter>
-    </ClCompile>
-    <ClCompile Include="interpreter\InterpreterObserverImpl.cpp">
-      <Filter>interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="base\AnalyzerBase.cpp">
       <Filter>base</Filter>
     </ClCompile>
@@ -129,16 +123,10 @@
     <ClInclude Include="interpreter\Interpreter.h">
       <Filter>interpreter</Filter>
     </ClInclude>
-    <ClInclude Include="interpreter\BinaryStyleInterpreter.h">
-      <Filter>interpreter</Filter>
-    </ClInclude>
     <ClInclude Include="interpreter\error\InterpreterException.h">
       <Filter>interpreter\error</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\TextChangedObserver.h">
-      <Filter>interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\InterpreterObserverImpl.h">
       <Filter>interpreter</Filter>
     </ClInclude>
     <ClInclude Include="base\AnalyzerBase.h">
