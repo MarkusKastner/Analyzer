@@ -5,6 +5,7 @@
 */
 
 #include "File.h"
+#include "AnalyzerLib\interpreter\InterpreterFactory.h"
 
 #include <regex>
 
@@ -20,6 +21,7 @@ namespace analyzer{
       : data(new std::vector<unsigned char>(data)), fileName(fileName), path(), interpreter()
     {
       this->setDirectoryNames(fileName, "/");
+      this->interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(this->data);
     }
 
     File::File(const File& other)
@@ -48,6 +50,7 @@ namespace analyzer{
       this->data.reset(new std::vector<unsigned char>(data));
       this->fileName = fileName;
       this->setDirectoryNames(fileName, "/");
+      this->interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(this->data);
     }
 
     bool File::IsLoaded()

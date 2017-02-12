@@ -21,6 +21,7 @@ namespace analyzer{
       virtual ~Interpreter() {}
 
       virtual bool HasData() = 0;
+      virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data) = 0;
 
     protected:
       Interpreter() {}

@@ -204,5 +204,8 @@
     <ClInclude Include="interpreter\ASCIIInterpreter.h">
       <Filter>interpreter</Filter>
     </ClInclude>
+    <ClInclude Include="core\FileInfo.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

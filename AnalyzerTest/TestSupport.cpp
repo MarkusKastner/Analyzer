@@ -7,6 +7,8 @@
 #include "TestSupport.h"
 
 #include <filesystem>
+#include <fstream>
+#include <exception>
 
 namespace fs = std::tr2::sys;
 
@@ -45,6 +47,29 @@ const std::wstring & TestSupport::GetTestDir() const
 const std::wstring & TestSupport::GetTestFilesDir() const
 {
   return this->testFilesDir;
+}
+
+std::shared_ptr<std::vector<unsigned char>> TestSupport::GetDataFromTestFilesDir(const std::string & fileName)
+{
+  std::string filePath(this->testFilesDir.begin(), this->testFilesDir.end());
+  filePath += "/";
+  filePath += fileName;
+
+  std::ifstream file(filePath.c_str(), std::ios::binary);
+  if (file.bad() || !file.is_open()) {
+    throw std::exception(std::string("Cannot open " + filePath).c_str());
+  }
+
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>());
+
+  long fileSize = 0;
+  file.seekg(0, std::ios::end);
+  fileSize = file.tellg();
+  file.seekg(0, std::ios::beg);
+
+  data->reserve(fileSize);
+  data->assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
+  return data;
 }
 
 TestSupport * TestSupport::instance = nullptr;

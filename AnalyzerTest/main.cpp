@@ -30,6 +30,7 @@
 #include "service\UpdateTest.h"
 #include "interpreter\InterpreterFactoyTest.h"
 #include "interpreter\ASCIIInterpreterTest.h"
+#include "core\TypeAnalyzerTest.h"
 
 int main(int argc, char** argv) {
 

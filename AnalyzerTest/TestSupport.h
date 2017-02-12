@@ -9,6 +9,8 @@
 
 #include <string>
 #include <exception>
+#include <memory>
+#include <vector>
 
 class TestSupport
 {
@@ -20,6 +22,7 @@ public:
 
   const std::wstring & GetTestDir() const;
   const std::wstring & GetTestFilesDir() const;
+  std::shared_ptr<std::vector<unsigned char>> GetDataFromTestFilesDir(const std::string & fileName);
 
 private:
   TestSupport();

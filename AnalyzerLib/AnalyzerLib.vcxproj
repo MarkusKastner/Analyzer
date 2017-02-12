@@ -195,6 +195,7 @@
     <ClInclude Include="base\error\DBException.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
+    <ClInclude Include="core\FileInfo.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
     <ClInclude Include="definitions\Definition.h" />
     <ClInclude Include="definitions\DefinitionDB.h" />

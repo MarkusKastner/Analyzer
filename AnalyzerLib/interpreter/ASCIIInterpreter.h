@@ -15,9 +15,14 @@ namespace analyzer {
     {
     public:
       ASCIIInterpreter();
+      explicit ASCIIInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual ~ASCIIInterpreter();
 
       virtual bool HasData();
+      virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+
+    private:
+      std::shared_ptr<std::vector<unsigned char>> data;
     };
   }
 }

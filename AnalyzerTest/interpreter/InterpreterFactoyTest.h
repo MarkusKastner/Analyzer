@@ -3,12 +3,13 @@
 
 #include <gtest\gtest.h>
 #include "AnalyzerLib\interpreter\InterpreterFactory.h"
+#include "AnalyzerLib\interpreter\ASCIIInterpreter.h"
 
 class IntepreterFactoryTest : public testing::Test
 {
 public:
   IntepreterFactoryTest() 
-  :intepreterFactory(), simpleText()
+  :simpleText()
   {}
   virtual ~IntepreterFactoryTest() {}
 
@@ -16,13 +17,21 @@ public:
     simpleText.reset(new std::vector<unsigned char>({ 'a', 'b', 'c', 'd', 'e', '~' }));
   }
 
-  analyzer::interpreter::InterpreterFactory intepreterFactory;
   std::shared_ptr<std::vector<unsigned char>> simpleText;
 };
 
 TEST_F(IntepreterFactoryTest, emptyData)
 {
-  ASSERT_EQ(this->intepreterFactory.CreateInterpreter(std::shared_ptr<std::vector<unsigned char>>()), nullptr);
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(std::shared_ptr<std::vector<unsigned char>>());
+  bool success = !(!interpreter);
+  ASSERT_FALSE(success);
+}
+
+TEST_F(IntepreterFactoryTest, asciiInterpreter)
+{
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(simpleText);
+  bool success = !(!dynamic_cast<analyzer::interpreter::ASCIIInterpreter*>(interpreter.get()));
+  ASSERT_TRUE(success);
 }
 
 #endif

@@ -5,18 +5,34 @@
 */
 
 #include "InterpreterFactory.h"
+#include "ASCIIInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {
     InterpreterFactory::InterpreterFactory()
     {
     }
+
     InterpreterFactory::~InterpreterFactory()
     {
     }
-    Interpreter * InterpreterFactory::CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
+
+    InterpreterFactory * InterpreterFactory::GetInstance()
     {
+      if (nullptr == InterpreterFactory::instance) {
+        InterpreterFactory::instance = new InterpreterFactory();
+      }
       return nullptr;
     }
+
+    std::shared_ptr<Interpreter> InterpreterFactory::CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (data) {
+        return std::shared_ptr<Interpreter>(new ASCIIInterpreter(data));
+      }
+      return std::shared_ptr<Interpreter>();
+    }
+
+    InterpreterFactory * InterpreterFactory::instance = nullptr;
   }
 }

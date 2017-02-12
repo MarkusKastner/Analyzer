@@ -17,10 +17,14 @@ namespace analyzer {
     class InterpreterFactory
     {
     public:
-      InterpreterFactory();
-      virtual ~InterpreterFactory();
+      ~InterpreterFactory();
 
-      Interpreter * CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
+      static InterpreterFactory * GetInstance();
+      std::shared_ptr<Interpreter> CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
+
+    private:
+      static InterpreterFactory * instance;
+      InterpreterFactory();
     };
   }
 }

@@ -35,4 +35,17 @@ TEST_F(ASCIIInterpreterTest, init)
   ASSERT_FALSE(interpreter.HasData());
 }
 
+TEST_F(ASCIIInterpreterTest, initWithData)
+{
+  analyzer::interpreter::ASCIIInterpreter interpreter(text);
+  ASSERT_TRUE(interpreter.HasData());
+}
+
+TEST_F(ASCIIInterpreterTest, setData)
+{
+  analyzer::interpreter::ASCIIInterpreter interpreter;
+  interpreter.SetData(text);
+  ASSERT_TRUE(interpreter.HasData());
+}
+
 #endif
