@@ -14,7 +14,6 @@
 #include <memory>
 
 #include "AnalyzerLib\core\File.h"
-#include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 
 class FileTest : public testing::Test
 {

@@ -52,12 +52,6 @@
     <ClCompile Include="base\AnalyzerBase.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="interpreter\TextStyleInterpreter.cpp">
-      <Filter>interpreter</Filter>
-    </ClCompile>
-    <ClCompile Include="interpreter\InterpreterDataImpl.cpp">
-      <Filter>interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="core\zip\ZIPContainer.cpp">
       <Filter>core\zip</Filter>
     </ClCompile>
@@ -126,17 +120,8 @@
     <ClInclude Include="interpreter\error\InterpreterException.h">
       <Filter>interpreter\error</Filter>
     </ClInclude>
-    <ClInclude Include="interpreter\TextChangedObserver.h">
-      <Filter>interpreter</Filter>
-    </ClInclude>
     <ClInclude Include="base\AnalyzerBase.h">
       <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\TextStyleInterpreter.h">
-      <Filter>interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\InterpreterDataImpl.h">
-      <Filter>interpreter</Filter>
     </ClInclude>
     <ClInclude Include="base\AnalyzerBaseObserver.h">
       <Filter>base</Filter>

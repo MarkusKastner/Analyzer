@@ -10,7 +10,6 @@
 #include <filesystem>
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
-#include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 #include "AnalyzerBaseObserver.h"
 #include "AnalyzerLib\core\zip\ZIPContainer.h"

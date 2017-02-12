@@ -11,13 +11,10 @@
 #include <vector>
 #include <memory>
 
-#include "AnalyzerLib\interpreter\TextStyleInterpreter.h"
 #include "AnalyzerLib\base\BaseData.h"
+#include "AnalyzerLib\interpreter\Interpreter.h"
 
 namespace analyzer{
-  namespace interpreter{
-    class TextChangedObserver;
-  }
   namespace core{
     class File
     {

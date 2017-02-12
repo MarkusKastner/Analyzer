@@ -23,9 +23,6 @@ namespace analyzer{
       virtual bool HasData() = 0;
       virtual void ResetData(const std::shared_ptr<std::vector<unsigned char>> & data) = 0;
       virtual std::shared_ptr<std::vector<unsigned char>> GetData() = 0;
-
-      virtual std::shared_ptr<std::wstring> GetText() = 0;
-      virtual std::vector<std::wstring> GetFunctionalHighlightExpressions() = 0;
     };
   }
 }
