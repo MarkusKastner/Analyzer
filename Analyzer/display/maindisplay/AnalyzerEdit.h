@@ -10,7 +10,6 @@
 #include <QPlainTextEdit>
 #include <QEvent>
 
-#include "AnalyzerLib\interpreter\TextChangedObserver.h"
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\base\BaseData.h"
 
@@ -28,7 +27,7 @@ namespace analyzer{
   namespace gui{
     namespace display{
       class AnalyzerEditHighlighter;
-      class AnalyzerEdit : public QPlainTextEdit, public interpreter::TextChangedObserver
+      class AnalyzerEdit : public QPlainTextEdit
       {
       private:
         class EditEvent : public QEvent
@@ -49,9 +48,6 @@ namespace analyzer{
       public:
         AnalyzerEdit(QWidget * parent = 0);
         virtual ~AnalyzerEdit();
-
-        virtual void NotifyDataChanged();
-        virtual void NotifyExInterpreter();
 
         void SetFile(core::File * file);
         void ClearFile();

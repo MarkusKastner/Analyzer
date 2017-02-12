@@ -11,13 +11,13 @@
 namespace analyzer{
   namespace interpreter{
     InterpreterDataImpl::InterpreterDataImpl()
-      :InterpreterObserverImpl(), data(new std::vector<unsigned char>()),
+      :Interpreter(), data(new std::vector<unsigned char>()),
       dataLock(), detailFormat(base::DetailFormat::unknown), formatter()
     {
     }
 
     InterpreterDataImpl::InterpreterDataImpl(const std::shared_ptr<std::vector<unsigned char>> & data)
-      : InterpreterObserverImpl(), data(data),
+      : Interpreter(), data(data),
       dataLock(), detailFormat(base::DetailFormat::unknown), formatter()
     {
     }
@@ -62,20 +62,6 @@ namespace analyzer{
     std::vector<std::wstring> InterpreterDataImpl::GetFunctionalHighlightExpressions()
     {
       return this->formatter->GetFunctionalHighlightingExp();
-    }
-
-    void InterpreterDataImpl::SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify)
-    {
-      if (this->detailFormat != detailFormat){
-        this->detailFormat = detailFormat;
-        this->setFormatter();
-        this->NotifyTextChange();
-      }
-      else{
-        if (forceNotify){
-          this->NotifyTextChange();
-        }
-      }
     }
 
     base::DetailFormat InterpreterDataImpl::getDetailFormat()

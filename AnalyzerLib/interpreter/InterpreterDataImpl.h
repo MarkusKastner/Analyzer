@@ -10,13 +10,13 @@
 #include <memory>
 #include <mutex>
 
-#include "InterpreterObserverImpl.h"
+#include "Interpreter.h"
 #include "AnalyzerLib\interpreter\formatter\Formatter.h"
 
 namespace analyzer{
   namespace interpreter{
     class Formatter;
-    class InterpreterDataImpl : public InterpreterObserverImpl
+    class InterpreterDataImpl : public Interpreter
     {
     private:
       InterpreterDataImpl(const InterpreterDataImpl&){}
@@ -34,8 +34,6 @@ namespace analyzer{
 
       virtual std::shared_ptr<std::wstring> GetText();
       virtual std::vector<std::wstring> GetFunctionalHighlightExpressions();
-
-      virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false);
 
     protected:
       base::DetailFormat getDetailFormat();

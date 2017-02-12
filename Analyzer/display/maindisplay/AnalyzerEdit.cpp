@@ -36,16 +36,6 @@ namespace analyzer{
       {
 
       }
-      
-      void AnalyzerEdit::NotifyDataChanged()
-      {
-        QApplication::postEvent(this, new EditEvent(EditEvent::Action::dataChange));
-      }
-
-      void AnalyzerEdit::NotifyExInterpreter()
-      {
-        QApplication::postEvent(this, new EditEvent(EditEvent::Action::exInterpreter));
-      }
 
       void AnalyzerEdit::SetFile(core::File * file)
       {

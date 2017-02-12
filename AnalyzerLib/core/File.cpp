@@ -7,7 +7,6 @@
 #include "File.h"
 
 #include <regex>
-#include "AnalyzerLib\interpreter\TextChangedObserver.h"
 
 namespace analyzer{
   namespace core{

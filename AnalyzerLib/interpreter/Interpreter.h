@@ -26,14 +26,6 @@ namespace analyzer{
 
       virtual std::shared_ptr<std::wstring> GetText() = 0;
       virtual std::vector<std::wstring> GetFunctionalHighlightExpressions() = 0;
-
-      virtual bool HasObservers() = 0;
-      virtual size_t NumberOfObservers() = 0;
-      virtual void RegisterObserver(TextChangedObserver * observer) = 0;
-      virtual void UnregisterObserver(TextChangedObserver * observer) = 0;
-      virtual void NotifyTextChange() = 0;
-
-      virtual void SetDetailFormat(const base::DetailFormat & detailFormat, bool forceNotify = false) = 0;
     };
   }
 }
