@@ -165,6 +165,7 @@
     <ClCompile Include="base\AnalyzerBase.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
+    <ClCompile Include="core\TypeAnalyzer.cpp" />
     <ClCompile Include="core\zip\miniz.c" />
     <ClCompile Include="core\zip\ZIPContainer.cpp" />
     <ClCompile Include="definitions\Definition.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
     <ClCompile Include="interpreter\InterpreterFactory.cpp" />
+    <ClCompile Include="interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
     <ClCompile Include="service\Update.cpp" />
     <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />
+    <ClInclude Include="core\TypeAnalyzer.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
     <ClInclude Include="definitions\Definition.h" />
     <ClInclude Include="definitions\DefinitionDB.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="interpreter\formatter\XMLFormatter.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
     <ClInclude Include="interpreter\InterpreterFactory.h" />
+    <ClInclude Include="interpreter\XMLInterpreter.h" />
     <ClInclude Include="network\CrossSock.h" />
     <ClInclude Include="service\Update.h" />
     <ClInclude Include="strategy\AnalyzingStrategy.h" />

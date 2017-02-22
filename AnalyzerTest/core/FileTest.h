@@ -87,9 +87,4 @@ TEST_F(FileTest, AssignOperator)
   ASSERT_EQ(theNewfile.GetSize(), this->charVector.size());
 }
 
-TEST_F(FileTest, xmlRecognition)
-{
-  this->file1.SetFileData("someXML.xml", this->xmlHeader);
-}
-
 #endif

@@ -115,6 +115,12 @@
     <ClCompile Include="interpreter\ASCIIInterpreter.cpp">
       <Filter>interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="core\TypeAnalyzer.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\XMLInterpreter.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -206,6 +212,12 @@
     </ClInclude>
     <ClInclude Include="core\FileInfo.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\TypeAnalyzer.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\XMLInterpreter.h">
+      <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

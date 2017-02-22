@@ -31,6 +31,7 @@
 #include "interpreter\InterpreterFactoyTest.h"
 #include "interpreter\ASCIIInterpreterTest.h"
 #include "core\TypeAnalyzerTest.h"
+#include "interpreter\XMLInterpreterTest.h"
 
 int main(int argc, char** argv) {
 

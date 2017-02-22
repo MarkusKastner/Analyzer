@@ -5,7 +5,10 @@
 */
 
 #include "InterpreterFactory.h"
+#include "AnalyzerLib\core\TypeAnalyzer.h"
+
 #include "ASCIIInterpreter.h"
+#include "XMLInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -27,10 +30,20 @@ namespace analyzer {
 
     std::shared_ptr<Interpreter> InterpreterFactory::CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
-      if (data) {
+      auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data);
+
+      switch (fileInfo.Format) {
+      case core::FileFormat::empty:
+        return std::shared_ptr<Interpreter>();
+      case core::FileFormat::unknown:
+        return std::shared_ptr<Interpreter>();
+      case core::FileFormat::ascii:
         return std::shared_ptr<Interpreter>(new ASCIIInterpreter(data));
+      case core::FileFormat::xml:
+        return std::shared_ptr<Interpreter>(new XMLInterpreter(data));
+      default:
+        return std::shared_ptr<Interpreter>();
       }
-      return std::shared_ptr<Interpreter>();
     }
 
     InterpreterFactory * InterpreterFactory::instance = nullptr;

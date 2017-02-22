@@ -28,6 +28,7 @@ namespace analyzer {
       TypeAnalyzer();
 
       bool isXML(const std::shared_ptr<std::vector<unsigned char>> & data);
+      bool isASCII(const std::shared_ptr<std::vector<unsigned char>> & data);
 
       static std::string toASCII(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & index, const size_t & offset);
     };

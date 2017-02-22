@@ -4,6 +4,7 @@
 #include <gtest\gtest.h>
 #include "AnalyzerLib\interpreter\InterpreterFactory.h"
 #include "AnalyzerLib\interpreter\ASCIIInterpreter.h"
+#include "AnalyzerLib\interpreter\XMLInterpreter.h"
 
 class IntepreterFactoryTest : public testing::Test
 {
@@ -31,6 +32,15 @@ TEST_F(IntepreterFactoryTest, asciiInterpreter)
 {
   std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(simpleText);
   bool success = !(!dynamic_cast<analyzer::interpreter::ASCIIInterpreter*>(interpreter.get()));
+  ASSERT_TRUE(success);
+}
+
+TEST_F(IntepreterFactoryTest, xmlInterpreter)
+{
+  std::string fileData("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>");
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(data);
+  bool success = !(!dynamic_cast<analyzer::interpreter::XMLInterpreter*>(interpreter.get()));
   ASSERT_TRUE(success);
 }
 

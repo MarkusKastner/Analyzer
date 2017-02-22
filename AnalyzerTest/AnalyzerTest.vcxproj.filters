@@ -126,6 +126,9 @@
     <ClCompile Include="..\AnalyzerLib\core\TypeAnalyzer.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\XMLInterpreter.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -277,6 +280,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\core\TypeAnalyzer.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\XMLInterpreterTest.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h">
+      <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,15 +27,21 @@ public:
 TEST_F(TypeAnalyzerTest, emptyData)
 {
   auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(std::shared_ptr<std::vector<unsigned char>>());
-  ASSERT_EQ(fileInfo.majorType, analyzer::core::MajorType::empty);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::empty);
 }
 
 TEST_F(TypeAnalyzerTest, recXML)
 {
   auto data = TestSupport::GetInstance()->GetDataFromTestFilesDir("test.xml");
   auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data);
-  ASSERT_EQ(fileInfo.majorType, analyzer::core::MajorType::text);
-  ASSERT_EQ(fileInfo.minorType, analyzer::core::MinorType::xml);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::xml);
+}
+
+TEST_F(TypeAnalyzerTest, recASCII)
+{
+  auto data = TestSupport::GetInstance()->GetDataFromTestFilesDir("test.txt");
+  auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::ascii);
 }
 
 #endif

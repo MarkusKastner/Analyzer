@@ -30,17 +30,19 @@ namespace analyzer {
     FileInfo TypeAnalyzer::GetFileInfo(const std::shared_ptr<std::vector<unsigned char>> & data)
     {
       FileInfo fileInfo;
+      
       if (!data) {
-        fileInfo.majorType = analyzer::core::MajorType::empty;
-        return fileInfo;
+        fileInfo.Format = analyzer::core::FileFormat::empty;
       }
-
-      if (this->isXML(data)) {
-        fileInfo.majorType = analyzer::core::MajorType::text;
-        fileInfo.minorType = analyzer::core::MinorType::xml;
-        return fileInfo;
+      else if (this->isXML(data)) {
+        fileInfo.Format = analyzer::core::FileFormat::xml;
       }
-
+      else if (this->isASCII(data)) {
+        fileInfo.Format = analyzer::core::FileFormat::ascii;
+      }
+      else {
+        fileInfo.Format = analyzer::core::FileFormat::unknown;
+      }
       return fileInfo;
     }
 
@@ -59,6 +61,44 @@ namespace analyzer {
         return false;
       }
       return true;
+    }
+
+    bool TypeAnalyzer::isASCII(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      size_t offset = 100;
+      if (data->size() < offset - 1) {
+        offset = data->size() - 1;
+      }
+
+      bool nonASCII = false;
+      for (size_t i = 0; i < offset; ++i) {
+        int numVal = data->at(i);
+        if ((numVal > 31 && numVal < 127) ||
+          (numVal == 10) ||
+          (numVal == 13) ||
+          (numVal == 128) ||
+          (numVal == 130) ||
+          (numVal == 158) ||
+          (numVal == 159) ||
+          (numVal > 144 && numVal < 157) ||
+          (numVal > 160 && numVal < 173) ||
+          (numVal > 173 && numVal < 256)
+          ) {
+          continue;
+        }
+        else {
+          nonASCII = true;
+          break;
+        }
+      }
+
+      if (nonASCII) {
+        return false;
+      }
+      else {
+        return true;
+      }
+      
     }
 
     std::string TypeAnalyzer::toASCII(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & index, const size_t & offset)

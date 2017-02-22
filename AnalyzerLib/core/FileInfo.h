@@ -9,26 +9,18 @@
 
 namespace analyzer {
   namespace core {
-    enum MajorType
-    {
-      text = 0,
-      binary,
-      mixed,
-      empty
-    };
 
-    enum MinorType
-    {
-      ascii = 0,
-      xml,
-      unknown
-    };
+    typedef enum {
+      empty = 0,
+      unknown,
+      ascii,
+      xml
+    } FileFormat;
 
     struct FileInfo 
     {
-      FileInfo() : majorType(MajorType::mixed), minorType(MinorType::unknown){}
-      MajorType majorType;
-      MinorType minorType;
+      FileInfo() : Format(empty) {}
+      FileFormat Format;
     };
   }
 }
