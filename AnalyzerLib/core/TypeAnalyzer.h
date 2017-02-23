@@ -17,7 +17,8 @@ namespace analyzer {
     class TypeAnalyzer
     {
     public:
-      const static size_t LenDosHeaderInclMsg = 150;
+      const static size_t LenDosHeaderInclMsg = 110;
+      const static size_t LenBMPHeader = 14;
 
       ~TypeAnalyzer();
 
@@ -33,6 +34,7 @@ namespace analyzer {
       bool isASCII(const std::shared_ptr<std::vector<unsigned char>> & data);
       bool isPDF(const std::shared_ptr<std::vector<unsigned char>> & data);
       bool isWinExec(const std::shared_ptr<std::vector<unsigned char>> & data);
+      bool isBmp(const std::shared_ptr<std::vector<unsigned char>> & data);
 
       static std::string toASCII(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & index, const size_t & offset);
     };

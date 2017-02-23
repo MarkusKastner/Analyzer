@@ -43,6 +43,9 @@ namespace analyzer {
       else if (this->isWinExec(data)) {
         fileInfo.Format = analyzer::core::FileFormat::winExec;
       }
+      else if (this->isBmp(data)) {
+        fileInfo.Format = analyzer::core::FileFormat::bmp;
+      }
       else if (this->isASCII(data)) {
         fileInfo.Format = analyzer::core::FileFormat::ascii;
       }
@@ -139,6 +142,30 @@ namespace analyzer {
         }
       }
 
+      return false;
+    }
+
+    bool TypeAnalyzer::isBmp(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (data->size() < LenBMPHeader) {
+        return false;
+      }
+      std::string BMPHeaderStart(toASCII(data, 0, 2));
+      if (BMPHeaderStart.compare("BM") == 0) {
+
+        unsigned int minOffsetToDataSection = 50;
+        unsigned int size = *reinterpret_cast<const uint32_t*>(&data->at(2));
+        unsigned short res1 = *reinterpret_cast<const uint16_t*>(&data->at(6));
+        unsigned short res2 = *reinterpret_cast<const uint16_t*>(&data->at(8));
+        unsigned int off = *reinterpret_cast<const uint32_t*>(&data->at(10));
+
+        if(size == data->size() &&
+          res1 == 0 &&
+          res2 == 0 &&
+          off > minOffsetToDataSection){
+          return true;
+        }
+      }
       return false;
     }
 

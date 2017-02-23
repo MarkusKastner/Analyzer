@@ -58,4 +58,11 @@ TEST_F(TypeAnalyzerTest, recMSExec)
   ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::winExec);
 }
 
+TEST_F(TypeAnalyzerTest, recBMP)
+{
+  auto data = TestSupport::GetInstance()->GetDataFromTestFilesDir("test.bmp");
+  auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::bmp);
+}
+
 #endif
