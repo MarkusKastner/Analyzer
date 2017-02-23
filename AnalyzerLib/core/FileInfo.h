@@ -14,7 +14,9 @@ namespace analyzer {
       empty = 0,
       unknown,
       ascii,
-      xml
+      xml,
+      pdf,
+      winExec
     } FileFormat;
 
     struct FileInfo 

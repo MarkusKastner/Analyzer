@@ -44,4 +44,18 @@ TEST_F(TypeAnalyzerTest, recASCII)
   ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::ascii);
 }
 
+TEST_F(TypeAnalyzerTest, recPDF)
+{
+  auto data = TestSupport::GetInstance()->GetDataFromTestFilesDir("test.pdf");
+  auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::pdf);
+}
+
+TEST_F(TypeAnalyzerTest, recMSExec)
+{
+  auto data = TestSupport::GetInstance()->GetDataFromTestFilesDir("test.exe");
+  auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::winExec);
+}
+
 #endif

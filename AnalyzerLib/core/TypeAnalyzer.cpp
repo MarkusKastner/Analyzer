@@ -37,6 +37,12 @@ namespace analyzer {
       else if (this->isXML(data)) {
         fileInfo.Format = analyzer::core::FileFormat::xml;
       }
+      else if (this->isPDF(data)) {
+        fileInfo.Format = analyzer::core::FileFormat::pdf;
+      }
+      else if (this->isWinExec(data)) {
+        fileInfo.Format = analyzer::core::FileFormat::winExec;
+      }
       else if (this->isASCII(data)) {
         fileInfo.Format = analyzer::core::FileFormat::ascii;
       }
@@ -101,6 +107,41 @@ namespace analyzer {
       
     }
 
+    bool TypeAnalyzer::isPDF(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (data->size() < 8) {
+        return false;
+      }
+      auto text(TypeAnalyzer::toASCII(data, 0, 8));
+
+      size_t startIndex = text.find("%PDF-");
+      if (startIndex < text.size()) {
+        return true;
+      }
+      else {
+        return false;
+      }
+      return true;
+    }
+
+    bool TypeAnalyzer::isWinExec(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (data->size() < LenDosHeaderInclMsg) {
+        return false;
+      }
+
+      std::string DOSHeaderStart(toASCII(data, 0, 2));
+      if (DOSHeaderStart.compare("MZ") == 0 ||
+        DOSHeaderStart.compare("ZM") == 0) {
+        std::string DOSHeaderMsg(toASCII(data, 78, 39));
+        if (DOSHeaderMsg.compare("This program cannot be run in DOS mode.") == 0) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
     std::string TypeAnalyzer::toASCII(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & index, const size_t & offset)
     {
       if (index + offset > data->size()) {
@@ -117,3 +158,5 @@ namespace analyzer {
       
   }
 }
+
+//MZê This program cannot be run in DOS mode.

@@ -17,6 +17,8 @@ namespace analyzer {
     class TypeAnalyzer
     {
     public:
+      const static size_t LenDosHeaderInclMsg = 150;
+
       ~TypeAnalyzer();
 
       static TypeAnalyzer * GetInstance();
@@ -29,6 +31,8 @@ namespace analyzer {
 
       bool isXML(const std::shared_ptr<std::vector<unsigned char>> & data);
       bool isASCII(const std::shared_ptr<std::vector<unsigned char>> & data);
+      bool isPDF(const std::shared_ptr<std::vector<unsigned char>> & data);
+      bool isWinExec(const std::shared_ptr<std::vector<unsigned char>> & data);
 
       static std::string toASCII(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & index, const size_t & offset);
     };
