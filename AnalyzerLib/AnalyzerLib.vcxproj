@@ -180,6 +180,7 @@
     <ClCompile Include="interpreter\formatter\HexFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
+    <ClCompile Include="interpreter\HTML\Document.cpp" />
     <ClCompile Include="interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
@@ -213,6 +214,10 @@
     <ClInclude Include="interpreter\formatter\HexFormatter.h" />
     <ClInclude Include="interpreter\formatter\SimpleTextFormatter.h" />
     <ClInclude Include="interpreter\formatter\XMLFormatter.h" />
+    <ClInclude Include="interpreter\HTML\BodyElement.h" />
+    <ClInclude Include="interpreter\HTML\Document.h" />
+    <ClInclude Include="interpreter\HTML\Heading.h" />
+    <ClInclude Include="interpreter\HTML\Paragraph.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
     <ClInclude Include="interpreter\InterpreterFactory.h" />
     <ClInclude Include="interpreter\XMLInterpreter.h" />

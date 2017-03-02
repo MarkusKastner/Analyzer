@@ -178,6 +178,7 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\HTML\Document.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\service\Update.cpp" />
@@ -210,6 +211,10 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\BodyElement.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Document.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Heading.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Paragraph.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterFactory.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />
@@ -233,6 +238,7 @@
     <ClInclude Include="interpreter\formatter\HexFormatterTest.h" />
     <ClInclude Include="interpreter\formatter\SimpleTextFormatterTest.h" />
     <ClInclude Include="interpreter\formatter\XMLFormatterTest.h" />
+    <ClInclude Include="interpreter\HTML\HTMLDocumentTest.h" />
     <ClInclude Include="interpreter\InterpreterFactoyTest.h" />
     <ClInclude Include="interpreter\XMLInterpreterTest.h" />
     <ClInclude Include="service\UpdateTest.h" />

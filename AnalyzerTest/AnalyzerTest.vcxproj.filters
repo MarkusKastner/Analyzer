@@ -49,6 +49,9 @@
     <Filter Include="service">
       <UniqueIdentifier>{9a83a395-1993-48cd-9605-fdad30341809}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interpreter\HTML">
+      <UniqueIdentifier>{82db74e1-24d4-4ce6-81b0-b95bc3c4c798}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\XMLInterpreter.cpp">
       <Filter>Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\HTML\Document.cpp">
+      <Filter>Interpreter\HTML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +292,21 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h">
       <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HTML\HTMLDocumentTest.h">
+      <Filter>Interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Document.h">
+      <Filter>Interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\BodyElement.h">
+      <Filter>Interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Heading.h">
+      <Filter>Interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Paragraph.h">
+      <Filter>Interpreter\HTML</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

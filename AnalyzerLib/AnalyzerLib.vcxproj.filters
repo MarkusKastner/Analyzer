@@ -44,6 +44,9 @@
     <Filter Include="network">
       <UniqueIdentifier>{e63bfbf9-e200-4f2f-ab6c-1594ef0bf795}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interpreter\HTML">
+      <UniqueIdentifier>{a1019da8-16f4-484e-a2fc-ab8dc98d2527}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -120,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="interpreter\XMLInterpreter.cpp">
       <Filter>interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\HTML\Document.cpp">
+      <Filter>interpreter\HTML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +224,18 @@
     </ClInclude>
     <ClInclude Include="interpreter\XMLInterpreter.h">
       <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HTML\Document.h">
+      <Filter>interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HTML\BodyElement.h">
+      <Filter>interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HTML\Heading.h">
+      <Filter>interpreter\HTML</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HTML\Paragraph.h">
+      <Filter>interpreter\HTML</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

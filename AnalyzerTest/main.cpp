@@ -32,6 +32,7 @@
 #include "interpreter\ASCIIInterpreterTest.h"
 #include "core\TypeAnalyzerTest.h"
 #include "interpreter\XMLInterpreterTest.h"
+#include "interpreter\HTML\HTMLDocumentTest.h"
 
 int main(int argc, char** argv) {
 
