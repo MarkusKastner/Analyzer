@@ -80,4 +80,13 @@ TEST_F(HTMLDocumentTest, addTable)
   document.AddTable(table);
   ASSERT_STREQ(document.GetString().c_str(), tableTestString.c_str());
 }
+
+TEST_F(HTMLDocumentTest, addLineFeed)
+{
+  std::string lfString("<!DOCTYPE html><html><head></head><body><p>Paragraph1</p><br><p>Paragraph2</p></body></html>");
+  document.AddParagraph(analyzer::interpreter::HTML::Paragraph("Paragraph1"));
+  document.AddLineFeed();
+  document.AddParagraph(analyzer::interpreter::HTML::Paragraph("Paragraph2"));
+  ASSERT_STREQ(document.GetString().c_str(), lfString.c_str());
+}
 #endif

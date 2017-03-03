@@ -38,6 +38,11 @@ namespace analyzer {
         this->bodyElements.push_back(std::shared_ptr<BodyElement>(new Table(table)));
       }
 
+      void Document::AddLineFeed()
+      {
+        this->bodyElements.push_back(std::shared_ptr<BodyElement>(new LineFeed()));
+      }
+
       void Document::assemble()
       {
         this->docString.clear();

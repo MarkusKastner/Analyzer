@@ -25,6 +25,7 @@ namespace analyzer {
         void AddHeading(const analyzer::interpreter::HTML::Heading & heading);
         void AddParagraph(const analyzer::interpreter::HTML::Paragraph & paragraph);
         void AddTable(const analyzer::interpreter::HTML::Table & table);
+        void AddLineFeed();
 
       private:
         std::string docString;
@@ -32,6 +33,16 @@ namespace analyzer {
         std::vector<std::shared_ptr<BodyElement>> bodyElements;
 
         void assemble();
+
+        class LineFeed : public BodyElement
+        {
+        public:
+          LineFeed() {}
+          virtual ~LineFeed() {}
+          virtual std::string ToString() {
+            return "<br>";
+          }
+        };
       };
     }
   }
