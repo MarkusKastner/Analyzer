@@ -308,5 +308,8 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Paragraph.h">
       <Filter>Interpreter\HTML</Filter>
     </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Table.h">
+      <Filter>Interpreter\HTML</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

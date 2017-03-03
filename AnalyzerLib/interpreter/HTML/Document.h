@@ -8,6 +8,7 @@
 #include "BodyElement.h"
 #include "Heading.h"
 #include "Paragraph.h"
+#include "Table.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -23,6 +24,7 @@ namespace analyzer {
         void SetTitle(const std::string & title);
         void AddHeading(const analyzer::interpreter::HTML::Heading & heading);
         void AddParagraph(const analyzer::interpreter::HTML::Paragraph & paragraph);
+        void AddTable(const analyzer::interpreter::HTML::Table & table);
 
       private:
         std::string docString;

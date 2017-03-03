@@ -215,6 +215,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Document.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Heading.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Paragraph.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Table.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterFactory.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />

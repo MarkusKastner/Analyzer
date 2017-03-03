@@ -33,6 +33,11 @@ namespace analyzer {
         this->bodyElements.push_back(std::shared_ptr<BodyElement>(new Paragraph(paragraph)));
       }
 
+      void Document::AddTable(const analyzer::interpreter::HTML::Table & table)
+      {
+        this->bodyElements.push_back(std::shared_ptr<BodyElement>(new Table(table)));
+      }
+
       void Document::assemble()
       {
         this->docString.clear();

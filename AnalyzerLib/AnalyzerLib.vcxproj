@@ -218,6 +218,7 @@
     <ClInclude Include="interpreter\HTML\Document.h" />
     <ClInclude Include="interpreter\HTML\Heading.h" />
     <ClInclude Include="interpreter\HTML\Paragraph.h" />
+    <ClInclude Include="interpreter\HTML\Table.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
     <ClInclude Include="interpreter\InterpreterFactory.h" />
     <ClInclude Include="interpreter\XMLInterpreter.h" />

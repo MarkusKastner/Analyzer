@@ -237,5 +237,8 @@
     <ClInclude Include="interpreter\HTML\Paragraph.h">
       <Filter>interpreter\HTML</Filter>
     </ClInclude>
+    <ClInclude Include="interpreter\HTML\Table.h">
+      <Filter>interpreter\HTML</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
