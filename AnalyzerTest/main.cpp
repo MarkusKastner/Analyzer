@@ -33,6 +33,7 @@
 #include "core\TypeAnalyzerTest.h"
 #include "interpreter\XMLInterpreterTest.h"
 #include "interpreter\HTML\HTMLDocumentTest.h"
+#include "interpreter\BMPInterpreterTest.h"
 
 int main(int argc, char** argv) {
 

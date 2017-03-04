@@ -44,4 +44,6 @@ TEST_F(IntepreterFactoryTest, xmlInterpreter)
   ASSERT_TRUE(success);
 }
 
+//BMPInterpreter
+//HEXInterpreter
 #endif
