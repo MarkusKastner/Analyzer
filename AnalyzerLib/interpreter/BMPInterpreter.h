@@ -75,6 +75,9 @@ namespace analyzer {
       void readInfoHeader();
 
       void setup();
+      void createHTMLDoc();
+      HTML::Table createFileHeaderTable();
+      HTML::Table createInfoHeaderTable();
     };
   }
 }
