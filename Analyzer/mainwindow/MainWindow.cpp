@@ -14,6 +14,7 @@
 #include "dialogs\OutputDock.h"
 #include "dialogs\BinaryDock.h"
 #include "display\maindisplay\AnalyzerEdit.h"
+#include "ViewTab.h"
 
 #include "AnalyzerTab.h"
 
@@ -39,7 +40,7 @@ namespace analyzer{
     void MainWindow::NotifyDocumentChange()
     {
       this->documentStructure->SetFiles(this->analyzerBase.GetFileNames());
-      this->tabWidget->GetAnalyzerEdit()->ClearFile();
+      this->tabWidget->GetViewTab()->ClearFile();
     }
 
     void MainWindow::AddBinaryLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical)
@@ -64,7 +65,7 @@ namespace analyzer{
 
     void MainWindow::FileChange()
     {
-      this->tabWidget->GetAnalyzerEdit()->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
+      this->tabWidget->GetViewTab()->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
     void MainWindow::setup()

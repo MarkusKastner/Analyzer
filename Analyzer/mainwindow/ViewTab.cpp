@@ -11,11 +11,12 @@
 #include "AnalyzerTab.h"
 
 #include "display\maindisplay\AnalyzerEdit.h"
+#include "display\maindisplay\HTMLOutput.h"
 
 namespace analyzer {
   namespace gui {
     ViewTab::ViewTab(AnalyzerTab * parent)
-      :QWidget(parent), analyzerEdit(nullptr)
+      :QWidget(parent), viewOutput(nullptr)
     {
       this->setup();
     }
@@ -24,18 +25,32 @@ namespace analyzer {
     {
     }
 
-    display::AnalyzerEdit * ViewTab::GetAnalyzerEdit()
+    void ViewTab::SetFile(core::File * file)
     {
-      return this->analyzerEdit;
+      this->ClearFile();
+      if (file->UseRichText()) {
+        this->viewOutput = new display::HTMPOutput(this);
+      }
+      else {
+        this->viewOutput = new display::AnalyzerEdit(this);
+      }
+      this->layout()->addWidget(dynamic_cast<QWidget*>(this->viewOutput));
+      this->viewOutput->SetFile(file);
+    }
+
+    void ViewTab::ClearFile()
+    {
+      if (this->viewOutput != nullptr) {
+        this->layout()->removeWidget(dynamic_cast<QWidget*>(this->viewOutput));
+        delete this->viewOutput;
+        this->viewOutput = nullptr;
+      }
     }
 
     void ViewTab::setup()
     {
       this->setLayout(new QVBoxLayout());
       this->layout()->setContentsMargins(1, 1, 1, 1);
-
-      this->analyzerEdit = new display::AnalyzerEdit(this);
-      this->layout()->addWidget(this->analyzerEdit);
     }
   }
 }

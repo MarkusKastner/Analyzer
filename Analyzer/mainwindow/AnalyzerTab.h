@@ -13,7 +13,7 @@ class QTextEdit;
 namespace analyzer {
   namespace gui {
     namespace display {
-      class AnalyzerEdit;
+      class ViewOutput;
     }
     class ViewTab;
     class AnalyzeResultTab;
@@ -27,7 +27,7 @@ namespace analyzer {
       explicit AnalyzerTab(QWidget * parent = nullptr);
       virtual ~AnalyzerTab();
 
-      display::AnalyzerEdit * GetAnalyzerEdit();
+      ViewTab * GetViewTab();
       QTextEdit * GetResultTextEdit();
 
     private:

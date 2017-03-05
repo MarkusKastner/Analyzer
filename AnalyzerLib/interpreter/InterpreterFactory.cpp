@@ -9,6 +9,7 @@
 
 #include "ASCIIInterpreter.h"
 #include "XMLInterpreter.h"
+#include "BMPInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -41,6 +42,8 @@ namespace analyzer {
         return std::shared_ptr<Interpreter>(new ASCIIInterpreter(data));
       case core::FileFormat::xml:
         return std::shared_ptr<Interpreter>(new XMLInterpreter(data));
+      case core::FileFormat::bmp:
+        return std::shared_ptr<Interpreter>(new BMPInterpreter(data));
       default:
         return std::shared_ptr<Interpreter>();
       }

@@ -63,4 +63,5 @@ TEST_F(BMPInterpreterTest, getText)
   std::string compText("<!DOCTYPE html><html><head><title>Windows Bitmap</title></head><body></body></html>");
   ASSERT_STREQ(text.c_str(), compText.c_str());
 }
+
 #endif

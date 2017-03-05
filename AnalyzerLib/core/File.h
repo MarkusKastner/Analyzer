@@ -34,11 +34,15 @@ namespace analyzer{
       const std::shared_ptr<std::vector<unsigned char>> & GetData();
       const std::vector<std::string> & GetPath();
 
+      bool UseRichText();
+      const std::string & GetText();
+
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string fileName;
       std::vector<std::string> path;
       std::shared_ptr<interpreter::Interpreter> interpreter;
+      std::string emptyText;
 
       void setDirectoryNames(const std::string& input, const std::string& regex);
     };

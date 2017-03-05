@@ -119,6 +119,9 @@
     <ClCompile Include="dialogs\BinaryListView.cpp">
       <Filter>dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="display\maindisplay\HTMLOutput.cpp">
+      <Filter>display\maindisplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -150,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="dialogs\BinaryListView.h">
       <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="display\maindisplay\ViewOutput.h">
+      <Filter>display\maindisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="display\maindisplay\HTMLOutput.h">
+      <Filter>display\maindisplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

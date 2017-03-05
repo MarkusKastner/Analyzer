@@ -10,9 +10,12 @@
 #include <QWidget>
 
 namespace analyzer {
+  namespace core {
+    class File;
+  }
   namespace gui {
     namespace display {
-      class AnalyzerEdit;
+      class ViewOutput;
     }
     class AnalyzerTab;
     class ViewTab : public QWidget
@@ -24,10 +27,11 @@ namespace analyzer {
       explicit ViewTab(AnalyzerTab * parent);
       virtual ~ViewTab();
 
-      display::AnalyzerEdit * GetAnalyzerEdit();
+      void SetFile(core::File * file);
+      void ClearFile();
 
     private:
-      display::AnalyzerEdit * analyzerEdit;
+      display::ViewOutput * viewOutput;
 
       void setup();
     };

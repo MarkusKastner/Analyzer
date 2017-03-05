@@ -87,4 +87,36 @@ TEST_F(FileTest, AssignOperator)
   ASSERT_EQ(theNewfile.GetSize(), this->charVector.size());
 }
 
+TEST_F(FileTest, UseRichTextEmpty)
+{
+  ASSERT_FALSE(this->file1.UseRichText());
+}
+
+TEST_F(FileTest, UseRichTextBMP)
+{
+  std::wstring testFilesDirW(TestSupport::GetInstance()->GetTestFilesDir());
+  std::string testFile(testFilesDirW.begin(), testFilesDirW.end());
+  std::string bmpFile("bmp/test16_1.bmp");
+  testFile += "/" + bmpFile;
+  auto dataPtr = TestSupport::GetInstance()->GetDataFromTestFilesDir(bmpFile);
+  std::vector<unsigned char> data(dataPtr->begin(), dataPtr->end());
+
+  this->file1.SetFileData(testFile, data);
+  ASSERT_TRUE(this->file1.UseRichText());
+}
+
+TEST_F(FileTest, getText)
+{
+  std::wstring testFilesDirW(TestSupport::GetInstance()->GetTestFilesDir());
+  std::string testFile(testFilesDirW.begin(), testFilesDirW.end());
+  std::string bmpFile("bmp/test16_1.bmp");
+  testFile += "/" + bmpFile;
+  auto dataPtr = TestSupport::GetInstance()->GetDataFromTestFilesDir(bmpFile);
+  std::vector<unsigned char> data(dataPtr->begin(), dataPtr->end());
+  this->file1.SetFileData(testFile, data);
+  std::string text(this->file1.GetText());
+  std::string compTxt("<!DOCTYPE html><html><head><title>Windows Bitmap</title></head>");
+  std::string testTxt(text.substr(0, 63));
+  ASSERT_STREQ(compTxt.c_str(), testTxt.c_str());
+}
 #endif

@@ -5,6 +5,7 @@
 #include "AnalyzerLib\interpreter\InterpreterFactory.h"
 #include "AnalyzerLib\interpreter\ASCIIInterpreter.h"
 #include "AnalyzerLib\interpreter\XMLInterpreter.h"
+#include "AnalyzerLib\interpreter\BMPInterpreter.h"
 
 class IntepreterFactoryTest : public testing::Test
 {
@@ -41,6 +42,14 @@ TEST_F(IntepreterFactoryTest, xmlInterpreter)
   std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
   std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(data);
   bool success = !(!dynamic_cast<analyzer::interpreter::XMLInterpreter*>(interpreter.get()));
+  ASSERT_TRUE(success);
+}
+
+TEST_F(IntepreterFactoryTest, bmpInterpreter)
+{
+  std::shared_ptr<std::vector<unsigned char>> data = TestSupport::GetInstance()->GetDataFromTestFilesDir("bmp/test16_1.bmp");
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(data);
+  bool success = !(!dynamic_cast<analyzer::interpreter::BMPInterpreter*>(interpreter.get()));
   ASSERT_TRUE(success);
 }
 

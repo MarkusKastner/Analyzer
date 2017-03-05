@@ -145,6 +145,7 @@
     <ClCompile Include="dialogs\OutputDock.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEditHighlighter.cpp" />
+    <ClCompile Include="display\maindisplay\HTMLOutput.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Actions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -187,6 +188,8 @@
   <ItemGroup>
     <ClInclude Include="application\error\AppException.h" />
     <ClInclude Include="dialogs\BinaryListView.h" />
+    <ClInclude Include="display\maindisplay\HTMLOutput.h" />
+    <ClInclude Include="display\maindisplay\ViewOutput.h" />
     <ClInclude Include="mainwindow\AnalyzeResultTab.h" />
     <ClInclude Include="mainwindow\AnalyzerTab.h" />
     <ClInclude Include="mainwindow\ViewTab.h" />

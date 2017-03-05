@@ -20,9 +20,9 @@ namespace analyzer {
     {
     }
 
-    display::AnalyzerEdit * AnalyzerTab::GetAnalyzerEdit()
+    ViewTab * AnalyzerTab::GetViewTab()
     {
-      return this->viewTab->GetAnalyzerEdit();
+      return this->viewTab;
     }
 
     QTextEdit * AnalyzerTab::GetResultTextEdit()

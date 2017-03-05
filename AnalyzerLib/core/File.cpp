@@ -12,13 +12,13 @@
 namespace analyzer{
   namespace core{
     File::File()
-      : data(new std::vector<unsigned char>()), fileName(), path(), interpreter()
+      : data(new std::vector<unsigned char>()), fileName(), path(), interpreter(), emptyText("No data available.")
     {
 
     }
 
     File::File(const std::string & fileName, const std::vector<unsigned char> & data)
-      : data(new std::vector<unsigned char>(data)), fileName(fileName), path(), interpreter()
+      : data(new std::vector<unsigned char>(data)), fileName(fileName), path(), interpreter(), emptyText("No data available.")
     {
       this->setDirectoryNames(fileName, "/");
       this->interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(this->data);
@@ -26,7 +26,7 @@ namespace analyzer{
 
     File::File(const File& other)
       : data(other.data),
-      fileName(other.fileName), path(other.path), interpreter(other.interpreter)
+      fileName(other.fileName), path(other.path), interpreter(other.interpreter), emptyText(other.emptyText)
     {
     }
 
@@ -37,6 +37,7 @@ namespace analyzer{
         this->fileName = other.fileName;
         this->path = other.path;
         this->interpreter = other.interpreter;
+        this->emptyText = other.emptyText;
       }
       return *this;
     }
@@ -81,6 +82,22 @@ namespace analyzer{
     const std::vector<std::string> & File::GetPath()
     {
       return this->path;
+    }
+
+    bool File::UseRichText()
+    {
+      if (this->interpreter) {
+        return this->interpreter->UseRichText();
+      }
+      return false;
+    }
+
+    const std::string & File::GetText()
+    {
+      if (this->interpreter) {
+        return this->interpreter->GetText();
+      }
+      return this->emptyText;
     }
 
     void File::setDirectoryNames(const std::string& input, const std::string& regex)

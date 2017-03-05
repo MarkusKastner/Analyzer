@@ -42,6 +42,7 @@ namespace analyzer {
 
     const std::string & BMPInterpreter::GetText()
     {
+      this->htmlDoc.AddHeading(HTML::Heading("Windows Bitmap", 1));
       this->text = this->htmlDoc.GetString();
       return this->text;
     }

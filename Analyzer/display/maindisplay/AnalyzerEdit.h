@@ -7,6 +7,8 @@
 #ifndef ANALYZEREDIT_H
 #define ANALYZEREDIT_H
 
+#include "ViewOutput.h"
+
 #include <QPlainTextEdit>
 #include <QEvent>
 
@@ -27,7 +29,7 @@ namespace analyzer{
   namespace gui{
     namespace display{
       class AnalyzerEditHighlighter;
-      class AnalyzerEdit : public QPlainTextEdit
+      class AnalyzerEdit : public ViewOutput, public QPlainTextEdit
       {
       private:
         class EditEvent : public QEvent
@@ -49,8 +51,8 @@ namespace analyzer{
         AnalyzerEdit(QWidget * parent = 0);
         virtual ~AnalyzerEdit();
 
-        void SetFile(core::File * file);
-        void ClearFile();
+        virtual void SetFile(core::File * file);
+        virtual void ClearFile();
 
         void LineNumberAreaPaintEvent(QPaintEvent *event);
         int GetLineNumbersWidth();
