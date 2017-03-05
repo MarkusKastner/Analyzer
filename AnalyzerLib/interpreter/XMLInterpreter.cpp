@@ -9,13 +9,13 @@
 namespace analyzer {
   namespace interpreter {
     XMLInterpreter::XMLInterpreter()
-      :Interpreter(), data()
+      :Interpreter(), data(), text()
     {
 
     }
 
     XMLInterpreter::XMLInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
-      : Interpreter(), data(data)
+      : Interpreter(), data(data), text()
     {
     }
 
@@ -31,6 +31,11 @@ namespace analyzer {
     void XMLInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
       this->data = data;
+    }
+
+    const std::string & XMLInterpreter::GetText()
+    {
+      return this->text;
     }
   }
 }

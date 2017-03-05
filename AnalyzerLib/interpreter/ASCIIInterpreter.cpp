@@ -9,13 +9,13 @@
 namespace analyzer {
   namespace interpreter {
     ASCIIInterpreter::ASCIIInterpreter()
-      :Interpreter(), data()
+      :Interpreter(), data(), text()
     {
 
     }
 
     ASCIIInterpreter::ASCIIInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
-      : Interpreter(), data(data)
+      : Interpreter(), data(data), text()
     {
     }
 
@@ -32,6 +32,11 @@ namespace analyzer {
     void ASCIIInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
       this->data = data;
+    }
+
+    const std::string & ASCIIInterpreter::GetText()
+    {
+      return this->text;
     }
 
   }

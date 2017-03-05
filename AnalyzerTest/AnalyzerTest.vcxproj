@@ -180,6 +180,7 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\HTML\Document.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\Interpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\service\Update.cpp" />

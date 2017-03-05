@@ -20,9 +20,11 @@ namespace analyzer {
 
       virtual bool HasData();
       virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      virtual const std::string & GetText();
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
+      std::string text;
     };
   }
 }

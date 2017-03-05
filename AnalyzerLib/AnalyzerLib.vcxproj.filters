@@ -130,6 +130,9 @@
     <ClCompile Include="interpreter\BMPInterpreter.cpp">
       <Filter>interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\Interpreter.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">

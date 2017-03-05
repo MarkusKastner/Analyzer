@@ -182,6 +182,7 @@
     <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
     <ClCompile Include="interpreter\HTML\Document.cpp" />
+    <ClCompile Include="interpreter\Interpreter.cpp" />
     <ClCompile Include="interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
