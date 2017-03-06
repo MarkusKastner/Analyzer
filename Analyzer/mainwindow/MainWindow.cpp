@@ -68,6 +68,12 @@ namespace analyzer{
       this->tabWidget->GetViewTab()->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
+    void MainWindow::SetBinaryOutput(const QString & binary)
+    {
+      this->binaryDock->Clear();
+      this->binaryDock->AddLine("testHex", "testBin", binary.toStdString(), "testNumberical");
+    }
+
     void MainWindow::setup()
     {
       this->analyzerBase.RegisterObserver(this);

@@ -20,6 +20,7 @@ namespace analyzer {
     class AnalyzerTab;
     class ViewTab : public QWidget
     {
+      Q_OBJECT
     private:
       ViewTab() {}
 

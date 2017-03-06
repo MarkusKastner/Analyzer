@@ -29,24 +29,9 @@ namespace analyzer{
   namespace gui{
     namespace display{
       class AnalyzerEditHighlighter;
-      class AnalyzerEdit : public ViewOutput, public QPlainTextEdit
+      class AnalyzerEdit : public QPlainTextEdit, public ViewOutput
       {
-      private:
-        class EditEvent : public QEvent
-        {
-        public:
-          enum Action{ clear, dataChange, exInterpreter };
-          EditEvent(const Action & action)
-            :QEvent(Type::User), action(action)
-          {}
-
-          const Action & GetAction() { return this->action; }
-          virtual ~EditEvent(){}
-        
-        private:
-          Action action;
-        };
-
+        Q_OBJECT
       public:
         AnalyzerEdit(QWidget * parent = 0);
         virtual ~AnalyzerEdit();
@@ -59,6 +44,9 @@ namespace analyzer{
 
         void SetNewDisplayOptions(const analyzer::base::BaseFormat & baseFormat, const analyzer::base::DetailFormat & detailFormat);
 
+      signals:
+        void SetBinaryOutput(const QString & binary);
+
       protected:
         void customEvent(QEvent * evt);
         void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
@@ -67,7 +55,22 @@ namespace analyzer{
         core::File * file;
         QWidget * lineNumbers;
         AnalyzerEditHighlighter * highlighter;
-        bool interpreterDeleted;
+        QString lastBlockText;
+
+        class EditEvent : public QEvent
+        {
+        public:
+          enum Action { clear, dataChange };
+          EditEvent(const Action & action)
+            :QEvent(Type::User), action(action)
+          {}
+
+          const Action & GetAction() { return this->action; }
+          virtual ~EditEvent() {}
+
+        private:
+          Action action;
+        };
 
         void arrangeNewFile(core::File * file);
         void clearFile();
@@ -75,6 +78,7 @@ namespace analyzer{
         void highlightCurrentLine();
         void updateLineNumberAreaWidth(int newBlockCount);
         void updateLineNumberArea(const QRect &, int);
+
       };
 
       class LineNumberArea : public QWidget

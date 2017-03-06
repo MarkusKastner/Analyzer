@@ -133,6 +133,9 @@
     <ClCompile Include="interpreter\Interpreter.cpp">
       <Filter>interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\formatter\ASCIIFormatter.cpp">
+      <Filter>interpreter\formatter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -248,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="interpreter\BMPInterpreter.h">
       <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\formatter\ASCIIFormatter.h">
+      <Filter>interpreter\formatter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

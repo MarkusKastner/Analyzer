@@ -41,6 +41,8 @@ namespace analyzer{
       virtual void SetAvailableAnalyzingOptions(const base::AnalyzingOptions & analyzingOptions);
       virtual void FileChange();
 
+      void SetBinaryOutput(const QString & binary);
+
     private:
       Ui::MainWindow ui;
       std::unique_ptr<Actions> actions;

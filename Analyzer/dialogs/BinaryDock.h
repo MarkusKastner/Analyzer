@@ -51,6 +51,7 @@ namespace analyzer {
       virtual ~BinaryDock();
 
       void AddLine(const std::string & hex, const std::string & binary, const std::string & ascii, const std::string & numerical);
+      void AddLine(const std::string & ascii);
       void Clear();
 
     protected:
@@ -60,6 +61,7 @@ namespace analyzer {
       BinaryListView * listView;
 
       void setup();
+      void asciiToBinary(const std::string & ascii);
     };
   }
 }

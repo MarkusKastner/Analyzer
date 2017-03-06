@@ -36,6 +36,7 @@ namespace analyzer {
 
     const std::string & ASCIIInterpreter::GetText()
     {
+      this->text = Interpreter::toASCII(this->data, 0, this->data->size());
       return this->text;
     }
 

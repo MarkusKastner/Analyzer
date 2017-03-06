@@ -176,6 +176,7 @@
     <ClCompile Include="definitions\TextDefinition.cpp" />
     <ClCompile Include="interpreter\ASCIIInterpreter.cpp" />
     <ClCompile Include="interpreter\BMPInterpreter.cpp" />
+    <ClCompile Include="interpreter\formatter\ASCIIFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\BitFormatter.cpp" />
     <ClCompile Include="interpreter\formatter\Formatter.cpp" />
     <ClCompile Include="interpreter\formatter\HexFormatter.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="interpreter\ASCIIInterpreter.h" />
     <ClInclude Include="interpreter\BMPInterpreter.h" />
     <ClInclude Include="interpreter\error\InterpreterException.h" />
+    <ClInclude Include="interpreter\formatter\ASCIIFormatter.h" />
     <ClInclude Include="interpreter\formatter\BitFormatter.h" />
     <ClInclude Include="interpreter\formatter\Formatter.h" />
     <ClInclude Include="interpreter\formatter\HexFormatter.h" />

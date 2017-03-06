@@ -59,9 +59,10 @@ TEST_F(BMPInterpreterTest, richText)
 
 TEST_F(BMPInterpreterTest, getText)
 {
-  std::string text(this->interpreter.GetText());
-  std::string compText("<!DOCTYPE html><html><head><title>Windows Bitmap</title></head><body></body></html>");
-  ASSERT_STREQ(text.c_str(), compText.c_str());
+  std::string fullText(this->interpreter.GetText());
+  std::string testText(fullText.substr(0, 48));
+  std::string compText("<!DOCTYPE html><html><head><title>Windows Bitmap");
+  ASSERT_STREQ(testText.c_str(), compText.c_str());
 }
 
 #endif

@@ -19,7 +19,7 @@ namespace analyzer{
     namespace display{
 
       AnalyzerEdit::AnalyzerEdit(QWidget * parent)
-        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), interpreterDeleted(false)
+        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), lastBlockText()
       {
         this->lineNumbers = new LineNumberArea(this);
         this->setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -111,9 +111,6 @@ namespace analyzer{
           case EditEvent::Action::clear:
             this->clearFile();
             break;
-          case EditEvent::Action::exInterpreter:
-            this->interpreterDeleted = true;
-            break;
           }
         }
       }
@@ -130,15 +127,13 @@ namespace analyzer{
       {
         this->clearFile();
         this->file = file;
-        this->interpreterDeleted = false;
+        this->setPlainText(QString::fromLatin1(this->file->GetText().c_str()));
       }
 
       void AnalyzerEdit::clearFile()
       {
         this->setPlainText("");
         if (this->file != nullptr) {
-          if (!this->interpreterDeleted) {
-          }
           this->file = nullptr;
         }
       }
@@ -159,7 +154,13 @@ namespace analyzer{
           extraSelections.append(selection);
         }
 
-        setExtraSelections(extraSelections);
+        QString currentBlockText(this->textCursor().block().text());
+        if (currentBlockText.compare(this->lastBlockText) != 0) {
+          this->lastBlockText = currentBlockText;
+          this->SetBinaryOutput(this->lastBlockText);
+        }
+        
+        this->setExtraSelections(extraSelections);
       }
 
       void AnalyzerEdit::updateLineNumberAreaWidth(int)

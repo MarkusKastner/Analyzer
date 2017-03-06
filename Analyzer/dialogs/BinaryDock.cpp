@@ -27,6 +27,11 @@ namespace analyzer {
       QApplication::postEvent(this, new AddLineEvent(hex, binary, ascii, numerical));
     }
 
+    void BinaryDock::AddLine(const std::string & ascii)
+    {
+      this->asciiToBinary(ascii);
+    }
+
     void BinaryDock::Clear()
     {
       QApplication::postEvent(this, new ClearEvent());
@@ -40,6 +45,10 @@ namespace analyzer {
 
       this->listView = new BinaryListView(this->widget());
       this->widget()->layout()->addWidget(this->listView);
+    }
+
+    void BinaryDock::asciiToBinary(const std::string & ascii)
+    {
     }
 
     void BinaryDock::customEvent(QEvent * evt)

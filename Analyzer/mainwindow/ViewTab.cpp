@@ -12,6 +12,7 @@
 
 #include "display\maindisplay\AnalyzerEdit.h"
 #include "display\maindisplay\HTMLOutput.h"
+#include "mainwindow\MainWindow.h"
 
 namespace analyzer {
   namespace gui {
@@ -33,6 +34,10 @@ namespace analyzer {
       }
       else {
         this->viewOutput = new display::AnalyzerEdit(this);
+        if (dynamic_cast<MainWindow*>(this->parent()->parent()->parent())) {
+          MainWindow* mainWnd = dynamic_cast<MainWindow*>(this->parent()->parent()->parent());
+          connect(dynamic_cast<display::AnalyzerEdit*>(this->viewOutput), &display::AnalyzerEdit::SetBinaryOutput, mainWnd, &MainWindow::SetBinaryOutput);
+        }
       }
       this->layout()->addWidget(dynamic_cast<QWidget*>(this->viewOutput));
       this->viewOutput->SetFile(file);
