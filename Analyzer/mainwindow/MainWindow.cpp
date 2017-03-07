@@ -19,6 +19,7 @@
 #include "AnalyzerTab.h"
 
 #include "AnalyzerLib\interpreter\Interpreter.h"
+#include "AnalyzerLib\interpreter\formatter\ASCIIFormatter.h"
 
 namespace analyzer{
   namespace gui{
@@ -71,7 +72,14 @@ namespace analyzer{
     void MainWindow::SetBinaryOutput(const QString & binary)
     {
       this->binaryDock->Clear();
-      this->binaryDock->AddLine("testHex", "testBin", binary.toStdString(), "testNumberical");
+      std::vector<std::string> lines = interpreter::ASCIIFormatter::Split(binary.toStdString(), 4);
+      for (auto& line : lines) {
+        this->binaryDock->AddLine(interpreter::ASCIIFormatter::Text2HexExpression(line), 
+          interpreter::ASCIIFormatter::Text2BinaryExpression(line), 
+          line, 
+          interpreter::ASCIIFormatter::Text2NumericalExpression(line));
+      }
+      
     }
 
     void MainWindow::setup()

@@ -32,4 +32,28 @@ TEST_F(ASCIIFormatterTest, splitt)
   std::vector<std::string> chunks(analyzer::interpreter::ASCIIFormatter::Split(this->text, 4));
   ASSERT_EQ(chunks.size(), 12);
 }
+
+TEST_F(ASCIIFormatterTest, text2Binary)
+{
+  std::string text("abcd");
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Text2BinaryExpression(text));
+  ASSERT_STREQ(bin.c_str(), "01100001 01100010 01100011 01100100");
+}
+
+TEST_F(ASCIIFormatterTest, text2Numerical)
+{
+  std::string text("abcd");
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Text2NumericalExpression(text));
+  ASSERT_STREQ(bin.c_str(), "97 98 99 100");
+}
+
+TEST_F(ASCIIFormatterTest, text2Hex)
+{
+  std::string text("abcd");
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Text2HexExpression(text));
+  ASSERT_STREQ(bin.c_str(), "61 62 63 64");
+}
 #endif

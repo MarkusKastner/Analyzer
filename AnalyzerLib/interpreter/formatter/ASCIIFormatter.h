@@ -16,6 +16,9 @@ namespace analyzer {
     {
     public:
       static std::vector<std::string> Split(const std::string & text, const size_t & chunkSize);
+      static std::string Text2BinaryExpression(const std::string & text);
+      static std::string Text2NumericalExpression(const std::string & text);
+      static std::string Text2HexExpression(const std::string & text);
     };
   }
 }
