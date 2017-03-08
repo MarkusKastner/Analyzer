@@ -53,6 +53,5 @@ TEST_F(IntepreterFactoryTest, bmpInterpreter)
   ASSERT_TRUE(success);
 }
 
-//BMPInterpreter
 //HEXInterpreter
 #endif

@@ -31,7 +31,7 @@ namespace analyzer{
         rules.append(stringRule);
       }
 
-      void AnalyzerEditHighlighter::SetFunctionalHighlightExpressions(const std::vector<std::wstring> & expressions)
+      void AnalyzerEditHighlighter::SetFunctionalHighlightExpressions(const std::vector<std::string> & expressions)
       {
         for (auto& expression : expressions){
           HighlightingRule rule;
@@ -96,10 +96,10 @@ namespace analyzer{
         }
       }
 
-      QString AnalyzerEditHighlighter::toRegExp(const std::wstring & expression)
+      QString AnalyzerEditHighlighter::toRegExp(const std::string & expression)
       {
         QString regexp("[");
-        regexp += QString::fromWCharArray(expression.c_str());
+        regexp += QString::fromLatin1(expression.c_str());
         regexp += "]{";
         regexp += QString::number(expression.size());
         regexp += "}";

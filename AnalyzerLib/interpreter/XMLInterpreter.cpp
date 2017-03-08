@@ -9,13 +9,13 @@
 namespace analyzer {
   namespace interpreter {
     XMLInterpreter::XMLInterpreter()
-      :Interpreter(), data(), text()
+      :Interpreter(), data(), text(), tabs()
     {
 
     }
 
     XMLInterpreter::XMLInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
-      : Interpreter(), data(data), text()
+      : Interpreter(), data(data), text(), tabs()
     {
     }
 
@@ -35,7 +35,69 @@ namespace analyzer {
 
     const std::string & XMLInterpreter::GetText()
     {
+      this->format();
       return this->text;
+    }
+
+    core::FileFormat XMLInterpreter::GetFileFormat()
+    {
+      return core::FileFormat::xml;
+    }
+
+    void XMLInterpreter::format()
+    {
+      std::shared_ptr<std::string> text(new std::string(this->toASCII(this->data, 0, this->data->size())));
+
+      size_t startHeader = text->find_first_of('<');
+      size_t endHeader = text->find_first_of('>');
+
+      std::shared_ptr<std::string> formatedText(new std::string(text->substr(startHeader, endHeader - startHeader + 1)));
+
+      bool firstTag = true;
+      for (size_t i = endHeader + 1; i < text->size(); i++) {
+
+        if (text->at(i) == '<' && text->at(i - 1) == '>') {
+
+          formatedText->push_back('\n');
+
+          size_t tagEnd = text->find_first_of('>', i);
+
+          wchar_t check1 = text->at(i + 1);
+          wchar_t check2 = text->at(tagEnd - 1);
+
+          if (text->at(tagEnd - 1) == '/') {
+            *formatedText += this->tabs;
+          }
+          else if (text->at(i + 1) == '/') {
+            this->decreaseTabs();
+            *formatedText += this->tabs;
+          }
+          else {
+            *formatedText += this->tabs;
+            size_t tagEnd = text->find_first_of('>', i);
+            if (tagEnd + 1 < text->size() && text->at(tagEnd + 1) == '<') {
+              this->increaseTabs();
+            }
+          }
+        }
+        formatedText->push_back(text->at(i));
+      }
+      this->text = *formatedText.get();
+    }
+
+    void XMLInterpreter::increaseTabs()
+    {
+      this->tabs += "  ";
+    }
+
+    void XMLInterpreter::decreaseTabs()
+    {
+      if (!this->tabs.empty()) {
+        this->tabs.pop_back();
+      }
+      if (!this->tabs.empty()) {
+        this->tabs.pop_back();
+      }
     }
   }
 }

@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "AnalyzerLib\core\File.h"
+#include "AnalyzerLib\core\FileInfo.h"
 
 class FileTest : public testing::Test
 {
@@ -118,5 +119,7 @@ TEST_F(FileTest, getText)
   std::string compTxt("<!DOCTYPE html><html><head><title>Windows Bitmap</title></head>");
   std::string testTxt(text.substr(0, 63));
   ASSERT_STREQ(compTxt.c_str(), testTxt.c_str());
+  ASSERT_EQ(this->file1.GetFileFormat(), analyzer::core::FileFormat::bmp);
 }
+
 #endif

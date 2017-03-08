@@ -48,6 +48,11 @@ namespace analyzer {
       return this->text;
     }
 
+    core::FileFormat BMPInterpreter::GetFileFormat()
+    {
+      return core::FileFormat::bmp;
+    }
+
     const BMPInterpreter::FileHeader & BMPInterpreter::GetFileHeader() const
     {
       return this->fileHeader;

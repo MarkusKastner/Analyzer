@@ -78,7 +78,7 @@ namespace analyzer{
         void highlightCurrentLine();
         void updateLineNumberAreaWidth(int newBlockCount);
         void updateLineNumberArea(const QRect &, int);
-
+        void setHighlighter();
       };
 
       class LineNumberArea : public QWidget

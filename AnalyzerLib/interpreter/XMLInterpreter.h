@@ -21,10 +21,16 @@ namespace analyzer {
       virtual bool HasData();
       virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
       virtual const std::string & GetText();
+      virtual core::FileFormat GetFileFormat();
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string text;
+      std::string tabs;
+
+      void format();
+      void increaseTabs();
+      void decreaseTabs();
     };
   }
 }

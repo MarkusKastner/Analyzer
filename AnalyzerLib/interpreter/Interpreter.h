@@ -13,6 +13,8 @@
 
 #include "AnalyzerLib\base\BaseData.h"
 #include "AnalyzerLib\interpreter\error\InterpreterException.h"
+#include "AnalyzerLib\core\FileInfo.h"
+
 namespace analyzer{
   namespace interpreter{
     class Interpreter
@@ -25,6 +27,7 @@ namespace analyzer{
       virtual bool UseRichText();
 
       virtual const std::string & GetText() = 0;
+      virtual core::FileFormat GetFileFormat() = 0;
 
     protected:
       Interpreter() {}

@@ -26,7 +26,7 @@ namespace analyzer{
         };
 
         AnalyzerEditHighlighter(QTextDocument *parent = 0);
-        void SetFunctionalHighlightExpressions(const std::vector<std::wstring> & expressions);
+        void SetFunctionalHighlightExpressions(const std::vector<std::string> & expressions);
         void SetMode(const Mode & mode);
 
       protected:
@@ -47,7 +47,7 @@ namespace analyzer{
         QTextCharFormat stringFormat;
 
         Mode mode;
-        static QString toRegExp(const std::wstring & expression);
+        static QString toRegExp(const std::string & expression);
       };
     }
   }

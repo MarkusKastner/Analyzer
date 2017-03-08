@@ -28,7 +28,7 @@ namespace analyzer{
         connect(this, &AnalyzerEdit::updateRequest, this, &AnalyzerEdit::updateLineNumberArea);
         connect(this, &AnalyzerEdit::cursorPositionChanged, this, &AnalyzerEdit::highlightCurrentLine);
 
-        this->highlighter = new AnalyzerEditHighlighter(this->document());
+        //this->highlighter = new AnalyzerEditHighlighter(this->document());
         
       }
 
@@ -128,6 +128,7 @@ namespace analyzer{
         this->clearFile();
         this->file = file;
         this->setPlainText(QString::fromLatin1(this->file->GetText().c_str()));
+        this->setHighlighter();
       }
 
       void AnalyzerEdit::clearFile()
@@ -178,6 +179,20 @@ namespace analyzer{
         }
         if (rect.contains(viewport()->rect())){
           this->updateLineNumberAreaWidth(0);
+        }
+      }
+      void AnalyzerEdit::setHighlighter()
+      {
+        if (nullptr == this->file) {
+          return;
+        }
+
+        auto format = this->file->GetFileFormat();
+        switch (format) {
+        case core::FileFormat::xml:
+          
+          
+          break;
         }
       }
     }

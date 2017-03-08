@@ -100,6 +100,11 @@ namespace analyzer{
       return this->emptyText;
     }
 
+    core::FileFormat File::GetFileFormat()
+    {
+      return this->interpreter->GetFileFormat();
+    }
+
     void File::setDirectoryNames(const std::string& input, const std::string& regex)
     {
       std::regex re(regex);

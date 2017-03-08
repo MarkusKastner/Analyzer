@@ -13,6 +13,7 @@
 
 #include "AnalyzerLib\base\BaseData.h"
 #include "AnalyzerLib\interpreter\Interpreter.h"
+#include "AnalyzerLib\core\FileInfo.h"
 
 namespace analyzer{
   namespace core{
@@ -36,6 +37,7 @@ namespace analyzer{
 
       bool UseRichText();
       const std::string & GetText();
+      core::FileFormat GetFileFormat();
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;

@@ -27,6 +27,7 @@ namespace analyzer {
       virtual bool UseRichText();
 
       virtual const std::string & GetText();
+      virtual core::FileFormat GetFileFormat();
 
       enum Compression 
       {

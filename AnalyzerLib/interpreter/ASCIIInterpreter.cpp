@@ -40,5 +40,10 @@ namespace analyzer {
       return this->text;
     }
 
+    core::FileFormat ASCIIInterpreter::GetFileFormat()
+    {
+      return core::FileFormat::ascii;
+    }
+
   }
 }
