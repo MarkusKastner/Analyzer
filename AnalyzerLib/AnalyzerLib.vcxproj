@@ -185,6 +185,7 @@
     <ClCompile Include="interpreter\HTML\Document.cpp" />
     <ClCompile Include="interpreter\Interpreter.cpp" />
     <ClCompile Include="interpreter\InterpreterFactory.cpp" />
+    <ClCompile Include="interpreter\PDFInterpreter.cpp" />
     <ClCompile Include="interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
     <ClCompile Include="service\Update.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="interpreter\HTML\Table.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
     <ClInclude Include="interpreter\InterpreterFactory.h" />
+    <ClInclude Include="interpreter\PDFInterpreter.h" />
     <ClInclude Include="interpreter\XMLInterpreter.h" />
     <ClInclude Include="network\CrossSock.h" />
     <ClInclude Include="service\Update.h" />

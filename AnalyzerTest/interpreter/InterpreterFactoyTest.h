@@ -1,3 +1,9 @@
+/* Copyright (C) 2016-2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #ifndef INTERPRETERFACTORYTEST_H
 #define INTERPRETERFACTORYTEST_H
 
@@ -6,6 +12,7 @@
 #include "AnalyzerLib\interpreter\ASCIIInterpreter.h"
 #include "AnalyzerLib\interpreter\XMLInterpreter.h"
 #include "AnalyzerLib\interpreter\BMPInterpreter.h"
+#include "AnalyzerLib\interpreter\PDFInterpreter.h"
 
 class IntepreterFactoryTest : public testing::Test
 {
@@ -50,6 +57,14 @@ TEST_F(IntepreterFactoryTest, bmpInterpreter)
   std::shared_ptr<std::vector<unsigned char>> data = TestSupport::GetInstance()->GetDataFromTestFilesDir("bmp/test16_1.bmp");
   std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(data);
   bool success = !(!dynamic_cast<analyzer::interpreter::BMPInterpreter*>(interpreter.get()));
+  ASSERT_TRUE(success);
+}
+
+TEST_F(IntepreterFactoryTest, pdfInterpreter)
+{
+  std::shared_ptr<std::vector<unsigned char>> data = TestSupport::GetInstance()->GetDataFromTestFilesDir("test.pdf");
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(data);
+  bool success = !(!dynamic_cast<analyzer::interpreter::PDFInterpreter*>(interpreter.get()));
   ASSERT_TRUE(success);
 }
 

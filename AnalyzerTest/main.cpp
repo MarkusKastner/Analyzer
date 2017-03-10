@@ -35,6 +35,7 @@
 #include "interpreter\HTML\HTMLDocumentTest.h"
 #include "interpreter\BMPInterpreterTest.h"
 #include "interpreter\formatter\ASCIIFormatterTest.h"
+#include "interpreter\PDFInterpreterTest.h"
 
 int main(int argc, char** argv) {
 

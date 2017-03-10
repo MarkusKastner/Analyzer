@@ -144,6 +144,9 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\ASCIIFormatter.cpp">
       <Filter>Interpreter\formatter</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\PDFInterpreter.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -331,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\ASCIIFormatter.h">
       <Filter>Interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\PDFInterpreterTest.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\PDFInterpreter.h">
+      <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
