@@ -12,6 +12,8 @@
 #include <QPlainTextEdit>
 #include <QEvent>
 
+#include <thread>
+
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\base\BaseData.h"
 
@@ -56,6 +58,7 @@ namespace analyzer{
         QWidget * lineNumbers;
         AnalyzerEditHighlighter * highlighter;
         QString lastBlockText;
+        std::unique_ptr<std::thread> hlThread;
 
         class EditEvent : public QEvent
         {
@@ -72,13 +75,29 @@ namespace analyzer{
           Action action;
         };
 
+        class SetHighlighterEvent : public QEvent
+        {
+        public:
+          SetHighlighterEvent(const std::vector<std::string> & expressions)
+            :QEvent(static_cast<QEvent::Type>(QEvent::Type::User + 1)), expressions(expressions)
+          {}
+          virtual ~SetHighlighterEvent() {}
+          const std::vector<std::string> & GetExpressions() const { return this->expressions; }
+        private:
+          std::vector<std::string> expressions;
+        };
+
         void arrangeNewFile(core::File * file);
         void clearFile();
 
         void highlightCurrentLine();
         void updateLineNumberAreaWidth(int newBlockCount);
         void updateLineNumberArea(const QRect &, int);
-        void setHighlighter();
+        void setHighlighter(std::string text, core::FileFormat fileFormat);
+
+        static std::vector<std::string> findXMLExpressions(const std::string & text);
+        static size_t findNextOffset(const std::string & text, const size_t i);
+        static void addExpression(std::vector<std::string> & expressions, const std::string & newExpression);
       };
 
       class LineNumberArea : public QWidget

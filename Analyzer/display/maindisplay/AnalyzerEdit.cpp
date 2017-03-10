@@ -19,7 +19,7 @@ namespace analyzer{
     namespace display{
 
       AnalyzerEdit::AnalyzerEdit(QWidget * parent)
-        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), lastBlockText()
+        :QPlainTextEdit(parent), file(nullptr), highlighter(nullptr), lastBlockText(), hlThread()
       {
         this->lineNumbers = new LineNumberArea(this);
         this->setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -28,7 +28,7 @@ namespace analyzer{
         connect(this, &AnalyzerEdit::updateRequest, this, &AnalyzerEdit::updateLineNumberArea);
         connect(this, &AnalyzerEdit::cursorPositionChanged, this, &AnalyzerEdit::highlightCurrentLine);
 
-        //this->highlighter = new AnalyzerEditHighlighter(this->document());
+        
         
       }
 
@@ -113,6 +113,13 @@ namespace analyzer{
             break;
           }
         }
+
+        if (dynamic_cast<SetHighlighterEvent*>(evt)) {
+          this->highlighter = new AnalyzerEditHighlighter(this->document());
+          this->highlighter->SetFunctionalHighlightExpressions(dynamic_cast<SetHighlighterEvent*>(evt)->GetExpressions());
+          this->hlThread->join();
+          this->hlThread.reset();
+        }
       }
 
       void AnalyzerEdit::resizeEvent(QResizeEvent *e)
@@ -128,7 +135,7 @@ namespace analyzer{
         this->clearFile();
         this->file = file;
         this->setPlainText(QString::fromLatin1(this->file->GetText().c_str()));
-        this->setHighlighter();
+        this->hlThread.reset(new std::thread(&AnalyzerEdit::setHighlighter, this, file->GetText(), this->file->GetFileFormat()));
       }
 
       void AnalyzerEdit::clearFile()
@@ -181,19 +188,58 @@ namespace analyzer{
           this->updateLineNumberAreaWidth(0);
         }
       }
-      void AnalyzerEdit::setHighlighter()
-      {
-        if (nullptr == this->file) {
-          return;
-        }
 
-        auto format = this->file->GetFileFormat();
-        switch (format) {
+      void AnalyzerEdit::setHighlighter(std::string text, core::FileFormat fileFormat)
+      {
+        std::vector<std::string> expressions;
+
+        switch (fileFormat) {
         case core::FileFormat::xml:
-          
-          
+          expressions = AnalyzerEdit::findXMLExpressions(text);
           break;
         }
+
+        QApplication::postEvent(this, new SetHighlighterEvent(expressions));
+      }
+
+      std::vector<std::string> AnalyzerEdit::findXMLExpressions(const std::string & text)
+      {
+        std::vector<std::string> expressions;
+        for (size_t i = 0; i < text.size(); ++i) {
+          if (text.at(i) == '<') {
+            size_t offset = AnalyzerEdit::findNextOffset(text, i);
+            if (offset > text.size()) {
+              break;
+            }
+            AnalyzerEdit::addExpression(expressions, text.substr(i, offset - i + 1));
+            i = offset;
+          }
+        }
+        expressions.push_back(">");
+        return expressions;
+      }
+
+      size_t AnalyzerEdit::findNextOffset(const std::string & text, const size_t i)
+      {
+        size_t offsetSpace = text.find(' ', i + 1);
+        size_t offsetEnd = text.find('>', i + 1);
+
+        if (offsetSpace < offsetEnd) {
+          return offsetSpace;
+        }
+        else {
+          return  offsetEnd;
+        }
+      }
+
+      void AnalyzerEdit::addExpression(std::vector<std::string>& expressions, const std::string & newExpression)
+      {
+        for (auto& exisiting : expressions) {
+          if (exisiting.compare(newExpression) == 0) {
+            return;
+          }
+        }
+        expressions.push_back(newExpression);
       }
     }
   }
