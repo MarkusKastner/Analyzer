@@ -7,12 +7,12 @@
 #ifndef INTERPRETERFACTORYTEST_H
 #define INTERPRETERFACTORYTEST_H
 
-#include <gtest\gtest.h>
-#include "AnalyzerLib\interpreter\InterpreterFactory.h"
-#include "AnalyzerLib\interpreter\ASCIIInterpreter.h"
-#include "AnalyzerLib\interpreter\XMLInterpreter.h"
-#include "AnalyzerLib\interpreter\BMPInterpreter.h"
-#include "AnalyzerLib\interpreter\PDFInterpreter.h"
+#include <gtest/gtest.h>
+#include "AnalyzerLib/interpreter/InterpreterFactory.h"
+#include "AnalyzerLib/interpreter/ASCIIInterpreter.h"
+#include "AnalyzerLib/interpreter/XMLInterpreter.h"
+#include "AnalyzerLib/interpreter/BMPInterpreter.h"
+#include "AnalyzerLib/interpreter/pdf/PDFInterpreter.h"
 
 class IntepreterFactoryTest : public testing::Test
 {

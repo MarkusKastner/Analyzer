@@ -51,6 +51,9 @@
     <Filter Include="dialogs">
       <UniqueIdentifier>{41101485-0785-4068-92c9-3a9af8fcaf23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="display\pdf">
+      <UniqueIdentifier>{470f603b-f39e-4abb-80a6-b91fa77c97b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -134,6 +137,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AnalyzerEdit.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="display\pdf\PDFBrowser.cpp">
+      <Filter>display\pdf</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PDFBrowser.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PDFBrowser.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -188,6 +200,9 @@
     </CustomBuild>
     <CustomBuild Include="mainwindow\ViewTab.h">
       <Filter>mainwindow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="display\pdf\PDFBrowser.h">
+      <Filter>display\pdf</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

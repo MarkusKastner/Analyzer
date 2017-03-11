@@ -7,8 +7,8 @@
 #ifndef PDFINTERPRETERTEST_H
 #define PDFINTERPRETERTEST_H
 
-#include <gtest\gtest.h>
-#include "AnalyzerLib\interpreter\PDFInterpreter.h"
+#include <gtest/gtest.h>
+#include "AnalyzerLib/interpreter/pdf/PDFInterpreter.h"
 
 #include <string>
 #include <memory>

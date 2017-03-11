@@ -10,7 +10,7 @@
 #include "ASCIIInterpreter.h"
 #include "XMLInterpreter.h"
 #include "BMPInterpreter.h"
-#include "PDFInterpreter.h"
+#include "pdf/PDFInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {

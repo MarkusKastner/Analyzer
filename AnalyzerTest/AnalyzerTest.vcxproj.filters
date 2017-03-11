@@ -52,6 +52,9 @@
     <Filter Include="Interpreter\HTML">
       <UniqueIdentifier>{82db74e1-24d4-4ce6-81b0-b95bc3c4c798}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interpreter\pdf">
+      <UniqueIdentifier>{667ca203-4654-490a-a8ac-e95b5e3743d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,8 +147,8 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\formatter\ASCIIFormatter.cpp">
       <Filter>Interpreter\formatter</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\PDFInterpreter.cpp">
-      <Filter>Interpreter</Filter>
+    <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.cpp">
+      <Filter>Interpreter\pdf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,11 +338,11 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\formatter\ASCIIFormatter.h">
       <Filter>Interpreter\formatter</Filter>
     </ClInclude>
-    <ClInclude Include="interpreter\PDFInterpreterTest.h">
-      <Filter>Interpreter</Filter>
+    <ClInclude Include="interpreter\pdf\PDFInterpreterTest.h">
+      <Filter>Interpreter\pdf</Filter>
     </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\PDFInterpreter.h">
-      <Filter>Interpreter</Filter>
+    <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.h">
+      <Filter>Interpreter\pdf</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

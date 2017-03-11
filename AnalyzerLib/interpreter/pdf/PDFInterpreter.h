@@ -7,7 +7,7 @@
 #ifndef PDFINTERPRETER_H
 #define PDFINTERPRETER_H
 
-#include "Interpreter.h"
+#include "AnalyzerLib/interpreter/Interpreter.h"
 
 namespace analyzer {
   namespace interpreter {

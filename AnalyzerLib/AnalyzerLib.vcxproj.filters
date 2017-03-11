@@ -47,6 +47,9 @@
     <Filter Include="interpreter\HTML">
       <UniqueIdentifier>{a1019da8-16f4-484e-a2fc-ab8dc98d2527}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interpreter\pdf">
+      <UniqueIdentifier>{20063553-ec95-4d7e-a720-6ccf5be0d5c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -136,8 +139,8 @@
     <ClCompile Include="interpreter\formatter\ASCIIFormatter.cpp">
       <Filter>interpreter\formatter</Filter>
     </ClCompile>
-    <ClCompile Include="interpreter\PDFInterpreter.cpp">
-      <Filter>interpreter</Filter>
+    <ClCompile Include="interpreter\pdf\PDFInterpreter.cpp">
+      <Filter>interpreter\pdf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -258,8 +261,8 @@
     <ClInclude Include="interpreter\formatter\ASCIIFormatter.h">
       <Filter>interpreter\formatter</Filter>
     </ClInclude>
-    <ClInclude Include="interpreter\PDFInterpreter.h">
-      <Filter>interpreter</Filter>
+    <ClInclude Include="interpreter\pdf\PDFInterpreter.h">
+      <Filter>interpreter\pdf</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
