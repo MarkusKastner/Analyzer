@@ -184,6 +184,7 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\Interpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFObject.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\service\Update.cpp" />
     <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterFactory.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObject.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\service\Update.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\AnalyzingStrategy.h" />

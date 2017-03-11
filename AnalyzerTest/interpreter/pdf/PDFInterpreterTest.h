@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 #include "AnalyzerLib/interpreter/pdf/PDFInterpreter.h"
+#include "AnalyzerLib/interpreter/pdf/PDFObject.h"
 
 #include <string>
 #include <memory>
@@ -50,4 +51,18 @@ TEST_F(PDFInterpreterTest, setData)
   ASSERT_TRUE(interpreter.HasData());
 }
 
+TEST_F(PDFInterpreterTest, initObject)
+{
+  analyzer::interpreter::PDFObject obj(1, 0);
+  ASSERT_EQ(obj.GetNumber(), 1);
+  ASSERT_EQ(obj.GetRevision(), 0);
+}
+
+TEST_F(PDFInterpreterTest, setObjectNumber)
+{
+  analyzer::interpreter::PDFObject obj;
+  obj.SetNumber(1, 0);
+  ASSERT_EQ(obj.GetNumber(), 1);
+  ASSERT_EQ(obj.GetRevision(), 0);
+}
 #endif
