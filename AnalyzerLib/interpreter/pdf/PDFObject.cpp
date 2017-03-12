@@ -5,16 +5,17 @@
 */
 
 #include "PDFObject.h"
+#include "AnalyzerLib/interpreter/error/InterpreterException.h"
 
 namespace analyzer {
   namespace interpreter {
     PDFObject::PDFObject()
-      :number(0), revision(0)
+      :number(0), revision(0), dataOffset(0), objectOffset(0), data(), isFolded(true)
     {
     }
 
     PDFObject::PDFObject(const size_t & number, const size_t & revision)
-      :number(number), revision(revision)
+      :number(number), revision(revision), dataOffset(0), objectOffset(0), data(), isFolded(true)
     {
     }
 
@@ -36,6 +37,87 @@ namespace analyzer {
     const size_t & PDFObject::GetRevision() const
     {
       return this->revision;
+    }
+
+    void PDFObject::SetData(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t dataOffset, const size_t & objectOffset)
+    {
+      this->data = data;
+      this->dataOffset = dataOffset;
+      this->objectOffset = objectOffset;
+    }
+
+    const size_t & PDFObject::GetDataOffset()
+    {
+      return this->dataOffset;
+    }
+
+    const size_t & PDFObject::GetObjectOffset()
+    {
+      return this->objectOffset;
+    }
+
+    std::string PDFObject::GetRichTextExpression()
+    {
+      std::string expr("<h3>");
+      if (this->isFolded) {
+        expr += "+";
+      }
+      else {
+        expr += "-";
+      }
+      expr += " Object ";
+      expr += std::to_string(this->number);
+      expr += " ";
+      expr += std::to_string(this->revision);
+      expr += ("</h3>");
+      if (!this->isFolded) {
+        expr += ("<p>");
+        expr += dataSection2String();
+        expr += ("</p>");
+      }
+      return expr;
+    }
+
+    void PDFObject::Fold()
+    {
+      this->isFolded = true;
+    }
+
+    void PDFObject::Unfold()
+    {
+      this->isFolded = false;
+    }
+
+    const bool & PDFObject::IsFolded() const
+    {
+      return this->isFolded;
+    }
+
+    std::string PDFObject::dataSection2String()
+    {
+      if (this->dataOffset + this->objectOffset > data->size()) {
+        throw InterpreterException("Invalid index or offset value in TypeAnalyzer::toASCII()");
+      }
+      std::string text;
+      for (size_t i = this->dataOffset; i <= this->dataOffset + this->objectOffset; ++i) {
+        char letter = static_cast<char>(data->at(i));
+        if ('<' == letter) {
+          text += "&lt;";
+        }
+        else if ('>' == letter) {
+          text += "&gt;";
+        }
+        else if ('&' == letter) {
+          text += "&amp;";
+        }
+        else if ('"' == letter) {
+          text += "&quot;";
+        }
+        else {
+          text.push_back(letter);
+        }
+      }
+      return text;
     }
   }
 }

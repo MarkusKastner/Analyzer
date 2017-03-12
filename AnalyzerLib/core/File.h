@@ -39,6 +39,8 @@ namespace analyzer{
       const std::string & GetText();
       core::FileFormat GetFileFormat();
 
+      std::shared_ptr<interpreter::Interpreter> GetInterpreter();
+
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string fileName;

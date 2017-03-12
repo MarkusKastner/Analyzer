@@ -8,6 +8,8 @@
 #define PDFOBJECT_H
 
 #include <string>
+#include <memory>
+#include <vector>
 
 namespace analyzer {
   namespace interpreter {
@@ -23,9 +25,25 @@ namespace analyzer {
       const size_t & GetNumber() const;
       const size_t & GetRevision() const;
 
+      void SetData(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t dataOffset, const size_t & objectOffset);
+      const size_t & GetDataOffset();
+      const size_t & GetObjectOffset();
+
+      std::string GetRichTextExpression();
+
+      void Fold();
+      void Unfold();
+      const bool & IsFolded() const;
+
     private:
       size_t number;
       size_t revision;
+      size_t dataOffset;
+      size_t objectOffset;
+      std::shared_ptr<std::vector<unsigned char>> data;
+      bool isFolded;
+
+      std::string dataSection2String();
     };
   }
 }

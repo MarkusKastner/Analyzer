@@ -12,7 +12,10 @@
 
 #include "display\maindisplay\AnalyzerEdit.h"
 #include "display\maindisplay\HTMLOutput.h"
+#include "display\pdf\PDFBrowser.h"
+
 #include "mainwindow\MainWindow.h"
+#include "application\error\AppException.h"
 
 namespace analyzer {
   namespace gui {
@@ -30,7 +33,17 @@ namespace analyzer {
     {
       this->ClearFile();
       if (file->UseRichText()) {
-        this->viewOutput = new display::HTMPOutput(this);
+        switch (file->GetFileFormat()){
+          case core::FileFormat::bmp:
+            this->viewOutput = new display::HTMPOutput(this);
+            break;
+          case core::FileFormat::pdf:
+            this->viewOutput = new display::PDFBrowser(this);
+            break;
+        default:
+          throw app::AppException("Unknown file format in ViewTab::SetFile()");
+          break;
+        }
       }
       else {
         this->viewOutput = new display::AnalyzerEdit(this);

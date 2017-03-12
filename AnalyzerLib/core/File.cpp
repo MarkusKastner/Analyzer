@@ -105,6 +105,11 @@ namespace analyzer{
       return this->interpreter->GetFileFormat();
     }
 
+    std::shared_ptr<interpreter::Interpreter> File::GetInterpreter()
+    {
+      return this->interpreter;
+    }
+
     void File::setDirectoryNames(const std::string& input, const std::string& regex)
     {
       std::regex re(regex);

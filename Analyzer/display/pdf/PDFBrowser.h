@@ -9,24 +9,29 @@
 
 #include <QTextEdit>
 
+#include "Analyzer\display\maindisplay\ViewOutput.h"
+#include "AnalyzerLib\core\File.h"
+
 namespace analyzer {
   namespace interpreter {
     class Interpreter;
   }
   namespace gui {
     namespace display {
-      class PDFBrowser : public QTextEdit
+      class PDFBrowser : public ViewOutput, public QTextEdit
       {
-        Q_OBJECT
       public:
-        PDFBrowser(QWindow * parent = 0);
+        PDFBrowser(QWidget * parent = 0);
         virtual ~PDFBrowser();
 
-      signals:
-        void OnClick(QMouseEvent * evt);
+        virtual void SetFile(core::File * file);
+        virtual void ClearFile();
 
       protected:
         virtual void mousePressEvent(QMouseEvent * evt);
+
+      private:
+        core::File * file;
 
       };
     }
