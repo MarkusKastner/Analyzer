@@ -187,6 +187,7 @@
     <ClCompile Include="interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="interpreter\pdf\PDFInterpreter.cpp" />
     <ClCompile Include="interpreter\pdf\PDFObject.cpp" />
+    <ClCompile Include="interpreter\pdf\PDFObjectDataFactory.cpp" />
     <ClCompile Include="interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
     <ClCompile Include="service\Update.cpp" />
@@ -230,6 +231,8 @@
     <ClInclude Include="interpreter\InterpreterFactory.h" />
     <ClInclude Include="interpreter\pdf\PDFInterpreter.h" />
     <ClInclude Include="interpreter\pdf\PDFObject.h" />
+    <ClInclude Include="interpreter\pdf\PDFObjectData.h" />
+    <ClInclude Include="interpreter\pdf\PDFObjectDataFactory.h" />
     <ClInclude Include="interpreter\XMLInterpreter.h" />
     <ClInclude Include="network\CrossSock.h" />
     <ClInclude Include="service\Update.h" />

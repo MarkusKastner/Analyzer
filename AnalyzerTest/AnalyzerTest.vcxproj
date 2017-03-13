@@ -185,6 +185,7 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\InterpreterFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFObject.cpp" />
+    <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFObjectDataFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="..\AnalyzerLib\service\Update.cpp" />
     <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp" />
@@ -227,6 +228,8 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterFactory.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObject.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObjectData.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObjectDataFactory.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\service\Update.h" />
     <ClInclude Include="..\AnalyzerLib\strategy\AnalyzingStrategy.h" />
@@ -253,6 +256,7 @@
     <ClInclude Include="interpreter\HTML\HTMLDocumentTest.h" />
     <ClInclude Include="interpreter\InterpreterFactoyTest.h" />
     <ClInclude Include="interpreter\pdf\PDFInterpreterTest.h" />
+    <ClInclude Include="interpreter\pdf\PDFObjectDataFactoryTest.h" />
     <ClInclude Include="interpreter\XMLInterpreterTest.h" />
     <ClInclude Include="service\UpdateTest.h" />
     <ClInclude Include="strategy\AnalyzingStrategyTest.h" />

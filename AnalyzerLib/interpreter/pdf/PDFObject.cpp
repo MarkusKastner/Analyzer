@@ -6,21 +6,44 @@
 
 #include "PDFObject.h"
 #include "AnalyzerLib/interpreter/error/InterpreterException.h"
+#include "PDFObjectDataFactory.h"
 
 namespace analyzer {
   namespace interpreter {
     PDFObject::PDFObject()
-      :number(0), revision(0), dataOffset(0), objectOffset(0), data(), isFolded(true)
+      :number(0), revision(0), dataOffset(0), objectOffset(0), data(), isFolded(true), objectData()
     {
     }
 
     PDFObject::PDFObject(const size_t & number, const size_t & revision)
-      :number(number), revision(revision), dataOffset(0), objectOffset(0), data(), isFolded(true)
+      :number(number), revision(revision), dataOffset(0), objectOffset(0), data(), isFolded(true), objectData()
     {
     }
 
     PDFObject::~PDFObject()
     {
+    }
+
+    PDFObject::PDFObject(const PDFObject & other)
+      :number(other.number), revision(other.revision), dataOffset(other.dataOffset), objectOffset(other.objectOffset), 
+      data(other.data), isFolded(other.isFolded), objectData()
+    {
+      this->objectData = std::move(PDFObjectDataFactory::CreatePDFObjectData(this->data, this->dataOffset, this->objectOffset));
+    }
+
+    PDFObject & PDFObject::operator=(const PDFObject & other)
+    {
+      if (this == &other) {
+        return *this;
+      }
+      this->number = other.number;
+      this->revision = other.revision;
+      this->dataOffset = other.dataOffset;
+      this->objectOffset = other.objectOffset;
+      this->data = other.data;
+      this->isFolded = other.isFolded;
+      this->objectData = std::move(PDFObjectDataFactory::CreatePDFObjectData(this->data, this->dataOffset, this->objectOffset));
+      return *this;
     }
 
     void PDFObject::SetNumber(const size_t & number, const size_t & revision)
@@ -44,6 +67,7 @@ namespace analyzer {
       this->data = data;
       this->dataOffset = dataOffset;
       this->objectOffset = objectOffset;
+      this->objectData = std::move(PDFObjectDataFactory::CreatePDFObjectData(this->data, this->dataOffset, this->objectOffset));
     }
 
     const size_t & PDFObject::GetDataOffset()
