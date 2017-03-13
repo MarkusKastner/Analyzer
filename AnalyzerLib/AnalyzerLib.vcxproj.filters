@@ -148,6 +148,9 @@
     <ClCompile Include="interpreter\pdf\PDFObjectDataFactory.cpp">
       <Filter>interpreter\pdf</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\pdf\PDFTitleObjectData.cpp">
+      <Filter>interpreter\pdf</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -277,6 +280,9 @@
       <Filter>interpreter\pdf</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\pdf\PDFObjectDataFactory.h">
+      <Filter>interpreter\pdf</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\pdf\PDFTitleObjectData.h">
       <Filter>interpreter\pdf</Filter>
     </ClInclude>
   </ItemGroup>

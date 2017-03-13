@@ -36,6 +36,7 @@
 #include "interpreter/BMPInterpreterTest.h"
 #include "interpreter/formatter\ASCIIFormatterTest.h"
 #include "interpreter/pdf/PDFInterpreterTest.h"
+#include "interpreter/pdf/PDFObjectDataFactoryTest.h"
 
 int main(int argc, char** argv) {
 

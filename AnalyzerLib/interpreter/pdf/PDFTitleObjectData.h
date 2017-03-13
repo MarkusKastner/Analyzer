@@ -4,20 +4,21 @@
 * Written by Markus Kastner <markus.kastner@marscode.at>
 */
 
-#ifndef PDFOBJECTDATAFACTORY_H
-#define PDFOBJECTDATAFACTORY_H
+#ifndef PDFTITLEOBJECTDATA_H
+#define PDFTITLEOBJECTDATA_H
 
-#include <memory>
-#include <vector>
-
+#include <string>
 #include "PDFObjectData.h"
 
 namespace analyzer {
   namespace interpreter {
-    class PDFObjectDataFactory
+    class PDFTitleObjectData : public PDFObjectData
     {
     public:
-      static std::unique_ptr<PDFObjectData> CreatePDFObjectData(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t dataOffset, const size_t & objectOffset);
+      PDFTitleObjectData();
+      virtual ~PDFTitleObjectData();
+      virtual std::string Data2String();
+      virtual PDFObjectData * Clone();
     };
   }
 }
