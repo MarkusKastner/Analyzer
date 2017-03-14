@@ -38,6 +38,8 @@ namespace analyzer {
       void Unfold();
       const bool & IsFolded() const;
 
+      std::string ObjectData2String();
+
     private:
       size_t number;
       size_t revision;

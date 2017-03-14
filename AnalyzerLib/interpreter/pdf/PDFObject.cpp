@@ -92,7 +92,7 @@ namespace analyzer {
       expr += ("</h3>");
       if (!this->isFolded) {
         expr += ("<p>");
-        expr += dataSection2String();
+        expr += this->ObjectData2String();
         expr += ("</p>");
       }
       return expr;
@@ -111,6 +111,33 @@ namespace analyzer {
     const bool & PDFObject::IsFolded() const
     {
       return this->isFolded;
+    }
+
+    std::string PDFObject::ObjectData2String()
+    {
+      if (this->dataOffset + this->objectOffset > data->size()) {
+        throw InterpreterException("Invalid index or offset value in TypeAnalyzer::toASCII()");
+      }
+      std::string text;
+      for (size_t i = this->dataOffset; i <= this->dataOffset + this->objectOffset; ++i) {
+        char letter = static_cast<char>(data->at(i));
+        if ('<' == letter) {
+          text += "&lt;";
+        }
+        else if ('>' == letter) {
+          text += "&gt;";
+        }
+        else if ('&' == letter) {
+          text += "&amp;";
+        }
+        else if ('"' == letter) {
+          text += "&quot;";
+        }
+        else {
+          text.push_back(letter);
+        }
+      }
+      return text;
     }
 
     std::string PDFObject::dataSection2String()

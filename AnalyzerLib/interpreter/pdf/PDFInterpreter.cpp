@@ -114,8 +114,8 @@ namespace analyzer {
     {
       size_t objectIndex = 0;
       for (size_t i = startIndex; i < this->data->size(); ++i) {
-        if (this->isLineBreak(i)) {
-          if (Interpreter::toASCII(this->data, i - 4, 4).compare(" obj") != 0) {
+        if (this->data->at(i) == 'o') {
+          if (Interpreter::toASCII(this->data, i - 1, 4).compare(" obj") != 0) {
             continue;
           }
           objectIndex = this->findPrevLineBreak(i - 3) + 1;
@@ -132,11 +132,18 @@ namespace analyzer {
     {
       size_t objectIndex = 0;
       for (size_t i = startIndex; i < this->data->size(); ++i) {
-        if (this->isLineBreak(i)) {
-          objectIndex = i + 1;
-          while (this->isLineBreak(objectIndex)) {
-            objectIndex++;
+        if (this->data->at(i) == 'o') {
+          if (Interpreter::toASCII(this->data, i - 1, 4).compare(" obj") == 0) {
+            objectIndex = i + 3;
+            while (true) {
+              if (this->isValidSign(objectIndex)) {
+                break;
+              }
+              objectIndex++;
+            }
           }
+        }
+        if (objectIndex != 0) {
           break;
         }
       }
@@ -232,6 +239,14 @@ namespace analyzer {
         return true;
       }
       return false;
+    }
+
+    bool PDFInterpreter::isValidSign(const size_t & index)
+    {
+      if (this->data->at(index) == 10 || this->data->at(index) == 13 || this->data->at(index) == 32) {
+        return false;
+      }
+      return true;
     }
 
     bool PDFInterpreter::isEndObject(const size_t & index)

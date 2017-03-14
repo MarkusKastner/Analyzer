@@ -21,7 +21,13 @@ class PDFInterpreterTest : public testing::Test
 {
 public:
   PDFInterpreterTest()
-    :data()
+    :data(),
+    dataObj1(19,24),
+    dataObj2(63,37),
+    dataObj3(120,157),
+    dataObj4(297,93),
+    dataObj5(410,55),
+    dataObj6(485, 82)
   {}
   virtual ~PDFInterpreterTest() {}
 
@@ -30,6 +36,12 @@ public:
   }
 
   std::shared_ptr<std::vector<unsigned char>> data;
+  const std::pair<size_t, size_t> dataObj1;
+  const std::pair<size_t, size_t> dataObj2;
+  const std::pair<size_t, size_t> dataObj3;
+  const std::pair<size_t, size_t> dataObj4;
+  const std::pair<size_t, size_t> dataObj5;
+  const std::pair<size_t, size_t> dataObj6;
 };
 
 TEST_F(PDFInterpreterTest, init)
@@ -77,7 +89,7 @@ TEST_F(PDFInterpreterTest, addObject)
 TEST_F(PDFInterpreterTest, setObjectData)
 {
   analyzer::interpreter::PDFObject obj(1, 0);
-  obj.SetData(this->data, 19, 24);
+  obj.SetData(this->data, this->dataObj1.first, this->dataObj1.second);
   ASSERT_EQ(obj.GetDataOffset(), 19);
   ASSERT_EQ(obj.GetObjectOffset(), 24);
 }
@@ -86,7 +98,7 @@ TEST_F(PDFInterpreterTest, getRichTextExpression)
 {
   std::string compString("<h3>+ Object 1 0</h3>");
   analyzer::interpreter::PDFObject obj(1, 0);
-  obj.SetData(this->data, 19, 24);
+  obj.SetData(this->data, this->dataObj1.first, this->dataObj1.second);
   ASSERT_STREQ(obj.GetRichTextExpression().c_str(), compString.c_str());
 }
 
@@ -102,7 +114,7 @@ TEST_F(PDFInterpreterTest, foldBlock)
   std::string compStringOpen("<h3>- Object 1 0</h3><p>&lt;&lt; /Title (Hallo Welt) &gt;&gt;</p>");
   std::string compStringFolded("<h3>+ Object 1 0</h3>");
   analyzer::interpreter::PDFObject obj(1, 0);
-  obj.SetData(this->data, 19, 24);
+  obj.SetData(this->data, this->dataObj1.first, this->dataObj1.second);
   
   obj.Unfold();
   ASSERT_STREQ(obj.GetRichTextExpression().c_str(), compStringOpen.c_str());
@@ -123,4 +135,14 @@ TEST_F(PDFInterpreterTest, switchFolding)
   interpreter.SwitchFolding("Object 1 0");
   ASSERT_STREQ(interpreter.GetPDFObject(1, 0).GetRichTextExpression().c_str(), compStringFolded.c_str());
 }
+
+TEST_F(PDFInterpreterTest, ObjectData2StringObj1)
+{
+  std::string compString("&lt;&lt; /Title (Hallo Welt) &gt;&gt;");
+  analyzer::interpreter::PDFObject obj(1, 0);
+  obj.SetData(this->data, this->dataObj1.first, this->dataObj1.second);
+
+  ASSERT_STREQ(obj.ObjectData2String().c_str(), compString.c_str());
+}
+
 #endif

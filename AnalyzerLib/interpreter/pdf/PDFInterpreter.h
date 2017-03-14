@@ -45,6 +45,7 @@ namespace analyzer {
       size_t getObjectNumber(const size_t & objectIndex);
       size_t getObjectRevision(const size_t & objectIndex);
       bool isLineBreak(const size_t & index);
+      bool isValidSign(const size_t & index);
       bool isEndObject(const size_t & index);
     };
   }
