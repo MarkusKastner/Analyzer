@@ -11,8 +11,6 @@
 #include <memory>
 #include <vector>
 
-#include "PDFObjectData.h"
-
 namespace analyzer {
   namespace interpreter {
     class PDFObject
@@ -47,7 +45,6 @@ namespace analyzer {
       size_t objectOffset;
       std::shared_ptr<std::vector<unsigned char>> data;
       bool isFolded;
-      std::unique_ptr<PDFObjectData> objectData;
       
       std::string dataSection2String();
     };

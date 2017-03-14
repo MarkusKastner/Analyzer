@@ -6,17 +6,16 @@
 
 #include "PDFObject.h"
 #include "AnalyzerLib/interpreter/error/InterpreterException.h"
-#include "PDFObjectDataFactory.h"
 
 namespace analyzer {
   namespace interpreter {
     PDFObject::PDFObject()
-      :number(0), revision(0), dataOffset(0), objectOffset(0), data(), isFolded(true), objectData()
+      :number(0), revision(0), dataOffset(0), objectOffset(0), data(), isFolded(true)
     {
     }
 
     PDFObject::PDFObject(const size_t & number, const size_t & revision)
-      :number(number), revision(revision), dataOffset(0), objectOffset(0), data(), isFolded(true), objectData()
+      :number(number), revision(revision), dataOffset(0), objectOffset(0), data(), isFolded(true)
     {
     }
 
@@ -26,9 +25,8 @@ namespace analyzer {
 
     PDFObject::PDFObject(const PDFObject & other)
       :number(other.number), revision(other.revision), dataOffset(other.dataOffset), objectOffset(other.objectOffset), 
-      data(other.data), isFolded(other.isFolded), objectData()
+      data(other.data), isFolded(other.isFolded)
     {
-      this->objectData = std::move(PDFObjectDataFactory::CreatePDFObjectData(this->data, this->dataOffset, this->objectOffset));
     }
 
     PDFObject & PDFObject::operator=(const PDFObject & other)
@@ -42,7 +40,6 @@ namespace analyzer {
       this->objectOffset = other.objectOffset;
       this->data = other.data;
       this->isFolded = other.isFolded;
-      this->objectData = std::move(PDFObjectDataFactory::CreatePDFObjectData(this->data, this->dataOffset, this->objectOffset));
       return *this;
     }
 
@@ -67,7 +64,6 @@ namespace analyzer {
       this->data = data;
       this->dataOffset = dataOffset;
       this->objectOffset = objectOffset;
-      this->objectData = std::move(PDFObjectDataFactory::CreatePDFObjectData(this->data, this->dataOffset, this->objectOffset));
     }
 
     const size_t & PDFObject::GetDataOffset()
