@@ -13,7 +13,57 @@ namespace analyzer {
       return false;
     }
 
-    std::string Interpreter::toASCII(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & index, const size_t & offset) 
+    void Interpreter::SetObserver(InterpreterObserver * observer)
+    {
+      this->observer = observer;
+    }
+
+    void Interpreter::DoSpecialProcessing()
+    {
+    }
+
+    void Interpreter::AddInternalFile(const std::shared_ptr<core::File>& internalFile)
+    {
+      if (this->observer != nullptr) {
+        this->observer->AddInternalFile(internalFile);
+      }
+    }
+
+    Interpreter::Interpreter()
+      :indexBegin(0), offset(0), observer(nullptr)
+    {
+    }
+
+    Interpreter::Interpreter(const size_t & indexBegin, const size_t & offset)
+      :indexBegin(indexBegin), offset(offset), observer(nullptr)
+    {
+    }
+
+    bool Interpreter::hasLimits()
+    {
+      if (offset != 0) {
+        return true;
+      }
+      return false;
+    }
+
+    void Interpreter::setLimits(const size_t & indexBegin, const size_t & offset)
+    {
+      this->indexBegin = indexBegin;
+      this->offset = offset;
+    }
+
+    const size_t & Interpreter::getIndexBegin() const
+    {
+      return this->indexBegin;
+    }
+
+    const size_t & Interpreter::getOffset() const
+    {
+      return this->offset;
+    }
+
+    std::string Interpreter::toASCII(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & index, const size_t & offset)
     {
       if (index + offset > data->size()) {
         throw InterpreterException("Invalid index or offset value in TypeAnalyzer::toASCII()");

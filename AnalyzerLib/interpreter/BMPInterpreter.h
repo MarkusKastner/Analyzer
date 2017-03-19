@@ -20,10 +20,12 @@ namespace analyzer {
 
       BMPInterpreter();
       explicit BMPInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
+      explicit BMPInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
       virtual ~BMPInterpreter();
 
       virtual bool HasData();
       virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
       virtual bool UseRichText();
 
       virtual const std::string & GetText();

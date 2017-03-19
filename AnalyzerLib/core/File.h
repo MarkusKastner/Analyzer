@@ -14,25 +14,22 @@
 #include "AnalyzerLib\base\BaseData.h"
 #include "AnalyzerLib\interpreter\Interpreter.h"
 #include "AnalyzerLib\core\FileInfo.h"
+#include "AnalyzerLib\interpreter\InterpreterObserver.h"
 
 namespace analyzer{
   namespace core{
-    class File
+    class FileObserver;
+    class File : public interpreter::InterpreterObserver
     {
     public:
       File();
-      explicit File(const std::string & fileName, const std::vector<unsigned char> & data);
-      File(const File & other);
-      File& operator=(const File & other);
+      explicit File(const std::string & fileName);
       virtual ~File();
 
-      void SetFileData(const std::string & fileName, const std::vector<unsigned char> & data);
-      bool IsLoaded();
-
-      size_t GetSize();
+      virtual bool IsLoaded() = 0;
+      virtual size_t GetSize() = 0;
 
       const std::string & GetFileName();
-      const std::shared_ptr<std::vector<unsigned char>> & GetData();
       const std::vector<std::string> & GetPath();
 
       bool UseRichText();
@@ -41,14 +38,29 @@ namespace analyzer{
 
       std::shared_ptr<interpreter::Interpreter> GetInterpreter();
 
+      virtual void AddInternalFile(const std::shared_ptr<analyzer::core::File> & internalFile);
+      bool HasInternalFiles();
+
+      void RegisterFileObserver(FileObserver * fileObserver);
+      void UnregisterFileObserver(FileObserver * fileObserver);
+
+    protected:
+      void setFileName(const std::string & fileName);
+      void setDirectoryNames(const std::string& input, const std::string& regex);
+
+      void setInterpreter(const std::shared_ptr<interpreter::Interpreter> & interpreter);
+      const std::shared_ptr<interpreter::Interpreter> & getInterpreter() const;
+      bool hasInterpreter();
+
     private:
-      std::shared_ptr<std::vector<unsigned char>> data;
       std::string fileName;
       std::vector<std::string> path;
       std::shared_ptr<interpreter::Interpreter> interpreter;
       std::string emptyText;
+      std::vector<std::shared_ptr<analyzer::core::File>> internalFiles;
+      std::vector<FileObserver*> fileObservers;
 
-      void setDirectoryNames(const std::string& input, const std::string& regex);
+      void notifyNewInternalFile(const std::shared_ptr<analyzer::core::File> & file);
     };
   }
 }

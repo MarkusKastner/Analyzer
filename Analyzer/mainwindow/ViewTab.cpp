@@ -40,6 +40,9 @@ namespace analyzer {
           case core::FileFormat::pdf:
             this->viewOutput = new display::PDFBrowser(this);
             break;
+          case core::FileFormat::empty:
+            this->viewOutput = new display::HTMPOutput(this);
+            break;
         default:
           throw app::AppException("Unknown file format in ViewTab::SetFile()");
           break;

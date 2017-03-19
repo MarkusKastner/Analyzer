@@ -16,37 +16,12 @@ namespace analyzer{
     class DocumentStructure : public QDockWidget
     {
       Q_OBJECT
-    private:
-      class FilesEvent : public QEvent
-      {
-      public:
-        explicit FilesEvent(const std::vector<std::string> & files)
-          :QEvent(Type::User), files(files)
-        {}
-        virtual ~FilesEvent(){}
-        const std::vector<std::string> & GetFiles(){ return this->files; }
-
-      private:
-        std::vector<std::string> files;
-      };
-
-      class FileItem : public QTreeWidgetItem
-      {
-      public:
-        explicit FileItem(QTreeWidgetItem * parent = nullptr)
-          :QTreeWidgetItem(parent)
-        {}
-        virtual ~FileItem(){}
-        void SetFilePath(const std::string & filePath) { this->filePath = filePath; }
-        const std::string & GetFilePath(){ return this->filePath; }
-      private:
-        std::string filePath;
-      };
 
     public:
       DocumentStructure(const QString & title,  QWidget * parent = 0);
       virtual ~DocumentStructure();
       void SetFiles(const std::vector<std::string> files);
+      void AddFile(const std::string & file);
 
     signals:
       void ActiveFileChanged(const std::string & fileName);
@@ -59,15 +34,55 @@ namespace analyzer{
 
       void setup();
       void setFiles(const std::vector<std::string> files);
+      void addFile(const std::string & file);
       QTreeWidgetItem * checkDir(const std::string & file);
       QTreeWidgetItem * createFileItem(const std::string & file);
-      void addFile(QTreeWidgetItem * item);
-      void addFile(QTreeWidgetItem * parent, QTreeWidgetItem * item);
+      void addTreeItem(QTreeWidgetItem * item);
+      void addTreeItem(QTreeWidgetItem * parent, QTreeWidgetItem * item);
 
       std::vector<std::string> getSplittedDir(const std::string & dir);
       std::string getFileName(const std::string & file);
 
       void onItemChanged(QTreeWidgetItem * item, int col);
+
+      class FilesEvent : public QEvent
+      {
+      public:
+        explicit FilesEvent(const std::vector<std::string> & files)
+          :QEvent(static_cast<QEvent::Type>(Type::User + 1)), files(files)
+        {}
+        virtual ~FilesEvent() {}
+        const std::vector<std::string> & GetFiles() { return this->files; }
+
+      private:
+        std::vector<std::string> files;
+      };
+
+      class AddFileEvent : public QEvent
+      {
+      public:
+        explicit AddFileEvent(const std::string & file)
+          :QEvent(static_cast<QEvent::Type>(Type::User + 2)), file(file)
+        {}
+        virtual ~AddFileEvent() {}
+        const std::string & GetFile() { return this->file; }
+
+      private:
+        std::string file;
+      };
+
+      class FileItem : public QTreeWidgetItem
+      {
+      public:
+        explicit FileItem(QTreeWidgetItem * parent = nullptr)
+          :QTreeWidgetItem(parent)
+        {}
+        virtual ~FileItem() {}
+        void SetFilePath(const std::string & filePath) { this->filePath = filePath; }
+        const std::string & GetFilePath() { return this->filePath; }
+      private:
+        std::string filePath;
+      };
     };
   }
 }

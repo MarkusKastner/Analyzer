@@ -7,6 +7,7 @@
 #include "PDFBrowser.h"
 
 #include <QTextBlock>
+#include <QScrollBar>
 
 #include "AnalyzerLib\interpreter\pdf\PDFInterpreter.h"
 
@@ -34,6 +35,7 @@ namespace analyzer {
 
       void PDFBrowser::mousePressEvent(QMouseEvent * evt)
       {
+        int lastPos = this->verticalScrollBar()->sliderPosition();
         QTextEdit::mousePressEvent(evt);
 
         std::string block(this->textCursor().block().text().toStdString());
@@ -51,6 +53,7 @@ namespace analyzer {
 
           this->setText(QString::fromLatin1(this->file->GetText().c_str()));
         }
+        this->verticalScrollBar()->setSliderPosition(lastPos);
       }
     }
   }

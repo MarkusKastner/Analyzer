@@ -153,6 +153,12 @@
     <ClCompile Include="..\AnalyzerLib\interpreter\pdf\PDFObject.cpp">
       <Filter>Interpreter\pdf</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\InternalFile.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\core\PrimaryFile.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -349,6 +355,18 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObject.h">
       <Filter>Interpreter\pdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\InternalFile.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\PrimaryFile.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\core\FileObserver.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterObserver.h">
+      <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

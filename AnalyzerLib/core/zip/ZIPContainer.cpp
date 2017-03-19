@@ -36,7 +36,7 @@ namespace analyzer{
       return this->files.size();
     }
 
-    core::File ZIPContainer::GetFileAt(const size_t & index)
+    std::shared_ptr<core::File> ZIPContainer::GetFileAt(const size_t & index)
     {
       return this->files.at(index);
     }

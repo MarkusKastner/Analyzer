@@ -1,16 +1,25 @@
 #include "PDFInterpreter.h"
 
+#include <algorithm>
+
+#include "AnalyzerLib\core\InternalFile.h"
+
+
 namespace analyzer {
   namespace interpreter {
     PDFInterpreter::PDFInterpreter()
-      :Interpreter(), data(), text(), objects()
+      :Interpreter(), data(), text(), objects(), maxIndex(0)
     {
     }
 
     PDFInterpreter::PDFInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data)
-      : Interpreter(), data(data), text()
+      : Interpreter(), data(data), text(), maxIndex(data->size())
     {
-      this->createObjects();
+    }
+
+    PDFInterpreter::PDFInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+      : Interpreter(indexBegin, offset), data(data), text(), maxIndex(offset + indexBegin)
+    {
     }
 
     PDFInterpreter::~PDFInterpreter()
@@ -25,7 +34,18 @@ namespace analyzer {
     void PDFInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
       this->data = data;
-      this->createObjects();
+      if (this->hasLimits()) {
+        this->maxIndex = this->getIndexBegin() + this->getOffset();
+      }
+      else {
+        this->maxIndex = this->data->size();
+      }
+    }
+
+    void PDFInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+    {
+      this->setLimits(indexBegin, offset);
+      this->SetData(data);
     }
 
     const std::string & PDFInterpreter::GetText()
@@ -48,6 +68,11 @@ namespace analyzer {
     bool PDFInterpreter::UseRichText()
     {
       return true;
+    }
+
+    void PDFInterpreter::DoSpecialProcessing()
+    {
+      this->CreateObjects();
     }
 
     void PDFInterpreter::AddPDFObject(const PDFObject & object)
@@ -85,20 +110,20 @@ namespace analyzer {
       }
     }
 
-    void PDFInterpreter::createObjects()
+    void PDFInterpreter::CreateObjects()
     {
       this->objects.clear();
       size_t objectIndex = 0;
-      size_t dataOffset = 0;
+      size_t dataOffset = this->getIndexBegin();
       size_t objectOffset = 0;
 
       while (true) {
         objectIndex = this->findNextObject(objectOffset + dataOffset);
-        if (objectIndex > this->data->size()) {
+        if (objectIndex > this->maxIndex) {
           break;
         }
         dataOffset = this->findDataOffset(objectIndex);
-        objectOffset = this->findObjectOffset(dataOffset) - dataOffset;
+        objectOffset = this->findObjectEndIndex(dataOffset) - dataOffset;
 
         if (!this->offsetsValid(dataOffset, objectOffset)) {
           break;
@@ -106,14 +131,27 @@ namespace analyzer {
 
         PDFObject newObject(this->getObjectNumber(objectIndex), this->getObjectRevision(objectIndex));
         newObject.SetData(this->data, dataOffset, objectOffset);
+
         this->objects.push_back(newObject);
+      }
+
+      std::sort(this->objects.begin(), this->objects.end(), smallerThen());
+
+      for (auto& obj : this->objects) {
+        if (obj.HasStreamObj()) {
+          std::string name("Object " + std::to_string(obj.GetNumber()) + "-" + std::to_string(obj.GetRevision()));
+          size_t index = obj.FindStreamStartIndex();
+          size_t offset = obj.FindStreamOffset(index);
+          std::shared_ptr<core::File> newFile(new core::InternalFile(name, this->data, index, offset));
+          this->AddInternalFile(newFile);
+        }
       }
     }
 
     size_t PDFInterpreter::findNextObject(const size_t & startIndex)
     {
       size_t objectIndex = 0;
-      for (size_t i = startIndex; i < this->data->size(); ++i) {
+      for (size_t i = startIndex; i < this->maxIndex; ++i) {
         if (this->data->at(i) == 'o') {
           if (Interpreter::toASCII(this->data, i - 1, 4).compare(" obj") != 0) {
             continue;
@@ -123,7 +161,7 @@ namespace analyzer {
         }
       }
       if (objectIndex == 0) {
-        objectIndex = this->data->size() + 2;
+        objectIndex = this->maxIndex + 2;
       }
       return objectIndex;
     }
@@ -131,7 +169,7 @@ namespace analyzer {
     size_t PDFInterpreter::findDataOffset(const size_t & startIndex)
     {
       size_t objectIndex = 0;
-      for (size_t i = startIndex; i < this->data->size(); ++i) {
+      for (size_t i = startIndex; i < this->maxIndex; ++i) {
         if (this->data->at(i) == 'o') {
           if (Interpreter::toASCII(this->data, i - 1, 4).compare(" obj") == 0) {
             objectIndex = i + 3;
@@ -148,26 +186,26 @@ namespace analyzer {
         }
       }
       if (objectIndex == 0) {
-        objectIndex = this->data->size() + 2;
+        objectIndex = this->maxIndex + 2;
       }
       return objectIndex;
     }
 
-    size_t PDFInterpreter::findObjectOffset(const size_t & startIndex)
+    size_t PDFInterpreter::findObjectEndIndex(const size_t & startIndex)
     {
-      size_t objectOffset = 0;
-      for (size_t i = startIndex; i < this->data->size(); ++i) {
-        if (static_cast<char>(this->data->at(i)) == 'e' &&  this->isLineBreak(i - 1)) {
+      size_t objectEndIndex = 0;
+      for (size_t i = startIndex; i < this->maxIndex; ++i) {
+        if (static_cast<char>(this->data->at(i)) == 'e') {
           if (this->isEndObject(i)) {
-            objectOffset = i - 3;
+            objectEndIndex = i - 1;
             break;
           }
         }
       }
-      if (objectOffset == 0) {
-        objectOffset = this->data->size() + 2;
+      if (objectEndIndex == 0) {
+        objectEndIndex = this->maxIndex + 2;
       }
-      return objectOffset;
+      return objectEndIndex;
     }
 
     size_t PDFInterpreter::findPrevLineBreak(const size_t & currentIndex)
@@ -182,13 +220,13 @@ namespace analyzer {
 
     bool PDFInterpreter::offsetsValid(const size_t & dataOffset, const size_t & objectOffset)
     {
-      if (dataOffset > this->data->size()) {
+      if (dataOffset > this->maxIndex) {
         return false;
       }
-      if (objectOffset > this->data->size()) {
+      if (objectOffset > this->maxIndex) {
         return false;
       }
-      if (dataOffset + objectOffset > this->data->size()) {
+      if (dataOffset + objectOffset > this->maxIndex) {
         return false;
       }
       return true;
@@ -197,7 +235,7 @@ namespace analyzer {
     size_t PDFInterpreter::getObjectNumber(const size_t & objectIndex)
     {
       std::string numString;
-      for (size_t i = objectIndex; i < this->data->size(); ++i) {
+      for (size_t i = objectIndex; i < this->maxIndex; ++i) {
         char letter = static_cast<char>(this->data->at(i));
         if (' ' == letter) {
           break;
@@ -214,7 +252,7 @@ namespace analyzer {
     {
       std::string numString;
       bool objectNumSpaceFound = false;
-      for (size_t i = objectIndex; i < this->data->size(); ++i) {
+      for (size_t i = objectIndex; i < this->maxIndex; ++i) {
         char letter = static_cast<char>(this->data->at(i));
         if (' ' == static_cast<char>(this->data->at(i))) {
           if (!objectNumSpaceFound) {

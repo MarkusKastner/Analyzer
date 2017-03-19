@@ -6,77 +6,29 @@
 
 #include "File.h"
 #include "AnalyzerLib\interpreter\InterpreterFactory.h"
+#include "AnalyzerLib\core\FileObserver.h"
 
 #include <regex>
 
 namespace analyzer{
   namespace core{
     File::File()
-      : data(new std::vector<unsigned char>()), fileName(), path(), interpreter(), emptyText("No data available.")
-    {
-
-    }
-
-    File::File(const std::string & fileName, const std::vector<unsigned char> & data)
-      : data(new std::vector<unsigned char>(data)), fileName(fileName), path(), interpreter(), emptyText("No data available.")
-    {
-      this->setDirectoryNames(fileName, "/");
-      this->interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(this->data);
-    }
-
-    File::File(const File& other)
-      : data(other.data),
-      fileName(other.fileName), path(other.path), interpreter(other.interpreter), emptyText(other.emptyText)
+      : fileName(), path(), interpreter(), emptyText("No data available."), internalFiles(), fileObservers()
     {
     }
 
-    File& File::operator=(const File & other)
+    File::File(const std::string & fileName)
+      : fileName(fileName), path(), interpreter(), emptyText("No data available."), internalFiles(), fileObservers()
     {
-      if (this != &other){
-        this->data = other.data;
-        this->fileName = other.fileName;
-        this->path = other.path;
-        this->interpreter = other.interpreter;
-        this->emptyText = other.emptyText;
-      }
-      return *this;
     }
 
     File::~File()
     {
     }
 
-    void File::SetFileData(const std::string & fileName, const std::vector<unsigned char> & data)
-    {
-      this->data.reset(new std::vector<unsigned char>(data));
-      this->fileName = fileName;
-      this->setDirectoryNames(fileName, "/");
-      this->interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(this->data);
-    }
-
-    bool File::IsLoaded()
-    {
-      if (this->data.get()->size() > 0 && !this->fileName.empty()){
-        return true;
-      }
-      else{
-        return false;
-      }
-    }
-
-    size_t File::GetSize()
-    {
-      return this->data.get()->size();
-    }
-
     const std::string & File::GetFileName()
     {
       return this->fileName;
-    }
-
-    const std::shared_ptr<std::vector<unsigned char>> & File::GetData()
-    {
-      return this->data;
     }
 
     const std::vector<std::string> & File::GetPath()
@@ -102,12 +54,53 @@ namespace analyzer{
 
     core::FileFormat File::GetFileFormat()
     {
-      return this->interpreter->GetFileFormat();
+      if (this->interpreter) {
+        return this->interpreter->GetFileFormat();
+      }
+      return core::FileFormat::empty;
     }
 
     std::shared_ptr<interpreter::Interpreter> File::GetInterpreter()
     {
       return this->interpreter;
+    }
+
+    void File::AddInternalFile(const std::shared_ptr<analyzer::core::File> & internalFile)
+    {
+      std::string newSubFileName(this->fileName + "/" + internalFile->GetFileName());
+      internalFile->setFileName(newSubFileName);
+      this->internalFiles.push_back(internalFile);
+      this->notifyNewInternalFile(internalFile);
+    }
+
+    bool File::HasInternalFiles()
+    {
+      return !this->internalFiles.empty();
+    }
+
+    void File::RegisterFileObserver(FileObserver * fileObserver)
+    {
+      for (auto it = this->fileObservers.begin(); it != this->fileObservers.end(); ++it) {
+        if ((*it) == fileObserver) {
+          return;
+        }
+      }
+      this->fileObservers.push_back(fileObserver);
+    }
+
+    void File::UnregisterFileObserver(FileObserver * fileObserver)
+    {
+      for (auto it = this->fileObservers.begin(); it != this->fileObservers.end(); ++it) {
+        if ((*it) == fileObserver) {
+          this->fileObservers.erase(it);
+          return;
+        }
+      }
+    }
+
+    void File::setFileName(const std::string & fileName)
+    {
+      this->fileName = fileName;
     }
 
     void File::setDirectoryNames(const std::string& input, const std::string& regex)
@@ -119,6 +112,31 @@ namespace analyzer{
         parts.erase(parts.begin() + parts.size() - 1);
       }
       this->path = parts;
+    }
+
+    void File::setInterpreter(const std::shared_ptr<interpreter::Interpreter> & interpreter)
+    {
+      this->interpreter = interpreter;
+      if (this->interpreter) {
+        this->interpreter->SetObserver(this);
+      }
+    }
+
+    const std::shared_ptr<interpreter::Interpreter> & File::getInterpreter() const
+    {
+      return this->interpreter;
+    }
+
+    bool File::hasInterpreter()
+    {
+      return !(!this->interpreter);
+    }
+
+    void File::notifyNewInternalFile(const std::shared_ptr<analyzer::core::File>& file)
+    {
+      for (auto& fileObserver : this->fileObservers) {
+        fileObserver->AddInternalFile(file);
+      }
     }
   }
 }

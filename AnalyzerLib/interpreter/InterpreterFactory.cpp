@@ -27,7 +27,7 @@ namespace analyzer {
       if (nullptr == InterpreterFactory::instance) {
         InterpreterFactory::instance = new InterpreterFactory();
       }
-      return nullptr;
+      return InterpreterFactory::instance;
     }
 
     std::shared_ptr<Interpreter> InterpreterFactory::CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
@@ -47,6 +47,28 @@ namespace analyzer {
         return std::shared_ptr<Interpreter>(new BMPInterpreter(data));
       case core::FileFormat::pdf:
         return std::shared_ptr<Interpreter>(new PDFInterpreter(data));
+      default:
+        return std::shared_ptr<Interpreter>();
+      }
+    }
+
+    std::shared_ptr<Interpreter> InterpreterFactory::CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+    {
+      auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data, indexBegin, offset);
+
+      switch (fileInfo.Format) {
+      case core::FileFormat::empty:
+        return std::shared_ptr<Interpreter>();
+      case core::FileFormat::unknown:
+        return std::shared_ptr<Interpreter>();
+      case core::FileFormat::ascii:
+        return std::shared_ptr<Interpreter>(new ASCIIInterpreter(data, indexBegin, offset));
+      case core::FileFormat::xml:
+        return std::shared_ptr<Interpreter>(new XMLInterpreter(data, indexBegin, offset));
+      case core::FileFormat::bmp:
+        return std::shared_ptr<Interpreter>(new BMPInterpreter(data, indexBegin, offset));
+      case core::FileFormat::pdf:
+        return std::shared_ptr<Interpreter>(new PDFInterpreter(data, indexBegin, offset));
       default:
         return std::shared_ptr<Interpreter>();
       }

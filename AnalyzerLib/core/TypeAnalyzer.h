@@ -25,8 +25,12 @@ namespace analyzer {
       static TypeAnalyzer * GetInstance();
 
       FileInfo GetFileInfo(const std::shared_ptr<std::vector<unsigned char>> & data);
+      FileInfo GetFileInfo(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
 
     private:
+      size_t indexBegin;
+      size_t offset;
+
       static TypeAnalyzer * instance;
       TypeAnalyzer();
 

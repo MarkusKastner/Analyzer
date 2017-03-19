@@ -68,5 +68,13 @@ TEST_F(IntepreterFactoryTest, pdfInterpreter)
   ASSERT_TRUE(success);
 }
 
+TEST_F(IntepreterFactoryTest, limits)
+{
+  std::string fileData("00000<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>0000");
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
+  std::shared_ptr<analyzer::interpreter::Interpreter> interpreter = analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(data, 5, 106);
+  bool success = !(!dynamic_cast<analyzer::interpreter::XMLInterpreter*>(interpreter.get()));
+  ASSERT_TRUE(success);
+}
 //HEXInterpreter
 #endif

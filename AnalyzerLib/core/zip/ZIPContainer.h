@@ -14,7 +14,7 @@
 #include <vector>
 
 #include "..\error\CoreException.h"
-#include "AnalyzerLib\core\File.h"
+#include "AnalyzerLib\core\PrimaryFile.h"
 
 namespace analyzer{
   namespace core{
@@ -33,11 +33,11 @@ namespace analyzer{
           mz_zip_reader_end(&zip_archive);
         }
 
-        std::vector<core::File> GetFiles(){
+        std::vector<std::shared_ptr<core::File>> GetFiles(){
           void *p = nullptr;
           size_t uncomp_size;
 
-          std::vector<core::File> files;
+          std::vector<std::shared_ptr<core::File>> files;
           unsigned int numFiles = mz_zip_reader_get_num_files(&zip_archive);
 
           for (unsigned int i = 0; i < numFiles; i++){
@@ -57,7 +57,7 @@ namespace analyzer{
               throw CoreException("mz_zip_reader_extract_file_to_heap() failed to extract the proper data\n");
             }
 
-            files.push_back(core::File(file_stat.m_filename, data));
+            files.push_back(std::shared_ptr<core::File>(new PrimaryFile(file_stat.m_filename, data)));
             mz_free(p);
           }
           return files;
@@ -83,10 +83,10 @@ namespace analyzer{
       bool HasContent();
       void Open(const std::string & containerFile);
       size_t GetFileCount();
-      core::File GetFileAt(const size_t & index);
+      std::shared_ptr<core::File> GetFileAt(const size_t & index);
 
     private:
-      std::vector<core::File> files;
+      std::vector<std::shared_ptr<core::File>> files;
 
     };
   }

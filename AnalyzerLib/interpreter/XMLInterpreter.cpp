@@ -19,6 +19,11 @@ namespace analyzer {
     {
     }
 
+    XMLInterpreter::XMLInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+      : Interpreter(indexBegin, offset), data(data), text(), tabs()
+    {
+    }
+
     XMLInterpreter::~XMLInterpreter()
     {
     }
@@ -31,6 +36,12 @@ namespace analyzer {
     void XMLInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
       this->data = data;
+    }
+
+    void XMLInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+    {
+      this->setLimits(indexBegin, offset);
+      this->SetData(data);
     }
 
     const std::string & XMLInterpreter::GetText()
@@ -46,7 +57,15 @@ namespace analyzer {
 
     void XMLInterpreter::format()
     {
-      std::shared_ptr<std::string> text(new std::string(this->toASCII(this->data, 0, this->data->size())));
+      size_t begin = 0;
+      size_t offset = this->data->size();
+
+      if (this->hasLimits()) {
+        begin = this->getIndexBegin();
+        offset = this->getOffset();
+      }
+
+      std::shared_ptr<std::string> text(new std::string(this->toASCII(this->data, begin, offset)));
 
       size_t startHeader = text->find_first_of('<');
       size_t endHeader = text->find_first_of('>');

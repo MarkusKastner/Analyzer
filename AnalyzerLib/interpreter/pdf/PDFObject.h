@@ -40,15 +40,18 @@ namespace analyzer {
 
       std::string ObjectData2String();
 
+      bool HasStreamObj();
+      size_t FindStreamStartIndex();
+      size_t FindStreamOffset(const size_t & streamStartIndex = 0);
+
     private:
       size_t number;
       size_t revision;
       size_t dataOffset;
       size_t objectOffset;
+      size_t streamOffset;
       std::shared_ptr<std::vector<unsigned char>> data;
       bool isFolded;
-      
-      std::string dataSection2String();
     };
   }
 }

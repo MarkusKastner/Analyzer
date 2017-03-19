@@ -46,7 +46,7 @@ namespace analyzer{
     {
       if (!this->documentPath.empty() && !this->files.empty()){
         for (auto& file : this->files){
-          if (file.GetFileName().compare(this->documentPath) == 0){
+          if (file->GetFileName().compare(this->documentPath) == 0){
             return true;
           }
         }
@@ -57,8 +57,8 @@ namespace analyzer{
     core::File * AnalyzerBase::CurrentFile()
     {
       for (auto& file : this->files){
-        if (file.GetFileName().compare(this->documentPath) == 0){
-          return &file;
+        if (file->GetFileName().compare(this->documentPath) == 0){
+          return file.get();
         }
       }
       return nullptr;
@@ -117,17 +117,22 @@ namespace analyzer{
       }
     }
 
-    void AnalyzerBase::AddAnalyzerFile(core::File & file)
+    void AnalyzerBase::AddAnalyzerFile(const std::shared_ptr<core::File> & file)
     {
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       for (auto& exisiting : this->files){
-        if (exisiting.GetFileName().compare(file.GetFileName()) == 0){
+        if (exisiting->GetFileName().compare(file->GetFileName()) == 0){
           return;
         }
       }
+      file->RegisterFileObserver(this);
       this->files.push_back(file);
       if (this->files.size() == 1){
-        this->documentPath = file.GetFileName();
+        this->documentPath = file->GetFileName();
+      }
+      
+      if (file->GetInterpreter()) {
+        file->GetInterpreter()->DoSpecialProcessing();
       }
     }
 
@@ -141,7 +146,7 @@ namespace analyzer{
     {
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       for (auto& exisiting : this->files){
-        if (exisiting.GetFileName().compare(fileName) == 0){
+        if (exisiting->GetFileName().compare(fileName) == 0){
           return true;
         }
       }
@@ -154,18 +159,18 @@ namespace analyzer{
       return this->files.size();
     }
 
-    core::File AnalyzerBase::GetAnalyzerFile(const std::string & fileName)
+    std::shared_ptr<core::File> AnalyzerBase::GetAnalyzerFile(const std::string & fileName)
     {
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       for (auto& exisiting : this->files){
-        if (exisiting.GetFileName().compare(fileName) == 0){
+        if (exisiting->GetFileName().compare(fileName) == 0){
           return exisiting;
         }
       }
       throw AnalyzerBaseException("unknown file");
     }
 
-    core::File AnalyzerBase::GetAnalyzerFile(const size_t & index)
+    std::shared_ptr<core::File> AnalyzerBase::GetAnalyzerFile(const size_t & index)
     {
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       for (size_t i = 0; i < this->files.size(); i++){
@@ -180,8 +185,8 @@ namespace analyzer{
     {
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       for (auto& exisiting : this->files){
-        if (exisiting.GetFileName().compare(this->documentPath) == 0){
-          return &exisiting;
+        if (exisiting->GetFileName().compare(this->documentPath) == 0){
+          return exisiting.get();
         }
       }
       throw AnalyzerBaseException("unknown file");
@@ -192,7 +197,7 @@ namespace analyzer{
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       std::vector<std::string> fileNames;
       for (auto& file : this->files){
-        fileNames.push_back(file.GetFileName());
+        fileNames.push_back(file->GetFileName());
       }
       return fileNames;
     }
@@ -201,13 +206,22 @@ namespace analyzer{
     {
       std::lock_guard<std::recursive_mutex> lock(this->filesLock);
       for (auto& exisiting : this->files){
-        if (exisiting.GetFileName().compare(fileName) == 0){
+        if (exisiting->GetFileName().compare(fileName) == 0){
           this->documentPath = fileName;
           this->activeFileChanged();
           return;
         }
       }
       throw AnalyzerBaseException("unknown file");
+    }
+
+    void AnalyzerBase::AddInternalFile(const std::shared_ptr<analyzer::core::File>& file)
+    {
+      {std::lock_guard<std::recursive_mutex> lock(this->filesLock);
+      file->RegisterFileObserver(this);
+      this->files.push_back(file);
+      }
+      //this->notifyFilesChange();
     }
 
     void AnalyzerBase::baseWorker()
@@ -290,10 +304,9 @@ namespace analyzer{
       data.reserve(fileSize);
       data.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
       fs::path path(this->documentPath);
-      std::wstring fileName(path.filename().c_str());
-
-      core::File analyzerFile(std::string(fileName.begin(), fileName.end()), data);
-      this->AddAnalyzerFile(analyzerFile);
+      std::wstring fileNameW(path.filename().c_str());
+      std::string fileName(fileNameW.begin(), fileNameW.end());
+      this->AddAnalyzerFile(std::shared_ptr<core::File>(new core::PrimaryFile(fileName, data)));
     }
 
     void AnalyzerBase::loadContainer()

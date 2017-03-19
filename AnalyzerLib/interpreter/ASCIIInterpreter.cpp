@@ -19,6 +19,11 @@ namespace analyzer {
     {
     }
 
+    ASCIIInterpreter::ASCIIInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+      : Interpreter(indexBegin, offset), data(data), text()
+    {
+    }
+
     ASCIIInterpreter::~ASCIIInterpreter()
     {
 
@@ -34,9 +39,19 @@ namespace analyzer {
       this->data = data;
     }
 
+    void ASCIIInterpreter::SetData(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+    {
+      this->setLimits(indexBegin, offset);
+      this->SetData(data);
+    }
+
     const std::string & ASCIIInterpreter::GetText()
     {
-      this->text = Interpreter::toASCII(this->data, 0, this->data->size());
+      size_t offset = this->data->size();
+      if (this->hasLimits()) {
+        offset = this->getOffset();
+      }
+      this->text = Interpreter::toASCII(this->data, this->getIndexBegin(), offset);
       return this->text;
     }
 

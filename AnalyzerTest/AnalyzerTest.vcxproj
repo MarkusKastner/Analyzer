@@ -163,6 +163,8 @@
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
+    <ClCompile Include="..\AnalyzerLib\core\InternalFile.cpp" />
+    <ClCompile Include="..\AnalyzerLib\core\PrimaryFile.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\TypeAnalyzer.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\zip\miniz.c" />
     <ClCompile Include="..\AnalyzerLib\core\zip\ZIPContainer.cpp" />
@@ -201,6 +203,9 @@
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
+    <ClInclude Include="..\AnalyzerLib\core\FileObserver.h" />
+    <ClInclude Include="..\AnalyzerLib\core\InternalFile.h" />
+    <ClInclude Include="..\AnalyzerLib\core\PrimaryFile.h" />
     <ClInclude Include="..\AnalyzerLib\core\TypeAnalyzer.h" />
     <ClInclude Include="..\AnalyzerLib\core\zip\ZIPContainer.h" />
     <ClInclude Include="..\AnalyzerLib\definitions\Definition.h" />
@@ -225,6 +230,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\HTML\Table.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\Interpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterFactory.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterObserver.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObject.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />

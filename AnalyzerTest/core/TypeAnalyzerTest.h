@@ -65,4 +65,12 @@ TEST_F(TypeAnalyzerTest, recBMP)
   ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::bmp);
 }
 
+TEST_F(TypeAnalyzerTest, limits)
+{
+  std::string fileData("00000<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<tag1>\n  <tag2>some text</tag2>\n  <tag3/>\n</tag1>0000");
+  std::shared_ptr<std::vector<unsigned char>> data(new std::vector<unsigned char>(fileData.begin(), fileData.end()));
+  auto fileInfo = analyzer::core::TypeAnalyzer::GetInstance()->GetFileInfo(data, 5, 106);
+  ASSERT_EQ(fileInfo.Format, analyzer::core::FileFormat::xml);
+}
+
 #endif

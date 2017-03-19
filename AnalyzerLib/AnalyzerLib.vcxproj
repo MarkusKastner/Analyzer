@@ -165,6 +165,8 @@
     <ClCompile Include="base\AnalyzerBase.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
+    <ClCompile Include="core\InternalFile.cpp" />
+    <ClCompile Include="core\PrimaryFile.cpp" />
     <ClCompile Include="core\TypeAnalyzer.cpp" />
     <ClCompile Include="core\zip\miniz.c" />
     <ClCompile Include="core\zip\ZIPContainer.cpp" />
@@ -204,6 +206,9 @@
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />
+    <ClInclude Include="core\FileObserver.h" />
+    <ClInclude Include="core\InternalFile.h" />
+    <ClInclude Include="core\PrimaryFile.h" />
     <ClInclude Include="core\TypeAnalyzer.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
     <ClInclude Include="definitions\Definition.h" />
@@ -228,6 +233,7 @@
     <ClInclude Include="interpreter\HTML\Table.h" />
     <ClInclude Include="interpreter\Interpreter.h" />
     <ClInclude Include="interpreter\InterpreterFactory.h" />
+    <ClInclude Include="interpreter\InterpreterObserver.h" />
     <ClInclude Include="interpreter\pdf\PDFInterpreter.h" />
     <ClInclude Include="interpreter\pdf\PDFObject.h" />
     <ClInclude Include="interpreter\XMLInterpreter.h" />

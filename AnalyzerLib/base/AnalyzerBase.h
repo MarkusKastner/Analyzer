@@ -17,6 +17,7 @@
 #include <condition_variable>
 
 #include "AnalyzerLib\core\File.h"
+#include "AnalyzerLib\core\FileObserver.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -24,7 +25,7 @@ namespace analyzer{
   }
   namespace base{
     class AnalyzerBaseObserver;
-    class AnalyzerBase
+    class AnalyzerBase : public core::FileObserver
     {
     public:
 
@@ -50,16 +51,18 @@ namespace analyzer{
 
       void Rethrow();
 
-      void AddAnalyzerFile(core::File & file);
+      void AddAnalyzerFile(const std::shared_ptr<core::File> & file);
       bool HasFiles();
       bool HasFile(const std::string & fileName);
       size_t FileCount();
-      core::File GetAnalyzerFile(const std::string & fileName);
-      core::File GetAnalyzerFile(const size_t & index);
+      std::shared_ptr<core::File> GetAnalyzerFile(const std::string & fileName);
+      std::shared_ptr<core::File> GetAnalyzerFile(const size_t & index);
       core::File * GetActiveAnalyzerFile();
       std::vector<std::string> GetFileNames();
       void SetActiveFile(const std::string & fileName);
  
+      virtual void AddInternalFile(const std::shared_ptr<analyzer::core::File> & file);
+
     private:
       std::thread * baseThread;
       std::atomic<bool> runBaseWorker;
@@ -74,7 +77,7 @@ namespace analyzer{
       
       std::recursive_mutex workTasksLock;
       
-      std::vector<core::File> files;
+      std::vector<std::shared_ptr<core::File>> files;
       std::recursive_mutex filesLock;
 
       void baseWorker();

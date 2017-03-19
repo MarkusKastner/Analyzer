@@ -16,10 +16,12 @@ namespace analyzer {
     public:
       ASCIIInterpreter();
       explicit ASCIIInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
+      explicit ASCIIInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
       virtual ~ASCIIInterpreter();
 
       virtual bool HasData();
       virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
       virtual const std::string & GetText();
       virtual core::FileFormat GetFileFormat();
 

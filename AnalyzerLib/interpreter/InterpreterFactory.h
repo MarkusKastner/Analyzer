@@ -21,6 +21,7 @@ namespace analyzer {
 
       static InterpreterFactory * GetInstance();
       std::shared_ptr<Interpreter> CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
+      std::shared_ptr<Interpreter> CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
 
     private:
       static InterpreterFactory * instance;

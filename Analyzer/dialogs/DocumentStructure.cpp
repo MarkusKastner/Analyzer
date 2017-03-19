@@ -29,10 +29,20 @@ namespace analyzer{
       QApplication::postEvent(this, new FilesEvent(files));
     }
 
+    void DocumentStructure::AddFile(const std::string & file)
+    {
+      QApplication::postEvent(this, new AddFileEvent(file));
+    }
+
     void DocumentStructure::customEvent(QEvent * evt)
     {
       if (dynamic_cast<FilesEvent*>(evt)){
         this->setFiles(dynamic_cast<FilesEvent*>(evt)->GetFiles());
+        return;
+      }
+      else if (dynamic_cast<AddFileEvent*>(evt)) {
+        this->addFile(dynamic_cast<AddFileEvent*>(evt)->GetFile());
+        return;
       }
     }
 
@@ -55,14 +65,19 @@ namespace analyzer{
       this->fileTree->clear();
 
       for (auto& file : files){
-        QTreeWidgetItem * parent = this->checkDir(file);
-        QTreeWidgetItem * item = createFileItem(file);
-        if (parent == nullptr){
-          this->addFile(item);
-        }
-        else{
-          this->addFile(parent, item);
-        }
+        this->addFile(file);
+      }
+    }
+
+    void DocumentStructure::addFile(const std::string & file)
+    {
+      QTreeWidgetItem * parent = this->checkDir(file);
+      QTreeWidgetItem * item = createFileItem(file);
+      if (parent == nullptr) {
+        this->addTreeItem(item);
+      }
+      else {
+        this->addTreeItem(parent, item);
       }
     }
 
@@ -106,12 +121,12 @@ namespace analyzer{
       return item;
     }
 
-    void DocumentStructure::addFile(QTreeWidgetItem * item)
+    void DocumentStructure::addTreeItem(QTreeWidgetItem * item)
     {
       this->fileTree->addTopLevelItem(item);
     }
 
-    void DocumentStructure::addFile(QTreeWidgetItem * parent, QTreeWidgetItem * item)
+    void DocumentStructure::addTreeItem(QTreeWidgetItem * parent, QTreeWidgetItem * item)
     {
       parent->addChild(item);
     }

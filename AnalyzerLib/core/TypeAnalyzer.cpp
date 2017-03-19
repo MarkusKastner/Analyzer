@@ -12,6 +12,7 @@ namespace analyzer {
   namespace core {
 
     TypeAnalyzer::TypeAnalyzer()
+      : indexBegin(0), offset(0)
     {
     }
 
@@ -30,8 +31,10 @@ namespace analyzer {
     FileInfo TypeAnalyzer::GetFileInfo(const std::shared_ptr<std::vector<unsigned char>> & data)
     {
       FileInfo fileInfo;
-      
-      if (!data) {
+      if (this->offset == 0 && data) {
+        this->offset = data->size();
+      }
+      if (!data || data->empty()) {
         fileInfo.Format = analyzer::core::FileFormat::empty;
       }
       else if (this->isXML(data)) {
@@ -52,15 +55,24 @@ namespace analyzer {
       else {
         fileInfo.Format = analyzer::core::FileFormat::unknown;
       }
+      this->indexBegin = 0;
+      this->offset = 0;
       return fileInfo;
+    }
+
+    FileInfo TypeAnalyzer::GetFileInfo(const std::shared_ptr<std::vector<unsigned char>>& data, const size_t & indexBegin, const size_t & offset)
+    {
+      this->indexBegin = indexBegin;
+      this->offset = offset;
+      return this->GetFileInfo(data);
     }
 
     bool TypeAnalyzer::isXML(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
-      if (data->size() < 25) {
+      if (this->offset < 25) {
         return false;
       }
-      auto text(TypeAnalyzer::toASCII(data, 0, 25));
+      auto text(TypeAnalyzer::toASCII(data, this->indexBegin, 25));
 
       size_t startIndex = text.find("<?xml version=");
       if (startIndex < text.size()) {
@@ -74,13 +86,13 @@ namespace analyzer {
 
     bool TypeAnalyzer::isASCII(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
-      size_t offset = 100;
-      if (data->size() < offset - 1) {
-        offset = data->size() - 1;
+      size_t analyzeOffset = 100;
+      if (this->offset < analyzeOffset - 1) {
+        analyzeOffset = this->offset - 1;
       }
 
       bool nonASCII = false;
-      for (size_t i = 0; i < offset; ++i) {
+      for (size_t i = this->indexBegin; i < this->indexBegin + analyzeOffset; ++i) {
         int numVal = data->at(i);
         if ((numVal > 31 && numVal < 127) ||
           (numVal == 10) ||
@@ -112,10 +124,10 @@ namespace analyzer {
 
     bool TypeAnalyzer::isPDF(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
-      if (data->size() < 8) {
+      if (this->offset < 8) {
         return false;
       }
-      auto text(TypeAnalyzer::toASCII(data, 0, 8));
+      auto text(TypeAnalyzer::toASCII(data, this->indexBegin, 8));
 
       size_t startIndex = text.find("%PDF-");
       if (startIndex < text.size()) {
@@ -129,11 +141,11 @@ namespace analyzer {
 
     bool TypeAnalyzer::isWinExec(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
-      if (data->size() < LenDosHeaderInclMsg) {
+      if (this->offset < LenDosHeaderInclMsg) {
         return false;
       }
 
-      std::string DOSHeaderStart(toASCII(data, 0, 2));
+      std::string DOSHeaderStart(toASCII(data, this->indexBegin, 2));
       if (DOSHeaderStart.compare("MZ") == 0 ||
         DOSHeaderStart.compare("ZM") == 0) {
         std::string DOSHeaderMsg(toASCII(data, 78, 39));
@@ -147,22 +159,20 @@ namespace analyzer {
 
     bool TypeAnalyzer::isBmp(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
-      if (data->size() < LenBMPHeader) {
+      if (this->offset < LenBMPHeader) {
         return false;
       }
-      std::string BMPHeaderStart(toASCII(data, 0, 2));
+      std::string BMPHeaderStart(toASCII(data, this->indexBegin, 2));
       if (BMPHeaderStart.compare("BM") == 0) {
 
         unsigned int minOffsetToDataSection = 50;
-        unsigned int size = *reinterpret_cast<const uint32_t*>(&data->at(2));
-        unsigned short res1 = *reinterpret_cast<const uint16_t*>(&data->at(6));
-        unsigned short res2 = *reinterpret_cast<const uint16_t*>(&data->at(8));
-        unsigned int off = *reinterpret_cast<const uint32_t*>(&data->at(10));
-
-        if(size == data->size() &&
-          res1 == 0 &&
-          res2 == 0 &&
-          off > minOffsetToDataSection){
+        unsigned int size = *reinterpret_cast<const uint32_t*>(&data->at(this->indexBegin + 2));
+        unsigned short res1 = *reinterpret_cast<const uint16_t*>(&data->at(this->indexBegin + 6));
+        unsigned short res2 = *reinterpret_cast<const uint16_t*>(&data->at(this->indexBegin + 8));
+        unsigned int off = *reinterpret_cast<const uint32_t*>(&data->at(this->indexBegin + 10));
+        unsigned int compression = *reinterpret_cast<const uint32_t*>(&data->at(this->indexBegin + 30));
+        if(off > minOffsetToDataSection &&
+          (compression >= 0 && compression <= 3)){
           return true;
         }
       }

@@ -26,10 +26,7 @@ namespace analyzer{
 
         connect(this, &AnalyzerEdit::blockCountChanged, this, &AnalyzerEdit::updateLineNumberAreaWidth);
         connect(this, &AnalyzerEdit::updateRequest, this, &AnalyzerEdit::updateLineNumberArea);
-        connect(this, &AnalyzerEdit::cursorPositionChanged, this, &AnalyzerEdit::highlightCurrentLine);
-
-        
-        
+        connect(this, &AnalyzerEdit::cursorPositionChanged, this, &AnalyzerEdit::highlightCurrentLine);   
       }
 
       AnalyzerEdit::~AnalyzerEdit()
@@ -135,7 +132,10 @@ namespace analyzer{
         this->clearFile();
         this->file = file;
         this->setPlainText(QString::fromLatin1(this->file->GetText().c_str()));
-        this->hlThread.reset(new std::thread(&AnalyzerEdit::setHighlighter, this, file->GetText(), this->file->GetFileFormat()));
+        auto fileFormat = this->file->GetFileFormat();
+        if (fileFormat != core::FileFormat::empty) {
+          this->hlThread.reset(new std::thread(&AnalyzerEdit::setHighlighter, this, file->GetText(), fileFormat));
+        }
       }
 
       void AnalyzerEdit::clearFile()

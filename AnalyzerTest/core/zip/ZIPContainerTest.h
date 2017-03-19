@@ -60,10 +60,10 @@ TEST_F(ZIPContainerTest, FileCount)
 TEST_F(ZIPContainerTest, GetFiles)
 {
   zipContainer1.Open(testFile2);
-  analyzer::core::File file1 = zipContainer1.GetFileAt(0);
-  analyzer::core::File file2 = zipContainer1.GetFileAt(1);
-  ASSERT_STREQ(file1.GetFileName().c_str(), "Erlkoenig.txt");
-  ASSERT_STREQ(file2.GetFileName().c_str(), "Zauberlehrling.txt");
+  auto file1 = zipContainer1.GetFileAt(0);
+  auto file2 = zipContainer1.GetFileAt(1);
+  ASSERT_STREQ(file1->GetFileName().c_str(), "Erlkoenig.txt");
+  ASSERT_STREQ(file2->GetFileName().c_str(), "Zauberlehrling.txt");
 }
 
 #endif

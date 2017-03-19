@@ -13,7 +13,7 @@
 #include "AnalyzerLib\base\AnalyzerBase.h"
 #include "AnalyzerLib\base\AnalyzerBaseObserver.h"
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
-#include "AnalyzerLib\core\File.h"
+#include "AnalyzerLib\core\PrimaryFile.h"
 
 class AnalyzerBaseTest : public testing::Test
 {
@@ -90,7 +90,7 @@ public:
   };
 
   AnalyzerBaseTest()
-    :analyzerBase1(), observer1(), path1(), dummyData1(), path2(), path3()
+    :analyzerBase1(), observer1(), path1(), dummyData1(), analyzerFile(new analyzer::core::PrimaryFile()), path2(), path3()
   {}
   ~AnalyzerBaseTest(){}
 
@@ -105,7 +105,7 @@ public:
     dummyData1.push_back('m');
     dummyData1.push_back('y');
 
-    analyzerFile.SetFileData(std::string(this->path1.begin(), this->path1.end()), dummyData1);
+    dynamic_cast<analyzer::core::PrimaryFile*>(analyzerFile.get())->SetFileData(std::string(this->path1.begin(), this->path1.end()), dummyData1);
   }
 
   void waitUntilFileCountEquals(const int & targetFileCount){
@@ -123,7 +123,7 @@ public:
   SomeObserver observer1;
   std::wstring path1;
   std::vector<unsigned char> dummyData1;
-  analyzer::core::File analyzerFile;
+  std::shared_ptr<analyzer::core::File> analyzerFile;
   std::wstring path2;
   std::wstring path3;
 
@@ -215,7 +215,7 @@ TEST_F(AnalyzerBaseTest, AddFile)
 TEST_F(AnalyzerBaseTest, SetFileAsDefault)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName().c_str(), this->analyzerFile.GetFileName().c_str());
+  ASSERT_STREQ(this->analyzerBase1.GetActiveAnalyzerFile()->GetFileName().c_str(), this->analyzerFile->GetFileName().c_str());
 }
 
 TEST_F(AnalyzerBaseTest, GetCurrentFile)
@@ -240,8 +240,8 @@ TEST_F(AnalyzerBaseTest, AddFileTwice)
 TEST_F(AnalyzerBaseTest, GetFileByName)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(std::string(this->path1.begin(), this->path1.end()));
-  ASSERT_STREQ(file.GetFileName().c_str(), std::string(this->path1.begin(), this->path1.end()).c_str());
+  auto file = this->analyzerBase1.GetAnalyzerFile(std::string(this->path1.begin(), this->path1.end()));
+  ASSERT_STREQ(file->GetFileName().c_str(), std::string(this->path1.begin(), this->path1.end()).c_str());
 }
 
 TEST_F(AnalyzerBaseTest, TryGetInvalidFileByName)
@@ -249,7 +249,7 @@ TEST_F(AnalyzerBaseTest, TryGetInvalidFileByName)
   std::string message;
   try{
     this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-    analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile("some/invalid/path.txt");
+    auto file = this->analyzerBase1.GetAnalyzerFile("some/invalid/path.txt");
   }
   catch (analyzer::base::AnalyzerBaseException & ex){
     message = ex.what();
@@ -269,8 +269,8 @@ TEST_F(AnalyzerBaseTest, HasFile)
 TEST_F(AnalyzerBaseTest, GetFileByIndex)
 {
   this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-  analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(0);
-  ASSERT_STREQ(file.GetFileName().c_str(), std::string(this->path1.begin(), this->path1.end()).c_str());
+  auto file = this->analyzerBase1.GetAnalyzerFile(0);
+  ASSERT_STREQ(file->GetFileName().c_str(), std::string(this->path1.begin(), this->path1.end()).c_str());
 }
 
 TEST_F(AnalyzerBaseTest, InvalidfileIndex)
@@ -278,7 +278,7 @@ TEST_F(AnalyzerBaseTest, InvalidfileIndex)
   std::string message;
   try{
     this->analyzerBase1.AddAnalyzerFile(this->analyzerFile);
-    analyzer::core::File file = this->analyzerBase1.GetAnalyzerFile(1);
+    auto file = this->analyzerBase1.GetAnalyzerFile(1);
   }
   catch (analyzer::base::AnalyzerBaseException & ex){
     message = ex.what();
