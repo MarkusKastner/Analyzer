@@ -11,6 +11,7 @@
 #include "XMLInterpreter.h"
 #include "BMPInterpreter.h"
 #include "pdf/PDFInterpreter.h"
+#include "HEXInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -38,7 +39,7 @@ namespace analyzer {
       case core::FileFormat::empty:
         return std::shared_ptr<Interpreter>();
       case core::FileFormat::unknown:
-        return std::shared_ptr<Interpreter>();
+        return std::shared_ptr<Interpreter>(new HEXInterpreter(data));
       case core::FileFormat::ascii:
         return std::shared_ptr<Interpreter>(new ASCIIInterpreter(data));
       case core::FileFormat::xml:
@@ -48,7 +49,7 @@ namespace analyzer {
       case core::FileFormat::pdf:
         return std::shared_ptr<Interpreter>(new PDFInterpreter(data));
       default:
-        return std::shared_ptr<Interpreter>();
+        return std::shared_ptr<Interpreter>(new HEXInterpreter(data));
       }
     }
 

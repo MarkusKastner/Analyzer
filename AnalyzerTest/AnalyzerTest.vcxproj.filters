@@ -159,6 +159,9 @@
     <ClCompile Include="..\AnalyzerLib\core\PrimaryFile.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\HEXInterpreter.cpp">
+      <Filter>Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -366,6 +369,12 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterObserver.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\HEXInterpreter.h">
+      <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HEXInterpreterTest.h">
       <Filter>Interpreter</Filter>
     </ClInclude>
   </ItemGroup>

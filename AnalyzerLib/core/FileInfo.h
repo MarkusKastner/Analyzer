@@ -17,7 +17,8 @@ namespace analyzer {
       xml,
       pdf,
       winExec,
-      bmp
+      bmp,
+      hex
     } FileFormat;
 
     struct FileInfo 

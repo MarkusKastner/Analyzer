@@ -151,6 +151,9 @@
     <ClCompile Include="core\PrimaryFile.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="interpreter\HEXInterpreter.cpp">
+      <Filter>interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -286,6 +289,9 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="interpreter\InterpreterObserver.h">
+      <Filter>interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\HEXInterpreter.h">
       <Filter>interpreter</Filter>
     </ClInclude>
   </ItemGroup>
