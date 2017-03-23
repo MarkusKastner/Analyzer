@@ -12,6 +12,7 @@
 
 #include "display\maindisplay\AnalyzerEdit.h"
 #include "display\maindisplay\HTMLOutput.h"
+#include "display\maindisplay\HexBrowser.h"
 #include "display\pdf\PDFBrowser.h"
 
 #include "mainwindow\MainWindow.h"
@@ -42,6 +43,9 @@ namespace analyzer {
             break;
           case core::FileFormat::empty:
             this->viewOutput = new display::HTMPOutput(this);
+            break;
+          case core::FileFormat::hex:
+            this->viewOutput = new display::HexBrowser(this);
             break;
         default:
           throw app::AppException("Unknown file format in ViewTab::SetFile()");

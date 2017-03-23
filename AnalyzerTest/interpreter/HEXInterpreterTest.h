@@ -79,4 +79,12 @@ TEST_F(HEXInterpreterTest, getHexWithLimits)
   ASSERT_STREQ(hex[0].c_str(), "00");
   ASSERT_STREQ(hex[255].c_str(), "ff");
 }
+
+TEST_F(HEXInterpreterTest, getHexRows)
+{
+  analyzer::interpreter::HEXInterpreter interpreter;
+  interpreter.SetData(this->data1);
+  std::vector<std::vector<std::string>> hex(interpreter.GetHexRows());
+  ASSERT_EQ(hex.size(), 16);
+}
 #endif

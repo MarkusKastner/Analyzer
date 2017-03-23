@@ -27,8 +27,11 @@ namespace analyzer {
       virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
       virtual const std::string & GetText();
       virtual core::FileFormat GetFileFormat();
+      virtual bool UseRichText();
 
       const std::vector<std::string> & GetHexExpressions();
+      std::vector<std::vector<std::string>> GetHexRows();
+
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::vector<std::string> hex;

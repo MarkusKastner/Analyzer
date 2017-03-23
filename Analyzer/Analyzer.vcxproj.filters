@@ -140,6 +140,9 @@
     <ClCompile Include="display\pdf\PDFBrowser.cpp">
       <Filter>display\pdf</Filter>
     </ClCompile>
+    <ClCompile Include="display\maindisplay\HexBrowser.cpp">
+      <Filter>display\maindisplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -170,6 +173,9 @@
       <Filter>display\maindisplay</Filter>
     </ClInclude>
     <ClInclude Include="display\maindisplay\HTMLOutput.h">
+      <Filter>display\maindisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="display\maindisplay\HexBrowser.h">
       <Filter>display\maindisplay</Filter>
     </ClInclude>
   </ItemGroup>

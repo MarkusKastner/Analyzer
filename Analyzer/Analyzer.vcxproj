@@ -145,6 +145,7 @@
     <ClCompile Include="dialogs\OutputDock.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEdit.cpp" />
     <ClCompile Include="display\maindisplay\AnalyzerEditHighlighter.cpp" />
+    <ClCompile Include="display\maindisplay\HexBrowser.cpp" />
     <ClCompile Include="display\maindisplay\HTMLOutput.cpp" />
     <ClCompile Include="display\pdf\PDFBrowser.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Actions.cpp">
@@ -205,6 +206,7 @@
   <ItemGroup>
     <ClInclude Include="application\error\AppException.h" />
     <ClInclude Include="dialogs\BinaryListView.h" />
+    <ClInclude Include="display\maindisplay\HexBrowser.h" />
     <ClInclude Include="display\maindisplay\HTMLOutput.h" />
     <ClInclude Include="display\maindisplay\ViewOutput.h" />
     <CustomBuild Include="display\pdf\PDFBrowser.h">

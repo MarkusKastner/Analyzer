@@ -60,9 +60,31 @@ namespace analyzer {
       return core::FileFormat::hex;
     }
 
+    bool HEXInterpreter::UseRichText()
+    {
+      return true;
+    }
+
     const std::vector<std::string> & HEXInterpreter::GetHexExpressions()
     {
       return this->hex;
+    }
+
+    std::vector<std::vector<std::string>> HEXInterpreter::GetHexRows()
+    {
+      std::vector<std::vector<std::string>> rows;
+      std::vector<std::string> row;
+      int counter = 0;
+      for (auto& hexExp : this->hex) {
+        row.push_back(hexExp);
+        counter++;
+        if (counter == 16) {
+          rows.push_back(row);
+          row.clear();
+          counter = 0;
+        }
+      }
+      return rows;
     }
 
     void HEXInterpreter::data2Hex()
