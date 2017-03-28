@@ -31,6 +31,7 @@ namespace analyzer {
 
       const std::vector<std::string> & GetHexExpressions();
       std::vector<std::vector<std::string>> GetHexRows();
+      std::vector<unsigned char> GetBytesByIndex(const std::vector<size_t> & indexes);
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
@@ -39,6 +40,7 @@ namespace analyzer {
 
       void data2Hex();
       std::string char2Hex(const unsigned char & value);
+      size_t findOffset();
     };
   }
 }

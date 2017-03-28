@@ -87,4 +87,16 @@ TEST_F(HEXInterpreterTest, getHexRows)
   std::vector<std::vector<std::string>> hex(interpreter.GetHexRows());
   ASSERT_EQ(hex.size(), 16);
 }
+
+TEST_F(HEXInterpreterTest, getBytesByIndex)
+{
+  analyzer::interpreter::HEXInterpreter interpreter;
+  interpreter.SetData(this->data2, 10, 256);
+  std::vector<size_t> indexes;
+  indexes.push_back(0);
+  indexes.push_back(20);
+  std::vector<unsigned char> bytes(interpreter.GetBytesByIndex(indexes));
+  ASSERT_EQ(bytes[0], 0);
+  ASSERT_EQ(bytes[1], 20);
+}
 #endif

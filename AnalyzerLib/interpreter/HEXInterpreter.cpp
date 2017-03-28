@@ -87,16 +87,28 @@ namespace analyzer {
       return rows;
     }
 
+    std::vector<unsigned char> HEXInterpreter::GetBytesByIndex(const std::vector<size_t> & indexes)
+    {
+      std::vector<unsigned char> bytes;
+      if (this->data->size() == 0) {
+        return bytes;
+      }
+      size_t offset = this->findOffset();
+
+      for (auto& index : indexes) {
+        if (index < this->getIndexBegin() + offset) {
+          bytes.push_back(this->data->at(this->getIndexBegin() + index));
+        }
+      }
+      return bytes;
+    }
+
     void HEXInterpreter::data2Hex()
     {
       if (this->data->size() == 0) {
         return;
       }
-
-      size_t offset = this->data->size();
-      if (this->hasLimits()) {
-        offset = this->getOffset();
-      }
+      size_t offset = this->findOffset();
 
       for (size_t i = this->getIndexBegin(); i < this->getIndexBegin() + offset; ++i) {
         this->hex.push_back(this->char2Hex(this->data.get()->at(i)));
@@ -108,6 +120,15 @@ namespace analyzer {
       std::stringstream stream;
       stream << std::setw(2) << std::setfill('0') << std::hex << +value;
       return stream.str();
+    }
+
+    size_t HEXInterpreter::findOffset()
+    {
+      size_t offset = this->data->size();
+      if (this->hasLimits()) {
+        offset = this->getOffset();
+      }
+      return offset;
     }
   }
 }

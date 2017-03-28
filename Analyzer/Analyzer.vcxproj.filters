@@ -143,6 +143,12 @@
     <ClCompile Include="display\maindisplay\HexBrowser.cpp">
       <Filter>display\maindisplay</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_HexBrowser.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_HexBrowser.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -175,9 +181,6 @@
     <ClInclude Include="display\maindisplay\HTMLOutput.h">
       <Filter>display\maindisplay</Filter>
     </ClInclude>
-    <ClInclude Include="display\maindisplay\HexBrowser.h">
-      <Filter>display\maindisplay</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow\MainWindow.ui">
@@ -203,6 +206,9 @@
     </CustomBuild>
     <CustomBuild Include="display\pdf\PDFBrowser.h">
       <Filter>display\pdf</Filter>
+    </CustomBuild>
+    <CustomBuild Include="display\maindisplay\HexBrowser.h">
+      <Filter>display\maindisplay</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

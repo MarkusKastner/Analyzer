@@ -57,5 +57,52 @@ namespace analyzer {
       ret.pop_back();
       return ret;
     }
+
+    std::string ASCIIFormatter::Bytes2BinaryExpression(const std::vector<unsigned char> & bytes)
+    {
+      std::string binString;
+      for (auto& byte : bytes) {
+        binString += std::bitset<8>(byte).to_string();
+        binString += " ";
+      }
+      binString.pop_back();
+      return binString;
+    }
+
+    std::string ASCIIFormatter::Bytes2NumericalExpression(const std::vector<unsigned char> & bytes)
+    {
+      std::stringstream ss;
+      for (int i = 0; i < bytes.size(); ++i) {
+        ss << std::setfill('0') << std::setw(2) << std::dec << static_cast<unsigned>(bytes[i]);
+        ss << ' ';
+      }
+      std::string ret(ss.str());
+      ret.pop_back();
+      return ret;
+    }
+
+    std::string ASCIIFormatter::Bytes2HexExpression(const std::vector<unsigned char> & bytes)
+    {
+      std::stringstream ss;
+      for (int i = 0; i < bytes.size(); ++i) {
+        ss << std::setfill('0') << std::setw(2) << std::hex << static_cast<unsigned>(bytes[i]);
+        ss << ' ';
+      }
+      std::string ret(ss.str());
+      ret.pop_back();
+      return ret;
+    }
+
+    std::string ASCIIFormatter::Bytes2ASCIIExpression(const std::vector<unsigned char>& bytes)
+    {
+      std::stringstream ss;
+      for (int i = 0; i < bytes.size(); ++i) {
+        ss << bytes[i];
+        ss << ' ';
+      }
+      std::string ret(ss.str());
+      ret.pop_back();
+      return ret;
+    }
   }
 }

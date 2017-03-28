@@ -41,7 +41,8 @@ namespace analyzer{
       virtual void SetAvailableAnalyzingOptions(const base::AnalyzingOptions & analyzingOptions);
       virtual void FileChange();
 
-      void SetBinaryOutput(const QString & binary);
+      void SetBinaryOutputFromString(const QString & binary);
+      void SetBinaryOutputFromBytes(const std::vector<unsigned char> & data);
 
     private:
       Ui::MainWindow ui;

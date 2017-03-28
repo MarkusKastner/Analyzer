@@ -56,4 +56,36 @@ TEST_F(ASCIIFormatterTest, text2Hex)
   std::string bin(analyzer::interpreter::ASCIIFormatter::Text2HexExpression(text));
   ASSERT_STREQ(bin.c_str(), "61 62 63 64");
 }
+
+TEST_F(ASCIIFormatterTest, byte2Hex)
+{
+  std::vector<unsigned char> data({97,98,99,100});
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Bytes2HexExpression(data));
+  ASSERT_STREQ(bin.c_str(), "61 62 63 64");
+}
+
+TEST_F(ASCIIFormatterTest, byte2Numerical)
+{
+  std::vector<unsigned char> data({ 97,98,99,100 });
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Bytes2NumericalExpression(data));
+  ASSERT_STREQ(bin.c_str(), "97 98 99 100");
+}
+
+TEST_F(ASCIIFormatterTest, byteBinary)
+{
+  std::vector<unsigned char> data({ 97,98,99,100 });
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Bytes2BinaryExpression(data));
+  ASSERT_STREQ(bin.c_str(), "01100001 01100010 01100011 01100100");
+}
+
+TEST_F(ASCIIFormatterTest, byte2ASCII)
+{
+  std::vector<unsigned char> data({ 97,98,99,100 });
+
+  std::string bin(analyzer::interpreter::ASCIIFormatter::Bytes2ASCIIExpression(data));
+  ASSERT_STREQ(bin.c_str(), "a b c d");
+}
 #endif

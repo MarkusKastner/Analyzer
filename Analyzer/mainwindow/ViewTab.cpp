@@ -32,6 +32,10 @@ namespace analyzer {
 
     void ViewTab::SetFile(core::File * file)
     {
+      MainWindow* mainWnd = nullptr;
+      if (dynamic_cast<MainWindow*>(this->parent()->parent()->parent())) {
+        mainWnd = dynamic_cast<MainWindow*>(this->parent()->parent()->parent());
+      }
       this->ClearFile();
       if (file->UseRichText()) {
         switch (file->GetFileFormat()){
@@ -46,6 +50,9 @@ namespace analyzer {
             break;
           case core::FileFormat::hex:
             this->viewOutput = new display::HexBrowser(this);
+            if (mainWnd != nullptr) {
+              connect(dynamic_cast<display::HexBrowser*>(this->viewOutput), &display::HexBrowser::SetBinaryOutput, mainWnd, &MainWindow::SetBinaryOutputFromBytes);
+            }
             break;
         default:
           throw app::AppException("Unknown file format in ViewTab::SetFile()");
@@ -54,9 +61,8 @@ namespace analyzer {
       }
       else {
         this->viewOutput = new display::AnalyzerEdit(this);
-        if (dynamic_cast<MainWindow*>(this->parent()->parent()->parent())) {
-          MainWindow* mainWnd = dynamic_cast<MainWindow*>(this->parent()->parent()->parent());
-          connect(dynamic_cast<display::AnalyzerEdit*>(this->viewOutput), &display::AnalyzerEdit::SetBinaryOutput, mainWnd, &MainWindow::SetBinaryOutput);
+        if (mainWnd != nullptr) {
+          connect(dynamic_cast<display::AnalyzerEdit*>(this->viewOutput), &display::AnalyzerEdit::SetBinaryOutput, mainWnd, &MainWindow::SetBinaryOutputFromString);
         }
       }
       this->layout()->addWidget(dynamic_cast<QWidget*>(this->viewOutput));

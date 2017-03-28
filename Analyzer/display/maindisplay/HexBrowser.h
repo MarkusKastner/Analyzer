@@ -25,8 +25,9 @@ namespace analyzer {
   }
   namespace gui {
     namespace display {
-      class HexBrowser : public ViewOutput, public QTableWidget
+      class HexBrowser : public QTableWidget, public ViewOutput
       {
+        Q_OBJECT
       public:
         HexBrowser(QWidget * parent = 0);
         virtual ~HexBrowser();
@@ -36,9 +37,13 @@ namespace analyzer {
 
         void AddHexRow(const std::vector<std::string> & hexExp);
 
+      signals:
+        void SetBinaryOutput(const std::vector<unsigned char> & data);
+
       private:
         core::File * file;
 
+        void onSelection();
         void setup();
         interpreter::HEXInterpreter * getInterpreter();
       };

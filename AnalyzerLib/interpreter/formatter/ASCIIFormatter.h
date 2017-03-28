@@ -19,6 +19,11 @@ namespace analyzer {
       static std::string Text2BinaryExpression(const std::string & text);
       static std::string Text2NumericalExpression(const std::string & text);
       static std::string Text2HexExpression(const std::string & text);
+
+      static std::string Bytes2BinaryExpression(const std::vector<unsigned char> & bytes);
+      static std::string Bytes2NumericalExpression(const std::vector<unsigned char> & bytes);
+      static std::string Bytes2HexExpression(const std::vector<unsigned char> & bytes);
+      static std::string Bytes2ASCIIExpression(const std::vector<unsigned char> & bytes);
     };
   }
 }

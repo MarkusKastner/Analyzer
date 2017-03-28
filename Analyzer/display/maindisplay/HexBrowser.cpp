@@ -62,6 +62,21 @@ namespace analyzer {
 
       }
 
+      void HexBrowser::onSelection()
+      {
+        std::vector<size_t> indexes;
+
+        QList<QTableWidgetItem*> items = this->selectedItems();
+        for (auto& item : items) {
+          int col = item->column();
+          int row = item->row();
+          size_t index = col-1 + (row*16);
+          indexes.push_back(index);
+        }
+        auto bytes(this->getInterpreter()->GetBytesByIndex(indexes));
+        this->SetBinaryOutput(bytes);
+      }
+
       void HexBrowser::setup()
       {
         QStringList horizontal;
@@ -78,6 +93,7 @@ namespace analyzer {
         this->setHorizontalHeaderLabels(horizontal);
         this->horizontalHeader()->show();
         this->verticalHeader()->hide();
+        connect(this, &HexBrowser::itemSelectionChanged, this, &HexBrowser::onSelection);
       }
 
       interpreter::HEXInterpreter * HexBrowser::getInterpreter()

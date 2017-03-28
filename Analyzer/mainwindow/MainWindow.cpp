@@ -69,7 +69,7 @@ namespace analyzer{
       this->tabWidget->GetViewTab()->SetFile(this->analyzerBase.GetActiveAnalyzerFile());
     }
 
-    void MainWindow::SetBinaryOutput(const QString & binary)
+    void MainWindow::SetBinaryOutputFromString(const QString & binary)
     {
       this->binaryDock->Clear();
       std::vector<std::string> lines = interpreter::ASCIIFormatter::Split(binary.toStdString(), 4);
@@ -79,7 +79,33 @@ namespace analyzer{
           line, 
           interpreter::ASCIIFormatter::Text2NumericalExpression(line));
       }
-      
+    }
+
+    void MainWindow::SetBinaryOutputFromBytes(const std::vector<unsigned char> & data)
+    {
+      this->binaryDock->Clear();
+      std::vector<std::vector<unsigned char>> lines;
+      int counter = 0;
+      std::vector<unsigned char> byteLine;
+      for (auto& byte : data) {
+        byteLine.push_back(byte);
+        counter++;
+        if (counter == 4) {
+          counter = 0;
+          lines.push_back(byteLine);
+          byteLine.clear();
+        }
+      }
+      if (!byteLine.empty()) {
+        lines.push_back(byteLine);
+      }
+
+      for (auto& line : lines) {
+        this->binaryDock->AddLine(interpreter::ASCIIFormatter::Bytes2HexExpression(line),
+          interpreter::ASCIIFormatter::Bytes2BinaryExpression(line),
+          interpreter::ASCIIFormatter::Bytes2ASCIIExpression(line),
+          interpreter::ASCIIFormatter::Bytes2NumericalExpression(line));
+      }
     }
 
     void MainWindow::setup()
