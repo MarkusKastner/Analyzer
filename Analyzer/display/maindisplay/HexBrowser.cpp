@@ -14,6 +14,8 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\HEXInterpreter.h"
@@ -23,7 +25,9 @@ namespace analyzer {
   namespace gui {
     namespace display {
       HexBrowser::HexBrowser(QWidget * parent)
-        :QWidget(parent), tableWidget(nullptr), intLineEdit(nullptr), floatLineEdit(nullptr)
+        :QWidget(parent), tableWidget(nullptr), castTable(nullptr), 
+        integerCast(new QTableWidgetItem()), doubleCast(new QTableWidgetItem()),
+        wideCharacter(new QTableWidgetItem())
       {
         this->setup();
       }
@@ -48,46 +52,74 @@ namespace analyzer {
 
       void HexBrowser::SetIntegerValue(const int & integerValue)
       {
-        this->intLineEdit->setText(QString::number(integerValue));
+        this->integerCast->setText(QString::number(integerValue));
       }
 
       void HexBrowser::SetDoubleValue(const double & doubleValue)
       {
-        this->floatLineEdit->setText(QString::number(doubleValue));
+        this->doubleCast->setText(QString::number(doubleValue));
+      }
+
+      void HexBrowser::SetWideCharacter(const wchar_t & wideCharacter)
+      {
+        this->wideCharacter->setText(QString::fromWCharArray(&wideCharacter, 1));
       }
 
       void HexBrowser::setup()
       {
-        this->setLayout(new QVBoxLayout());
+        this->setLayout(new QHBoxLayout());
 
         QWidget * detailWidget = new QWidget(this);
         detailWidget->setLayout(new QVBoxLayout());
+        detailWidget->layout()->setContentsMargins(0, 0, 0, 0);
+        detailWidget->setMaximumWidth(200);
+        detailWidget->setMinimumWidth(200);
 
         QGroupBox * details = new QGroupBox("Details", detailWidget);
-        details->setLayout(new QHBoxLayout());
-        
-        QWidget * intWidget = new QWidget(details);
-        intWidget->setLayout(new QHBoxLayout());
-        this->intLineEdit = new QLineEdit(details);
-        QLabel * intLabel = new QLabel("Integral: ");
-        intWidget->layout()->addWidget(intLabel);
-        intWidget->layout()->addWidget(this->intLineEdit);
+        details->setLayout(new QVBoxLayout());
 
-        QWidget * floatWidget = new QWidget(details);
-        floatWidget->setLayout(new QHBoxLayout());
-        this->floatLineEdit = new QLineEdit(details);
-        QLabel * floatLabel = new QLabel("Floating Point: ");
-        floatWidget->layout()->addWidget(floatLabel);
-        floatWidget->layout()->addWidget(this->floatLineEdit);
-
-        details->layout()->addWidget(intWidget);
-        details->layout()->addWidget(floatWidget);
-
+        this->createCastTable();
+        details->layout()->addWidget(this->castTable);
         detailWidget->layout()->addWidget(details);
 
         this->tableWidget = new HexTableWidget(this);
-        this->layout()->addWidget(detailWidget);
         this->layout()->addWidget(this->tableWidget);
+        this->layout()->addWidget(detailWidget);
+        
+      }
+
+      void HexBrowser::createCastTable()
+      {
+        QStringList horizontalHeaderList;
+        horizontalHeaderList.push_back("value");
+
+        QStringList verticalHeaderList;
+        verticalHeaderList.push_back("Integer");
+        verticalHeaderList.push_back("Floating point");
+        verticalHeaderList.push_back("Wide character");
+
+        this->castTable = new QTableWidget(this);
+        this->castTable->insertColumn(0);
+        this->castTable->insertRow(0);
+        this->castTable->insertRow(1);
+        this->castTable->insertRow(2);
+
+        this->castTable->setHorizontalHeaderLabels(horizontalHeaderList);
+        this->castTable->setVerticalHeaderLabels(verticalHeaderList);
+        
+        this->integerCast->setTextAlignment(Qt::Alignment::enum_type::AlignRight);
+        this->doubleCast->setTextAlignment(Qt::Alignment::enum_type::AlignRight);
+        this->wideCharacter->setTextAlignment(Qt::Alignment::enum_type::AlignRight);
+
+        this->castTable->setItem(0, 0, this->integerCast);
+        this->castTable->setItem(1, 0, this->doubleCast);
+        this->castTable->setItem(2, 0, this->wideCharacter);
+
+        this->castTable->verticalHeader()->show();
+        this->castTable->horizontalHeader()->show();
+
+        this->castTable->setMaximumWidth(190);
+        this->castTable->setMinimumWidth(190);
       }
     }
   }

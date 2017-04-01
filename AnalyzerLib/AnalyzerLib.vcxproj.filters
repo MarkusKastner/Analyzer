@@ -32,9 +32,6 @@
     <Filter Include="service">
       <UniqueIdentifier>{06e3e1d1-a339-43bf-8611-9bdbc45f1044}</UniqueIdentifier>
     </Filter>
-    <Filter Include="network">
-      <UniqueIdentifier>{e63bfbf9-e200-4f2f-ab6c-1594ef0bf795}</UniqueIdentifier>
-    </Filter>
     <Filter Include="interpreter\HTML">
       <UniqueIdentifier>{a1019da8-16f4-484e-a2fc-ab8dc98d2527}</UniqueIdentifier>
     </Filter>
@@ -60,9 +57,6 @@
     </ClCompile>
     <ClCompile Include="service\Update.cpp">
       <Filter>service</Filter>
-    </ClCompile>
-    <ClCompile Include="network\CrossSock.cpp">
-      <Filter>network</Filter>
     </ClCompile>
     <ClCompile Include="interpreter\InterpreterFactory.cpp">
       <Filter>interpreter</Filter>
@@ -137,9 +131,6 @@
     </ClInclude>
     <ClInclude Include="service\Update.h">
       <Filter>service</Filter>
-    </ClInclude>
-    <ClInclude Include="network\CrossSock.h">
-      <Filter>network</Filter>
     </ClInclude>
     <ClInclude Include="base\AnalyzingOptions.h">
       <Filter>base</Filter>

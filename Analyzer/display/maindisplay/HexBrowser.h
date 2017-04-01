@@ -17,6 +17,9 @@
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\base\BaseData.h"
 
+class QTableWidget;
+class QTableWidgetItem;
+
 namespace analyzer {
   namespace interpreter {
     class HEXInterpreter;
@@ -41,18 +44,25 @@ namespace analyzer {
 
         void SetIntegerValue(const int & integerValue);
         void SetDoubleValue(const double & doubleValue);
+        void SetWideCharacter(const wchar_t & wideCharacter);
+
+        void ClearValues();
 
       signals:
         void SetBinaryOutput(const std::vector<unsigned char> & data);
 
       private:
         HexTableWidget * tableWidget;
-        QLineEdit * intLineEdit;
-        QLineEdit * floatLineEdit;
+        QTableWidget * castTable;
+
+        QTableWidgetItem * integerCast;
+        QTableWidgetItem * doubleCast;
+        QTableWidgetItem * wideCharacter;
 
         core::File * file;
 
         void setup();
+        void createCastTable();
       };
     }
   }
