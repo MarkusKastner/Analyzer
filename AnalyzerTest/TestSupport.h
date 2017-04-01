@@ -20,14 +20,14 @@ public:
   static void Initialize(const std::string & appPath);
   static TestSupport * GetInstance();
 
-  const std::wstring & GetTestDir() const;
-  const std::wstring & GetTestFilesDir() const;
+  const std::string & GetTestDir() const;
+  const std::string & GetTestFilesDir() const;
   std::shared_ptr<std::vector<unsigned char>> GetDataFromTestFilesDir(const std::string & fileName);
 
 private:
   TestSupport();
-  std::wstring testDir;
-  std::wstring testFilesDir;
+  std::string testDir;
+  std::string testFilesDir;
   static TestSupport * instance;
 
   void setup(const std::string & appPath);

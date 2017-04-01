@@ -75,6 +75,11 @@ namespace analyzer {
       }
     }
 
+    std::shared_ptr<Interpreter> InterpreterFactory::CreateHexInterpreter(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      return std::shared_ptr<Interpreter>(new HEXInterpreter(data));
+    }
+
     InterpreterFactory * InterpreterFactory::instance = nullptr;
   }
 }

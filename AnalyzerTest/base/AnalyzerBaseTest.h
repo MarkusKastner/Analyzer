@@ -95,9 +95,9 @@ public:
   ~AnalyzerBaseTest(){}
 
   void SetUp(){
-    this->path1 = std::wstring(TestSupport::GetInstance()->GetTestFilesDir() + std::wstring(L"/test.txt"));
-    this->path2 = std::wstring(TestSupport::GetInstance()->GetTestFilesDir() + std::wstring(L"/test.zip"));
-    this->path3 = std::wstring(TestSupport::GetInstance()->GetTestFilesDir() + std::wstring(L"/test.docx"));
+    this->path1 = std::string(TestSupport::GetInstance()->GetTestFilesDir() + std::string("/test.txt"));
+    this->path2 = std::string(TestSupport::GetInstance()->GetTestFilesDir() + std::string("/test.zip"));
+    this->path3 = std::string(TestSupport::GetInstance()->GetTestFilesDir() + std::string("/test.docx"));
 
     dummyData1.push_back('D');
     dummyData1.push_back('u');
@@ -121,11 +121,11 @@ public:
 
   analyzer::base::AnalyzerBase analyzerBase1;
   SomeObserver observer1;
-  std::wstring path1;
+  std::string path1;
   std::vector<unsigned char> dummyData1;
   std::shared_ptr<analyzer::core::File> analyzerFile;
-  std::wstring path2;
-  std::wstring path3;
+  std::string path2;
+  std::string path3;
 
 };
 
@@ -340,4 +340,5 @@ TEST_F(AnalyzerBaseTest, closeDocument)
 
   ASSERT_FALSE(this->analyzerBase1.HasFiles());
 }
+
 #endif

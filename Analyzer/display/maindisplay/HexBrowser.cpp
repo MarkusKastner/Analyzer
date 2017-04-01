@@ -11,15 +11,19 @@
 #include <iomanip>
 
 #include <QHeaderView>
+#include <QVBoxLayout>
+#include <QGroupBox>
+#include <QLabel>
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\HEXInterpreter.h"
+#include "HexTableWidget.h"
 
 namespace analyzer {
   namespace gui {
     namespace display {
       HexBrowser::HexBrowser(QWidget * parent)
-        :QTableWidget(parent)
+        :QWidget(parent), tableWidget(nullptr), intLineEdit(nullptr), floatLineEdit(nullptr)
       {
         this->setup();
       }
@@ -30,11 +34,7 @@ namespace analyzer {
 
       void HexBrowser::SetFile(core::File * file)
       {
-        this->file = file;
-        auto rows = this->getInterpreter()->GetHexRows();
-        for (auto& row : rows) {
-          this->AddHexRow(row);
-        }
+        this->tableWidget->SetFile(file);
       }
 
       void HexBrowser::ClearFile()
@@ -43,62 +43,51 @@ namespace analyzer {
 
       void HexBrowser::AddHexRow(const std::vector<std::string> & hexExp)
       {
-        int numRows = this->rowCount();
-        int offset = numRows * 16;
-        std::stringstream stream;
-        //stream.setf(std::ios::hex);
-        stream << std::setfill('0') << std::setw(10) << std::hex << offset;
-        std::string hexStr(stream.str());
-        QString offsetStr(stream.str().c_str());
-        this->insertRow(numRows);
-
-        this->setItem(numRows, 0, new QTableWidgetItem(offsetStr));
-        this->item(numRows, 0)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
-
-        for (size_t i = 0; i < hexExp.size(); i++) {
-          this->setItem(numRows, i + 1, new QTableWidgetItem(hexExp[i].c_str()));
-          this->item(numRows, i + 1)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
-        }
-
+        this->tableWidget->AddHexRow(hexExp);
       }
 
-      void HexBrowser::onSelection()
+      void HexBrowser::SetIntegerValue(const int & integerValue)
       {
-        std::vector<size_t> indexes;
+        this->intLineEdit->setText(QString::number(integerValue));
+      }
 
-        QList<QTableWidgetItem*> items = this->selectedItems();
-        for (auto& item : items) {
-          int col = item->column();
-          int row = item->row();
-          size_t index = col-1 + (row*16);
-          indexes.push_back(index);
-        }
-        auto bytes(this->getInterpreter()->GetBytesByIndex(indexes));
-        this->SetBinaryOutput(bytes);
+      void HexBrowser::SetDoubleValue(const double & doubleValue)
+      {
+        this->floatLineEdit->setText(QString::number(doubleValue));
       }
 
       void HexBrowser::setup()
       {
-        QStringList horizontal;
-        horizontal.push_back("offset [h]");
-        this->insertColumn(0);
-        for (int i = 0; i < 16; i++) {
-          std::stringstream stream;
-          stream << std::setw(2) << std::setfill('0') << std::hex << +i;
-          horizontal.push_back(QString(stream.str().c_str()));
-          this->insertColumn(i + 1);
-          this->setColumnWidth(i + 1, 25);
-        }
+        this->setLayout(new QVBoxLayout());
 
-        this->setHorizontalHeaderLabels(horizontal);
-        this->horizontalHeader()->show();
-        this->verticalHeader()->hide();
-        connect(this, &HexBrowser::itemSelectionChanged, this, &HexBrowser::onSelection);
-      }
+        QWidget * detailWidget = new QWidget(this);
+        detailWidget->setLayout(new QVBoxLayout());
 
-      interpreter::HEXInterpreter * HexBrowser::getInterpreter()
-      {
-        return dynamic_cast<interpreter::HEXInterpreter*>(this->file->GetInterpreter().get());
+        QGroupBox * details = new QGroupBox("Details", detailWidget);
+        details->setLayout(new QHBoxLayout());
+        
+        QWidget * intWidget = new QWidget(details);
+        intWidget->setLayout(new QHBoxLayout());
+        this->intLineEdit = new QLineEdit(details);
+        QLabel * intLabel = new QLabel("Integral: ");
+        intWidget->layout()->addWidget(intLabel);
+        intWidget->layout()->addWidget(this->intLineEdit);
+
+        QWidget * floatWidget = new QWidget(details);
+        floatWidget->setLayout(new QHBoxLayout());
+        this->floatLineEdit = new QLineEdit(details);
+        QLabel * floatLabel = new QLabel("Floating Point: ");
+        floatWidget->layout()->addWidget(floatLabel);
+        floatWidget->layout()->addWidget(this->floatLineEdit);
+
+        details->layout()->addWidget(intWidget);
+        details->layout()->addWidget(floatWidget);
+
+        detailWidget->layout()->addWidget(details);
+
+        this->tableWidget = new HexTableWidget(this);
+        this->layout()->addWidget(detailWidget);
+        this->layout()->addWidget(this->tableWidget);
       }
     }
   }

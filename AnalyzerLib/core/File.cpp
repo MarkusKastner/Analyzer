@@ -7,6 +7,7 @@
 #include "File.h"
 #include "AnalyzerLib\interpreter\InterpreterFactory.h"
 #include "AnalyzerLib\core\FileObserver.h"
+#include "AnalyzerLib\core\PrimaryFile.h"
 
 #include <regex>
 
@@ -96,6 +97,13 @@ namespace analyzer{
           return;
         }
       }
+    }
+
+    std::shared_ptr<File> File::CloneToHexFile()
+    {
+      std::shared_ptr<File> hexFile(new PrimaryFile());
+      dynamic_cast<PrimaryFile*>(hexFile.get())->CreateHexFile(this->fileName, this->cloneData());
+      return hexFile;
     }
 
     void File::setFileName(const std::string & fileName)

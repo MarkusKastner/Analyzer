@@ -15,6 +15,7 @@
 #include "AnalyzerLib\interpreter\Interpreter.h"
 #include "AnalyzerLib\core\FileInfo.h"
 #include "AnalyzerLib\interpreter\InterpreterObserver.h"
+#include "AnalyzerLib\interpreter\HEXInterpreter.h"
 
 namespace analyzer{
   namespace core{
@@ -44,6 +45,8 @@ namespace analyzer{
       void RegisterFileObserver(FileObserver * fileObserver);
       void UnregisterFileObserver(FileObserver * fileObserver);
 
+      std::shared_ptr<File> CloneToHexFile();
+
     protected:
       void setFileName(const std::string & fileName);
       void setDirectoryNames(const std::string& input, const std::string& regex);
@@ -51,6 +54,8 @@ namespace analyzer{
       void setInterpreter(const std::shared_ptr<interpreter::Interpreter> & interpreter);
       const std::shared_ptr<interpreter::Interpreter> & getInterpreter() const;
       bool hasInterpreter();
+
+      virtual std::shared_ptr<std::vector<unsigned char>> cloneData() = 0;
 
     private:
       std::string fileName;

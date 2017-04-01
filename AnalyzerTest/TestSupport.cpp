@@ -39,12 +39,12 @@ TestSupport * TestSupport::GetInstance()
   return instance;
 }
 
-const std::wstring & TestSupport::GetTestDir() const
+const std::string & TestSupport::GetTestDir() const
 {
   return this->testDir;
 }
 
-const std::wstring & TestSupport::GetTestFilesDir() const
+const std::string & TestSupport::GetTestFilesDir() const
 {
   return this->testFilesDir;
 }
@@ -82,6 +82,7 @@ void TestSupport::setup(const std::string & appPath)
   if (!fs::exists(dir)) {
     fs::create_directory(dir);
   }
-  this->testDir = dir;
-  this->testFilesDir = L"C:/dev/Analyzer/AnalyzerTest/testFiles";
+  std::wstring temp = dir;
+  this->testDir.assign(temp.begin(), temp.end());
+  this->testFilesDir = "C:/dev/Analyzer/AnalyzerTest/testFiles";
 }

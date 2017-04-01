@@ -11,7 +11,7 @@
 namespace analyzer {
   namespace gui {
     AnalyzerTab::AnalyzerTab(QWidget * parent)
-     : QTabWidget(parent), viewTab(nullptr), resultTab(nullptr)
+     : QTabWidget(parent), viewTab(nullptr), resultTab(nullptr), hexTab(nullptr)
     {
       this->setup();
     }
@@ -30,13 +30,48 @@ namespace analyzer {
       return this->resultTab->GetResultTextEdit();
     }
 
+    ViewTab * AnalyzerTab::AddHexTab()
+    {
+      if (this->hexTab == nullptr) {
+        this->hexTab = new ViewTab(this);
+        this->addTab(this->hexTab, tr("Hex"));
+        
+      }
+      return this->hexTab;
+    }
+
+    void AnalyzerTab::ClearHexTab()
+    {
+      if (this->hexTab == nullptr) {
+        return;
+      }
+      for (int i = 0; i < this->count(); i++) {
+        if (this->widget(i)->windowTitle().compare("Hex") == 0) {
+          this->removeTab(i);
+        }
+      }
+      delete this->hexTab;
+      this->hexTab = nullptr;
+    }
+
+    
     void AnalyzerTab::setup()
     {
+      this->setTabsClosable(true);
+      connect(this, &AnalyzerTab::tabCloseRequested, this, &AnalyzerTab::onCloseTab);
+
       this->viewTab = new ViewTab(this);
       this->addTab(this->viewTab, tr("View"));
       
       this->resultTab = new AnalyzeResultTab(this);
       this->addTab(this->resultTab, tr("Analyze Result"));
+    }
+
+    void AnalyzerTab::onCloseTab(const int & index)
+    {
+      if (this->tabText(index).compare("Hex") == 0) {
+        this->ClearHexTab();
+      }
     }
   }
 }

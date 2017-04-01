@@ -22,6 +22,7 @@ namespace analyzer {
       static InterpreterFactory * GetInstance();
       std::shared_ptr<Interpreter> CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
       std::shared_ptr<Interpreter> CreateInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
+      std::shared_ptr<Interpreter> CreateHexInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
 
     private:
       static InterpreterFactory * instance;

@@ -21,7 +21,6 @@ namespace analyzer{
 
     Actions::~Actions()
     {
-
     }
 
     void Actions::OnOpen()

@@ -27,7 +27,7 @@ namespace analyzer{
     MainWindow::MainWindow(base::AnalyzerBase & analyzerBase, QWidget *parent)
       : QMainWindow(parent), actions(), analyzerBase(analyzerBase), tabWidget(nullptr),
       analyzeDock(nullptr), outputDock(nullptr), binaryDock(nullptr),
-      documentStructure(nullptr)
+      documentStructure(nullptr), hexFile()
     {
       ui.setupUi(this);
       this->setup();
@@ -145,6 +145,7 @@ namespace analyzer{
       connect(this->ui.actionClose, &QAction::triggered, this->actions.get(), &Actions::OnClose);
       connect(this->ui.actionStart_Analyzing, &QAction::triggered, this->actions.get(), &Actions::OnStartAnalyzing);
       connect(this->ui.actionStop_Analyzing, &QAction::triggered, this->actions.get(), &Actions::OnStopAnalyzing);
+      connect(this->ui.actionShow_as_Hex, &QAction::triggered, this, &MainWindow::onShowHex);
       connect(this->ui.actionDocumentStructure, &QAction::toggled, this, &MainWindow::onDocStructureToggled);
       connect(this->ui.actionOutput, &QAction::toggled, this, &MainWindow::onOutputToggled);
       connect(this->ui.actionAnalyze, &QAction::toggled, this, &MainWindow::onAnalyzeToggled);
@@ -219,6 +220,14 @@ namespace analyzer{
     void MainWindow::onBinaryViewVisibility(bool visible)
     {
       this->ui.actionBinary_View->setChecked(visible);
+    }
+
+    void MainWindow::onShowHex()
+    {
+      this->hexFile = this->analyzerBase.GetActiveAnalyzerFile()->CloneToHexFile();
+      if (this->hexFile) {
+        this->tabWidget->AddHexTab()->SetFile(this->hexFile.get());
+      }
     }
   }
 }

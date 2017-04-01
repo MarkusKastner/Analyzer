@@ -28,8 +28,7 @@ public:
   }
 
   void SetUp(){
-    std::wstring filesDirW(TestSupport::GetInstance()->GetTestFilesDir());
-    std::string filesDir(filesDirW.begin(), filesDirW.end());
+    std::string filesDir(TestSupport::GetInstance()->GetTestFilesDir());
 
     this->testFile1 = std::string(filesDir + std::string("/test.docx"));
     this->testFile2 = std::string(filesDir + std::string("/test.zip"));

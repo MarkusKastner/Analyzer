@@ -55,6 +55,8 @@ namespace analyzer{
       BinaryDock * binaryDock;
       DocumentStructure * documentStructure;
 
+      std::shared_ptr<core::File> hexFile;
+
       void setup();
       void setupDialogs();
 
@@ -69,6 +71,8 @@ namespace analyzer{
       void onOutputViewVisibility(bool visible);
       void onAnalyzeViewVisibility(bool visible);
       void onBinaryViewVisibility(bool visible);
+
+      void onShowHex();
     };
   }
 }

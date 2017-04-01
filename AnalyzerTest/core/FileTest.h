@@ -19,6 +19,7 @@
 #include "AnalyzerLib\core\FileInfo.h"
 #include "AnalyzerLib\core\FileObserver.h"
 #include "AnalyzerLib\interpreter\XMLInterpreter.h"
+#include "AnalyzerLib\interpreter\HEXInterpreter.h"
 
 class FileTest : public testing::Test
 {
@@ -49,7 +50,9 @@ public:
   };
 
   FileTest()
-    : file1(), charVector(), fileName1("test.txt"), xmlHeader(), someFileObserver()
+    : file1(), charVector(), fileName1("test.txt"), someFileObserver(), 
+    parentFileName("parent"), internalFileName("newinternal"), 
+    internalDataIndex(19), internalDataOffset(38), primFile(), intFile()
   {}
   virtual ~FileTest(){
   }
@@ -66,15 +69,26 @@ public:
     internalXMLData.insert(internalXMLData.end(), xmlHeaderStr.begin(), xmlHeaderStr.end());
     internalXMLData.insert(internalXMLData.end(), postData.begin(), postData.end());
 
-    this->xmlHeader = std::vector<unsigned char>{ '<', '?', 'x', 'm', 'l', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '=', '"', '1', '.', '0', '"', ' ', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=', '"', 'u', 't', 'f', '-', '8', '"', '?', '>' };
+    std::shared_ptr<std::vector<unsigned char>> data(std::make_shared<std::vector<unsigned char>>(this->internalXMLData));
+    std::vector<unsigned char> empty;
+    this->primFile.reset(new analyzer::core::PrimaryFile(parentFileName, empty));
+    this->intFile.reset(new SomeIntFile(internalFileName, data, this->internalDataIndex, this->internalDataOffset));
+
+    this->primFile->RegisterFileObserver(&this->someFileObserver);
+    this->primFile->AddInternalFile(intFile);
   }
 
   analyzer::core::PrimaryFile file1;
   std::vector<unsigned char> charVector;
   std::string fileName1;
-  std::vector<unsigned char> xmlHeader;
   SomeFileObserver someFileObserver;
   std::vector<unsigned char> internalXMLData;
+  std::string parentFileName;
+  std::string internalFileName;
+  size_t internalDataIndex;
+  size_t internalDataOffset;
+  std::shared_ptr<analyzer::core::File> primFile;
+  std::shared_ptr<analyzer::core::File> intFile;
 };
 
 TEST_F(FileTest, Init)
@@ -133,8 +147,7 @@ TEST_F(FileTest, UseRichTextEmpty)
 
 TEST_F(FileTest, UseRichTextBMP)
 {
-  std::wstring testFilesDirW(TestSupport::GetInstance()->GetTestFilesDir());
-  std::string testFile(testFilesDirW.begin(), testFilesDirW.end());
+  std::string testFile(TestSupport::GetInstance()->GetTestFilesDir());
   std::string bmpFile("bmp/test16_1.bmp");
   testFile += "/" + bmpFile;
   auto dataPtr = TestSupport::GetInstance()->GetDataFromTestFilesDir(bmpFile);
@@ -146,8 +159,7 @@ TEST_F(FileTest, UseRichTextBMP)
 
 TEST_F(FileTest, getText)
 {
-  std::wstring testFilesDirW(TestSupport::GetInstance()->GetTestFilesDir());
-  std::string testFile(testFilesDirW.begin(), testFilesDirW.end());
+  std::string testFile(TestSupport::GetInstance()->GetTestFilesDir());
   std::string bmpFile("bmp/test16_1.bmp");
   testFile += "/" + bmpFile;
   auto dataPtr = TestSupport::GetInstance()->GetDataFromTestFilesDir(bmpFile);
@@ -162,17 +174,8 @@ TEST_F(FileTest, getText)
 
 TEST_F(FileTest, handleInternalFile)
 {
-  std::shared_ptr<std::vector<unsigned char>> data(std::make_shared<std::vector<unsigned char>>(this->internalXMLData));
-  std::vector<unsigned char> empty;
-  std::string parentFileName("parent");
-  std::string internalFileName("newinternal");
   std::string fileName(parentFileName + "/" + internalFileName);
-  std::shared_ptr<analyzer::core::File> primFile(new analyzer::core::PrimaryFile(parentFileName, empty));
-  std::shared_ptr<analyzer::core::File> intFile(new SomeIntFile(internalFileName, data, 19, 38));
 
-  primFile->RegisterFileObserver(&this->someFileObserver);
-
-  primFile->AddInternalFile(intFile);
   ASSERT_TRUE(primFile->HasInternalFiles());
   ASSERT_STREQ(fileName.c_str(), this->someFileObserver.GetInternalFileTest()->GetFileName().c_str());
   bool isXML = false;
@@ -183,4 +186,39 @@ TEST_F(FileTest, handleInternalFile)
   primFile->UnregisterFileObserver(&this->someFileObserver);
 }
 
+TEST_F(FileTest, internalFileSize)
+{
+  ASSERT_EQ(this->intFile->GetSize(), this->internalDataOffset);
+}
+
+TEST_F(FileTest, cloneToHexfileFromPrimFile)
+{
+  std::string testFile(TestSupport::GetInstance()->GetTestFilesDir());
+  std::string bmpFile("bmp/test16_1.bmp");
+  testFile += "/" + bmpFile;
+  auto dataPtr = TestSupport::GetInstance()->GetDataFromTestFilesDir(bmpFile);
+  std::vector<unsigned char> data(dataPtr->begin(), dataPtr->end());
+  this->file1.SetFileData(testFile, data);
+
+  std::shared_ptr<analyzer::core::File> file(this->file1.CloneToHexFile());
+
+  bool isHex = false;
+  if (dynamic_cast<analyzer::interpreter::HEXInterpreter*>(file->GetInterpreter().get())) {
+    isHex = true;
+  }
+  ASSERT_TRUE(isHex);
+  ASSERT_EQ(dataPtr->size(), file->GetSize());
+}
+
+TEST_F(FileTest, cloneToHexfileFromInternalFile)
+{
+  std::shared_ptr<analyzer::core::File> file(this->intFile->CloneToHexFile());
+
+  bool isHex = false;
+  if (dynamic_cast<analyzer::interpreter::HEXInterpreter*>(file->GetInterpreter().get())) {
+    isHex = true;
+  }
+  ASSERT_TRUE(isHex);
+  ASSERT_EQ(this->internalDataOffset, file->GetSize());
+}
 #endif

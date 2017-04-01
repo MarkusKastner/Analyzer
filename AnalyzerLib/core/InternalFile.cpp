@@ -12,13 +12,13 @@
 namespace analyzer {
   namespace core {
     InternalFile::InternalFile()
-      : File(), data(new std::vector<unsigned char>()), emptyText("No data available.")
+      : File(), data(new std::vector<unsigned char>()), emptyText("No data available."), indexBegin(0), offset(0)
     {
 
     }
 
     InternalFile::InternalFile(const std::string & fileName, const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset)
-      : File(fileName), emptyText("No data available.")
+      : File(fileName), emptyText("No data available."), indexBegin(indexBegin), offset(offset)
     {
       this->setDirectoryNames(fileName, "/");
       this->data = data;
@@ -36,6 +36,8 @@ namespace analyzer {
 
     void InternalFile::SetFileData(const std::string & fileName, const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset)
     {
+      this->indexBegin = indexBegin;
+      this->offset = offset;
       this->setFileName(fileName);
       this->data = data;
       this->setDirectoryNames(fileName, "/");
@@ -54,12 +56,19 @@ namespace analyzer {
 
     size_t InternalFile::GetSize()
     {
-      return this->data.get()->size();
+      return this->offset;
     }
 
     const std::shared_ptr<std::vector<unsigned char>> & InternalFile::GetData()
     {
       return this->data;
+    }
+
+    std::shared_ptr<std::vector<unsigned char>> InternalFile::cloneData()
+    {
+      std::vector<unsigned char>::const_iterator first = this->data->begin() + this->indexBegin;
+      std::vector<unsigned char>::const_iterator last = this->data->begin() + (this->indexBegin + this->offset);
+      return std::shared_ptr<std::vector<unsigned char>>(new std::vector<unsigned char>(first, last));
     }
   }
 }

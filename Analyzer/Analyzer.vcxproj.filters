@@ -149,6 +149,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_HexBrowser.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="display\maindisplay\HexTableWidget.cpp">
+      <Filter>display\maindisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_HexTableWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_HexTableWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -208,6 +217,9 @@
       <Filter>display\pdf</Filter>
     </CustomBuild>
     <CustomBuild Include="display\maindisplay\HexBrowser.h">
+      <Filter>display\maindisplay</Filter>
+    </CustomBuild>
+    <CustomBuild Include="display\maindisplay\HexTableWidget.h">
       <Filter>display\maindisplay</Filter>
     </CustomBuild>
   </ItemGroup>

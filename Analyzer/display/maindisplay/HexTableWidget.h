@@ -4,12 +4,11 @@
 * Written by Markus Kastner <markus.kastner@marscode.at>
 */
 
-#ifndef HEXBROWSER_H
-#define HEXBROWSER_H
+#ifndef HEXTABLEWIDGET_H
+#define HEXTABLEWIDGET_H
 
 #include "ViewOutput.h"
-#include <QWidget>
-#include <QLineEdit>
+#include <QTableWidget>
 
 #include <vector>
 #include <string>
@@ -26,33 +25,27 @@ namespace analyzer {
   }
   namespace gui {
     namespace display {
-      class HexTableWidget;
-      class HexBrowser : public QWidget, public ViewOutput
+      class HexBrowser;
+      class HexTableWidget : public QTableWidget, public ViewOutput
       {
         Q_OBJECT
       public:
-        HexBrowser(QWidget * parent = 0);
-        virtual ~HexBrowser();
+        HexTableWidget(HexBrowser * parent);
+        virtual ~HexTableWidget();
 
         virtual void SetFile(core::File * file);
         virtual void ClearFile();
 
         void AddHexRow(const std::vector<std::string> & hexExp);
 
-        void SetIntegerValue(const int & integerValue);
-        void SetDoubleValue(const double & doubleValue);
-
-      signals:
-        void SetBinaryOutput(const std::vector<unsigned char> & data);
-
       private:
-        HexTableWidget * tableWidget;
-        QLineEdit * intLineEdit;
-        QLineEdit * floatLineEdit;
-
         core::File * file;
+        HexBrowser * browser;
 
+        void onSelection();
         void setup();
+        void setDetailOutput(const std::vector<unsigned char> & bytes);
+        interpreter::HEXInterpreter * getInterpreter();
       };
     }
   }

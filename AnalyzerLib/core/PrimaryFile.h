@@ -24,11 +24,15 @@ namespace analyzer {
       virtual ~PrimaryFile();
 
       void SetFileData(const std::string & fileName, const std::vector<unsigned char> & data);
-      
+      void CreateHexFile(const std::string & fileName, const std::shared_ptr<std::vector<unsigned char>> & data);
+
       virtual bool IsLoaded();
       virtual size_t GetSize();
 
       const std::shared_ptr<std::vector<unsigned char>> & GetData();
+
+    protected:
+      virtual std::shared_ptr<std::vector<unsigned char>> cloneData();
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;

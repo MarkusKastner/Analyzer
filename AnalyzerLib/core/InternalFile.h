@@ -30,9 +30,14 @@ namespace analyzer {
 
       const std::shared_ptr<std::vector<unsigned char>> & GetData();
 
+    protected:
+      virtual std::shared_ptr<std::vector<unsigned char>> cloneData();
+
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string emptyText;
+      size_t indexBegin;
+      size_t offset;
     };
   }
 }

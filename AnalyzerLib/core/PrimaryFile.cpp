@@ -14,7 +14,6 @@ namespace analyzer {
     PrimaryFile::PrimaryFile()
       : File(), data(new std::vector<unsigned char>()), emptyText("No data available.")
     {
-
     }
 
     PrimaryFile::PrimaryFile(const std::string & fileName, const std::vector<unsigned char> & data)
@@ -41,6 +40,14 @@ namespace analyzer {
       this->setInterpreter(analyzer::interpreter::InterpreterFactory::GetInstance()->CreateInterpreter(this->data));
     }
 
+    void PrimaryFile::CreateHexFile(const std::string & fileName, const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      this->setFileName(fileName);
+      this->data = data;
+      this->setDirectoryNames(fileName, "/");
+      this->setInterpreter(analyzer::interpreter::InterpreterFactory::GetInstance()->CreateHexInterpreter(this->data));
+    }
+
     bool PrimaryFile::IsLoaded()
     {
       if (this->data.get()->size() > 0 && !this->GetFileName().empty()) {
@@ -59,6 +66,11 @@ namespace analyzer {
     const std::shared_ptr<std::vector<unsigned char>> & PrimaryFile::GetData()
     {
       return this->data;
+    }
+
+    std::shared_ptr<std::vector<unsigned char>> PrimaryFile::cloneData()
+    {
+      return std::shared_ptr<std::vector<unsigned char>>(new std::vector<unsigned char>(*this->data.get()));
     }
   }
 }

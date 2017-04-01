@@ -30,11 +30,16 @@ namespace analyzer {
       ViewTab * GetViewTab();
       QTextEdit * GetResultTextEdit();
 
+      ViewTab * AddHexTab();
+      void ClearHexTab();
+
     private:
       ViewTab * viewTab;
       AnalyzeResultTab * resultTab;
+      ViewTab * hexTab;
 
       void setup();
+      void onCloseTab(const int & index);
     };
   }
 }
