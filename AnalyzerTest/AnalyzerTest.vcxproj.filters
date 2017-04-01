@@ -34,15 +34,6 @@
     <Filter Include="core\zip">
       <UniqueIdentifier>{49ef9502-6de8-4790-80f2-17f253a06fc5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="definitions">
-      <UniqueIdentifier>{070114b9-5ab0-4d94-80b5-56cf4cb0473f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="strategy">
-      <UniqueIdentifier>{cc5c7263-6500-48ab-87dd-2f822e3c82c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="strategy\xml">
-      <UniqueIdentifier>{36b4912a-4fa6-48c9-971e-ec621a92def1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interpreter\formatter">
       <UniqueIdentifier>{164c8c15-f0ca-4a07-939d-2e61254a840c}</UniqueIdentifier>
     </Filter>
