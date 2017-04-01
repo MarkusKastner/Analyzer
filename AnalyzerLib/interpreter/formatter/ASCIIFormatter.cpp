@@ -1,8 +1,16 @@
+/* Copyright (C) 2016-2017 - All Rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* Proprietary and confidential
+* Written by Markus Kastner <markus.kastner@marscode.at>
+*/
+
 #include "ASCIIFormatter.h"
 
 #include <bitset>
 #include <sstream>
 #include <iomanip>
+
+#include "AnalyzerLib\interpreter\formatter\ASCIITable.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -97,7 +105,7 @@ namespace analyzer {
     {
       std::stringstream ss;
       for (int i = 0; i < bytes.size(); ++i) {
-        ss << bytes[i];
+        ss << ASCIITable::Byte2ASCIIExp(bytes[i]);
         ss << ' ';
       }
       std::string ret(ss.str());

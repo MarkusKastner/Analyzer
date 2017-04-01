@@ -97,7 +97,8 @@ namespace analyzer {
 
       for (auto& index : indexes) {
         if (index < this->getIndexBegin() + offset) {
-          bytes.push_back(this->data->at(this->getIndexBegin() + index));
+          size_t resIndex = this->getIndexBegin() + index;
+          bytes.push_back(this->data->at(resIndex));
         }
       }
       return bytes;

@@ -170,20 +170,9 @@
     <ClCompile Include="core\TypeAnalyzer.cpp" />
     <ClCompile Include="core\zip\miniz.c" />
     <ClCompile Include="core\zip\ZIPContainer.cpp" />
-    <ClCompile Include="definitions\Definition.cpp" />
-    <ClCompile Include="definitions\DefinitionDB.cpp" />
-    <ClCompile Include="definitions\DefinitionSource.cpp" />
-    <ClCompile Include="definitions\DefinitionVault.cpp" />
-    <ClCompile Include="definitions\LocalDefinition.cpp" />
-    <ClCompile Include="definitions\TextDefinition.cpp" />
     <ClCompile Include="interpreter\ASCIIInterpreter.cpp" />
     <ClCompile Include="interpreter\BMPInterpreter.cpp" />
     <ClCompile Include="interpreter\formatter\ASCIIFormatter.cpp" />
-    <ClCompile Include="interpreter\formatter\BitFormatter.cpp" />
-    <ClCompile Include="interpreter\formatter\Formatter.cpp" />
-    <ClCompile Include="interpreter\formatter\HexFormatter.cpp" />
-    <ClCompile Include="interpreter\formatter\SimpleTextFormatter.cpp" />
-    <ClCompile Include="interpreter\formatter\XMLFormatter.cpp" />
     <ClCompile Include="interpreter\HEXInterpreter.cpp" />
     <ClCompile Include="interpreter\HTML\Document.cpp" />
     <ClCompile Include="interpreter\Interpreter.cpp" />
@@ -193,9 +182,6 @@
     <ClCompile Include="interpreter\XMLInterpreter.cpp" />
     <ClCompile Include="network\CrossSock.cpp" />
     <ClCompile Include="service\Update.cpp" />
-    <ClCompile Include="strategy\AnalyzingStrategy.cpp" />
-    <ClCompile Include="strategy\Result.cpp" />
-    <ClCompile Include="strategy\xml\XMLStrategy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\AnalyzerBase.h" />
@@ -212,21 +198,11 @@
     <ClInclude Include="core\PrimaryFile.h" />
     <ClInclude Include="core\TypeAnalyzer.h" />
     <ClInclude Include="core\zip\ZIPContainer.h" />
-    <ClInclude Include="definitions\Definition.h" />
-    <ClInclude Include="definitions\DefinitionDB.h" />
-    <ClInclude Include="definitions\DefinitionSource.h" />
-    <ClInclude Include="definitions\DefinitionVault.h" />
-    <ClInclude Include="definitions\LocalDefinition.h" />
-    <ClInclude Include="definitions\TextDefinition.h" />
     <ClInclude Include="interpreter\ASCIIInterpreter.h" />
     <ClInclude Include="interpreter\BMPInterpreter.h" />
     <ClInclude Include="interpreter\error\InterpreterException.h" />
     <ClInclude Include="interpreter\formatter\ASCIIFormatter.h" />
-    <ClInclude Include="interpreter\formatter\BitFormatter.h" />
-    <ClInclude Include="interpreter\formatter\Formatter.h" />
-    <ClInclude Include="interpreter\formatter\HexFormatter.h" />
-    <ClInclude Include="interpreter\formatter\SimpleTextFormatter.h" />
-    <ClInclude Include="interpreter\formatter\XMLFormatter.h" />
+    <ClInclude Include="interpreter\formatter\ASCIITable.h" />
     <ClInclude Include="interpreter\HEXInterpreter.h" />
     <ClInclude Include="interpreter\HTML\BodyElement.h" />
     <ClInclude Include="interpreter\HTML\Document.h" />
@@ -241,9 +217,6 @@
     <ClInclude Include="interpreter\XMLInterpreter.h" />
     <ClInclude Include="network\CrossSock.h" />
     <ClInclude Include="service\Update.h" />
-    <ClInclude Include="strategy\AnalyzingStrategy.h" />
-    <ClInclude Include="strategy\Result.h" />
-    <ClInclude Include="strategy\xml\XMLStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

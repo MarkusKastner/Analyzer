@@ -75,50 +75,8 @@
     <ClCompile Include="..\AnalyzerLib\core\File.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\definitions\DefinitionDB.cpp">
-      <Filter>definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\definitions\DefinitionSource.cpp">
-      <Filter>definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\definitions\DefinitionVault.cpp">
-      <Filter>definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\definitions\LocalDefinition.cpp">
-      <Filter>definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\definitions\Definition.cpp">
-      <Filter>definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\definitions\TextDefinition.cpp">
-      <Filter>definitions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\strategy\AnalyzingStrategy.cpp">
-      <Filter>strategy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\strategy\Result.cpp">
-      <Filter>strategy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\strategy\xml\XMLStrategy.cpp">
-      <Filter>strategy\xml</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\Formatter.cpp">
-      <Filter>Interpreter\formatter</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.cpp">
-      <Filter>Interpreter\formatter</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.cpp">
-      <Filter>Interpreter\formatter</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\BitFormatter.cpp">
-      <Filter>Interpreter\formatter</Filter>
-    </ClCompile>
     <ClCompile Include="TestSupport.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.cpp">
-      <Filter>Interpreter\formatter</Filter>
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\service\Update.cpp">
       <Filter>service</Filter>
@@ -200,95 +158,11 @@
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h">
       <Filter>base\error</Filter>
     </ClInclude>
-    <ClInclude Include="definitions\DefinitionDBTest.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="definitions\DefinitionSourceTest.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="definitions\DefinitionVaultTest.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="definitions\LocalDefinitionTest.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\definitions\DefinitionDB.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\definitions\DefinitionSource.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\definitions\DefinitionVault.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\definitions\LocalDefinition.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\definitions\Definition.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="definitions\DefinitionTest.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="definitions\TextDefinitionTest.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\definitions\TextDefinition.h">
-      <Filter>definitions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\strategy\AnalyzingStrategy.h">
-      <Filter>strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="strategy\AnalyzingStrategyTest.h">
-      <Filter>strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="strategy\ResultTest.h">
-      <Filter>strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\strategy\Result.h">
-      <Filter>strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="strategy\xml\XMLStrategyTest.h">
-      <Filter>strategy\xml</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\strategy\xml\XMLStrategy.h">
-      <Filter>strategy\xml</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\Formatter.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\formatter\FormatterTest.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\formatter\XMLFormatterTest.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\XMLFormatter.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
     <ClInclude Include="..\AnalyzerLib\base\BaseData.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="interpreter\formatter\SimpleTextFormatterTest.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\SimpleTextFormatter.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\BitFormatter.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\formatter\BitFormatterTest.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
     <ClInclude Include="TestSupport.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="interpreter\formatter\HexFormatterTest.h">
-      <Filter>Interpreter\formatter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AnalyzerLib\interpreter\formatter\HexFormatter.h">
-      <Filter>Interpreter\formatter</Filter>
     </ClInclude>
     <ClInclude Include="service\UpdateTest.h">
       <Filter>service</Filter>

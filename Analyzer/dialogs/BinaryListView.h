@@ -21,7 +21,7 @@ namespace analyzer {
       {
       public:
         explicit Item(const std::string & text)
-          :QStandardItem(text.c_str()), text(text)
+          :QStandardItem(QString::fromLatin1(text.c_str())), text(text)
         {
           this->setup();
         }

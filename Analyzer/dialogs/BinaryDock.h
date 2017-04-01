@@ -54,6 +54,10 @@ namespace analyzer {
       void AddLine(const std::string & ascii);
       void Clear();
 
+      void SetBinaryOutputFromString(const QString & binary);
+
+      void SetBinaryOutputFromBytes(const std::vector<unsigned char>& data);
+
     protected:
       void customEvent(QEvent * evt);
 

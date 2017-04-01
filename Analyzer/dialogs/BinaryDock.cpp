@@ -10,6 +10,8 @@
 #include <QVBoxLayout>
 #include <QApplication>
 
+#include "AnalyzerLib\interpreter\formatter\ASCIIFormatter.h"
+
 namespace analyzer {
   namespace gui {
     BinaryDock::BinaryDock(QWidget *parent, Qt::WindowFlags flags)
@@ -35,6 +37,43 @@ namespace analyzer {
     void BinaryDock::Clear()
     {
       QApplication::postEvent(this, new ClearEvent());
+    }
+
+    void BinaryDock::SetBinaryOutputFromString(const QString & binary)
+    {
+      std::vector<std::string> lines = interpreter::ASCIIFormatter::Split(binary.toStdString(), 4);
+      for (auto& line : lines) {
+        this->AddLine(interpreter::ASCIIFormatter::Text2HexExpression(line),
+          interpreter::ASCIIFormatter::Text2BinaryExpression(line),
+          line,
+          interpreter::ASCIIFormatter::Text2NumericalExpression(line));
+      }
+    }
+
+    void BinaryDock::SetBinaryOutputFromBytes(const std::vector<unsigned char> & data)
+    {
+      std::vector<std::vector<unsigned char>> lines;
+      int counter = 0;
+      std::vector<unsigned char> byteLine;
+      for (auto& byte : data) {
+        byteLine.push_back(byte);
+        counter++;
+        if (counter == 4) {
+          counter = 0;
+          lines.push_back(byteLine);
+          byteLine.clear();
+        }
+      }
+      if (!byteLine.empty()) {
+        lines.push_back(byteLine);
+      }
+
+      for (auto& line : lines) {
+        this->AddLine(interpreter::ASCIIFormatter::Bytes2HexExpression(line),
+          interpreter::ASCIIFormatter::Bytes2BinaryExpression(line),
+          interpreter::ASCIIFormatter::Bytes2ASCIIExpression(line),
+          interpreter::ASCIIFormatter::Bytes2NumericalExpression(line));
+      }
     }
 
     void BinaryDock::setup()

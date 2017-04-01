@@ -12,6 +12,9 @@
 #include <iomanip>
 
 #include <QHeaderView>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QAbstractButton>
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\HEXInterpreter.h"
@@ -47,18 +50,16 @@ namespace analyzer {
         int numRows = this->rowCount();
         int offset = numRows * 16;
         std::stringstream stream;
-        //stream.setf(std::ios::hex);
         stream << std::setfill('0') << std::setw(10) << std::hex << offset;
         std::string hexStr(stream.str());
         QString offsetStr(stream.str().c_str());
         this->insertRow(numRows);
 
-        this->setItem(numRows, 0, new QTableWidgetItem(offsetStr));
-        this->item(numRows, 0)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
+        this->setVerticalHeaderItem(numRows, new QTableWidgetItem(offsetStr));
 
         for (size_t i = 0; i < hexExp.size(); i++) {
-          this->setItem(numRows, i + 1, new QTableWidgetItem(hexExp[i].c_str()));
-          this->item(numRows, i + 1)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
+          this->setItem(numRows, i, new QTableWidgetItem(hexExp[i].c_str()));
+          this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
         }
 
       }
@@ -71,7 +72,7 @@ namespace analyzer {
         for (auto& item : items) {
           int col = item->column();
           int row = item->row();
-          size_t index = col-1 + (row*16);
+          size_t index = col + (row*16);
           indexes.push_back(index);
         }
         auto bytes(this->getInterpreter()->GetBytesByIndex(indexes));
@@ -82,20 +83,19 @@ namespace analyzer {
       void HexTableWidget::setup()
       {
         QStringList horizontal;
-        horizontal.push_back("offset [h]");
-        this->insertColumn(0);
         for (int i = 0; i < 16; i++) {
           std::stringstream stream;
           stream << std::setw(2) << std::setfill('0') << std::hex << +i;
           horizontal.push_back(QString(stream.str().c_str()));
-          this->insertColumn(i + 1);
-          this->setColumnWidth(i + 1, 25);
+          this->insertColumn(i);
+          this->setColumnWidth(i, 25);
         }
 
         this->setHorizontalHeaderLabels(horizontal);
         this->horizontalHeader()->show();
-        this->verticalHeader()->hide();
+        this->verticalHeader()->show();
         connect(this, &HexTableWidget::itemSelectionChanged, this, &HexTableWidget::onSelection);
+
       }
 
       void HexTableWidget::setDetailOutput(const std::vector<unsigned char>& bytes)
