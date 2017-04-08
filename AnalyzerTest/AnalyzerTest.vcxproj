@@ -161,6 +161,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
+    <ClCompile Include="..\AnalyzerLib\cast\Cast.cpp" />
+    <ClCompile Include="..\AnalyzerLib\cast\CastFactory.cpp" />
+    <ClCompile Include="..\AnalyzerLib\cast\CastPool.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\InternalFile.cpp" />
@@ -188,6 +191,10 @@
     <ClInclude Include="..\AnalyzerLib\base\BaseData.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
+    <ClInclude Include="..\AnalyzerLib\cast\Cast.h" />
+    <ClInclude Include="..\AnalyzerLib\cast\CastFactory.h" />
+    <ClInclude Include="..\AnalyzerLib\cast\CastPool.h" />
+    <ClInclude Include="..\AnalyzerLib\cast\EmptyCast.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
     <ClInclude Include="..\AnalyzerLib\core\FileObserver.h" />
@@ -213,6 +220,8 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\service\Update.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />
+    <ClInclude Include="cast\CastFactoryTest.h" />
+    <ClInclude Include="cast\CastPoolTest.h" />
     <ClInclude Include="core\FileTest.h" />
     <ClInclude Include="core\TypeAnalyzerTest.h" />
     <ClInclude Include="core\zip\ZIPContainerTest.h" />

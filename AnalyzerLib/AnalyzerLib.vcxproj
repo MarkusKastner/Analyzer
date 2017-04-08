@@ -163,6 +163,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\AnalyzerBase.cpp" />
+    <ClCompile Include="cast\Cast.cpp" />
+    <ClCompile Include="cast\CastFactory.cpp" />
+    <ClCompile Include="cast\CastPool.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
     <ClCompile Include="core\InternalFile.cpp" />
@@ -189,6 +192,10 @@
     <ClInclude Include="base\BaseData.h" />
     <ClInclude Include="base\error\AnalyzerBaseException.h" />
     <ClInclude Include="base\error\DBException.h" />
+    <ClInclude Include="cast\Cast.h" />
+    <ClInclude Include="cast\CastFactory.h" />
+    <ClInclude Include="cast\CastPool.h" />
+    <ClInclude Include="cast\EmptyCast.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />

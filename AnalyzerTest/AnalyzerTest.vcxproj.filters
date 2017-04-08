@@ -46,6 +46,9 @@
     <Filter Include="Interpreter\pdf">
       <UniqueIdentifier>{667ca203-4654-490a-a8ac-e95b5e3743d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cast">
+      <UniqueIdentifier>{cf83cac0-1552-4654-bb77-67bbf2c5bd4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,15 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\interpreter\HEXInterpreter.cpp">
       <Filter>Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\cast\CastPool.cpp">
+      <Filter>cast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\cast\CastFactory.cpp">
+      <Filter>cast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\cast\Cast.cpp">
+      <Filter>cast</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +253,24 @@
     </ClInclude>
     <ClInclude Include="interpreter\HEXInterpreterTest.h">
       <Filter>Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\CastPoolTest.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\cast\CastPool.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\cast\Cast.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\cast\CastFactory.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\CastFactoryTest.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\cast\EmptyCast.h">
+      <Filter>cast</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

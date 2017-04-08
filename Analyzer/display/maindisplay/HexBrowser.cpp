@@ -14,8 +14,8 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
-#include <QTableWidget>
 #include <QTableWidgetItem>
+#include <QTableWidget>
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\HEXInterpreter.h"
@@ -27,7 +27,7 @@ namespace analyzer {
       HexBrowser::HexBrowser(QWidget * parent)
         :QWidget(parent), tableWidget(nullptr), castTable(nullptr), 
         integerCast(new QTableWidgetItem()), doubleCast(new QTableWidgetItem()),
-        wideCharacter(new QTableWidgetItem())
+        wideCharacter(new QTableWidgetItem()), rgb(new RGBWidget())
       {
         this->setup();
       }
@@ -65,6 +65,11 @@ namespace analyzer {
         this->wideCharacter->setText(QString::fromWCharArray(&wideCharacter, 1));
       }
 
+      void HexBrowser::SetRGB(const char & r, const char & g, const char & b)
+      {
+        this->rgb->SetValues(r, g, b);
+      }
+
       void HexBrowser::setup()
       {
         this->setLayout(new QHBoxLayout());
@@ -97,12 +102,14 @@ namespace analyzer {
         verticalHeaderList.push_back("Integer");
         verticalHeaderList.push_back("Floating point");
         verticalHeaderList.push_back("Wide character");
+        verticalHeaderList.push_back("RGB");
 
         this->castTable = new QTableWidget(this);
         this->castTable->insertColumn(0);
         this->castTable->insertRow(0);
         this->castTable->insertRow(1);
         this->castTable->insertRow(2);
+        this->castTable->insertRow(3);
 
         this->castTable->setHorizontalHeaderLabels(horizontalHeaderList);
         this->castTable->setVerticalHeaderLabels(verticalHeaderList);
@@ -114,6 +121,7 @@ namespace analyzer {
         this->castTable->setItem(0, 0, this->integerCast);
         this->castTable->setItem(1, 0, this->doubleCast);
         this->castTable->setItem(2, 0, this->wideCharacter);
+        this->castTable->setCellWidget(3, 0, this->rgb);
 
         this->castTable->verticalHeader()->show();
         this->castTable->horizontalHeader()->show();

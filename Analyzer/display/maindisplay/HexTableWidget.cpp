@@ -111,6 +111,10 @@ namespace analyzer {
             buffer[1] = bytes[1];
             int16_t * value = reinterpret_cast<int16_t*>(&buffer);
             this->browser->SetIntegerValue(*value);
+
+            float * fVal = reinterpret_cast<float*>(&buffer);
+            this->browser->SetDoubleValue(*fVal);
+
             return;
           }
           else if (bytes.size() == 3) {
@@ -118,13 +122,26 @@ namespace analyzer {
             buffer[0] = bytes[0];
             buffer[1] = bytes[1];
             buffer[2] = bytes[2];
-            int32_t * value = reinterpret_cast<int32_t*>(&buffer);
-            this->browser->SetIntegerValue(static_cast<long long>(*value));
+            int32_t * intVal = reinterpret_cast<int32_t*>(&buffer);
+            this->browser->SetIntegerValue(static_cast<long long>(*intVal));
+
+            double * dVal = reinterpret_cast<double*>(&buffer);
+            this->browser->SetDoubleValue(*dVal);
+            this->browser->SetRGB(bytes[0], bytes[1], bytes[2]);
             return;
           }
           else if (bytes.size() == 4) {
-            short value = reinterpret_cast<int32_t>(&bytes[0]);
-            this->browser->SetIntegerValue(static_cast<long long>(value));
+            char buffer[4];
+            buffer[0] = bytes[0];
+            buffer[1] = bytes[1];
+            buffer[2] = bytes[2];
+            buffer[3] = bytes[3];
+            int32_t * intVal = reinterpret_cast<int32_t*>(&buffer);
+            this->browser->SetIntegerValue(static_cast<long long>(*intVal));
+
+            double * dVal = reinterpret_cast<double*>(&buffer);
+            this->browser->SetDoubleValue(*dVal);
+
             return;
           }
         }

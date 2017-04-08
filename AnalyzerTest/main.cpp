@@ -23,6 +23,8 @@
 #include "interpreter/formatter/ASCIIFormatterTest.h"
 #include "interpreter/pdf/PDFInterpreterTest.h"
 #include "interpreter/HEXInterpreterTest.h"
+#include "cast/CastPoolTest.h"
+#include "cast/CastFactoryTest.h"
 
 int main(int argc, char** argv) {
 

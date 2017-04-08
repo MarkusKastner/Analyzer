@@ -38,6 +38,9 @@
     <Filter Include="interpreter\pdf">
       <UniqueIdentifier>{20063553-ec95-4d7e-a720-6ccf5be0d5c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cast">
+      <UniqueIdentifier>{a5ab61a3-9223-401b-9c10-f91af7185c63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -96,6 +99,15 @@
     </ClCompile>
     <ClCompile Include="interpreter\HEXInterpreter.cpp">
       <Filter>interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="cast\CastPool.cpp">
+      <Filter>cast</Filter>
+    </ClCompile>
+    <ClCompile Include="cast\Cast.cpp">
+      <Filter>cast</Filter>
+    </ClCompile>
+    <ClCompile Include="cast\CastFactory.cpp">
+      <Filter>cast</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +206,18 @@
     </ClInclude>
     <ClInclude Include="interpreter\formatter\ASCIITable.h">
       <Filter>interpreter\formatter</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\CastPool.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\Cast.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\CastFactory.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\EmptyCast.h">
+      <Filter>cast</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
