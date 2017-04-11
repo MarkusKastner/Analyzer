@@ -17,12 +17,12 @@ namespace analyzer {
     public:
       virtual ~CastFactory();
 
-      static std::shared_ptr<Cast> CreateCast(const std::vector<unsigned char> & data);
+      static std::shared_ptr<Cast> CreateCast(const std::shared_ptr<std::vector<unsigned char>> & data);
 
     private:
       static CastFactory * instance;
 
-      std::shared_ptr<Cast> createCast(const std::vector<unsigned char> & data);
+      std::shared_ptr<Cast> createCast(const std::shared_ptr<std::vector<unsigned char>> & data);
 
     };
   }

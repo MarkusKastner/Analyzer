@@ -164,6 +164,7 @@
     <ClCompile Include="..\AnalyzerLib\cast\Cast.cpp" />
     <ClCompile Include="..\AnalyzerLib\cast\CastFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\cast\CastPool.cpp" />
+    <ClCompile Include="..\AnalyzerLib\cast\SingleByteCast.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\InternalFile.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="..\AnalyzerLib\cast\CastFactory.h" />
     <ClInclude Include="..\AnalyzerLib\cast\CastPool.h" />
     <ClInclude Include="..\AnalyzerLib\cast\EmptyCast.h" />
+    <ClInclude Include="..\AnalyzerLib\cast\SingleByteCast.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
     <ClInclude Include="..\AnalyzerLib\core\FileObserver.h" />

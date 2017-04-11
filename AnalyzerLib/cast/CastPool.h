@@ -17,13 +17,13 @@ namespace analyzer {
     public:
       virtual ~CastPool();
       
-      static std::shared_ptr<Cast> GetCaster(const std::vector<unsigned char> & data);
+      static std::shared_ptr<Cast> GetCaster(const std::shared_ptr<std::vector<unsigned char>> & data);
 
     private:
       static CastPool * instance;
       std::vector<std::shared_ptr<Cast>> casts;
 
-      std::shared_ptr<Cast> findOrCreateCast(const std::vector<unsigned char> & data);
+      std::shared_ptr<Cast> findOrCreateCast(const std::shared_ptr<std::vector<unsigned char>> & data);
     };
   }
 }

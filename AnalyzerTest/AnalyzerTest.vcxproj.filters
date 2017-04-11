@@ -123,6 +123,9 @@
     <ClCompile Include="..\AnalyzerLib\cast\Cast.cpp">
       <Filter>cast</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\cast\SingleByteCast.cpp">
+      <Filter>cast</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -270,6 +273,9 @@
       <Filter>cast</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\cast\EmptyCast.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\cast\SingleByteCast.h">
       <Filter>cast</Filter>
     </ClInclude>
   </ItemGroup>

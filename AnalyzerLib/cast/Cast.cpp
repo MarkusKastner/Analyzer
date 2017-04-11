@@ -7,16 +7,26 @@ namespace analyzer {
     {
     }
 
+    const std::shared_ptr<std::vector<unsigned char>>& Cast::getData() const
+    {
+      return this->data;
+    }
+
     Cast::~Cast()
     {
     }
 
-    size_t Cast::GetByteSize()
+    size_t Cast::GetDataSize()
     {
-      return this->data->size();
+      if (this->data) {
+        return this->data->size();
+      }
+      else {
+        return 0;
+      }
     }
 
-    void Cast::ResetData(const std::shared_ptr<std::vector<unsigned char>>& data)
+    void Cast::ResetData(const std::shared_ptr<std::vector<unsigned char>> & data)
     {
       if (this->data->size() != data->size()) {
         throw std::exception("Invalid data size for this cast");

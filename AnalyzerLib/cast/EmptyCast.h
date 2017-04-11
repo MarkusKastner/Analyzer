@@ -14,8 +14,6 @@ namespace analyzer {
     public:
       explicit EmptyCast() : Cast(std::shared_ptr<std::vector<unsigned char>>()) {}
       virtual ~EmptyCast() {}
-
-      size_t GetByteSize() { return 0; }
     };
   }
 }

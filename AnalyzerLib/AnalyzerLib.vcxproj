@@ -166,6 +166,7 @@
     <ClCompile Include="cast\Cast.cpp" />
     <ClCompile Include="cast\CastFactory.cpp" />
     <ClCompile Include="cast\CastPool.cpp" />
+    <ClCompile Include="cast\SingleByteCast.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
     <ClCompile Include="core\InternalFile.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="cast\CastFactory.h" />
     <ClInclude Include="cast\CastPool.h" />
     <ClInclude Include="cast\EmptyCast.h" />
+    <ClInclude Include="cast\SingleByteCast.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />

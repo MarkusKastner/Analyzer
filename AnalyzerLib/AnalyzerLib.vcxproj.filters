@@ -109,6 +109,9 @@
     <ClCompile Include="cast\CastFactory.cpp">
       <Filter>cast</Filter>
     </ClCompile>
+    <ClCompile Include="cast\SingleByteCast.cpp">
+      <Filter>cast</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -217,6 +220,9 @@
       <Filter>cast</Filter>
     </ClInclude>
     <ClInclude Include="cast\EmptyCast.h">
+      <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="cast\SingleByteCast.h">
       <Filter>cast</Filter>
     </ClInclude>
   </ItemGroup>

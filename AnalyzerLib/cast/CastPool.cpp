@@ -14,7 +14,7 @@ namespace analyzer{
     {
     }
 
-    std::shared_ptr<Cast> CastPool::GetCaster(const std::vector<unsigned char> & data)
+    std::shared_ptr<Cast> CastPool::GetCaster(const std::shared_ptr<std::vector<unsigned char>> & data)
     {
       if (CastPool::instance == nullptr) {
         CastPool::instance = new CastPool();
@@ -22,10 +22,10 @@ namespace analyzer{
       return CastPool::instance->findOrCreateCast(data);
     }
 
-    std::shared_ptr<Cast> CastPool::findOrCreateCast(const std::vector<unsigned char> & data)
+    std::shared_ptr<Cast> CastPool::findOrCreateCast(const std::shared_ptr<std::vector<unsigned char>> & data)
     {
       for (auto& cast : this->casts) {
-        if (cast->GetByteSize() == data.size()) {
+        if (cast->GetDataSize() == data->size()) {
           return cast;
         }
       }
