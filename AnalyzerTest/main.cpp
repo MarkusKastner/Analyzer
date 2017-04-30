@@ -25,6 +25,7 @@
 #include "interpreter/HEXInterpreterTest.h"
 #include "cast/CastPoolTest.h"
 #include "cast/CastFactoryTest.h"
+#include "interpreter/PE/PEInterpreterTest.h"
 
 int main(int argc, char** argv) {
 

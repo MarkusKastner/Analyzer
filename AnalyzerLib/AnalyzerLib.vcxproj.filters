@@ -41,6 +41,9 @@
     <Filter Include="cast">
       <UniqueIdentifier>{a5ab61a3-9223-401b-9c10-f91af7185c63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interpreter\PE">
+      <UniqueIdentifier>{9ba73064-479c-4289-9f38-acdb270b1790}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -111,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="cast\SingleByteCast.cpp">
       <Filter>cast</Filter>
+    </ClCompile>
+    <ClCompile Include="interpreter\PE\PEInterpreter.cpp">
+      <Filter>interpreter\PE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="cast\SingleByteCast.h">
       <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\PE\PEInterpreter.h">
+      <Filter>interpreter\PE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

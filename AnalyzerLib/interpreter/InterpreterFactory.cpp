@@ -12,6 +12,7 @@
 #include "BMPInterpreter.h"
 #include "pdf/PDFInterpreter.h"
 #include "HEXInterpreter.h"
+#include "PE/PEInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -48,6 +49,8 @@ namespace analyzer {
         return std::shared_ptr<Interpreter>(new BMPInterpreter(data));
       case core::FileFormat::pdf:
         return std::shared_ptr<Interpreter>(new PDFInterpreter(data));
+      case core::FileFormat::winExec:
+        return std::shared_ptr<Interpreter>(new PEInterpreter(data));
       default:
         return std::shared_ptr<Interpreter>(new HEXInterpreter(data));
       }
@@ -70,6 +73,8 @@ namespace analyzer {
         return std::shared_ptr<Interpreter>(new BMPInterpreter(data, indexBegin, offset));
       case core::FileFormat::pdf:
         return std::shared_ptr<Interpreter>(new PDFInterpreter(data, indexBegin, offset));
+      case core::FileFormat::winExec:
+        return std::shared_ptr<Interpreter>(new PEInterpreter(data, indexBegin, offset));
       default:
         return std::shared_ptr<Interpreter>(new HEXInterpreter(data, indexBegin, offset));
       }

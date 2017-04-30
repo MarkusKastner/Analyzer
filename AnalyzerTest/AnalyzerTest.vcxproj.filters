@@ -49,6 +49,9 @@
     <Filter Include="cast">
       <UniqueIdentifier>{cf83cac0-1552-4654-bb77-67bbf2c5bd4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interpreter\PE">
+      <UniqueIdentifier>{e59044a3-f519-410f-a5ae-71e01befb718}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\cast\SingleByteCast.cpp">
       <Filter>cast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\interpreter\PE\PEInterpreter.cpp">
+      <Filter>Interpreter\PE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\cast\SingleByteCast.h">
       <Filter>cast</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\PE\PEInterpreterTest.h">
+      <Filter>Interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\PEInterpreter.h">
+      <Filter>Interpreter\PE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

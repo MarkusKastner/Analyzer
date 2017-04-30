@@ -123,13 +123,10 @@ namespace analyzer {
     void BMPInterpreter::createHTMLDoc()
     {
       this->htmlDoc.AddHeading(HTML::Heading("Windows Bitmap", 1));
-      this->htmlDoc.AddLineFeed();
       this->htmlDoc.AddHeading(HTML::Heading("File Header", 2));
-      this->htmlDoc.AddLineFeed();
       this->htmlDoc.AddTable(this->createFileHeaderTable());
       this->htmlDoc.AddLineFeed();
       this->htmlDoc.AddHeading(HTML::Heading("Info Header", 2));
-      this->htmlDoc.AddLineFeed();
       this->htmlDoc.AddTable(this->createInfoHeaderTable());
       this->htmlDoc.AddLineFeed();
     }
