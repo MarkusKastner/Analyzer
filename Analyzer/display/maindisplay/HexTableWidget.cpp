@@ -45,7 +45,7 @@ namespace analyzer {
       {
       }
 
-      void HexTableWidget::AddHexRow(const std::vector<std::string> & hexExp)
+      void HexTableWidget::AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp)
       {
         int numRows = this->rowCount();
         int offset = numRows * 16;
@@ -56,12 +56,14 @@ namespace analyzer {
         this->insertRow(numRows);
 
         this->setVerticalHeaderItem(numRows, new QTableWidgetItem(offsetStr));
-
-        for (size_t i = 0; i < hexExp.size(); i++) {
-          this->setItem(numRows, i, new QTableWidgetItem(hexExp[i].c_str()));
+        size_t i = 0;
+        for (; i < hexExp.HexValues.size(); i++) {
+          this->setItem(numRows, i, new QTableWidgetItem(hexExp.HexValues[i].c_str()));
           this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
         }
 
+        this->setItem(numRows, i, new QTableWidgetItem(QString::fromLatin1(hexExp.ASCII.c_str())));
+        this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
       }
 
       void HexTableWidget::onSelection()
@@ -83,13 +85,17 @@ namespace analyzer {
       void HexTableWidget::setup()
       {
         QStringList horizontal;
-        for (int i = 0; i < 16; i++) {
+        int i = 0;
+        for (; i < 16; i++) {
           std::stringstream stream;
           stream << std::setw(2) << std::setfill('0') << std::hex << +i;
           horizontal.push_back(QString(stream.str().c_str()));
           this->insertColumn(i);
           this->setColumnWidth(i, 25);
         }
+        horizontal.push_back("ASCII");
+        this->insertColumn(i);
+        this->setColumnWidth(i, 50);
 
         this->setHorizontalHeaderLabels(horizontal);
         this->horizontalHeader()->show();

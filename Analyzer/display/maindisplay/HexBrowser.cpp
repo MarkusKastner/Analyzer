@@ -45,7 +45,7 @@ namespace analyzer {
       {
       }
 
-      void HexBrowser::AddHexRow(const std::vector<std::string> & hexExp)
+      void HexBrowser::AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp)
       {
         this->tableWidget->AddHexRow(hexExp);
       }

@@ -5,6 +5,7 @@
 */
 
 #include "AnalyzerLib/interpreter/HEXInterpreter.h"
+#include "AnalyzerLib/interpreter/formatter/ASCIITable.h"
 
 #include <sstream>
 #include <bitset>
@@ -65,22 +66,25 @@ namespace analyzer {
       return true;
     }
 
-    const std::vector<std::string> & HEXInterpreter::GetHexExpressions()
+    const std::vector<std::pair<std::string, char>> & HEXInterpreter::GetHexExpressions()
     {
       return this->hex;
     }
 
-    std::vector<std::vector<std::string>> HEXInterpreter::GetHexRows()
+    std::vector<HEXInterpreter::HexRow> HEXInterpreter::GetHexRows()
     {
-      std::vector<std::vector<std::string>> rows;
-      std::vector<std::string> row;
+      std::vector<HEXInterpreter::HexRow> rows;
+      HEXInterpreter::HexRow row;
+
       int counter = 0;
       for (auto& hexExp : this->hex) {
-        row.push_back(hexExp);
+        row.HexValues.push_back(hexExp.first);
+        row.ASCII += hexExp.second;
         counter++;
         if (counter == 16) {
           rows.push_back(row);
-          row.clear();
+          row.HexValues.clear();
+          row.ASCII.clear();
           counter = 0;
         }
       }
@@ -112,7 +116,7 @@ namespace analyzer {
       size_t offset = this->findOffset();
 
       for (size_t i = this->getIndexBegin(); i < this->getIndexBegin() + offset; ++i) {
-        this->hex.push_back(this->char2Hex(this->data.get()->at(i)));
+        this->hex.push_back({ this->char2Hex(this->data.get()->at(i)), ASCIITable::Byte2Printable(this->data.get()->at(i)) });
       }
     }
 

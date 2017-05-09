@@ -42,7 +42,7 @@ namespace analyzer {
         virtual void SetFile(core::File * file);
         virtual void ClearFile();
 
-        void AddHexRow(const std::vector<std::string> & hexExp);
+        void AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp);
 
         void SetIntegerValue(const int & integerValue);
         void SetDoubleValue(const double & doubleValue);

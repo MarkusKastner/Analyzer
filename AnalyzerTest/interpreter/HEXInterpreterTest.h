@@ -57,34 +57,34 @@ TEST_F(HEXInterpreterTest, initWithData)
 TEST_F(HEXInterpreterTest, getHex)
 {
   analyzer::interpreter::HEXInterpreter interpreter(this->data1);
-  std::vector<std::string> hex(interpreter.GetHexExpressions());
-  ASSERT_STREQ(hex[0].c_str(), "00");
-  ASSERT_STREQ(hex[255].c_str(), "ff");
+  std::vector<std::pair<std::string, char>> hex(interpreter.GetHexExpressions());
+  ASSERT_STREQ(hex[0].first.c_str(), "00");
+  ASSERT_STREQ(hex[255].first.c_str(), "ff");
 }
 
 TEST_F(HEXInterpreterTest, getHexAfterSetData)
 {
   analyzer::interpreter::HEXInterpreter interpreter;
   interpreter.SetData(this->data1);
-  std::vector<std::string> hex(interpreter.GetHexExpressions());
-  ASSERT_STREQ(hex[0].c_str(), "00");
-  ASSERT_STREQ(hex[255].c_str(), "ff");
+  std::vector<std::pair<std::string, char>> hex(interpreter.GetHexExpressions());
+  ASSERT_STREQ(hex[0].first.c_str(), "00");
+  ASSERT_STREQ(hex[255].first.c_str(), "ff");
 }
 
 TEST_F(HEXInterpreterTest, getHexWithLimits)
 {
   analyzer::interpreter::HEXInterpreter interpreter;
   interpreter.SetData(this->data2, 10, 256);
-  std::vector<std::string> hex(interpreter.GetHexExpressions());
-  ASSERT_STREQ(hex[0].c_str(), "00");
-  ASSERT_STREQ(hex[255].c_str(), "ff");
+  std::vector<std::pair<std::string, char>> hex(interpreter.GetHexExpressions());
+  ASSERT_STREQ(hex[0].first.c_str(), "00");
+  ASSERT_STREQ(hex[255].first.c_str(), "ff");
 }
 
 TEST_F(HEXInterpreterTest, getHexRows)
 {
   analyzer::interpreter::HEXInterpreter interpreter;
   interpreter.SetData(this->data1);
-  std::vector<std::vector<std::string>> hex(interpreter.GetHexRows());
+  std::vector<analyzer::interpreter::HEXInterpreter::HexRow> hex(interpreter.GetHexRows());
   ASSERT_EQ(hex.size(), 16);
 }
 

@@ -15,6 +15,7 @@
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\base\BaseData.h"
+#include "AnalyzerLib\interpreter\HEXInterpreter.h"
 
 namespace analyzer {
   namespace interpreter {
@@ -36,7 +37,7 @@ namespace analyzer {
         virtual void SetFile(core::File * file);
         virtual void ClearFile();
 
-        void AddHexRow(const std::vector<std::string> & hexExp);
+        void AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp);
 
       private:
         core::File * file;

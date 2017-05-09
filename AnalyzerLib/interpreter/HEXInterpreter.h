@@ -17,6 +17,12 @@ namespace analyzer {
     class HEXInterpreter : public Interpreter
     {
     public:
+      struct HexRow
+      {
+        std::vector<std::string> HexValues;
+        std::string ASCII;
+      };
+
       HEXInterpreter();
       explicit HEXInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data);
       explicit HEXInterpreter(const std::shared_ptr<std::vector<unsigned char>> & data, const size_t & indexBegin, const size_t & offset);
@@ -29,13 +35,13 @@ namespace analyzer {
       virtual core::FileFormat GetFileFormat();
       virtual bool UseRichText();
 
-      const std::vector<std::string> & GetHexExpressions();
-      std::vector<std::vector<std::string>> GetHexRows();
+      const std::vector<std::pair<std::string, char>> & GetHexExpressions();
+      std::vector<HexRow> GetHexRows();
       std::vector<unsigned char> GetBytesByIndex(const std::vector<size_t> & indexes);
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
-      std::vector<std::string> hex;
+      std::vector<std::pair<std::string, char>> hex;
       std::string text;
 
       void data2Hex();
