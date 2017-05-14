@@ -62,8 +62,8 @@ namespace analyzer {
           this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
         }
 
-        this->setItem(numRows, i, new QTableWidgetItem(QString::fromLatin1(hexExp.ASCII.c_str())));
-        this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
+        this->setItem(numRows, 16, new QTableWidgetItem(QString::fromLatin1(hexExp.ASCII.c_str())));
+        this->item(numRows, 16)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
       }
 
       void HexTableWidget::onSelection()

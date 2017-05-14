@@ -76,17 +76,17 @@ namespace analyzer {
       std::vector<HEXInterpreter::HexRow> rows;
       HEXInterpreter::HexRow row;
 
-      int counter = 0;
       for (auto& hexExp : this->hex) {
         row.HexValues.push_back(hexExp.first);
         row.ASCII += hexExp.second;
-        counter++;
-        if (counter == 16) {
+        if (row.HexValues.size() >= 16) {
           rows.push_back(row);
           row.HexValues.clear();
           row.ASCII.clear();
-          counter = 0;
         }
+      }
+      if (!row.HexValues.empty()) {
+        rows.push_back(row);
       }
       return rows;
     }
