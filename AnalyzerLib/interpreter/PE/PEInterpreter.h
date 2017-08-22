@@ -87,7 +87,7 @@ namespace analyzer {
         long SizeOfHeapCommit;
         long LoaderFlags;
         long NumberOfRvaAndSizes;
-        data_directory * DataDirectory[];
+        data_directory * DataDirectory;
       };
 
       PEInterpreter();

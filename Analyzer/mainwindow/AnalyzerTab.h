@@ -33,6 +33,10 @@ namespace analyzer {
       ViewTab * AddHexTab();
       void ClearHexTab();
 
+      bool IsAnalyzeResultTabInitialized() const;
+      AnalyzeResultTab * GetAnalyzeResultTab() const;
+      void AddAnalyzeResultTab();
+
     private:
       ViewTab * viewTab;
       AnalyzeResultTab * resultTab;
@@ -40,6 +44,8 @@ namespace analyzer {
 
       void setup();
       void onCloseTab(const int & index);
+
+      void assertAnalyzeResultTab() const;
     };
   }
 }

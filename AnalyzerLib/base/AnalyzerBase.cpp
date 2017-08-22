@@ -296,9 +296,9 @@ namespace analyzer{
 
       std::vector<unsigned char> data;
 
-      long fileSize = 0;
+      size_t fileSize = 0;
       file.seekg(0, std::ios::end);
-      fileSize = file.tellg();
+      fileSize = static_cast<size_t>(file.tellg());
       file.seekg(0, std::ios::beg);
 
       data.reserve(fileSize);

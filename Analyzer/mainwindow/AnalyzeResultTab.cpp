@@ -27,6 +27,11 @@ namespace analyzer {
       return this->textEdit;
     }
 
+    void AnalyzeResultTab::Clear()
+    {
+      this->textEdit->clear();
+    }
+
     void AnalyzeResultTab::setup()
     {
       this->setLayout(new QVBoxLayout());

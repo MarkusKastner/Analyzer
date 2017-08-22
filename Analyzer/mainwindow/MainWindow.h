@@ -45,6 +45,7 @@ namespace analyzer{
       void SetBinaryOutputFromBytes(const std::vector<unsigned char> & data);
 
     private:
+      friend class Actions;
       Ui::MainWindow ui;
       std::unique_ptr<Actions> actions;
       base::AnalyzerBase & analyzerBase;

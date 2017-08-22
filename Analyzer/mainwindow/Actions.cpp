@@ -10,6 +10,8 @@
 
 #include "application\error\AppException.h"
 #include "mainwindow\MainWindow.h"
+#include "AnalyzerTab.h"
+#include "AnalyzeResultTab.h"
 
 namespace analyzer{
   namespace gui{
@@ -39,6 +41,12 @@ namespace analyzer{
 
     void Actions::OnStartAnalyzing()
     {
+      if (this->mainWindow->tabWidget->IsAnalyzeResultTabInitialized()) {
+        this->mainWindow->tabWidget->GetAnalyzeResultTab()->Clear();
+      }
+      else {
+        this->mainWindow->tabWidget->AddAnalyzeResultTab();
+      }
     }
 
     void Actions::OnStopAnalyzing()

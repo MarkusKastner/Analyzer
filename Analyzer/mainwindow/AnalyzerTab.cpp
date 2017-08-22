@@ -54,6 +54,27 @@ namespace analyzer {
       this->hexTab = nullptr;
     }
 
+    bool AnalyzerTab::IsAnalyzeResultTabInitialized() const
+    {
+      if (this->resultTab == nullptr) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+
+    AnalyzeResultTab * AnalyzerTab::GetAnalyzeResultTab() const
+    {
+      this->assertAnalyzeResultTab();
+      return this->resultTab;
+    }
+
+    void AnalyzerTab::AddAnalyzeResultTab()
+    {
+      this->resultTab = new AnalyzeResultTab(this);
+      this->addTab(this->resultTab, tr("Analyze Result"));
+    }
     
     void AnalyzerTab::setup()
     {
@@ -62,15 +83,25 @@ namespace analyzer {
 
       this->viewTab = new ViewTab(this);
       this->addTab(this->viewTab, tr("View"));
-      
-      this->resultTab = new AnalyzeResultTab(this);
-      this->addTab(this->resultTab, tr("Analyze Result"));
     }
 
     void AnalyzerTab::onCloseTab(const int & index)
     {
       if (this->tabText(index).compare("Hex") == 0) {
         this->ClearHexTab();
+        return;
+      }
+      if (dynamic_cast<AnalyzeResultTab*>(this->widget(index))) {
+        this->removeTab(index);
+        delete this->resultTab;
+        this->resultTab = nullptr;
+      }
+    }
+
+    void AnalyzerTab::assertAnalyzeResultTab() const
+    {
+      if (this->resultTab == nullptr) {
+        throw std::exception("Invalid analyze result tab");
       }
     }
   }
