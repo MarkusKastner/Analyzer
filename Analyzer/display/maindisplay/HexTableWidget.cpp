@@ -55,14 +55,21 @@ namespace analyzer {
         QString offsetStr(stream.str().c_str());
         this->insertRow(numRows);
 
+        auto verticalItem = new QTableWidgetItem(offsetStr);
+        verticalItem->setFlags(verticalItem->flags() ^ Qt::ItemIsEditable);
         this->setVerticalHeaderItem(numRows, new QTableWidgetItem(offsetStr));
+
         size_t i = 0;
         for (; i < hexExp.HexValues.size(); i++) {
-          this->setItem(numRows, i, new QTableWidgetItem(hexExp.HexValues[i].c_str()));
+          auto item = new QTableWidgetItem(hexExp.HexValues[i].c_str());
+          item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          this->setItem(numRows, i, item);
           this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
         }
 
-        this->setItem(numRows, 16, new QTableWidgetItem(QString::fromLatin1(hexExp.ASCII.c_str())));
+        auto item = new QTableWidgetItem(QString::fromLatin1(hexExp.ASCII.c_str()));
+        item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        this->setItem(numRows, 16, item);
         this->item(numRows, 16)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
       }
 
