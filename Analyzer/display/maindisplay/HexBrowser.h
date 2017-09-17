@@ -47,7 +47,7 @@ namespace analyzer {
         void SetIntegerValue(const int & integerValue);
         void SetDoubleValue(const double & doubleValue);
         void SetWideCharacter(const wchar_t & wideCharacter);
-        void SetRGB(const char & r, const char & g, const char & b);
+        void SetRGB(const unsigned char & r, const unsigned char & g, const unsigned char & b);
 
         void ClearValues();
 
@@ -70,40 +70,43 @@ namespace analyzer {
         class RGBWidget : public QWidget
         {
         public:
-          RGBWidget() : QWidget(), color(new QLabel()), rEdit(new QLineEdit()), gEdit(new QLineEdit()), bEdit(new QLineEdit())
+          RGBWidget() : QWidget(), color(new QLabel()), rLabel(new QLabel()), gLabel(new QLabel()), bLabel(new QLabel())
           {
+            this->color->setFixedSize(30, 20);
             this->color->setAutoFillBackground(true);
-            this->setLayout(new QVBoxLayout());
+            this->setLayout(new QHBoxLayout());
             this->layout()->addWidget(this->color);
-            this->layout()->addWidget(this->rEdit);
-            this->layout()->addWidget(this->gEdit);
-            this->layout()->addWidget(this->bEdit);
+            this->layout()->addWidget(this->rLabel);
+            this->layout()->addWidget(this->gLabel);
+            this->layout()->addWidget(this->bLabel);
+            this->layout()->setContentsMargins(1, 1, 1, 1);
             
             this->Clear();
           }
           virtual ~RGBWidget() {}
 
-          void SetValues(const char & r, const char & g, const char & b) {
+          void SetValues(const unsigned char & r, const unsigned char & g, const unsigned char & b) {
             
-            this->color->setStyleSheet("QLabel { background-color: rgb(" + QString::number(r) + ", " + QString::number(g) + ", " + QString::number(b) + "); }");
+            QString styleString("background:rgb(" + QString::number(r) + ", " + QString::number(g) + ", " + QString::number(b) + ");");
+            this->color->setStyleSheet(styleString);
 
-            this->rEdit->setText(QString::number(r));
-            this->gEdit->setText(QString::number(g));
-            this->bEdit->setText(QString::number(b));
+            this->rLabel->setText(QString::number(r));
+            this->gLabel->setText(QString::number(g));
+            this->bLabel->setText(QString::number(b));
           }
 
           void Clear() {
             this->color->setStyleSheet("QLabel { background-color: rgb(255, 255, 255); }");
-            this->rEdit->setText("");
-            this->gEdit->setText("");
-            this->bEdit->setText("");
+            this->rLabel->setText("");
+            this->gLabel->setText("");
+            this->bLabel->setText("");
           }
 
         private:
           QLabel * color;
-          QLineEdit * rEdit;
-          QLineEdit * gEdit;
-          QLineEdit * bEdit;
+          QLabel * rLabel;
+          QLabel * gLabel;
+          QLabel * bLabel;
         };
         RGBWidget * rgb;
 

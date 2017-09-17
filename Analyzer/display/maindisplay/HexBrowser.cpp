@@ -65,7 +65,7 @@ namespace analyzer {
         this->wideCharacter->setText(QString::fromWCharArray(&wideCharacter, 1));
       }
 
-      void HexBrowser::SetRGB(const char & r, const char & g, const char & b)
+      void HexBrowser::SetRGB(const unsigned char & r, const unsigned char & g, const unsigned char & b)
       {
         this->rgb->SetValues(r, g, b);
       }
@@ -75,6 +75,7 @@ namespace analyzer {
         this->integerCast->setText("");
         this->doubleCast->setText("");
         this->wideCharacter->setText("");
+        this->rgb->Clear();
       }
 
       void HexBrowser::setup()
@@ -84,8 +85,8 @@ namespace analyzer {
         QWidget * detailWidget = new QWidget(this);
         detailWidget->setLayout(new QVBoxLayout());
         detailWidget->layout()->setContentsMargins(0, 0, 0, 0);
-        detailWidget->setMaximumWidth(200);
-        detailWidget->setMinimumWidth(200);
+        detailWidget->setFixedWidth(250);
+        detailWidget->setFixedHeight(300);
 
         QGroupBox * details = new QGroupBox("Details", detailWidget);
         details->setLayout(new QVBoxLayout());
@@ -93,7 +94,8 @@ namespace analyzer {
         this->createCastTable();
         details->layout()->addWidget(this->castTable);
         detailWidget->layout()->addWidget(details);
-
+        detailWidget->layout()->addItem(new QSpacerItem(1,1, QSizePolicy::Expanding, QSizePolicy::Expanding));
+        
         this->tableWidget = new HexTableWidget(this);
         this->layout()->addWidget(this->tableWidget);
         this->layout()->addWidget(detailWidget);
@@ -112,6 +114,7 @@ namespace analyzer {
         verticalHeaderList.push_back("RGB");
 
         this->castTable = new QTableWidget(this);
+        this->castTable->setFixedWidth(230);
         this->castTable->insertColumn(0);
         this->castTable->insertRow(0);
         this->castTable->insertRow(1);
@@ -132,9 +135,8 @@ namespace analyzer {
 
         this->castTable->verticalHeader()->show();
         this->castTable->horizontalHeader()->show();
+        this->castTable->setColumnWidth(1, 150);
 
-        this->castTable->setMaximumWidth(190);
-        this->castTable->setMinimumWidth(190);
       }
     }
   }

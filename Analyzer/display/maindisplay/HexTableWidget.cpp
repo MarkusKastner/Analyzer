@@ -123,25 +123,19 @@ namespace analyzer {
             char buffer[2];
             buffer[0] = bytes[0];
             buffer[1] = bytes[1];
-            int16_t * value = reinterpret_cast<int16_t*>(&buffer);
-            this->browser->SetIntegerValue(*value);
+            
+            int16_t intVal = 0;
+            memcpy(&intVal, &buffer, 2);
+            this->browser->SetIntegerValue(static_cast<int>(intVal));
 
-            float * fVal = reinterpret_cast<float*>(&buffer);
-            this->browser->SetDoubleValue(*fVal);
+            wchar_t wcharVal;
+            memcpy(&wcharVal, &buffer, 2);
+            this->browser->SetWideCharacter(wcharVal);
 
             return;
           }
           else if (bytes.size() == 3) {
-            char buffer[3];
-            buffer[0] = bytes[0];
-            buffer[1] = bytes[1];
-            buffer[2] = bytes[2];
-            int32_t * intVal = reinterpret_cast<int32_t*>(&buffer);
-            this->browser->SetIntegerValue(static_cast<long long>(*intVal));
-
-            double * dVal = reinterpret_cast<double*>(&buffer);
-            this->browser->SetDoubleValue(*dVal);
-            this->browser->SetRGB(bytes[0], bytes[1], bytes[2]);
+            this->browser->SetRGB(static_cast<unsigned char>(bytes[0]), static_cast<unsigned char>(bytes[1]), static_cast<unsigned char>(bytes[2]));
             return;
           }
           else if (bytes.size() == 4) {
@@ -150,11 +144,14 @@ namespace analyzer {
             buffer[1] = bytes[1];
             buffer[2] = bytes[2];
             buffer[3] = bytes[3];
-            int32_t * intVal = reinterpret_cast<int32_t*>(&buffer);
-            this->browser->SetIntegerValue(static_cast<long long>(*intVal));
 
-            double * dVal = reinterpret_cast<double*>(&buffer);
-            this->browser->SetDoubleValue(*dVal);
+            float floatVal = 0;
+            memcpy(&floatVal, &buffer, 4);
+            this->browser->SetDoubleValue(floatVal);
+
+            int intVal = 0;
+            memcpy(&intVal, &buffer, 4);
+            this->browser->SetIntegerValue(intVal);
 
             return;
           }
