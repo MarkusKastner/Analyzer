@@ -21,9 +21,10 @@ namespace analyzer {
       const std::string & GetAppDir();
 
       void SetLastOpenDir(const std::string & lastOpenDir);
-      const std::string & GetLastOpenDir() const;
+      std::string GetLastOpenDir() const;
 
       void Serialize();
+      void Deserialize();
 
     private:
       std::string appDir;
@@ -31,7 +32,12 @@ namespace analyzer {
 
       void assertAppDir();
 
+      static std::string parseTag(const std::string & line);
+      static std::string parseValue(const std::string & line);
+
       static std::string fileName;
+      static std::string lastOpenDirTag;
+
     };
   }
 }

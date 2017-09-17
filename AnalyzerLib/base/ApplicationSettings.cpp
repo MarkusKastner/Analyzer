@@ -40,9 +40,12 @@ namespace analyzer {
       this->lastOpenDir = lastOpenDir;
     }
 
-    const std::string & ApplicationSettings::GetLastOpenDir() const
+    std::string ApplicationSettings::GetLastOpenDir() const
     {
-      return this->lastOpenDir;
+      if (fs::exists(fs::path(this->lastOpenDir))) {
+        return this->lastOpenDir;
+      }
+      return std::string();
     }
 
     void ApplicationSettings::Serialize()
@@ -56,7 +59,32 @@ namespace analyzer {
         throw AnalyzerBaseException(AnalyzerBaseException::ErrorCode::CannotOpenOrCreateSettingsFile);
       }
 
+      out << lastOpenDirTag << "=" << this->lastOpenDir << std::endl;
+
       out.flush();
+    }
+
+    void ApplicationSettings::Deserialize()
+    {
+      this->assertAppDir();
+
+      std::string filePath(this->appDir + "/" + ApplicationSettings::fileName);
+      std::ifstream in(filePath, std::ios::in);
+
+      if (!in.is_open() || in.bad()) {
+        throw AnalyzerBaseException(AnalyzerBaseException::ErrorCode::CannotOpenOrCreateSettingsFile);
+      }
+
+      std::string line;
+      while (std::getline(in, line))
+      {
+        std::string tag(ApplicationSettings::parseTag(line));
+
+        if (tag.compare(ApplicationSettings::lastOpenDirTag) == 0) {
+          this->lastOpenDir = ApplicationSettings::parseValue(line);
+        }
+      }
+      
     }
 
     void ApplicationSettings::assertAppDir()
@@ -66,6 +94,27 @@ namespace analyzer {
       }
     }
 
+    std::string ApplicationSettings::parseTag(const std::string & line)
+    {
+      size_t splittOffset = line.find_first_of('=');
+      if (splittOffset > line.size() + 1) {
+        return std::string();
+      }
+      std::string tag(line.substr(0, splittOffset));
+      return tag;
+    }
+
+    std::string ApplicationSettings::parseValue(const std::string & line)
+    {
+      size_t splittOffset = line.find_first_of('=');
+      if (splittOffset > line.size() + 1) {
+        return std::string();
+      }
+      std::string val(line.substr(splittOffset + 1, line.size() - splittOffset));
+      return val;
+    }
+
     std::string ApplicationSettings::fileName = "analyzer.config";
+    std::string ApplicationSettings::lastOpenDirTag = "LastOpenDirectory";
   }
 }

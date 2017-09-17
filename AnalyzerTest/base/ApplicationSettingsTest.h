@@ -21,7 +21,7 @@ class ApplicationSettingsTest : public testing::Test
 {
 public:
   ApplicationSettingsTest()
-  :testing::Test(), applicationSettings(), lastOpenDir(TestSupport::GetInstance()->GetAppdir())
+  :testing::Test(), applicationSettings(), lastOpenDir(TestSupport::GetInstance()->GetAppdir()), notExistingDir("C:/idontexist")
   {}
 
   virtual ~ApplicationSettingsTest() {}
@@ -31,10 +31,15 @@ public:
     if (!fs::exists(fs::path(this->lastOpenDir))) {
       fs::create_directory(this->lastOpenDir);
     }
+
+    if (fs::exists(fs::path(this->notExistingDir))) {
+      fs::remove(fs::path(this->notExistingDir));
+    }
   }
 
   analyzer::base::ApplicationSettings applicationSettings;
   std::string lastOpenDir;
+  std::string notExistingDir;
 };
 
 TEST_F(ApplicationSettingsTest, init)
@@ -80,4 +85,32 @@ TEST_F(ApplicationSettingsTest, lastOpenDir)
   ASSERT_STREQ(this->lastOpenDir.c_str(), this->applicationSettings.GetLastOpenDir().c_str());
 }
 
+TEST_F(ApplicationSettingsTest, deserialize)
+{
+  std::string lastOpenDirSerialized;
+  {
+    analyzer::base::ApplicationSettings appSettings;
+    appSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
+    appSettings.SetLastOpenDir(this->lastOpenDir);
+    appSettings.Serialize();
+  }
+
+  {
+    analyzer::base::ApplicationSettings appSettings;
+    appSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
+    appSettings.Deserialize();
+    lastOpenDirSerialized = appSettings.GetLastOpenDir();
+  }
+  
+  ASSERT_STREQ(this->lastOpenDir.c_str(), lastOpenDirSerialized.c_str());
+}
+
+TEST_F(ApplicationSettingsTest, tryGetLastOpenDirThatDoesntExisit)
+{
+  this->applicationSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
+  this->applicationSettings.SetLastOpenDir(this->notExistingDir);
+
+  ASSERT_STREQ("", this->applicationSettings.GetLastOpenDir().c_str());
+
+}
 #endif
