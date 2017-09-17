@@ -113,6 +113,7 @@ namespace analyzer {
 
       void HexTableWidget::setDetailOutput(const std::vector<unsigned char>& bytes)
       {
+        this->browser->ClearValues();
         if (bytes.size() > 0) {
           if (bytes.size() == 1) {
             this->browser->SetIntegerValue(static_cast<long long>(bytes[0]));

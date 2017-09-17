@@ -62,7 +62,6 @@ namespace analyzer {
         QTableWidgetItem * doubleCast;
         QTableWidgetItem * wideCharacter;
         
-
         core::File * file;
 
         void setup();

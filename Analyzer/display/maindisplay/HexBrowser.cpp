@@ -70,6 +70,13 @@ namespace analyzer {
         this->rgb->SetValues(r, g, b);
       }
 
+      void HexBrowser::ClearValues()
+      {
+        this->integerCast->setText("");
+        this->doubleCast->setText("");
+        this->wideCharacter->setText("");
+      }
+
       void HexBrowser::setup()
       {
         this->setLayout(new QHBoxLayout());
