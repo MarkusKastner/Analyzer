@@ -26,7 +26,8 @@ namespace analyzer{
       documentPath(),
       baseObservers(),
       workTasksLock(),
-      files(), filesLock()
+      files(), filesLock(),
+      applicationSettings()
     {
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
     }
@@ -93,6 +94,11 @@ namespace analyzer{
 
     void AnalyzerBase::OpenDocument(const std::string & path)
     {
+      fs::path dir(path);
+      dir.remove_filename();
+      this->applicationSettings.SetLastOpenDir(dir.generic_string());
+      this->applicationSettings.Serialize();
+
       this->documentPath = path;
       this->addTask(Task::LoadNewDataFromFile);
       this->workCondition.notify_one();
@@ -221,6 +227,28 @@ namespace analyzer{
       file->RegisterFileObserver(this);
       this->files.push_back(file);
       }
+    }
+
+    void AnalyzerBase::SetApplicationDirectory(const std::string & appDir)
+    {
+      this->applicationSettings.SetAppDir(appDir);
+      if (this->applicationSettings.SettingsFileExists()) {
+        this->applicationSettings.Deserialize();
+      }
+      else {
+        this->applicationSettings.Serialize();
+      }
+    }
+
+    std::string AnalyzerBase::GetLastOpenDir()
+    {
+      return this->applicationSettings.GetLastOpenDir();
+    }
+
+    void AnalyzerBase::SetLastOpenDir(const std::string & lastOpenDir)
+    {
+      this->applicationSettings.SetLastOpenDir(lastOpenDir);
+      this->applicationSettings.Serialize();
     }
 
     void AnalyzerBase::baseWorker()

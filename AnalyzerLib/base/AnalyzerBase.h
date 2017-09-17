@@ -18,6 +18,7 @@
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\core\FileObserver.h"
+#include "ApplicationSettings.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -63,6 +64,10 @@ namespace analyzer{
  
       virtual void AddInternalFile(const std::shared_ptr<analyzer::core::File> & file);
 
+      void SetApplicationDirectory(const std::string & appDir);
+      std::string GetLastOpenDir();
+      void SetLastOpenDir(const std::string & lastOpenDir);
+
     private:
       std::thread * baseThread;
       std::atomic<bool> runBaseWorker;
@@ -79,6 +84,8 @@ namespace analyzer{
       
       std::vector<std::shared_ptr<core::File>> files;
       std::recursive_mutex filesLock;
+
+      ApplicationSettings applicationSettings;
 
       void baseWorker();
       bool hasTask();

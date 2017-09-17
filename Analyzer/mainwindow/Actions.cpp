@@ -27,7 +27,10 @@ namespace analyzer{
 
     void Actions::OnOpen()
     {
-      QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Open Document")));
+      QString fileName(QFileDialog::getOpenFileName(this->mainWindow, tr("Open Document"), this->analyzerBase.GetLastOpenDir().c_str()));
+      if (!QFile(fileName).exists()) {
+        return;
+      }
       if (this->analyzerBase.HasData()) {
         this->analyzerBase.CloseDocument();
       }

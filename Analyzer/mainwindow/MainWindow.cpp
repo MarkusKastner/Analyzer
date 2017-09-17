@@ -84,6 +84,7 @@ namespace analyzer{
     void MainWindow::setup()
     {
       this->analyzerBase.RegisterObserver(this);
+      this->analyzerBase.SetApplicationDirectory(QApplication::applicationDirPath().toStdString());
 
       this->tabWidget = new AnalyzerTab(this);
       this->setCentralWidget(this->tabWidget);

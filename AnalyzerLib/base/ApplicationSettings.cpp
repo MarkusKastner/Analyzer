@@ -35,6 +35,11 @@ namespace analyzer {
       return this->appDir;
     }
 
+    bool ApplicationSettings::SettingsFileExists()
+    {
+      return fs::exists(fs::path(this->appDir + "/" + ApplicationSettings::fileName));
+    }
+
     void ApplicationSettings::SetLastOpenDir(const std::string & lastOpenDir)
     {
       this->lastOpenDir = lastOpenDir;

@@ -19,6 +19,7 @@ namespace analyzer {
 
       void SetAppDir(const std::string & appDir);
       const std::string & GetAppDir();
+      bool SettingsFileExists();
 
       void SetLastOpenDir(const std::string & lastOpenDir);
       std::string GetLastOpenDir() const;

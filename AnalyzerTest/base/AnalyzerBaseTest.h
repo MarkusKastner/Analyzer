@@ -95,6 +95,8 @@ public:
   ~AnalyzerBaseTest(){}
 
   void SetUp(){
+    this->analyzerBase1.SetApplicationDirectory(TestSupport::GetInstance()->GetAppdir());
+
     this->path1 = std::string(TestSupport::GetInstance()->GetTestFilesDir() + std::string("/test.txt"));
     this->path2 = std::string(TestSupport::GetInstance()->GetTestFilesDir() + std::string("/test.zip"));
     this->path3 = std::string(TestSupport::GetInstance()->GetTestFilesDir() + std::string("/test.docx"));
