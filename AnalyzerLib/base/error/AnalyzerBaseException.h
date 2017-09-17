@@ -20,7 +20,8 @@ namespace analyzer{
       {
         Empty = 0,
         Unknown,
-        ApplicationPathNotSet
+        ApplicationPathNotSet,
+        CannotOpenOrCreateSettingsFile
       };
 
       AnalyzerBaseException()

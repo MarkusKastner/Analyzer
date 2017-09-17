@@ -10,8 +10,12 @@
 #include <gtest\gtest.h>
 #include "TestSupport.h"
 
+#include <filesystem>
+
 #include "AnalyzerLib\base\ApplicationSettings.h"
 #include "AnalyzerLib\base\error\AnalyzerBaseException.h"
+
+namespace fs = std::tr2::sys;
 
 class ApplicationSettingsTest : public testing::Test
 {
@@ -53,4 +57,14 @@ TEST_F(ApplicationSettingsTest, appPathNotSet)
   ASSERT_EQ(errCode, analyzer::base::AnalyzerBaseException::ErrorCode::ApplicationPathNotSet);
 }
 
+TEST_F(ApplicationSettingsTest, serialize)
+{
+  std::string path(TestSupport::GetInstance()->GetAppdir());
+  path += "/analyzer.config";
+
+  this->applicationSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
+  this->applicationSettings.Serialize();
+
+  ASSERT_TRUE(fs::exists(fs::path(path)));
+}
 #endif

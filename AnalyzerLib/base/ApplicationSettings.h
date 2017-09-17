@@ -20,10 +20,14 @@ namespace analyzer {
       void SetAppDir(const std::string & appDir);
       const std::string & GetAppDir();
 
+      void Serialize();
+
     private:
       std::string appDir;
 
       void assertAppDir();
+
+      static std::string fileName;
     };
   }
 }
