@@ -18,10 +18,12 @@ namespace analyzer {
       ~ApplicationSettings();
 
       void SetAppDir(const std::string & appDir);
-      const std::string & GetAppDir() const;
+      const std::string & GetAppDir();
 
     private:
       std::string appDir;
+
+      void assertAppDir();
     };
   }
 }

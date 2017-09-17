@@ -6,6 +6,12 @@
 
 #include "ApplicationSettings.h"
 
+#include <filesystem>
+
+#include "AnalyzerLib/base/error/AnalyzerBaseException.h"
+
+namespace fs = std::tr2::sys;
+
 namespace analyzer {
   namespace base {
     ApplicationSettings::ApplicationSettings()
@@ -22,9 +28,17 @@ namespace analyzer {
       this->appDir = appDir;
     }
 
-    const std::string & ApplicationSettings::GetAppDir() const
+    const std::string & ApplicationSettings::GetAppDir()
     {
+      this->assertAppDir();
       return this->appDir;
+    }
+
+    void ApplicationSettings::assertAppDir()
+    {
+      if (!fs::exists(fs::path(this->appDir))) {
+        throw AnalyzerBaseException(AnalyzerBaseException::ErrorCode::ApplicationPathNotSet);
+      }
     }
   }
 }

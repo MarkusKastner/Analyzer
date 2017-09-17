@@ -11,6 +11,7 @@
 #include "TestSupport.h"
 
 #include "AnalyzerLib\base\ApplicationSettings.h"
+#include "AnalyzerLib\base\error\AnalyzerBaseException.h"
 
 class ApplicationSettingsTest : public testing::Test
 {
@@ -38,4 +39,18 @@ TEST_F(ApplicationSettingsTest, appPath)
   this->applicationSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
   ASSERT_STREQ(TestSupport::GetInstance()->GetAppdir().c_str(), this->applicationSettings.GetAppDir().c_str());
 }
+
+TEST_F(ApplicationSettingsTest, appPathNotSet)
+{
+  analyzer::base::AnalyzerBaseException::ErrorCode errCode = analyzer::base::AnalyzerBaseException::ErrorCode::Empty;
+  try {
+    this->applicationSettings.GetAppDir();
+  }
+  catch (analyzer::base::AnalyzerBaseException & ex)
+  {
+    errCode = ex.GetErrorCode();
+  }
+  ASSERT_EQ(errCode, analyzer::base::AnalyzerBaseException::ErrorCode::ApplicationPathNotSet);
+}
+
 #endif

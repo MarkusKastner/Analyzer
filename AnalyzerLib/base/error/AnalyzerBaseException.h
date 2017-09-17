@@ -15,19 +15,45 @@ namespace analyzer{
     class AnalyzerBaseException : public std::exception
     {
     public:
+
+      enum ErrorCode
+      {
+        Empty = 0,
+        Unknown,
+        ApplicationPathNotSet
+      };
+
       AnalyzerBaseException()
-        : std::exception()
+        : std::exception(), errorCode(ErrorCode::Empty)
       {
       }
 
       explicit AnalyzerBaseException(const std::string & message)
-        : std::exception(message.c_str())
+        : std::exception(message.c_str()), errorCode(ErrorCode::Empty)
+      {
+      }
+
+      explicit AnalyzerBaseException(const ErrorCode & errorCode)
+        : std::exception(), errorCode(errorCode)
       {
       }
 
       virtual ~AnalyzerBaseException()
       {
       }
+
+      virtual char const* what() const
+      {
+        return std::exception::what();
+      }
+
+      const ErrorCode & GetErrorCode() const 
+      {
+        return this->errorCode;
+      }
+
+    private:
+      ErrorCode errorCode;
     };
   }
 }
