@@ -21,16 +21,20 @@ class ApplicationSettingsTest : public testing::Test
 {
 public:
   ApplicationSettingsTest()
-  :testing::Test(), applicationSettings()
+  :testing::Test(), applicationSettings(), lastOpenDir(TestSupport::GetInstance()->GetAppdir())
   {}
 
   virtual ~ApplicationSettingsTest() {}
 
   virtual void SetUp() {
-
+    this->lastOpenDir += "/lastOpen";
+    if (!fs::exists(fs::path(this->lastOpenDir))) {
+      fs::create_directory(this->lastOpenDir);
+    }
   }
 
   analyzer::base::ApplicationSettings applicationSettings;
+  std::string lastOpenDir;
 };
 
 TEST_F(ApplicationSettingsTest, init)
@@ -67,4 +71,13 @@ TEST_F(ApplicationSettingsTest, serialize)
 
   ASSERT_TRUE(fs::exists(fs::path(path)));
 }
+
+TEST_F(ApplicationSettingsTest, lastOpenDir)
+{
+  this->applicationSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
+
+  this->applicationSettings.SetLastOpenDir(this->lastOpenDir);
+  ASSERT_STREQ(this->lastOpenDir.c_str(), this->applicationSettings.GetLastOpenDir().c_str());
+}
+
 #endif

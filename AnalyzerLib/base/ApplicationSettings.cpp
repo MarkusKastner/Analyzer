@@ -16,7 +16,7 @@ namespace fs = std::tr2::sys;
 namespace analyzer {
   namespace base {
     ApplicationSettings::ApplicationSettings()
-      :appDir()
+      :appDir(), lastOpenDir()
     {
     }
 
@@ -33,6 +33,16 @@ namespace analyzer {
     {
       this->assertAppDir();
       return this->appDir;
+    }
+
+    void ApplicationSettings::SetLastOpenDir(const std::string & lastOpenDir)
+    {
+      this->lastOpenDir = lastOpenDir;
+    }
+
+    const std::string & ApplicationSettings::GetLastOpenDir() const
+    {
+      return this->lastOpenDir;
     }
 
     void ApplicationSettings::Serialize()

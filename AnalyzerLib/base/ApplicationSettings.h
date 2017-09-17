@@ -20,10 +20,14 @@ namespace analyzer {
       void SetAppDir(const std::string & appDir);
       const std::string & GetAppDir();
 
+      void SetLastOpenDir(const std::string & lastOpenDir);
+      const std::string & GetLastOpenDir() const;
+
       void Serialize();
 
     private:
       std::string appDir;
+      std::string lastOpenDir;
 
       void assertAppDir();
 
