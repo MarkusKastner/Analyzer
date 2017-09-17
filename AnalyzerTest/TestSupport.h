@@ -22,12 +22,14 @@ public:
 
   const std::string & GetTestDir() const;
   const std::string & GetTestFilesDir() const;
+  const std::string & GetAppdir() const;
   std::shared_ptr<std::vector<unsigned char>> GetDataFromTestFilesDir(const std::string & fileName);
 
 private:
   TestSupport();
   std::string testDir;
   std::string testFilesDir;
+  std::string appDir;
   static TestSupport * instance;
 
   void setup(const std::string & appPath);

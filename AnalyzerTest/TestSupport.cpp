@@ -13,7 +13,7 @@
 namespace fs = std::tr2::sys;
 
 TestSupport::TestSupport()
-  :testDir(), testFilesDir()
+  :testDir(), testFilesDir(), appDir()
 {
 
 }
@@ -49,6 +49,11 @@ const std::string & TestSupport::GetTestFilesDir() const
   return this->testFilesDir;
 }
 
+const std::string & TestSupport::GetAppdir() const
+{
+  return this->appDir;
+}
+
 std::shared_ptr<std::vector<unsigned char>> TestSupport::GetDataFromTestFilesDir(const std::string & fileName)
 {
   std::string filePath(this->testFilesDir.begin(), this->testFilesDir.end());
@@ -82,7 +87,11 @@ void TestSupport::setup(const std::string & appPath)
   if (!fs::exists(dir)) {
     fs::create_directory(dir);
   }
-  std::wstring temp = dir;
-  this->testDir.assign(temp.begin(), temp.end());
+
+  this->testDir = dir.generic_string();
   this->testFilesDir = "C:/dev/Analyzer/AnalyzerTest/testFiles";
+
+  fs::path appDir(appPath);
+  appDir.remove_filename();
+  this->appDir = appDir.generic_string();
 }

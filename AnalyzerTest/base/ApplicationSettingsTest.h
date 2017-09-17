@@ -16,10 +16,16 @@ class ApplicationSettingsTest : public testing::Test
 {
 public:
   ApplicationSettingsTest()
-  :testing::Test()
+  :testing::Test(), applicationSettings()
   {}
 
   virtual ~ApplicationSettingsTest() {}
+
+  virtual void SetUp() {
+
+  }
+
+  analyzer::base::ApplicationSettings applicationSettings;
 };
 
 TEST_F(ApplicationSettingsTest, init)
@@ -27,4 +33,9 @@ TEST_F(ApplicationSettingsTest, init)
   analyzer::base::ApplicationSettings appSettings;
 }
 
+TEST_F(ApplicationSettingsTest, appPath)
+{
+  this->applicationSettings.SetAppDir(TestSupport::GetInstance()->GetAppdir());
+  ASSERT_STREQ(TestSupport::GetInstance()->GetAppdir().c_str(), this->applicationSettings.GetAppDir().c_str());
+}
 #endif

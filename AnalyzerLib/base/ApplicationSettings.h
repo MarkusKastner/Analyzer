@@ -7,6 +7,8 @@
 #ifndef APPLICATIONSETTINGS_H
 #define APPLICATIONSETTINGS_H
 
+#include <string>
+
 namespace analyzer {
   namespace base {
     class ApplicationSettings
@@ -14,6 +16,12 @@ namespace analyzer {
     public:
       ApplicationSettings();
       ~ApplicationSettings();
+
+      void SetAppDir(const std::string & appDir);
+      const std::string & GetAppDir() const;
+
+    private:
+      std::string appDir;
     };
   }
 }

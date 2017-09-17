@@ -9,10 +9,22 @@
 namespace analyzer {
   namespace base {
     ApplicationSettings::ApplicationSettings()
+      :appDir()
     {
     }
+
     ApplicationSettings::~ApplicationSettings()
     {
+    }
+
+    void ApplicationSettings::SetAppDir(const std::string & appDir)
+    {
+      this->appDir = appDir;
+    }
+
+    const std::string & ApplicationSettings::GetAppDir() const
+    {
+      return this->appDir;
     }
   }
 }
