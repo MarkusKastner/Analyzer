@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\AnalyzerBase.cpp" />
+    <ClCompile Include="base\ApplicationSettings.cpp" />
     <ClCompile Include="cast\Cast.cpp" />
     <ClCompile Include="cast\CastFactory.cpp" />
     <ClCompile Include="cast\CastPool.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="base\AnalyzerBase.h" />
     <ClInclude Include="base\AnalyzerBaseObserver.h" />
     <ClInclude Include="base\AnalyzingOptions.h" />
+    <ClInclude Include="base\ApplicationSettings.h" />
     <ClInclude Include="base\BaseData.h" />
     <ClInclude Include="base\error\AnalyzerBaseException.h" />
     <ClInclude Include="base\error\DBException.h" />

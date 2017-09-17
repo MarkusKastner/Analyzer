@@ -109,7 +109,7 @@ public:
   }
 
   void waitUntilFileCountEquals(const int & targetFileCount){
-    for (int i = 0; i < 60; i++) {
+    for (int i = 0; i < 100; i++) {
       if (this->analyzerBase1.FileCount() != targetFileCount) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
       }

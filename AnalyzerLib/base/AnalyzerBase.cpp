@@ -221,7 +221,6 @@ namespace analyzer{
       file->RegisterFileObserver(this);
       this->files.push_back(file);
       }
-      //this->notifyFilesChange();
     }
 
     void AnalyzerBase::baseWorker()

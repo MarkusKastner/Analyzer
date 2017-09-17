@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AnalyzerLib\base\AnalyzerBase.cpp" />
+    <ClCompile Include="..\AnalyzerLib\base\ApplicationSettings.cpp" />
     <ClCompile Include="..\AnalyzerLib\cast\Cast.cpp" />
     <ClCompile Include="..\AnalyzerLib\cast\CastFactory.cpp" />
     <ClCompile Include="..\AnalyzerLib\cast\CastPool.cpp" />
@@ -190,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBase.h" />
     <ClInclude Include="..\AnalyzerLib\base\AnalyzerBaseObserver.h" />
+    <ClInclude Include="..\AnalyzerLib\base\ApplicationSettings.h" />
     <ClInclude Include="..\AnalyzerLib\base\BaseData.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\AnalyzerBaseException.h" />
     <ClInclude Include="..\AnalyzerLib\base\error\DBException.h" />
@@ -224,6 +226,7 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\service\Update.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />
+    <ClInclude Include="base\ApplicationSettingsTest.h" />
     <ClInclude Include="cast\CastFactoryTest.h" />
     <ClInclude Include="cast\CastPoolTest.h" />
     <ClInclude Include="core\FileTest.h" />

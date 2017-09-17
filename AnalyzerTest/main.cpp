@@ -26,6 +26,7 @@
 #include "cast/CastPoolTest.h"
 #include "cast/CastFactoryTest.h"
 #include "interpreter/PE/PEInterpreterTest.h"
+#include "base/ApplicationSettingsTest.h"
 
 int main(int argc, char** argv) {
 

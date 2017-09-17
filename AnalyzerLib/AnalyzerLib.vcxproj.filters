@@ -118,6 +118,9 @@
     <ClCompile Include="interpreter\PE\PEInterpreter.cpp">
       <Filter>interpreter\PE</Filter>
     </ClCompile>
+    <ClCompile Include="base\ApplicationSettings.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="interpreter\PE\PEInterpreter.h">
       <Filter>interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="base\ApplicationSettings.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
