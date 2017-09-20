@@ -15,6 +15,12 @@ namespace analyzer {
     class PEInterpreter : public Interpreter
     {
     public:
+
+      static const unsigned int SizeOfNTSignature = 4;
+      static const unsigned short NTX32_Type = 0x10b;
+      static const unsigned short NTX64_Type = 0x20b;
+      static const unsigned short ROM_Type = 0x107;
+
       struct DOSHeader
       {
         char Signature[2];
@@ -57,9 +63,9 @@ namespace analyzer {
 
       struct PEOptionalHeader
       {
-        short Signature;
-        char MajorLinkerVersion;
-        char MinorLinkerVersion;
+        unsigned short Signature;
+        unsigned char MajorLinkerVersion;
+        unsigned char MinorLinkerVersion;
         long SizeOfCode;
         long SizeOfInitializedData;
         long SizeOfUninitializedData;
@@ -79,7 +85,7 @@ namespace analyzer {
         long SizeOfImage;
         long SizeOfHeaders;
         long Checksum;
-        short Subsystem;
+        unsigned short Subsystem;
         short DLLCharacteristics;
         long SizeOfStackReserve;
         long SizeOfStackCommit;
@@ -87,7 +93,7 @@ namespace analyzer {
         long SizeOfHeapCommit;
         long LoaderFlags;
         long NumberOfRvaAndSizes;
-        data_directory * DataDirectory;
+        //data_directory * DataDirectory;
       };
 
       PEInterpreter();
@@ -107,8 +113,25 @@ namespace analyzer {
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string text;
       DOSHeader dosHeader;
+      PEOptionalHeader peHeader;
+      HTML::Document htmlDoc;
 
       void interpret();
+
+      void createHTMLDoc();
+      HTML::Table createDOSHeaderTable();
+      HTML::Table createCOFFHeaderTable();
+      HTML::Table createPEHeaderTable();
+
+      std::vector<std::string> dosSignature2Line();
+      std::vector<std::string> size2Line();
+      std::vector<std::string> numBlocks2Line();
+      std::vector<std::string> numRelock2Line();
+      std::vector<std::string> sizeInParagraphs2Line();
+
+      std::vector<std::string> peSignature2Line();
+      //std::vector<std::string>();
+
     };
   }
 }

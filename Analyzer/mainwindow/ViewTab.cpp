@@ -42,6 +42,9 @@ namespace analyzer {
           case core::FileFormat::bmp:
             this->viewOutput = new display::HTMPOutput(this);
             break;
+          case core::FileFormat::winExec:
+            this->viewOutput = new display::HTMPOutput(this);
+            break;
           case core::FileFormat::pdf:
             this->viewOutput = new display::PDFBrowser(this);
             break;
