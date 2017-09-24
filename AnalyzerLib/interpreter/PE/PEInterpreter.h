@@ -113,6 +113,7 @@ namespace analyzer {
       std::shared_ptr<std::vector<unsigned char>> data;
       std::string text;
       DOSHeader dosHeader;
+      COFFHeader coffHeader;
       PEOptionalHeader peHeader;
       HTML::Document htmlDoc;
 
@@ -129,8 +130,15 @@ namespace analyzer {
       std::vector<std::string> numRelock2Line();
       std::vector<std::string> sizeInParagraphs2Line();
 
+      std::vector<std::string> coffMachine2Line();
+      std::vector<std::string> coffNumbSections2Line();
+      std::vector<std::string> coffTimeDateStamp2Line();
+      std::vector<std::string> coffPointerToSymbolTable2Line();
+      std::vector<std::string> coffNumOfSymbols2Line();
+      std::vector<std::string> coffSizeOfOptionalHeader2Line();
+      std::vector<std::string> coffCharacteristics2Line();
+
       std::vector<std::string> peSignature2Line();
-      //std::vector<std::string>();
 
     };
   }
