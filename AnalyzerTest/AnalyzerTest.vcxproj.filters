@@ -299,5 +299,14 @@
     <ClInclude Include="base\ApplicationSettingsTest.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\COFFHeader.h">
+      <Filter>Interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\DOSHeader.h">
+      <Filter>Interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\PEOptionalHeader.h">
+      <Filter>Interpreter\PE</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

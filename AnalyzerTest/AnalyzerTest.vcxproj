@@ -222,7 +222,10 @@
     <ClInclude Include="..\AnalyzerLib\interpreter\InterpreterObserver.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\pdf\PDFObject.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\COFFHeader.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\DOSHeader.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\PE\PEInterpreter.h" />
+    <ClInclude Include="..\AnalyzerLib\interpreter\PE\PEOptionalHeader.h" />
     <ClInclude Include="..\AnalyzerLib\interpreter\XMLInterpreter.h" />
     <ClInclude Include="..\AnalyzerLib\service\Update.h" />
     <ClInclude Include="base\AnalyzerBaseTest.h" />

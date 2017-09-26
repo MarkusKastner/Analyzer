@@ -225,7 +225,10 @@
     <ClInclude Include="interpreter\InterpreterObserver.h" />
     <ClInclude Include="interpreter\pdf\PDFInterpreter.h" />
     <ClInclude Include="interpreter\pdf\PDFObject.h" />
+    <ClInclude Include="interpreter\PE\COFFHeader.h" />
+    <ClInclude Include="interpreter\PE\DOSHeader.h" />
     <ClInclude Include="interpreter\PE\PEInterpreter.h" />
+    <ClInclude Include="interpreter\PE\PEOptionalHeader.h" />
     <ClInclude Include="interpreter\XMLInterpreter.h" />
     <ClInclude Include="service\Update.h" />
   </ItemGroup>

@@ -240,5 +240,14 @@
     <ClInclude Include="base\ApplicationSettings.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="interpreter\PE\COFFHeader.h">
+      <Filter>interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\PE\DOSHeader.h">
+      <Filter>interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="interpreter\PE\PEOptionalHeader.h">
+      <Filter>interpreter\PE</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
