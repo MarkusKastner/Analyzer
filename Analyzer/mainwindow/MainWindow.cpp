@@ -198,6 +198,9 @@ namespace analyzer{
 
     void MainWindow::onShowHex()
     {
+      if (!this->analyzerBase.HasActivefile()) {
+        return;
+      }
       this->hexFile = this->analyzerBase.GetActiveAnalyzerFile()->CloneToHexFile();
       if (this->hexFile) {
         this->tabWidget->AddHexTab()->SetFile(this->hexFile.get());

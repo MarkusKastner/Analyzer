@@ -44,6 +44,9 @@ namespace analyzer{
 
     void Actions::OnStartAnalyzing()
     {
+      if (!this->analyzerBase.HasActivefile()) {
+        return;
+      }
       if (this->mainWindow->tabWidget->IsAnalyzeResultTabInitialized()) {
         this->mainWindow->tabWidget->GetAnalyzeResultTab()->Clear();
       }
