@@ -19,6 +19,7 @@ namespace analyzer {
 
       size_t GetNumCheckObservers() const;
       void RegisterCheckObserver(CheckObserver * observer);
+      void UnregisterCheckObserver(CheckObserver * observer);
 
     protected:
       ContentChecker();

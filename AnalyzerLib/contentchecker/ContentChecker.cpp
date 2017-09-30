@@ -23,6 +23,18 @@ namespace analyzer {
       this->checkObservers.push_back(observer);
     }
 
+    void ContentChecker::UnregisterCheckObserver(CheckObserver * observer)
+    {
+      std::vector<CheckObserver*>::iterator end = this->checkObservers.end();
+
+      for (auto it = this->checkObservers.begin(); it != end; ++it) {
+        if ((*it) == observer) {
+          it = this->checkObservers.erase(it);
+          return;
+        }
+      }
+    }
+
     ContentChecker::ContentChecker()
       :checkObservers()
     {
