@@ -24,6 +24,13 @@ namespace analyzer{
       xml,
       pdf
     };
+
+    struct AnalyzerRGB
+    {
+      int r;
+      int g;
+      int b;
+    };
   }
 }
 #endif

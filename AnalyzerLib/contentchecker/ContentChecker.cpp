@@ -35,8 +35,18 @@ namespace analyzer {
       }
     }
 
+    void ContentChecker::SetWorkingColor(const base::AnalyzerRGB & color)
+    {
+      this->workingColor = color;
+    }
+
+    const base::AnalyzerRGB & ContentChecker::GetWorkingColor() const
+    {
+      return this->workingColor;
+    }
+
     ContentChecker::ContentChecker()
-      :checkObservers()
+      :checkObservers(), workingColor({0,0,0})
     {
     }
   }

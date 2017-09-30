@@ -8,6 +8,7 @@
 #define CONTENTCHECKER_H
 
 #include <vector>
+#include "AnalyzerLib/base/BaseData.h"
 
 namespace analyzer {
   namespace checker {
@@ -21,11 +22,15 @@ namespace analyzer {
       void RegisterCheckObserver(CheckObserver * observer);
       void UnregisterCheckObserver(CheckObserver * observer);
 
+      void SetWorkingColor(const base::AnalyzerRGB & color);
+      const base::AnalyzerRGB & GetWorkingColor() const;
+
     protected:
       ContentChecker();
 
     private:
       std::vector<CheckObserver*> checkObservers;
+      base::AnalyzerRGB workingColor;
     };
   }
 }
