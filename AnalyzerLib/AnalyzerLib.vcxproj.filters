@@ -258,5 +258,8 @@
     <ClInclude Include="contentchecker\ContentChecker.h">
       <Filter>contentchecker</Filter>
     </ClInclude>
+    <ClInclude Include="contentchecker\CheckObserver.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

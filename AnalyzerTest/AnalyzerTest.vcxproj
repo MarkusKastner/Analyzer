@@ -201,6 +201,7 @@
     <ClInclude Include="..\AnalyzerLib\cast\CastPool.h" />
     <ClInclude Include="..\AnalyzerLib\cast\EmptyCast.h" />
     <ClInclude Include="..\AnalyzerLib\cast\SingleByteCast.h" />
+    <ClInclude Include="..\AnalyzerLib\contentchecker\CheckObserver.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\ContentChecker.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />

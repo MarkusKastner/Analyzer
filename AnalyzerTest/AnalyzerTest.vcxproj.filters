@@ -320,5 +320,8 @@
     <ClInclude Include="contentchecker\ContentCheckerTest.h">
       <Filter>contentchecker</Filter>
     </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\CheckObserver.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
