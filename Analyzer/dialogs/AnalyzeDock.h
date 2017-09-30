@@ -21,8 +21,12 @@ namespace analyzer {
       virtual ~AnalyzeDock();
 
       void SetOptions(const base::AnalyzingOptions & analyzingOptions);
-      base::AnalyzingOptions GetSelectedOptions();
       void ResetOptions();
+
+      bool CheckExtraordinary();
+      bool CheckExecutable();
+      bool CheckExternalLinks();
+      bool CheckMacros();
 
     private:
       QCheckBox * extraordinary;

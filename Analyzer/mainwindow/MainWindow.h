@@ -44,6 +44,9 @@ namespace analyzer{
       void SetBinaryOutputFromString(const QString & binary);
       void SetBinaryOutputFromBytes(const std::vector<unsigned char> & data);
 
+      bool HasAnalyzeDock() const;
+      AnalyzeDock * GetAnalyzeDock() const;
+
     private:
       friend class Actions;
       Ui::MainWindow ui;
@@ -74,6 +77,8 @@ namespace analyzer{
       void onBinaryViewVisibility(bool visible);
 
       void onShowHex();
+
+      void assertAnalyzeDock();
     };
   }
 }

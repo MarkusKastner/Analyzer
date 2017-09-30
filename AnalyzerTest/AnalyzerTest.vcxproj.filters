@@ -52,6 +52,9 @@
     <Filter Include="Interpreter\PE">
       <UniqueIdentifier>{e59044a3-f519-410f-a5ae-71e01befb718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="contentchecker">
+      <UniqueIdentifier>{ed6829b6-ea4f-496d-bc43-39ba8efa71da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -134,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\base\ApplicationSettings.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\ContentChecker.cpp">
+      <Filter>contentchecker</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +313,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\interpreter\PE\PEOptionalHeader.h">
       <Filter>Interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\ContentChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ContentCheckerTest.h">
+      <Filter>contentchecker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

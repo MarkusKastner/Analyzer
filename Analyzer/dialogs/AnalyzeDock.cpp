@@ -39,24 +39,32 @@ namespace analyzer {
       }
     }
 
-    base::AnalyzingOptions AnalyzeDock::GetSelectedOptions()
-    {
-      base::AnalyzingOptions options;
-
-      options.Extraordinary = this->extraordinary->isChecked();
-      options.Executable = this->executable->isChecked();
-      options.ExternalLinks = this->externalLinks->isChecked();
-      options.Macros = this->macros->isChecked();
-      
-      return options;
-    }
-
     void AnalyzeDock::ResetOptions()
     {
       this->extraordinary->setVisible(true);
       this->executable->setVisible(true);
       this->externalLinks->setVisible(true);
       this->macros->setVisible(true);
+    }
+
+    bool AnalyzeDock::CheckExtraordinary()
+    {
+      return this->extraordinary->isChecked();
+    }
+
+    bool AnalyzeDock::CheckExecutable()
+    {
+      return this->executable->isChecked();
+    }
+
+    bool AnalyzeDock::CheckExternalLinks()
+    {
+      return this->externalLinks->isChecked();
+    }
+
+    bool AnalyzeDock::CheckMacros()
+    {
+      return this->macros->isChecked();
     }
 
     void AnalyzeDock::setup()

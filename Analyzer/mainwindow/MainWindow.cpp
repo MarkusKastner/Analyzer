@@ -81,6 +81,16 @@ namespace analyzer{
       this->binaryDock->SetBinaryOutputFromBytes(data);
     }
 
+    bool MainWindow::HasAnalyzeDock() const
+    {
+      return (this->analyzeDock != nullptr);
+    }
+
+    AnalyzeDock * MainWindow::GetAnalyzeDock() const
+    {
+      return this->analyzeDock;
+    }
+
     void MainWindow::setup()
     {
       this->analyzerBase.RegisterObserver(this);
@@ -204,6 +214,13 @@ namespace analyzer{
       this->hexFile = this->analyzerBase.GetActiveAnalyzerFile()->CloneToHexFile();
       if (this->hexFile) {
         this->tabWidget->AddHexTab()->SetFile(this->hexFile.get());
+      }
+    }
+
+    void MainWindow::assertAnalyzeDock()
+    {
+      if (this->analyzeDock == nullptr) {
+        throw app::AppException("Invalid analyzerDock");
       }
     }
   }

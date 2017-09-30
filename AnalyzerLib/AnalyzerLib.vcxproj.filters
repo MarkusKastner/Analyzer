@@ -44,6 +44,9 @@
     <Filter Include="interpreter\PE">
       <UniqueIdentifier>{9ba73064-479c-4289-9f38-acdb270b1790}</UniqueIdentifier>
     </Filter>
+    <Filter Include="contentchecker">
+      <UniqueIdentifier>{6f156de3-4f70-48c8-aaa7-4c10bd12a389}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -120,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="base\ApplicationSettings.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="contentchecker\ContentChecker.cpp">
+      <Filter>contentchecker</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="interpreter\PE\PEOptionalHeader.h">
       <Filter>interpreter\PE</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ContentChecker.h">
+      <Filter>contentchecker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

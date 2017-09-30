@@ -12,6 +12,7 @@
 #include "mainwindow\MainWindow.h"
 #include "AnalyzerTab.h"
 #include "AnalyzeResultTab.h"
+#include "Analyzer\dialogs\AnalyzeDock.h"
 
 namespace analyzer{
   namespace gui{
@@ -44,7 +45,7 @@ namespace analyzer{
 
     void Actions::OnStartAnalyzing()
     {
-      if (!this->analyzerBase.HasActivefile()) {
+      if (!this->analyzerBase.HasActivefile() || !this->mainWindow->HasAnalyzeDock()) {
         return;
       }
       if (this->mainWindow->tabWidget->IsAnalyzeResultTabInitialized()) {
@@ -53,10 +54,31 @@ namespace analyzer{
       else {
         this->mainWindow->tabWidget->AddAnalyzeResultTab();
       }
+      this->initCheckers();
     }
 
     void Actions::OnStopAnalyzing()
     {
+    }
+
+    void Actions::initCheckers()
+    {
+      if (!this->mainWindow->HasAnalyzeDock()) {
+        return;
+      }
+
+      if (this->mainWindow->GetAnalyzeDock()->CheckExtraordinary()) {
+
+      }
+      if (this->mainWindow->GetAnalyzeDock()->CheckExecutable()) {
+
+      }
+      if (this->mainWindow->GetAnalyzeDock()->CheckExternalLinks()) {
+
+      }
+      if (this->mainWindow->GetAnalyzeDock()->CheckMacros()) {
+
+       }
     }
 
     void Actions::throwMainWindow()

@@ -30,6 +30,7 @@ namespace analyzer{
       MainWindow * mainWindow;
       base::AnalyzerBase & analyzerBase;
 
+      void initCheckers();
       void throwMainWindow();
     };
   }
