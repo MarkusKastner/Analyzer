@@ -31,6 +31,10 @@ namespace analyzer {
       void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
       void ReleaseData();
 
+      void SetCheckRange(const size_t & startOffset, const size_t & checkOffset);
+      const size_t & GetStartOffest() const;
+      const size_t & GetCheckOffest() const;
+
     protected:
       ContentChecker();
 
@@ -38,6 +42,8 @@ namespace analyzer {
       std::vector<CheckObserver*> checkObservers;
       base::AnalyzerRGB workingColor;
       std::shared_ptr<std::vector<unsigned char>> data;
+      size_t startOffest;
+      size_t checkOffest;
     };
   }
 }

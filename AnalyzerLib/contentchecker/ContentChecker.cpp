@@ -62,8 +62,25 @@ namespace analyzer {
       }
     }
 
+    void ContentChecker::SetCheckRange(const size_t & startOffset, const size_t & checkOffset)
+    {
+      this->startOffest = startOffset;
+      this->checkOffest = checkOffset;
+    }
+
+    const size_t & ContentChecker::GetStartOffest() const
+    {
+      return this->startOffest;
+    }
+
+    const size_t & ContentChecker::GetCheckOffest() const
+    {
+      return this->checkOffest;
+    }
+
     ContentChecker::ContentChecker()
-      :checkObservers(), workingColor({0,0,0}), data()
+      :checkObservers(), workingColor({0,0,0}), data(),
+      startOffest(0), checkOffest(0)
     {
     }
   }
