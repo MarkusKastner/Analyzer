@@ -1,6 +1,7 @@
 #include "ContentChecker.h"
 
 #include "CheckObserver.h"
+#include "AnalyzerLib/contentchecker/error/ContentCheckException.h"
 
 namespace analyzer {
   namespace checker {
@@ -90,6 +91,9 @@ namespace analyzer {
 
     void ContentChecker::StartCheck()
     {
+      if (!this->data || this->data->empty()) {
+        throw ContentCheckException("Cannot start without data");
+      }
       if (this->checkThread && this->checkThread->joinable()) {
         this->checkThread->join();
       }

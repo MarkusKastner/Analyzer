@@ -55,6 +55,9 @@
     <Filter Include="contentchecker">
       <UniqueIdentifier>{ed6829b6-ea4f-496d-bc43-39ba8efa71da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="contentchecker\error">
+      <UniqueIdentifier>{aa57af57-1b06-46ff-ab61-467e919681c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\contentchecker\CheckObserver.h">
       <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\error\ContentCheckException.h">
+      <Filter>contentchecker\error</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

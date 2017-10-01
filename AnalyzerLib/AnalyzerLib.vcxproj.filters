@@ -47,6 +47,9 @@
     <Filter Include="contentchecker">
       <UniqueIdentifier>{6f156de3-4f70-48c8-aaa7-4c10bd12a389}</UniqueIdentifier>
     </Filter>
+    <Filter Include="contentchecker\error">
+      <UniqueIdentifier>{26c66f3f-2d3e-4074-a673-738b0b5ddeba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="contentchecker\CheckObserver.h">
       <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\error\ContentCheckException.h">
+      <Filter>contentchecker\error</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

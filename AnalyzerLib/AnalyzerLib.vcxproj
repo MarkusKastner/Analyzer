@@ -204,6 +204,7 @@
     <ClInclude Include="cast\SingleByteCast.h" />
     <ClInclude Include="contentchecker\CheckObserver.h" />
     <ClInclude Include="contentchecker\ContentChecker.h" />
+    <ClInclude Include="contentchecker\error\ContentCheckException.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />

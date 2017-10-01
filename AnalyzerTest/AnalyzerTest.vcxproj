@@ -203,6 +203,7 @@
     <ClInclude Include="..\AnalyzerLib\cast\SingleByteCast.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\CheckObserver.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\ContentChecker.h" />
+    <ClInclude Include="..\AnalyzerLib\contentchecker\error\ContentCheckException.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
     <ClInclude Include="..\AnalyzerLib\core\FileObserver.h" />
