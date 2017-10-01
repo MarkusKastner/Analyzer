@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <memory>
+#include <atomic>
 
 #include "AnalyzerLib/base/BaseData.h"
 
@@ -35,6 +36,9 @@ namespace analyzer {
       const size_t & GetStartOffest() const;
       const size_t & GetCheckOffest() const;
 
+      bool IsChecking() const;
+      void StartCheck();
+
     protected:
       ContentChecker();
 
@@ -44,6 +48,7 @@ namespace analyzer {
       std::shared_ptr<std::vector<unsigned char>> data;
       size_t startOffest;
       size_t checkOffest;
+      std::atomic<bool> runCheck;
     };
   }
 }

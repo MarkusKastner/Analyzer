@@ -53,6 +53,7 @@ namespace analyzer {
     void ContentChecker::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
     {
       this->data = data;
+      this->checkOffest = this->data->size();
     }
 
     void ContentChecker::ReleaseData()
@@ -78,9 +79,19 @@ namespace analyzer {
       return this->checkOffest;
     }
 
+    bool ContentChecker::IsChecking() const
+    {
+      return this->runCheck.load();
+    }
+
+    void ContentChecker::StartCheck()
+    {
+      this->runCheck = true;
+    }
+
     ContentChecker::ContentChecker()
       :checkObservers(), workingColor({0,0,0}), data(),
-      startOffest(0), checkOffest(0)
+      startOffest(0), checkOffest(0), runCheck(false)
     {
     }
   }
