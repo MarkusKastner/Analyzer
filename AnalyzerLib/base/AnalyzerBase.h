@@ -16,9 +16,10 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "AnalyzerLib\core\File.h"
-#include "AnalyzerLib\core\FileObserver.h"
+#include "AnalyzerLib/core/File.h"
+#include "AnalyzerLib/core/FileObserver.h"
 #include "ApplicationSettings.h"
+#include "AnalyzerLib/contentchecker/ContentCheckerVault.h"
 
 namespace analyzer{
   namespace interpreter{
@@ -68,6 +69,8 @@ namespace analyzer{
       std::string GetLastOpenDir();
       void SetLastOpenDir(const std::string & lastOpenDir);
 
+      checker::ContentCheckerVault & GetContentCheckerVault();
+
     private:
       std::thread * baseThread;
       std::atomic<bool> runBaseWorker;
@@ -86,6 +89,8 @@ namespace analyzer{
       std::recursive_mutex filesLock;
 
       ApplicationSettings applicationSettings;
+
+      checker::ContentCheckerVault checkerVault;
 
       void baseWorker();
       bool hasTask();

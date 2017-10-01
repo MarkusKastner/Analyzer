@@ -12,6 +12,9 @@
 #include "AnalyzerLib\base\AnalyzerBase.h"
 
 namespace analyzer{
+  namespace checker {
+    class ContentChecker;
+  }
   namespace gui{
     class MainWindow;
     class Actions : public QObject
@@ -31,6 +34,8 @@ namespace analyzer{
       base::AnalyzerBase & analyzerBase;
 
       void initCheckers();
+      void connectChecker(checker::ContentChecker * contentChecker);
+
       void throwMainWindow();
     };
   }

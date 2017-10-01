@@ -167,6 +167,7 @@
     <ClCompile Include="..\AnalyzerLib\cast\CastPool.cpp" />
     <ClCompile Include="..\AnalyzerLib\cast\SingleByteCast.cpp" />
     <ClCompile Include="..\AnalyzerLib\contentchecker\ContentChecker.cpp" />
+    <ClCompile Include="..\AnalyzerLib\contentchecker\ContentCheckerVault.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\InternalFile.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="..\AnalyzerLib\cast\SingleByteCast.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\CheckObserver.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\ContentChecker.h" />
+    <ClInclude Include="..\AnalyzerLib\contentchecker\ContentCheckerVault.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\error\ContentCheckException.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
@@ -237,6 +239,7 @@
     <ClInclude Include="cast\CastFactoryTest.h" />
     <ClInclude Include="cast\CastPoolTest.h" />
     <ClInclude Include="contentchecker\ContentCheckerTest.h" />
+    <ClInclude Include="contentchecker\ContentCheckerVaultTest.h" />
     <ClInclude Include="core\FileTest.h" />
     <ClInclude Include="core\TypeAnalyzerTest.h" />
     <ClInclude Include="core\zip\ZIPContainerTest.h" />

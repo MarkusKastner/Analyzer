@@ -144,6 +144,9 @@
     <ClCompile Include="..\AnalyzerLib\contentchecker\ContentChecker.cpp">
       <Filter>contentchecker</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\ContentCheckerVault.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -328,6 +331,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\contentchecker\error\ContentCheckException.h">
       <Filter>contentchecker\error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\ContentCheckerVault.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ContentCheckerVaultTest.h">
+      <Filter>contentchecker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,7 +27,8 @@ namespace analyzer{
       baseObservers(),
       workTasksLock(),
       files(), filesLock(),
-      applicationSettings()
+      applicationSettings(), 
+      checkerVault()
     {
       this->baseThread = new std::thread(&AnalyzerBase::baseWorker, this);
     }
@@ -249,6 +250,11 @@ namespace analyzer{
     {
       this->applicationSettings.SetLastOpenDir(lastOpenDir);
       this->applicationSettings.Serialize();
+    }
+
+    checker::ContentCheckerVault & AnalyzerBase::GetContentCheckerVault()
+    {
+      return this->checkerVault;
     }
 
     void AnalyzerBase::baseWorker()

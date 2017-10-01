@@ -130,6 +130,9 @@
     <ClCompile Include="contentchecker\ContentChecker.cpp">
       <Filter>contentchecker</Filter>
     </ClCompile>
+    <ClCompile Include="contentchecker\ContentCheckerVault.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -266,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="contentchecker\error\ContentCheckException.h">
       <Filter>contentchecker\error</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ContentCheckerVault.h">
+      <Filter>contentchecker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

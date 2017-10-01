@@ -68,7 +68,7 @@ namespace analyzer{
       }
 
       if (this->mainWindow->GetAnalyzeDock()->CheckExtraordinary()) {
-
+        //this->connectChecker(this->analyzerBase.GetContentCheckerVault()->CreateExtraordinaryChecker());
       }
       if (this->mainWindow->GetAnalyzeDock()->CheckExecutable()) {
 
@@ -79,6 +79,10 @@ namespace analyzer{
       if (this->mainWindow->GetAnalyzeDock()->CheckMacros()) {
 
        }
+    }
+
+    void Actions::connectChecker(checker::ContentChecker * contentChecker)
+    {
     }
 
     void Actions::throwMainWindow()

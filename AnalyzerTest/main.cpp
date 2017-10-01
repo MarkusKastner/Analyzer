@@ -28,6 +28,7 @@
 #include "interpreter/PE/PEInterpreterTest.h"
 #include "base/ApplicationSettingsTest.h"
 #include "contentchecker/ContentCheckerTest.h"
+#include "contentchecker/ContentCheckerVaultTest.h"
 
 int main(int argc, char** argv) {
 
