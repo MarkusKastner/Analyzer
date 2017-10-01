@@ -40,25 +40,29 @@ TEST_F(ContentCheckerVaultTest, init)
 
 TEST_F(ContentCheckerVaultTest, extraordinaryChecker)
 {
-  auto checker(contentCheckerVault.CreateExtraordinaryChecker());
-  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExtraordinaryChecker*>(checker)));
+  ASSERT_FALSE(contentCheckerVault.HasExtraordinaryChecker());
+  contentCheckerVault.InitializeExtraordinaryChecker();
+  ASSERT_TRUE(contentCheckerVault.HasExtraordinaryChecker());
 }
 
 TEST_F(ContentCheckerVaultTest, executableChecker)
 {
-  auto checker(contentCheckerVault.CreateExecutableChecker());
-  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExecutableChecker*>(checker)));
+  ASSERT_FALSE(contentCheckerVault.HasExecutableChecker());
+  contentCheckerVault.InitializeExecutableChecker();
+  ASSERT_TRUE(contentCheckerVault.HasExecutableChecker());
 }
 
 TEST_F(ContentCheckerVaultTest, externalLinkChecker)
 {
-  auto checker(contentCheckerVault.CreateExternalLinkChecker());
-  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExternalLinkChecker*>(checker)));
+  ASSERT_FALSE(contentCheckerVault.HasExternalLinkChecker());
+  contentCheckerVault.InitializeExternalLinkChecker();
+  ASSERT_TRUE(contentCheckerVault.HasExternalLinkChecker());
 }
 
 TEST_F(ContentCheckerVaultTest, macroChecker)
 {
-  auto checker(contentCheckerVault.CreateMacroChecker());
-  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::MacroChecker*>(checker)));
+  ASSERT_FALSE(contentCheckerVault.HasMacroChecker());
+  contentCheckerVault.InitializeMacroChecker();
+  ASSERT_TRUE(contentCheckerVault.HasMacroChecker());
 }
 #endif

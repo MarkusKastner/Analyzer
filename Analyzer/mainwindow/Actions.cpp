@@ -70,21 +70,17 @@ namespace analyzer{
       }
 
       if (this->mainWindow->GetAnalyzeDock()->CheckExtraordinary()) {
-        this->connectChecker(this->analyzerBase.GetContentCheckerVault().CreateExtraordinaryChecker());
+        this->analyzerBase.GetContentCheckerVault().InitializeExtraordinaryChecker();
       }
       if (this->mainWindow->GetAnalyzeDock()->CheckExecutable()) {
-
+        this->analyzerBase.GetContentCheckerVault().InitializeExecutableChecker();
       }
       if (this->mainWindow->GetAnalyzeDock()->CheckExternalLinks()) {
-
+        this->analyzerBase.GetContentCheckerVault().InitializeExternalLinkChecker();
       }
       if (this->mainWindow->GetAnalyzeDock()->CheckMacros()) {
-
+        this->analyzerBase.GetContentCheckerVault().InitializeMacroChecker();
        }
-    }
-
-    void Actions::connectChecker(checker::ContentChecker * contentChecker)
-    {
     }
 
     void Actions::throwMainWindow()

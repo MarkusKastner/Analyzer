@@ -14,6 +14,7 @@
 namespace analyzer {
   namespace checker {
     ContentCheckerVault::ContentCheckerVault()
+      :contentCheckers()
     {
     }
 
@@ -21,29 +22,69 @@ namespace analyzer {
     {
     }
 
-    size_t ContentCheckerVault::GetNumCheckers()
+    size_t ContentCheckerVault::GetNumCheckers() const
     {
-      return size_t(0);
+      return this->contentCheckers.size();
     }
 
-    ContentChecker * ContentCheckerVault::CreateExtraordinaryChecker()
+    void ContentCheckerVault::InitializeExtraordinaryChecker()
     {
-      return new ExtraordinaryChecker();
+      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new ExtraordinaryChecker()));
     }
 
-    ContentChecker * ContentCheckerVault::CreateExecutableChecker()
+    void ContentCheckerVault::InitializeExecutableChecker()
     {
-      return new ExecutableChecker();
+      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new ExecutableChecker()));
     }
 
-    ContentChecker * ContentCheckerVault::CreateExternalLinkChecker()
+    void ContentCheckerVault::InitializeExternalLinkChecker()
     {
-      return new ExternalLinkChecker();
+      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new ExternalLinkChecker()));
     }
 
-    ContentChecker * ContentCheckerVault::CreateMacroChecker()
+    void ContentCheckerVault::InitializeMacroChecker()
     {
-      return new MacroChecker();
+      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new MacroChecker()));
+    }
+
+    bool ContentCheckerVault::HasExtraordinaryChecker() const
+    {
+      for (auto& contentChecker : this->contentCheckers) {
+        if (dynamic_cast<ExtraordinaryChecker*>(contentChecker.get())) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    bool ContentCheckerVault::HasExecutableChecker() const
+    {
+      for (auto& contentChecker : this->contentCheckers) {
+        if (dynamic_cast<ExecutableChecker*>(contentChecker.get())) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    bool ContentCheckerVault::HasExternalLinkChecker() const
+    {
+      for (auto& contentChecker : this->contentCheckers) {
+        if (dynamic_cast<ExternalLinkChecker*>(contentChecker.get())) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    bool ContentCheckerVault::HasMacroChecker() const
+    {
+      for (auto& contentChecker : this->contentCheckers) {
+        if (dynamic_cast<MacroChecker*>(contentChecker.get())) {
+          return true;
+        }
+      }
+      return false;
     }
   }
 }

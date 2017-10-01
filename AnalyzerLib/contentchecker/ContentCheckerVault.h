@@ -23,12 +23,20 @@ namespace analyzer {
       ContentCheckerVault();
       ~ContentCheckerVault();
 
-      size_t GetNumCheckers();
+      size_t GetNumCheckers() const;
 
-      ContentChecker * CreateExtraordinaryChecker();
-      ContentChecker * CreateExecutableChecker();
-      ContentChecker * CreateExternalLinkChecker();
-      ContentChecker * CreateMacroChecker();
+      void InitializeExtraordinaryChecker();
+      void InitializeExecutableChecker();
+      void InitializeExternalLinkChecker();
+      void InitializeMacroChecker();
+
+      bool HasExtraordinaryChecker() const;
+      bool HasExecutableChecker() const;
+      bool HasExternalLinkChecker() const;
+      bool HasMacroChecker() const;
+
+    private:
+      std::vector<std::unique_ptr<ContentChecker>> contentCheckers;
     };
   }
 }

@@ -34,7 +34,6 @@ namespace analyzer{
       base::AnalyzerBase & analyzerBase;
 
       void initCheckers();
-      void connectChecker(checker::ContentChecker * contentChecker);
 
       void throwMainWindow();
     };
