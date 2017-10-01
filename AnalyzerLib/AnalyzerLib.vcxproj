@@ -170,7 +170,10 @@
     <ClCompile Include="cast\SingleByteCast.cpp" />
     <ClCompile Include="contentchecker\ContentChecker.cpp" />
     <ClCompile Include="contentchecker\ContentCheckerVault.cpp" />
+    <ClCompile Include="contentchecker\ExecutableChecker.cpp" />
+    <ClCompile Include="contentchecker\ExternalLinkChecker.cpp" />
     <ClCompile Include="contentchecker\ExtraordinaryChecker.cpp" />
+    <ClCompile Include="contentchecker\MacroChecker.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
     <ClCompile Include="core\InternalFile.cpp" />
@@ -208,7 +211,10 @@
     <ClInclude Include="contentchecker\ContentChecker.h" />
     <ClInclude Include="contentchecker\ContentCheckerVault.h" />
     <ClInclude Include="contentchecker\error\ContentCheckException.h" />
+    <ClInclude Include="contentchecker\ExecutableChecker.h" />
+    <ClInclude Include="contentchecker\ExternalLinkChecker.h" />
     <ClInclude Include="contentchecker\ExtraordinaryChecker.h" />
+    <ClInclude Include="contentchecker\MacroChecker.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />

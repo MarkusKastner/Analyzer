@@ -30,6 +30,9 @@
 #include "contentchecker/ContentCheckerTest.h"
 #include "contentchecker/ContentCheckerVaultTest.h"
 #include "contentchecker/ExtraordinaryCheckerTest.h"
+#include "contentchecker/ExecutableCheckerTest.h"
+#include "contentchecker/ExternalLinkCheckerTest.h"
+#include "contentchecker/MacroCheckerTest.h"
 
 int main(int argc, char** argv) {
 

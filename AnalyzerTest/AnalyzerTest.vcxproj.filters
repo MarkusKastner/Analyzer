@@ -150,6 +150,15 @@
     <ClCompile Include="..\AnalyzerLib\contentchecker\ExtraordinaryChecker.cpp">
       <Filter>contentchecker</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\ExecutableChecker.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\ExternalLinkChecker.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\MacroChecker.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -345,6 +354,24 @@
       <Filter>contentchecker</Filter>
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\contentchecker\ExtraordinaryChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ExecutableCheckerTest.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ExternalLinkCheckerTest.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\MacroCheckerTest.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\ExecutableChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\ExternalLinkChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\MacroChecker.h">
       <Filter>contentchecker</Filter>
     </ClInclude>
   </ItemGroup>

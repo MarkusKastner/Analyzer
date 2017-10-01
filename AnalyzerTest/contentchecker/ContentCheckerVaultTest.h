@@ -11,6 +11,9 @@
 
 #include "AnalyzerLib/contentchecker/ContentCheckerVault.h"
 #include "AnalyzerLib/contentchecker/ExtraordinaryChecker.h"
+#include "AnalyzerLib/contentchecker/ExecutableChecker.h"
+#include "AnalyzerLib/contentchecker/ExternalLinkChecker.h"
+#include "AnalyzerLib/contentchecker/MacroChecker.h"
 
 class ContentCheckerVaultTest : public testing::Test
 {
@@ -41,4 +44,21 @@ TEST_F(ContentCheckerVaultTest, extraordinaryChecker)
   ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExtraordinaryChecker*>(checker)));
 }
 
+TEST_F(ContentCheckerVaultTest, executableChecker)
+{
+  auto checker(contentCheckerVault.CreateExecutableChecker());
+  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExecutableChecker*>(checker)));
+}
+
+TEST_F(ContentCheckerVaultTest, externalLinkChecker)
+{
+  auto checker(contentCheckerVault.CreateExternalLinkChecker());
+  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExternalLinkChecker*>(checker)));
+}
+
+TEST_F(ContentCheckerVaultTest, macroChecker)
+{
+  auto checker(contentCheckerVault.CreateMacroChecker());
+  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::MacroChecker*>(checker)));
+}
 #endif

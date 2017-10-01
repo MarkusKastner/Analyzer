@@ -26,6 +26,9 @@ namespace analyzer {
       size_t GetNumCheckers();
 
       ContentChecker * CreateExtraordinaryChecker();
+      ContentChecker * CreateExecutableChecker();
+      ContentChecker * CreateExternalLinkChecker();
+      ContentChecker * CreateMacroChecker();
     };
   }
 }

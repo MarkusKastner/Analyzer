@@ -136,6 +136,15 @@
     <ClCompile Include="contentchecker\ExtraordinaryChecker.cpp">
       <Filter>contentchecker</Filter>
     </ClCompile>
+    <ClCompile Include="contentchecker\ExecutableChecker.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
+    <ClCompile Include="contentchecker\ExternalLinkChecker.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
+    <ClCompile Include="contentchecker\MacroChecker.cpp">
+      <Filter>contentchecker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\error\CoreException.h">
@@ -277,6 +286,15 @@
       <Filter>contentchecker</Filter>
     </ClInclude>
     <ClInclude Include="contentchecker\ExtraordinaryChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ExecutableChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\ExternalLinkChecker.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\MacroChecker.h">
       <Filter>contentchecker</Filter>
     </ClInclude>
   </ItemGroup>
