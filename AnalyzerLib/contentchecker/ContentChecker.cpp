@@ -45,8 +45,18 @@ namespace analyzer {
       return this->workingColor;
     }
 
+    bool ContentChecker::HasData()
+    {
+      return (this->data.get() != nullptr);
+    }
+
+    void ContentChecker::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      this->data = data;
+    }
+
     ContentChecker::ContentChecker()
-      :checkObservers(), workingColor({0,0,0})
+      :checkObservers(), workingColor({0,0,0}), data()
     {
     }
   }
