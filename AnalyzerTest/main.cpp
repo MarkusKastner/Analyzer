@@ -29,6 +29,7 @@
 #include "base/ApplicationSettingsTest.h"
 #include "contentchecker/ContentCheckerTest.h"
 #include "contentchecker/ContentCheckerVaultTest.h"
+#include "contentchecker/ExtraordinaryCheckerTest.h"
 
 int main(int argc, char** argv) {
 

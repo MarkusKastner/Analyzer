@@ -4,19 +4,21 @@
 * Written by Markus Kastner <markus.kastner@marscode.at>
 */
 
-#include "ContentCheckerVault.h"
+#include "ExtraOrdinaryChecker.h"
 
 namespace analyzer {
   namespace checker {
-    ContentCheckerVault::ContentCheckerVault()
+    ExtraOrdinaryChecker::ExtraOrdinaryChecker()
+      :ContentChecker()
     {
     }
-    ContentCheckerVault::~ContentCheckerVault()
+
+    ExtraOrdinaryChecker::~ExtraOrdinaryChecker()
     {
     }
-    size_t ContentCheckerVault::GetNumCheckers()
+
+    void ExtraOrdinaryChecker::checkData()
     {
-      return size_t(0);
     }
   }
 }
