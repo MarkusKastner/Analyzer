@@ -6,6 +6,8 @@
 
 #include "ContentCheckerVault.h"
 
+#include "AnalyzerLib/contentchecker/ExtraordinaryChecker.h"
+
 namespace analyzer {
   namespace checker {
     ContentCheckerVault::ContentCheckerVault()
@@ -17,6 +19,11 @@ namespace analyzer {
     size_t ContentCheckerVault::GetNumCheckers()
     {
       return size_t(0);
+    }
+
+    ContentChecker * ContentCheckerVault::CreateExtraordinaryChecker()
+    {
+      return new ExtraordinaryChecker();
     }
   }
 }

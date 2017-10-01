@@ -11,10 +11,10 @@
 
 #include "AnalyzerLib/contentchecker/ExtraOrdinaryChecker.h"
 
-class ExtraOrdinaryCheckerTest : public testing::Test
+class ExtraordinaryCheckerTest : public testing::Test
 {
 public:
-  ExtraOrdinaryCheckerTest()
+  ExtraordinaryCheckerTest()
     : testing::Test()
   {
   }
@@ -22,14 +22,14 @@ public:
   void SetUp() {
   }
 
-  virtual ~ExtraOrdinaryCheckerTest() {
+  virtual ~ExtraordinaryCheckerTest() {
   }
 
 };
 
-TEST_F(ExtraOrdinaryCheckerTest, init)
+TEST_F(ExtraordinaryCheckerTest, init)
 {
-  analyzer::checker::ExtraOrdinaryChecker checker;
+  analyzer::checker::ExtraordinaryChecker checker;
   ASSERT_FALSE(checker.HasData());
 }
 

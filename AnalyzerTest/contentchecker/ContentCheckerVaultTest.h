@@ -10,12 +10,13 @@
 #include <gtest/gtest.h>
 
 #include "AnalyzerLib/contentchecker/ContentCheckerVault.h"
+#include "AnalyzerLib/contentchecker/ExtraordinaryChecker.h"
 
 class ContentCheckerVaultTest : public testing::Test
 {
 public:
   ContentCheckerVaultTest()
-    : testing::Test()
+    : testing::Test(), contentCheckerVault()
   {
   }
 
@@ -25,12 +26,19 @@ public:
   virtual ~ContentCheckerVaultTest(){
   }
 
+  analyzer::checker::ContentCheckerVault contentCheckerVault;
 };
 
 TEST_F(ContentCheckerVaultTest, init)
 {
   analyzer::checker::ContentCheckerVault vault;
   ASSERT_EQ(vault.GetNumCheckers(), 0);
+}
+
+TEST_F(ContentCheckerVaultTest, extraordinaryChecker)
+{
+  auto checker(contentCheckerVault.CreateExtraordinaryChecker());
+  ASSERT_TRUE(static_cast<bool>(dynamic_cast<analyzer::checker::ExtraordinaryChecker*>(checker)));
 }
 
 #endif

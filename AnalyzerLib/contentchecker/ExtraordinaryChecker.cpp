@@ -4,20 +4,20 @@
 * Written by Markus Kastner <markus.kastner@marscode.at>
 */
 
-#include "ExtraOrdinaryChecker.h"
+#include "ExtraordinaryChecker.h"
 
 namespace analyzer {
   namespace checker {
-    ExtraOrdinaryChecker::ExtraOrdinaryChecker()
+    ExtraordinaryChecker::ExtraordinaryChecker()
       :ContentChecker()
     {
     }
 
-    ExtraOrdinaryChecker::~ExtraOrdinaryChecker()
+    ExtraordinaryChecker::~ExtraordinaryChecker()
     {
     }
 
-    void ExtraOrdinaryChecker::checkData()
+    void ExtraordinaryChecker::checkData()
     {
     }
   }

@@ -13,6 +13,7 @@
 #include <thread>
 
 #include "AnalyzerLib/base/BaseData.h"
+#include "ContentChecker.h"
 
 namespace analyzer {
   namespace checker {
@@ -23,6 +24,8 @@ namespace analyzer {
       ~ContentCheckerVault();
 
       size_t GetNumCheckers();
+
+      ContentChecker * CreateExtraordinaryChecker();
     };
   }
 }

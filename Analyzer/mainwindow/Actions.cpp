@@ -14,6 +14,8 @@
 #include "AnalyzeResultTab.h"
 #include "Analyzer\dialogs\AnalyzeDock.h"
 
+#include "AnalyzerLib/contentchecker/ContentCheckerVault.h"
+
 namespace analyzer{
   namespace gui{
     Actions::Actions(MainWindow * mainWindow, base::AnalyzerBase & analyzerBase)
@@ -68,7 +70,7 @@ namespace analyzer{
       }
 
       if (this->mainWindow->GetAnalyzeDock()->CheckExtraordinary()) {
-        //this->connectChecker(this->analyzerBase.GetContentCheckerVault()->CreateExtraordinaryChecker());
+        this->connectChecker(this->analyzerBase.GetContentCheckerVault().CreateExtraordinaryChecker());
       }
       if (this->mainWindow->GetAnalyzeDock()->CheckExecutable()) {
 

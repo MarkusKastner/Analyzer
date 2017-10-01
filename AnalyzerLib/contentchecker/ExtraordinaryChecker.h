@@ -11,11 +11,11 @@
 
 namespace analyzer {
   namespace checker {
-    class ExtraOrdinaryChecker : public ContentChecker
+    class ExtraordinaryChecker : public ContentChecker
     {
     public:
-      ExtraOrdinaryChecker();
-      virtual ~ExtraOrdinaryChecker();
+      ExtraordinaryChecker();
+      virtual ~ExtraordinaryChecker();
 
     protected:
       virtual void checkData();
