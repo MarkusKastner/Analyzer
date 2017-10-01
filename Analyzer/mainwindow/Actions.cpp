@@ -7,12 +7,14 @@
 #include "Actions.h"
 
 #include <QFileDialog>
+#include <QMessageBox>
 
-#include "application\error\AppException.h"
-#include "mainwindow\MainWindow.h"
+#include "application/error/AppException.h"
+#include "mainwindow/MainWindow.h"
 #include "AnalyzerTab.h"
 #include "AnalyzeResultTab.h"
-#include "Analyzer\dialogs\AnalyzeDock.h"
+#include "Analyzer/dialogs/AnalyzeDock.h"
+#include "Analyzer/mainwindow/ViewTab.h"
 
 #include "AnalyzerLib/contentchecker/ContentCheckerVault.h"
 
@@ -65,22 +67,33 @@ namespace analyzer{
 
     void Actions::initCheckers()
     {
-      if (!this->mainWindow->HasAnalyzeDock()) {
-        return;
-      }
+      try {
+        if (!this->mainWindow->HasAnalyzeDock()) {
+          return;
+        }
 
-      if (this->mainWindow->GetAnalyzeDock()->CheckExtraordinary()) {
-        this->analyzerBase.GetContentCheckerVault().InitializeExtraordinaryChecker();
+        if (this->mainWindow->GetAnalyzeDock()->CheckExtraordinary()) {
+          this->analyzerBase.GetContentCheckerVault().InitializeExtraordinaryChecker();
+        }
+        if (this->mainWindow->GetAnalyzeDock()->CheckExecutable()) {
+          this->analyzerBase.GetContentCheckerVault().InitializeExecutableChecker();
+        }
+        if (this->mainWindow->GetAnalyzeDock()->CheckExternalLinks()) {
+          this->analyzerBase.GetContentCheckerVault().InitializeExternalLinkChecker();
+        }
+        if (this->mainWindow->GetAnalyzeDock()->CheckMacros()) {
+          this->analyzerBase.GetContentCheckerVault().InitializeMacroChecker();
+        }
+
+        if (this->mainWindow->tabWidget != nullptr && this->mainWindow->tabWidget->HasHexTab()) {
+          this->analyzerBase.GetContentCheckerVault().RegisterCheckObserver(this->mainWindow->tabWidget->GetHexTab());
+        }
+
+        this->analyzerBase.GetContentCheckerVault().RunChecker();
       }
-      if (this->mainWindow->GetAnalyzeDock()->CheckExecutable()) {
-        this->analyzerBase.GetContentCheckerVault().InitializeExecutableChecker();
+      catch (std::exception & ex) {
+        QMessageBox::information(this->mainWindow, "Error", ex.what());
       }
-      if (this->mainWindow->GetAnalyzeDock()->CheckExternalLinks()) {
-        this->analyzerBase.GetContentCheckerVault().InitializeExternalLinkChecker();
-      }
-      if (this->mainWindow->GetAnalyzeDock()->CheckMacros()) {
-        this->analyzerBase.GetContentCheckerVault().InitializeMacroChecker();
-       }
     }
 
     void Actions::throwMainWindow()

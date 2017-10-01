@@ -222,5 +222,8 @@
     <CustomBuild Include="display\maindisplay\HexTableWidget.h">
       <Filter>display\maindisplay</Filter>
     </CustomBuild>
+    <CustomBuild Include="display\maindisplay\HexTableWidgetItem.h">
+      <Filter>display\maindisplay</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

@@ -32,6 +32,8 @@ namespace analyzer {
 
       ViewTab * AddHexTab();
       void ClearHexTab();
+      bool HasHexTab() const;
+      ViewTab * GetHexTab();
 
       bool IsAnalyzeResultTabInitialized() const;
       AnalyzeResultTab * GetAnalyzeResultTab() const;

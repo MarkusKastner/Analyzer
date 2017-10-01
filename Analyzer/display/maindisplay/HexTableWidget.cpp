@@ -18,12 +18,13 @@
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\HEXInterpreter.h"
+#include "HexTableWidgetItem.h"
 
 namespace analyzer {
   namespace gui {
     namespace display {
       HexTableWidget::HexTableWidget(HexBrowser * parent)
-        :QTableWidget(parent), browser(parent)
+        :QTableWidget(parent), browser(parent), hexTableWidgetItems()
       {
         this->setup();
       }
@@ -57,20 +58,36 @@ namespace analyzer {
 
         auto verticalItem = new QTableWidgetItem(offsetStr);
         verticalItem->setFlags(verticalItem->flags() ^ Qt::ItemIsEditable);
+        verticalItem->setFlags(verticalItem->flags() ^ Qt::ItemIsSelectable);
         this->setVerticalHeaderItem(numRows, new QTableWidgetItem(offsetStr));
 
         size_t i = 0;
-        for (; i < hexExp.HexValues.size(); i++) {
-          auto item = new QTableWidgetItem(hexExp.HexValues[i].c_str());
+        size_t size = hexExp.HexValues.size();
+        for (; i < size; i++) {
+          auto HexVal = hexExp.HexValues[i];
+          auto item = new HexTableWidgetItem(HexVal.Expression, HexVal.Index);
           item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+          this->hexTableWidgetItems.push_back(item);
           this->setItem(numRows, i, item);
           this->item(numRows, i)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
         }
 
         auto item = new QTableWidgetItem(QString::fromLatin1(hexExp.ASCII.c_str()));
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        item->setFlags(item->flags() ^ Qt::ItemIsSelectable);
         this->setItem(numRows, 16, item);
         this->item(numRows, 16)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
+      }
+
+      void HexTableWidget::MarkIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color)
+      {
+        for (auto& itm : this->hexTableWidgetItems) {
+          if (itm->GetIndex() == markedIndex) {
+            itm->setBackgroundColor(QColor(color.r, color.g, color.b));
+            this->viewport()->update();
+            return;
+          }
+        }
       }
 
       void HexTableWidget::onSelection()

@@ -9,6 +9,9 @@
 
 #include <QWidget>
 
+#include "AnalyzerLib/contentchecker/CheckObserver.h"
+#include "AnalyzerLib/base/BaseData.h"
+
 namespace analyzer {
   namespace core {
     class File;
@@ -18,7 +21,7 @@ namespace analyzer {
       class ViewOutput;
     }
     class AnalyzerTab;
-    class ViewTab : public QWidget
+    class ViewTab : public QWidget, public checker::CheckObserver
     {
       Q_OBJECT
     private:
@@ -30,6 +33,10 @@ namespace analyzer {
 
       void SetFile(core::File * file);
       void ClearFile();
+
+      virtual void NotifyCheckRunFinished();
+      virtual void NotifyCurrentIndex(const size_t & checkIndex);
+      virtual void NotifyMarkedIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color);
 
     private:
       display::ViewOutput * viewOutput;

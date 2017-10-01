@@ -91,6 +91,11 @@ namespace analyzer{
       return this->analyzeDock;
     }
 
+    base::AnalyzerBase & MainWindow::GetAnalyzerBase() const
+    {
+      return this->analyzerBase;
+    }
+
     void MainWindow::setup()
     {
       this->analyzerBase.RegisterObserver(this);

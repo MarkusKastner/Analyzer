@@ -35,8 +35,19 @@ namespace analyzer {
       bool HasExternalLinkChecker() const;
       bool HasMacroChecker() const;
 
+      void RegisterCheckObserver(CheckObserver * observer);
+      void UnregisterCheckObserver(CheckObserver * observer);
+
+      void RunChecker();
+      void SetCurrentData(const std::shared_ptr<std::vector<unsigned char>> & data);
+
     private:
-      std::vector<std::unique_ptr<ContentChecker>> contentCheckers;
+      std::vector<std::shared_ptr<ContentChecker>> contentCheckers;
+      std::shared_ptr<std::vector<unsigned char>> data;
+      std::vector<CheckObserver*> checkObservers;
+
+      void registerObservers(ContentChecker * contentChecker);
+      void unregisterObservers(ContentChecker * contentChecker);
     };
   }
 }

@@ -76,9 +76,11 @@ namespace analyzer {
       std::vector<HEXInterpreter::HexRow> rows;
       HEXInterpreter::HexRow row;
 
-      for (auto& hexExp : this->hex) {
-        row.HexValues.push_back(hexExp.first);
-        row.ASCII += hexExp.second;
+      size_t size = this->hex.size();
+
+      for (size_t i = 0; i < size; ++i) {
+        row.HexValues.push_back({ this->hex[i].first, i });
+        row.ASCII += this->hex[i].second;
         if (row.HexValues.size() >= 16) {
           rows.push_back(row);
           row.HexValues.clear();

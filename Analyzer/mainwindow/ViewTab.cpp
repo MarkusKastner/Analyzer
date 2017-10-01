@@ -81,6 +81,24 @@ namespace analyzer {
       }
     }
 
+    void ViewTab::NotifyCheckRunFinished()
+    {
+    }
+
+    void ViewTab::NotifyCurrentIndex(const size_t & checkIndex)
+    {
+      if (dynamic_cast<display::HexBrowser*>(this->viewOutput)) {
+        
+      }
+    }
+
+    void ViewTab::NotifyMarkedIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color)
+    {
+      if (dynamic_cast<display::HexBrowser*>(this->viewOutput)) {
+        dynamic_cast<display::HexBrowser*>(this->viewOutput)->MarkIndex(markedIndex, color);
+      }
+    }
+
     void ViewTab::setup()
     {
       this->setLayout(new QVBoxLayout());

@@ -14,7 +14,7 @@
 namespace analyzer {
   namespace checker {
     ContentCheckerVault::ContentCheckerVault()
-      :contentCheckers()
+      :contentCheckers(), data(), checkObservers()
     {
     }
 
@@ -29,22 +29,47 @@ namespace analyzer {
 
     void ContentCheckerVault::InitializeExtraordinaryChecker()
     {
-      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new ExtraordinaryChecker()));
+      if (!this->data) {
+        return;
+      }
+      std::shared_ptr<ContentChecker> checker(new ExtraordinaryChecker());
+      checker->SetWorkingColor({ 0, 255, 255 });
+      this->registerObservers(checker.get());
+      this->contentCheckers.push_back(checker);
     }
 
     void ContentCheckerVault::InitializeExecutableChecker()
     {
-      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new ExecutableChecker()));
+      if (!this->data) {
+        return;
+      }
+      std::shared_ptr<ContentChecker> checker(new ExecutableChecker());
+      checker->SetWorkingColor({ 255, 0, 0 });
+      this->registerObservers(checker.get());
+      this->contentCheckers.push_back(checker);
     }
 
     void ContentCheckerVault::InitializeExternalLinkChecker()
     {
-      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new ExternalLinkChecker()));
+      if (!this->data) {
+        return;
+      }
+      std::shared_ptr<ContentChecker> checker(new ExternalLinkChecker());
+      checker->SetWorkingColor({ 255, 51, 204 });
+      this->registerObservers(checker.get());
+      this->contentCheckers.push_back(checker);
     }
 
     void ContentCheckerVault::InitializeMacroChecker()
     {
-      this->contentCheckers.push_back(std::unique_ptr<ContentChecker>(new MacroChecker()));
+      if (!this->data) {
+        return;
+      }
+      std::shared_ptr<ContentChecker> checker(new MacroChecker());
+      checker->SetWorkingColor({ 0, 255, 0 });
+      checker->SetData(this->data);
+      this->registerObservers(checker.get());
+      this->contentCheckers.push_back(checker);
     }
 
     bool ContentCheckerVault::HasExtraordinaryChecker() const
@@ -85,6 +110,54 @@ namespace analyzer {
         }
       }
       return false;
+    }
+
+    void ContentCheckerVault::RegisterCheckObserver(CheckObserver * observer)
+    {
+      for (auto& existing : this->checkObservers) {
+        if (existing == observer) {
+          return;
+        }
+      }
+      this->checkObservers.push_back(observer);
+    }
+
+    void ContentCheckerVault::UnregisterCheckObserver(CheckObserver * observer)
+    {
+      std::vector<CheckObserver*>::iterator end = this->checkObservers.end();
+
+      for (auto it = this->checkObservers.begin(); it != end; ++it) {
+        if ((*it) == observer) {
+          it = this->checkObservers.erase(it);
+          return;
+        }
+      }
+    }
+
+    void ContentCheckerVault::RunChecker()
+    {
+      for (auto& contentChecker : this->contentCheckers) {
+        contentChecker->StartCheck();
+      }
+    }
+
+    void ContentCheckerVault::SetCurrentData(const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      this->data = data;
+    }
+
+    void ContentCheckerVault::registerObservers(ContentChecker * contentChecker)
+    {
+      for (auto& observer : this->checkObservers) {
+        contentChecker->RegisterCheckObserver(observer);
+      }
+    }
+
+    void ContentCheckerVault::unregisterObservers(ContentChecker * contentChecker)
+    {
+      for (auto& observer : this->checkObservers) {
+        contentChecker->UnregisterCheckObserver(observer);
+      }
     }
   }
 }

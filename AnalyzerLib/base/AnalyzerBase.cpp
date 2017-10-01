@@ -196,7 +196,7 @@ namespace analyzer{
           return exisiting.get();
         }
       }
-      throw AnalyzerBaseException("unknown file");
+      return nullptr;
     }
 
     std::vector<std::string> AnalyzerBase::GetFileNames()
@@ -215,6 +215,7 @@ namespace analyzer{
       for (auto& exisiting : this->files){
         if (exisiting->GetFileName().compare(fileName) == 0){
           this->documentPath = fileName;
+          this->checkerVault.SetCurrentData(exisiting->GetData());
           this->activeFileChanged();
           return;
         }

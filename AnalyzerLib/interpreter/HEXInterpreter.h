@@ -17,9 +17,15 @@ namespace analyzer {
     class HEXInterpreter : public Interpreter
     {
     public:
+      struct HexValue
+      {
+        std::string Expression;
+        size_t Index;
+      };
+
       struct HexRow
       {
-        std::vector<std::string> HexValues;
+        std::vector<HexValue> HexValues;
         std::string ASCII;
       };
 

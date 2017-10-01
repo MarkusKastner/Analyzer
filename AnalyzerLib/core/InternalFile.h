@@ -28,7 +28,7 @@ namespace analyzer {
       virtual bool IsLoaded();
       virtual size_t GetSize();
 
-      const std::shared_ptr<std::vector<unsigned char>> & GetData();
+      virtual const std::shared_ptr<std::vector<unsigned char>> & GetData();
 
     protected:
       virtual std::shared_ptr<std::vector<unsigned char>> cloneData();

@@ -29,6 +29,7 @@ namespace analyzer{
 
       virtual bool IsLoaded() = 0;
       virtual size_t GetSize() = 0;
+      virtual const std::shared_ptr<std::vector<unsigned char>> & GetData() = 0;
 
       const std::string & GetFileName();
       const std::vector<std::string> & GetPath();

@@ -78,6 +78,11 @@ namespace analyzer {
         this->rgb->Clear();
       }
 
+      void HexBrowser::MarkIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color)
+      {
+        this->tableWidget->MarkIndex(markedIndex, color);
+      }
+
       void HexBrowser::setup()
       {
         this->setLayout(new QHBoxLayout());

@@ -7,6 +7,8 @@
 #include "AnalyzerTab.h"
 #include "ViewTab.h"
 #include "AnalyzeResultTab.h"
+#include "mainwindow\MainWindow.h"
+#include "AnalyzerLib/base/AnalyzerBase.h"
 
 namespace analyzer {
   namespace gui {
@@ -35,7 +37,9 @@ namespace analyzer {
       if (this->hexTab == nullptr) {
         this->hexTab = new ViewTab(this);
         this->addTab(this->hexTab, tr("Hex"));
-        
+        if (dynamic_cast<MainWindow*>(this->parent())) {
+          dynamic_cast<MainWindow*>(this->parent())->GetAnalyzerBase().GetContentCheckerVault().RegisterCheckObserver(this->hexTab);
+        }
       }
       return this->hexTab;
     }
@@ -52,6 +56,21 @@ namespace analyzer {
       }
       delete this->hexTab;
       this->hexTab = nullptr;
+    }
+
+    bool AnalyzerTab::HasHexTab() const
+    {
+      for (int i = 0; i < this->count(); i++) {
+        if (this->widget(i)->windowTitle().compare("Hex") == 0) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    ViewTab * AnalyzerTab::GetHexTab()
+    {
+      return nullptr;
     }
 
     bool AnalyzerTab::IsAnalyzeResultTabInitialized() const

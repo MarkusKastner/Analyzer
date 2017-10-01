@@ -7,6 +7,8 @@
 #ifndef CHECKOBSERVER_H
 #define CHECKOBSERVER_H
 
+#include "AnalyzerLib\base\BaseData.h"
+
 namespace analyzer {
   namespace checker {
     class CheckObserver

@@ -46,6 +46,7 @@ namespace analyzer{
 
       bool HasAnalyzeDock() const;
       AnalyzeDock * GetAnalyzeDock() const;
+      base::AnalyzerBase & GetAnalyzerBase() const;
 
     private:
       friend class Actions;

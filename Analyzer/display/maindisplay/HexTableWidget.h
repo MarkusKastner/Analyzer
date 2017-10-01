@@ -27,6 +27,7 @@ namespace analyzer {
   namespace gui {
     namespace display {
       class HexBrowser;
+      class HexTableWidgetItem;
       class HexTableWidget : public QTableWidget, public ViewOutput
       {
         Q_OBJECT
@@ -38,10 +39,12 @@ namespace analyzer {
         virtual void ClearFile();
 
         void AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp);
+        void MarkIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color);
 
       private:
         core::File * file;
         HexBrowser * browser;
+        std::vector<HexTableWidgetItem*> hexTableWidgetItems;
 
         void onSelection();
         void setup();
