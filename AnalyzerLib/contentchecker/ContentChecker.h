@@ -29,6 +29,7 @@ namespace analyzer {
 
       bool HasData();
       void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      void ReleaseData();
 
     protected:
       ContentChecker();

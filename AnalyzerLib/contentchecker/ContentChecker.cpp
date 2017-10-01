@@ -55,6 +55,13 @@ namespace analyzer {
       this->data = data;
     }
 
+    void ContentChecker::ReleaseData()
+    {
+      if (this->data) {
+        this->data.reset();
+      }
+    }
+
     ContentChecker::ContentChecker()
       :checkObservers(), workingColor({0,0,0}), data()
     {
