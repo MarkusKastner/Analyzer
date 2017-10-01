@@ -111,10 +111,7 @@ namespace analyzer {
     void ContentChecker::checkRoutine()
     {
       this->runCheck = true;
-      do {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-      } 
-      while (this->runCheck.load());
+      this->checkData();
     }
   }
 }

@@ -44,6 +44,8 @@ namespace analyzer {
     protected:
       ContentChecker();
 
+      virtual void checkData() = 0;
+
     private:
       std::vector<CheckObserver*> checkObservers;
       base::AnalyzerRGB workingColor;
