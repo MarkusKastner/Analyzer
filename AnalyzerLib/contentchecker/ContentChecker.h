@@ -40,12 +40,12 @@ namespace analyzer {
       bool IsChecking() const;
       void StartCheck();
       void StopCheck();
+      bool IsFinished() const;
 
     protected:
       ContentChecker();
 
       virtual void checkData() = 0;
-
     private:
       std::vector<CheckObserver*> checkObservers;
       base::AnalyzerRGB workingColor;
@@ -53,9 +53,11 @@ namespace analyzer {
       size_t startOffest;
       size_t checkOffest;
       std::atomic<bool> runCheck;
+      std::atomic<bool> finished;
       std::unique_ptr<std::thread> checkThread;
 
       void checkRoutine();
+      void notifyCheckFinished();
     };
   }
 }

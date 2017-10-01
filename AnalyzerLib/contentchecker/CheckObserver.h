@@ -12,7 +12,7 @@ namespace analyzer {
     class CheckObserver
     {
     public:
-
+      virtual void NotifyCheckRunFinished() = 0;
     };
   }
 }

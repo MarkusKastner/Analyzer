@@ -106,16 +106,32 @@ namespace analyzer {
       std::this_thread::sleep_for(std::chrono::milliseconds(70));
     }
 
+    bool ContentChecker::IsFinished() const
+    {
+      return this->finished.load();
+    }
+
     ContentChecker::ContentChecker()
       :checkObservers(), workingColor({0,0,0}), data(),
-      startOffest(0), checkOffest(0), runCheck(false)
+      startOffest(0), checkOffest(0), runCheck(false), finished(false)
     {
     }
 
     void ContentChecker::checkRoutine()
     {
+      this->finished = false;
       this->runCheck = true;
       this->checkData();
+      this->runCheck = false;
+      this->finished = true;
+      this->notifyCheckFinished();
+    }
+
+    void ContentChecker::notifyCheckFinished()
+    {
+      for (auto& observer : this->checkObservers) {
+        observer->NotifyCheckRunFinished();
+      }
     }
   }
 }
