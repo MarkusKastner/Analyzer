@@ -117,6 +117,25 @@ namespace analyzer {
     {
     }
 
+    const std::shared_ptr<std::vector<unsigned char>> & ContentChecker::getData()
+    {
+      return this->data;
+    }
+
+    void ContentChecker::notifyCurrentIndex(const size_t index)
+    {
+      for (auto& observer : this->checkObservers) {
+        observer->NotifyCurrentIndex(index);
+      }
+    }
+
+    void ContentChecker::notifyMarkedIndex(const size_t index)
+    {
+      for (auto& observer : this->checkObservers) {
+        observer->NotifyMarkedIndex(index, this->workingColor);
+      }
+    }
+
     void ContentChecker::checkRoutine()
     {
       this->finished = false;

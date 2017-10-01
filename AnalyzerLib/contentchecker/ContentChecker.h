@@ -46,6 +46,11 @@ namespace analyzer {
       ContentChecker();
 
       virtual void checkData() = 0;
+      
+      const std::shared_ptr<std::vector<unsigned char>> & getData();
+      void notifyCurrentIndex(const size_t index);
+      void notifyMarkedIndex(const size_t index);
+
     private:
       std::vector<CheckObserver*> checkObservers;
       base::AnalyzerRGB workingColor;

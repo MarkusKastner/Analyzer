@@ -13,6 +13,8 @@ namespace analyzer {
     {
     public:
       virtual void NotifyCheckRunFinished() = 0;
+      virtual void NotifyCurrentIndex(const size_t & checkIndex) = 0;
+      virtual void NotifyMarkedIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color) = 0;
     };
   }
 }
