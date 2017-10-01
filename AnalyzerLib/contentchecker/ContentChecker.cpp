@@ -6,6 +6,10 @@ namespace analyzer {
   namespace checker {
     ContentChecker::~ContentChecker()
     {
+      this->StopCheck();
+      if (this->checkThread && this->checkThread->joinable()) {
+        this->checkThread->join();
+      }
     }
 
     size_t ContentChecker::GetNumCheckObservers() const
@@ -86,13 +90,31 @@ namespace analyzer {
 
     void ContentChecker::StartCheck()
     {
-      this->runCheck = true;
+      if (this->checkThread && this->checkThread->joinable()) {
+        this->checkThread->join();
+      }
+      this->checkThread.reset(new std::thread(&ContentChecker::checkRoutine, this));
+    }
+
+    void ContentChecker::StopCheck()
+    {
+      this->runCheck = false;
+      std::this_thread::sleep_for(std::chrono::milliseconds(70));
     }
 
     ContentChecker::ContentChecker()
       :checkObservers(), workingColor({0,0,0}), data(),
       startOffest(0), checkOffest(0), runCheck(false)
     {
+    }
+
+    void ContentChecker::checkRoutine()
+    {
+      this->runCheck = true;
+      do {
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+      } 
+      while (this->runCheck.load());
     }
   }
 }

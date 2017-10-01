@@ -10,6 +10,7 @@
 #include <vector>
 #include <memory>
 #include <atomic>
+#include <thread>
 
 #include "AnalyzerLib/base/BaseData.h"
 
@@ -38,6 +39,7 @@ namespace analyzer {
 
       bool IsChecking() const;
       void StartCheck();
+      void StopCheck();
 
     protected:
       ContentChecker();
@@ -49,6 +51,9 @@ namespace analyzer {
       size_t startOffest;
       size_t checkOffest;
       std::atomic<bool> runCheck;
+      std::unique_ptr<std::thread> checkThread;
+
+      void checkRoutine();
     };
   }
 }
