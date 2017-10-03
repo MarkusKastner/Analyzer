@@ -12,6 +12,11 @@
 
 #include <vector>
 #include <string>
+#include <queue>
+#include <thread>
+#include <memory>
+#include <atomic>
+#include <mutex>
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\base\BaseData.h"
@@ -39,16 +44,34 @@ namespace analyzer {
         virtual void ClearFile();
 
         void AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp);
-        void MarkIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color);
+        void MarkIndex(const analyzer::base::Marking & marking);
 
       private:
         core::File * file;
         HexBrowser * browser;
         std::vector<HexTableWidgetItem*> hexTableWidgetItems;
 
+        std::queue<analyzer::base::Marking> newMarkings;
+        std::queue<analyzer::base::AnalyzerRGB> colorToDelete;
+
+        std::unique_ptr<std::thread> markerThread;
+        std::atomic<bool> runMarker;
+        std::recursive_mutex newMarkingsLock;
+        std::recursive_mutex  colorToDeleteLock;
+
         void onSelection();
         void setup();
         void setDetailOutput(const std::vector<unsigned char> & bytes);
+
+        void markingRoutine();
+        bool hasColorToDelete();
+        analyzer::base::AnalyzerRGB fetchColorToDelete();
+        void deleteColor();
+
+        bool hasNewMarking();
+        void setNewMarking();
+        analyzer::base::Marking fetchNextMarking();
+
         interpreter::HEXInterpreter * getInterpreter();
       };
     }

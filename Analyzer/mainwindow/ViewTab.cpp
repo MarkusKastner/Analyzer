@@ -92,10 +92,10 @@ namespace analyzer {
       }
     }
 
-    void ViewTab::NotifyMarkedIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color)
+    void ViewTab::NotifyMarkedIndex(const analyzer::base::Marking & marking)
     {
       if (dynamic_cast<display::HexBrowser*>(this->viewOutput)) {
-        dynamic_cast<display::HexBrowser*>(this->viewOutput)->MarkIndex(markedIndex, color);
+        dynamic_cast<display::HexBrowser*>(this->viewOutput)->MarkIndex(marking);
       }
     }
 

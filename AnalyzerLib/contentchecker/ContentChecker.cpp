@@ -138,7 +138,7 @@ namespace analyzer {
     void ContentChecker::notifyMarkedIndex(const size_t index)
     {
       for (auto& observer : this->checkObservers) {
-        observer->NotifyMarkedIndex(index, this->workingColor);
+        observer->NotifyMarkedIndex({ index, this->workingColor });
       }
     }
 

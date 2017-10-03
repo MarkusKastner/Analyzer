@@ -19,17 +19,22 @@ class ContentCheckerVaultTest : public testing::Test
 {
 public:
   ContentCheckerVaultTest()
-    : testing::Test(), contentCheckerVault()
+    : testing::Test(), contentCheckerVault(), dummyData1(new std::vector<unsigned char>())
   {
   }
 
   void SetUp() {
+    for (unsigned char i = 65; i < 127; ++i) {
+      this->dummyData1->push_back(i);
+    }
+    this->contentCheckerVault.SetCurrentData(this->dummyData1);
   }
 
   virtual ~ContentCheckerVaultTest(){
   }
 
   analyzer::checker::ContentCheckerVault contentCheckerVault;
+  std::shared_ptr<std::vector<unsigned char>> dummyData1;
 };
 
 TEST_F(ContentCheckerVaultTest, init)
@@ -40,29 +45,29 @@ TEST_F(ContentCheckerVaultTest, init)
 
 TEST_F(ContentCheckerVaultTest, extraordinaryChecker)
 {
-  ASSERT_FALSE(contentCheckerVault.HasExtraordinaryChecker());
-  contentCheckerVault.InitializeExtraordinaryChecker();
-  ASSERT_TRUE(contentCheckerVault.HasExtraordinaryChecker());
+  ASSERT_FALSE(this->contentCheckerVault.HasExtraordinaryChecker());
+  this->contentCheckerVault.InitializeExtraordinaryChecker();
+  ASSERT_TRUE(this->contentCheckerVault.HasExtraordinaryChecker());
 }
 
 TEST_F(ContentCheckerVaultTest, executableChecker)
 {
-  ASSERT_FALSE(contentCheckerVault.HasExecutableChecker());
-  contentCheckerVault.InitializeExecutableChecker();
-  ASSERT_TRUE(contentCheckerVault.HasExecutableChecker());
+  ASSERT_FALSE(this->contentCheckerVault.HasExecutableChecker());
+  this->contentCheckerVault.InitializeExecutableChecker();
+  ASSERT_TRUE(this->contentCheckerVault.HasExecutableChecker());
 }
 
 TEST_F(ContentCheckerVaultTest, externalLinkChecker)
 {
-  ASSERT_FALSE(contentCheckerVault.HasExternalLinkChecker());
-  contentCheckerVault.InitializeExternalLinkChecker();
-  ASSERT_TRUE(contentCheckerVault.HasExternalLinkChecker());
+  ASSERT_FALSE(this->contentCheckerVault.HasExternalLinkChecker());
+  this->contentCheckerVault.InitializeExternalLinkChecker();
+  ASSERT_TRUE(this->contentCheckerVault.HasExternalLinkChecker());
 }
 
 TEST_F(ContentCheckerVaultTest, macroChecker)
 {
-  ASSERT_FALSE(contentCheckerVault.HasMacroChecker());
-  contentCheckerVault.InitializeMacroChecker();
-  ASSERT_TRUE(contentCheckerVault.HasMacroChecker());
+  ASSERT_FALSE(this->contentCheckerVault.HasMacroChecker());
+  this->contentCheckerVault.InitializeMacroChecker();
+  ASSERT_TRUE(this->contentCheckerVault.HasMacroChecker());
 }
 #endif

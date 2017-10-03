@@ -31,6 +31,23 @@ namespace analyzer{
       int g;
       int b;
     };
+
+    struct Marking
+    {
+      size_t Index;
+      AnalyzerRGB Color;
+    };
+  }
+}
+
+inline bool operator==(const analyzer::base::AnalyzerRGB & color1, const analyzer::base::AnalyzerRGB & color2) {
+  if (color1.r == color2.r ||
+    color1.g == color2.g ||
+    color1.b == color2.b) {
+    return true;
+  }
+  else {
+    return false;
   }
 }
 #endif

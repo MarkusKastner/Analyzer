@@ -24,13 +24,20 @@ namespace analyzer {
   namespace gui {
     namespace display {
       HexTableWidget::HexTableWidget(HexBrowser * parent)
-        :QTableWidget(parent), browser(parent), hexTableWidgetItems()
+        :QTableWidget(parent), browser(parent), hexTableWidgetItems(),
+        newMarkings(), colorToDelete(), 
+        markerThread(), runMarker(false),
+        newMarkingsLock(), colorToDeleteLock()
       {
         this->setup();
       }
 
       HexTableWidget::~HexTableWidget()
       {
+        this->runMarker = false;
+        if (this->markerThread && this->markerThread->joinable()) {
+          this->markerThread->join();
+        }
       }
 
       void HexTableWidget::SetFile(core::File * file)
@@ -63,7 +70,7 @@ namespace analyzer {
 
         size_t i = 0;
         size_t size = hexExp.HexValues.size();
-        for (; i < size; i++) {
+        for (; i < size; ++i) {
           auto HexVal = hexExp.HexValues[i];
           auto item = new HexTableWidgetItem(HexVal.Expression, HexVal.Index);
           item->setFlags(item->flags() ^ Qt::ItemIsEditable);
@@ -79,15 +86,10 @@ namespace analyzer {
         this->item(numRows, 16)->setTextAlignment(Qt::Alignment::enum_type::AlignCenter);
       }
 
-      void HexTableWidget::MarkIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color)
+      void HexTableWidget::MarkIndex(const analyzer::base::Marking & marking)
       {
-        for (auto& itm : this->hexTableWidgetItems) {
-          if (itm->GetIndex() == markedIndex) {
-            itm->setBackgroundColor(QColor(color.r, color.g, color.b));
-            this->viewport()->update();
-            return;
-          }
-        }
+        std::lock_guard<std::recursive_mutex> lock(this->newMarkingsLock);
+        this->newMarkings.push(marking);
       }
 
       void HexTableWidget::onSelection()
@@ -125,7 +127,7 @@ namespace analyzer {
         this->horizontalHeader()->show();
         this->verticalHeader()->show();
         connect(this, &HexTableWidget::itemSelectionChanged, this, &HexTableWidget::onSelection);
-
+        this->markerThread.reset(new std::thread(&HexTableWidget::markingRoutine, this));
       }
 
       void HexTableWidget::setDetailOutput(const std::vector<unsigned char>& bytes)
@@ -176,7 +178,83 @@ namespace analyzer {
 
         this->browser->SetIntegerValue(0);
         this->browser->SetDoubleValue(0.0);
+      }
 
+      void HexTableWidget::markingRoutine()
+      {
+        this->runMarker = true;
+        bool pause = false;
+
+        do {
+          pause = true;
+          if (this->hasColorToDelete()) {
+            this->deleteColor();
+            pause = false;
+          }
+
+          if (this->hasNewMarking()) {
+            this->setNewMarking();
+            pause = false;
+          }
+
+          if(pause){
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+          }
+
+        } while (this->runMarker.load());
+      }
+
+      bool HexTableWidget::hasColorToDelete()
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->colorToDeleteLock);
+        return !this->colorToDelete.empty();
+      }
+
+      analyzer::base::AnalyzerRGB HexTableWidget::fetchColorToDelete()
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->colorToDeleteLock);
+        auto colorToDelete = this->colorToDelete.front();
+        this->colorToDelete.pop();
+        return colorToDelete;
+      }
+
+      void HexTableWidget::deleteColor()
+      {
+        auto color2Delte = this->fetchColorToDelete();
+        
+        for (auto& itm : this->hexTableWidgetItems) {
+          if (itm->HasColor(color2Delte)) {
+            itm->ClearColor(color2Delte);
+            this->viewport()->update();
+            return;
+          }
+        }
+      }
+
+      bool HexTableWidget::hasNewMarking()
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->newMarkingsLock);
+        return !this->newMarkings.empty();
+      }
+
+      void HexTableWidget::setNewMarking()
+      {
+        auto newMarking = this->fetchNextMarking();
+        for (auto& itm : this->hexTableWidgetItems) {
+          if (itm->GetIndex() == newMarking.Index) {
+            itm->SetNewColor(newMarking.Color);
+            this->viewport()->update();
+            return;
+          }
+        }
+      }
+
+      analyzer::base::Marking HexTableWidget::fetchNextMarking()
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->newMarkingsLock);
+        auto newMarking = this->newMarkings.front();
+        this->newMarkings.pop();
+        return newMarking;
       }
 
       interpreter::HEXInterpreter * HexTableWidget::getInterpreter()

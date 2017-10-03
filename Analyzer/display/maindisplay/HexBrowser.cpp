@@ -78,9 +78,9 @@ namespace analyzer {
         this->rgb->Clear();
       }
 
-      void HexBrowser::MarkIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color)
+      void HexBrowser::MarkIndex(const analyzer::base::Marking & marking)
       {
-        this->tableWidget->MarkIndex(markedIndex, color);
+        this->tableWidget->MarkIndex(marking);
       }
 
       void HexBrowser::setup()

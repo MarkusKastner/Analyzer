@@ -34,7 +34,7 @@ protected:
       }
       this->notifyCurrentIndex(i);
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
   }
 };
 
@@ -70,9 +70,9 @@ public:
     this->checkedIndexes.push_back(checkIndex);
   }
 
-  virtual void NotifyMarkedIndex(const size_t & markedIndex, const analyzer::base::AnalyzerRGB & color) {
-    this->markedIndexes.push_back(markedIndex);
-    this->color = color;
+  virtual void NotifyMarkedIndex(const analyzer::base::Marking & marking) {
+    this->markedIndexes.push_back(marking.Index);
+    this->color = marking.Color;
   }
 
 private:
