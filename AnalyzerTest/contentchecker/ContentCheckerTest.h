@@ -62,6 +62,10 @@ public:
     return this->color;
   }
 
+  const analyzer::base::AnalyzerRGB & GetColor2Clear() {
+    return this->color2Clear;
+  }
+
   virtual void NotifyCheckRunFinished(){
     this->finishedReported = true;
   }
@@ -75,11 +79,16 @@ public:
     this->color = marking.Color;
   }
 
+  virtual void NotifyClearColor(const analyzer::base::AnalyzerRGB & color) {
+    this->color2Clear = color;
+  }
+
 private:
   bool finishedReported;
   std::vector<size_t> checkedIndexes;
   std::vector<size_t> markedIndexes;
   analyzer::base::AnalyzerRGB color;
+  analyzer::base::AnalyzerRGB color2Clear;
 };
 
 class ContentCheckerTest : public testing::Test
@@ -259,4 +268,13 @@ TEST_F(ContentCheckerTest, workingMarkings)
   ASSERT_EQ(markedIndexes[0], 6);
   ASSERT_EQ(markingColor.b, 99);
 }
+
+TEST_F(ContentCheckerTest, deleteColor)
+{
+  this->checker->RegisterCheckObserver(this->observer.get());
+  this->checker->SetWorkingColor(this->rgb);
+  this->checker->ClearWorkerMarkings();
+  ASSERT_TRUE(dynamic_cast<Observer*>(this->observer.get())->GetColor2Clear() == this->rgb);
+}
+
 #endif

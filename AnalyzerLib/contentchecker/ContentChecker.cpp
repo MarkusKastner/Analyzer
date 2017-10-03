@@ -56,6 +56,11 @@ namespace analyzer {
       return this->workingColor;
     }
 
+    void ContentChecker::ClearWorkerMarkings()
+    {
+      this->notifyClearWorkingMarkings();
+    }
+
     bool ContentChecker::HasData()
     {
       return (this->data.get() != nullptr);
@@ -139,6 +144,13 @@ namespace analyzer {
     {
       for (auto& observer : this->checkObservers) {
         observer->NotifyMarkedIndex({ index, this->workingColor });
+      }
+    }
+
+    void ContentChecker::notifyClearWorkingMarkings()
+    {
+      for (auto& observer : this->checkObservers) {
+        observer->NotifyClearColor( this->workingColor );
       }
     }
 

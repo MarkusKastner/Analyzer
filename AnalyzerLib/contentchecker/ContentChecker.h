@@ -28,6 +28,7 @@ namespace analyzer {
 
       void SetWorkingColor(const base::AnalyzerRGB & color);
       const base::AnalyzerRGB & GetWorkingColor() const;
+      void ClearWorkerMarkings();
 
       bool HasData();
       void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
@@ -50,6 +51,7 @@ namespace analyzer {
       const std::shared_ptr<std::vector<unsigned char>> & getData();
       void notifyCurrentIndex(const size_t index);
       void notifyMarkedIndex(const size_t index);
+      void notifyClearWorkingMarkings();
 
     private:
       std::vector<CheckObserver*> checkObservers;
