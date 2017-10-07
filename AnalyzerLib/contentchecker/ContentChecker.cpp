@@ -61,6 +61,11 @@ namespace analyzer {
       this->notifyClearWorkingMarkings();
     }
 
+    void ContentChecker::MarkSuspectRange(const size_t & index, const size_t & offset)
+    {
+      this->notifySuspectRange(index, offset);
+    }
+
     bool ContentChecker::HasData()
     {
       return (this->data.get() != nullptr);
@@ -122,6 +127,19 @@ namespace analyzer {
       return this->finished.load();
     }
 
+    std::string ContentChecker::RangeToString(const size_t & offset, const size_t & length) const
+    {
+      std::string strg;
+      size_t endOffset = length + offset;
+      if (endOffset > this->data->size()) {
+        return strg;
+      }
+      for (size_t i = offset; i < endOffset; ++i) {
+        strg.push_back(static_cast<char>(this->data->at(i)));
+      }
+      return strg;
+    }
+
     ContentChecker::ContentChecker()
       :checkObservers(), workingColor({0,0,0}), data(),
       startOffest(0), checkOffest(0), runCheck(false), finished(false)
@@ -151,6 +169,13 @@ namespace analyzer {
     {
       for (auto& observer : this->checkObservers) {
         observer->NotifyClearColor( this->workingColor );
+      }
+    }
+
+    void ContentChecker::notifySuspectRange(const size_t & index, const size_t & offset)
+    {
+      for (auto& observer : this->checkObservers) {
+        observer->NotifyMarkSuspectRange(index, offset);
       }
     }
 

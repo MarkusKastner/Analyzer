@@ -19,8 +19,8 @@ namespace analyzer {
       class HexTableWidgetItem : public QTableWidgetItem
       {
       public:
-        explicit HexTableWidgetItem(const std::string & expression, const size_t & index) 
-          :QTableWidgetItem(expression.c_str()), index(index)
+        explicit HexTableWidgetItem(const std::string & expression, const size_t & index)
+          :QTableWidgetItem(expression.c_str()), index(index), isSuspected(false)
         {
 
         }
@@ -50,6 +50,10 @@ namespace analyzer {
               break;
             }
           }
+          if (this->isSuspected) {
+            this->setBackgroundColor(QColor(255, 0, 0));
+            return;
+          }
           if (!this->colors.empty()) {
             this->setBackgroundColor(QColor(this->colors[0].r, this->colors[0].g, this->colors[0].b));
           }
@@ -68,9 +72,15 @@ namespace analyzer {
           return false;
         }
 
+        void SetSuspected(){
+          this->isSuspected = true;
+          this->setBackgroundColor(QColor(255, 0, 0));
+        }
+
       private:
         size_t index;
         std::vector<base::AnalyzerRGB> colors;
+        bool isSuspected;
       };
     }
   }

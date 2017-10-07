@@ -38,6 +38,7 @@ namespace analyzer {
       virtual void NotifyCurrentIndex(const size_t & checkIndex);
       virtual void NotifyMarkedIndex(const analyzer::base::Marking & marking);
       virtual void NotifyClearColor(const base::AnalyzerRGB & color);
+      virtual void NotifyMarkSuspectRange(const size_t & index, const size_t offset);
 
     private:
       display::ViewOutput * viewOutput;

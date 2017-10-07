@@ -17,8 +17,23 @@ namespace analyzer {
       MacroChecker();
       virtual ~MacroChecker();
 
+      size_t FindNextSyntaxHint();
+
     protected:
       virtual void checkData();
+
+    private:
+      bool isSyntax(const size_t & offset);
+      bool isICaseSyntax(const size_t & offset);
+
+    public:
+      static const std::string KeyWord_if;
+      static const std::string KeyWord_implements;
+      static const std::string KeyWord_import;
+      static const std::string KeyWord_in;
+      static const std::string KeyWord_instanceof;
+      static const std::string KeyWord_int;
+      static const std::string KeyWord_interface;
     };
   }
 }

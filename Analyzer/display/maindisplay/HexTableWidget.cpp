@@ -25,9 +25,9 @@ namespace analyzer {
     namespace display {
       HexTableWidget::HexTableWidget(HexBrowser * parent)
         :QTableWidget(parent), browser(parent), hexTableWidgetItems(),
-        newMarkings(), colorToDelete(), 
+        newMarkings(), colorToDelete(), suspected(),
         markerThread(), runMarker(false),
-        newMarkingsLock(), colorToDeleteLock()
+        newMarkingsLock(), colorToDeleteLock(), suspectedLock()
       {
         this->setup();
       }
@@ -96,6 +96,15 @@ namespace analyzer {
       {
         std::lock_guard<std::recursive_mutex> lock(this->colorToDeleteLock);
         this->colorToDelete.push(color);
+      }
+
+      void HexTableWidget::MarkSuspectRange(const size_t & index, const size_t offset)
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->suspectedLock);
+        size_t range = index + offset;
+        for (size_t i = index; i < range; ++i) {
+          this->suspected.push(i);
+        }
       }
 
       void HexTableWidget::onSelection()
@@ -193,6 +202,9 @@ namespace analyzer {
 
         do {
           pause = true;
+          if (this->hasSuspected()) {
+            this->markSuspected();
+          }
           if (this->hasColorToDelete()) {
             this->deleteColor();
             pause = false;
@@ -260,6 +272,37 @@ namespace analyzer {
         auto newMarking = this->newMarkings.front();
         this->newMarkings.pop();
         return newMarking;
+      }
+
+      void HexTableWidget::markSuspected()
+      {
+        while (this->hasSuspected()) {
+          auto suspected = this->fetchSuspected();
+          for (auto& itm : this->hexTableWidgetItems) {
+            if (itm->GetIndex() == suspected) {
+              itm->SetSuspected();
+              break;
+            }
+          }
+        }
+        this->viewport()->update();
+      }
+
+      bool HexTableWidget::hasSuspected()
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->suspectedLock);
+        return !this->suspected.empty();
+      }
+
+      size_t HexTableWidget::fetchSuspected()
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->suspectedLock);
+        if (this->suspected.empty()) {
+          return 0;
+        }
+        size_t next = this->suspected.front();
+        this->suspected.pop();
+        return next;
       }
 
       interpreter::HEXInterpreter * HexTableWidget::getInterpreter()

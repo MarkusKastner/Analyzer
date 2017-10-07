@@ -53,6 +53,7 @@ namespace analyzer {
 
         void MarkIndex(const analyzer::base::Marking & marking);
         void DeleteColor(const analyzer::base::AnalyzerRGB & color);
+        void MarkSuspectedRange(const size_t & index, const size_t offset);
 
       signals:
         void SetBinaryOutput(const std::vector<unsigned char> & data);

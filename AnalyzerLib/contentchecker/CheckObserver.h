@@ -18,6 +18,7 @@ namespace analyzer {
       virtual void NotifyCurrentIndex(const size_t & checkIndex) = 0;
       virtual void NotifyMarkedIndex(const analyzer::base::Marking & marking) = 0;
       virtual void NotifyClearColor(const base::AnalyzerRGB & color) = 0;
+      virtual void NotifyMarkSuspectRange(const size_t & index, const size_t offset) = 0;
     };
   }
 }

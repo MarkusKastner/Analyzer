@@ -29,6 +29,7 @@ namespace analyzer {
       void SetWorkingColor(const base::AnalyzerRGB & color);
       const base::AnalyzerRGB & GetWorkingColor() const;
       void ClearWorkerMarkings();
+      void MarkSuspectRange(const size_t & index, const size_t & offset);
 
       bool HasData();
       void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
@@ -43,6 +44,8 @@ namespace analyzer {
       void StopCheck();
       bool IsFinished() const;
 
+      std::string RangeToString(const size_t & offset, const size_t & length) const;
+      
     protected:
       ContentChecker();
 
@@ -52,6 +55,7 @@ namespace analyzer {
       void notifyCurrentIndex(const size_t index);
       void notifyMarkedIndex(const size_t index);
       void notifyClearWorkingMarkings();
+      void notifySuspectRange(const size_t & index, const size_t & offset);
 
     private:
       std::vector<CheckObserver*> checkObservers;

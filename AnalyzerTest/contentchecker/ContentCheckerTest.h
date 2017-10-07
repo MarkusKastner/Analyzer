@@ -42,7 +42,8 @@ class Observer : public analyzer::checker::CheckObserver
 {
 public:
   Observer() 
-    :analyzer::checker::CheckObserver(), finishedReported(false), checkedIndexes(), markedIndexes()
+    :analyzer::checker::CheckObserver(), finishedReported(false), checkedIndexes(), markedIndexes(),
+    suspectIndex(0), suspectOffet(0)
   {}
   virtual ~Observer() {}
 
@@ -66,6 +67,14 @@ public:
     return this->color2Clear;
   }
 
+  const size_t & GetSuspectIndex() const {
+    return this->suspectIndex;
+  }
+
+  const size_t & GetSuspectOffet() const {
+    return this->suspectOffet;
+  }
+
   virtual void NotifyCheckRunFinished(){
     this->finishedReported = true;
   }
@@ -83,12 +92,19 @@ public:
     this->color2Clear = color;
   }
 
+  virtual void NotifyMarkSuspectRange(const size_t & index, const size_t offset) {
+    this->suspectIndex = index;
+    this->suspectOffet = offset;
+  }
+
 private:
   bool finishedReported;
   std::vector<size_t> checkedIndexes;
   std::vector<size_t> markedIndexes;
   analyzer::base::AnalyzerRGB color;
   analyzer::base::AnalyzerRGB color2Clear;
+  size_t suspectIndex;
+  size_t suspectOffet;
 };
 
 class ContentCheckerTest : public testing::Test
@@ -96,18 +112,30 @@ class ContentCheckerTest : public testing::Test
 public:
   ContentCheckerTest() 
     : testing::Test(), checker(new AnyChecker()), observer(new Observer()),
-    dummyData1(new std::vector<unsigned char>()), rgb()
+    dummyData1(new std::vector<unsigned char>()), rgb(),
+    dummyData2(new std::vector<unsigned char>())
   {
   }
 
   void SetUp() {
     for (unsigned char i = 65; i < 127; ++i) {
-      dummyData1->push_back(i);
+      this->dummyData1->push_back(i);
     }
     
     this->rgb.r = 155;
     this->rgb.g = 151;
     this->rgb.b = 99;
+
+    this->dummyData2->push_back(0);
+    this->dummyData2->push_back(0);
+    this->dummyData2->push_back(0);
+    this->dummyData2->push_back('e');
+    this->dummyData2->push_back('l');
+    this->dummyData2->push_back('s');
+    this->dummyData2->push_back('e');
+    this->dummyData2->push_back(0);
+    this->dummyData2->push_back(0);
+    this->dummyData2->push_back(0);
   }
 
   virtual ~ContentCheckerTest()
@@ -117,6 +145,7 @@ public:
   std::shared_ptr<analyzer::checker::CheckObserver> observer;
   std::shared_ptr<std::vector<unsigned char>> dummyData1;
   analyzer::base::AnalyzerRGB rgb;
+  std::shared_ptr<std::vector<unsigned char>> dummyData2;
 };
 
 TEST_F(ContentCheckerTest, init)
@@ -277,4 +306,24 @@ TEST_F(ContentCheckerTest, deleteColor)
   ASSERT_TRUE(dynamic_cast<Observer*>(this->observer.get())->GetColor2Clear() == this->rgb);
 }
 
+TEST_F(ContentCheckerTest, range2String)
+{
+  this->checker->SetData(this->dummyData2);
+  ASSERT_STREQ(this->checker->RangeToString(3, 4).c_str(), std::string("else").c_str());
+}
+
+TEST_F(ContentCheckerTest, range2StringTooLong)
+{
+  this->checker->SetData(this->dummyData2);
+  ASSERT_TRUE(this->checker->RangeToString(3, 18).empty());
+}
+
+TEST_F(ContentCheckerTest, markSuspectIndex)
+{
+  this->checker->RegisterCheckObserver(this->observer.get());
+  this->checker->SetData(this->dummyData2);
+  this->checker->MarkSuspectRange(3, 4);
+  ASSERT_EQ(dynamic_cast<Observer*>(this->observer.get())->GetSuspectIndex(), 3);
+  ASSERT_EQ(dynamic_cast<Observer*>(this->observer.get())->GetSuspectOffet(), 4);
+}
 #endif

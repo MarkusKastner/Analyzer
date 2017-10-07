@@ -46,6 +46,7 @@ namespace analyzer {
         void AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp);
         void MarkIndex(const analyzer::base::Marking & marking);
         void DeleteColor(const analyzer::base::AnalyzerRGB & color);
+        void MarkSuspectRange(const size_t & index, const size_t offset);
 
       private:
         core::File * file;
@@ -54,11 +55,13 @@ namespace analyzer {
 
         std::queue<analyzer::base::Marking> newMarkings;
         std::queue<analyzer::base::AnalyzerRGB> colorToDelete;
+        std::queue<size_t> suspected;
 
         std::unique_ptr<std::thread> markerThread;
         std::atomic<bool> runMarker;
         std::recursive_mutex newMarkingsLock;
-        std::recursive_mutex  colorToDeleteLock;
+        std::recursive_mutex colorToDeleteLock;
+        std::recursive_mutex suspectedLock;
 
         void onSelection();
         void setup();
@@ -72,6 +75,10 @@ namespace analyzer {
         bool hasNewMarking();
         void setNewMarking();
         analyzer::base::Marking fetchNextMarking();
+
+        void markSuspected();
+        bool hasSuspected();
+        size_t fetchSuspected();
 
         interpreter::HEXInterpreter * getInterpreter();
       };

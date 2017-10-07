@@ -88,6 +88,11 @@ namespace analyzer {
         this->tableWidget->DeleteColor(color);
       }
 
+      void HexBrowser::MarkSuspectedRange(const size_t & index, const size_t offset)
+      {
+        this->tableWidget->MarkSuspectRange(index, offset);
+      }
+
       void HexBrowser::setup()
       {
         this->setLayout(new QHBoxLayout());

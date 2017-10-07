@@ -106,6 +106,13 @@ namespace analyzer {
       }
     }
 
+    void ViewTab::NotifyMarkSuspectRange(const size_t & index, const size_t offset)
+    {
+      if (dynamic_cast<display::HexBrowser*>(this->viewOutput)) {
+        dynamic_cast<display::HexBrowser*>(this->viewOutput)->MarkSuspectedRange(index, offset);
+      }
+    }
+
     void ViewTab::setup()
     {
       this->setLayout(new QVBoxLayout());
