@@ -54,7 +54,7 @@ namespace analyzer {
             this->setBackgroundColor(QColor(this->colors[0].r, this->colors[0].g, this->colors[0].b));
           }
           else {
-            this->setBackgroundColor(QColor(0, 0, 0));
+            this->setBackgroundColor(QColor(255, 255, 255));
           }
         }
 

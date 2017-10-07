@@ -99,6 +99,13 @@ namespace analyzer {
       }
     }
 
+    void ViewTab::NotifyClearColor(const base::AnalyzerRGB & color)
+    {
+      if (dynamic_cast<display::HexBrowser*>(this->viewOutput)) {
+        dynamic_cast<display::HexBrowser*>(this->viewOutput)->DeleteColor(color);
+      }
+    }
+
     void ViewTab::setup()
     {
       this->setLayout(new QVBoxLayout());

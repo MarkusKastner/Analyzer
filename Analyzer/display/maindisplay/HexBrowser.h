@@ -51,7 +51,8 @@ namespace analyzer {
 
         void ClearValues();
 
-        void MarkIndex(const analyzer::base::Marking & color);
+        void MarkIndex(const analyzer::base::Marking & marking);
+        void DeleteColor(const analyzer::base::AnalyzerRGB & color);
 
       signals:
         void SetBinaryOutput(const std::vector<unsigned char> & data);

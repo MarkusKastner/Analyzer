@@ -37,6 +37,7 @@ namespace analyzer {
       virtual void NotifyCheckRunFinished();
       virtual void NotifyCurrentIndex(const size_t & checkIndex);
       virtual void NotifyMarkedIndex(const analyzer::base::Marking & marking);
+      virtual void NotifyClearColor(const base::AnalyzerRGB & color);
 
     private:
       display::ViewOutput * viewOutput;

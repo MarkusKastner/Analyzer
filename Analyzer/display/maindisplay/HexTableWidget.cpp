@@ -92,6 +92,12 @@ namespace analyzer {
         this->newMarkings.push(marking);
       }
 
+      void HexTableWidget::DeleteColor(const analyzer::base::AnalyzerRGB & color)
+      {
+        std::lock_guard<std::recursive_mutex> lock(this->colorToDeleteLock);
+        this->colorToDelete.push(color);
+      }
+
       void HexTableWidget::onSelection()
       {
         std::vector<size_t> indexes;
@@ -225,10 +231,9 @@ namespace analyzer {
         for (auto& itm : this->hexTableWidgetItems) {
           if (itm->HasColor(color2Delte)) {
             itm->ClearColor(color2Delte);
-            this->viewport()->update();
-            return;
           }
         }
+        this->viewport()->update();
       }
 
       bool HexTableWidget::hasNewMarking()

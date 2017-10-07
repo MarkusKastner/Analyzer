@@ -83,6 +83,11 @@ namespace analyzer {
         this->tableWidget->MarkIndex(marking);
       }
 
+      void HexBrowser::DeleteColor(const analyzer::base::AnalyzerRGB & color)
+      {
+        this->tableWidget->DeleteColor(color);
+      }
+
       void HexBrowser::setup()
       {
         this->setLayout(new QHBoxLayout());

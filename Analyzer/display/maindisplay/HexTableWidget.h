@@ -45,6 +45,7 @@ namespace analyzer {
 
         void AddHexRow(const interpreter::HEXInterpreter::HexRow & hexExp);
         void MarkIndex(const analyzer::base::Marking & marking);
+        void DeleteColor(const analyzer::base::AnalyzerRGB & color);
 
       private:
         core::File * file;
