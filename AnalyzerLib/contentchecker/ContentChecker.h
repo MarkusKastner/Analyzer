@@ -46,6 +46,11 @@ namespace analyzer {
 
       std::string RangeToString(const size_t & offset, const size_t & length) const;
       
+      const size_t & GetSearchPos() const;
+      const size_t & StepUpSearchPos();
+      void SetSearchPos(const size_t & searchPos);
+      bool SearchDone();
+
     protected:
       ContentChecker();
 
@@ -66,6 +71,8 @@ namespace analyzer {
       std::atomic<bool> runCheck;
       std::atomic<bool> finished;
       std::unique_ptr<std::thread> checkThread;
+      size_t searchPos;
+      bool searchDone;
 
       void checkRoutine();
       void notifyCheckFinished();

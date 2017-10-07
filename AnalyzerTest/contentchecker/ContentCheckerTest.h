@@ -326,4 +326,20 @@ TEST_F(ContentCheckerTest, markSuspectIndex)
   ASSERT_EQ(dynamic_cast<Observer*>(this->observer.get())->GetSuspectIndex(), 3);
   ASSERT_EQ(dynamic_cast<Observer*>(this->observer.get())->GetSuspectOffet(), 4);
 }
+
+TEST_F(ContentCheckerTest, searchPos)
+{
+  this->checker->RegisterCheckObserver(this->observer.get());
+  this->checker->SetData(this->dummyData2);
+  ASSERT_EQ(this->checker->GetSearchPos(), 0);
+  this->checker->SetCheckRange(5, 10);
+  ASSERT_EQ(this->checker->GetSearchPos(), 5);
+  ASSERT_EQ(this->checker->StepUpSearchPos(), 6);
+  this->checker->SetSearchPos(10);
+  ASSERT_EQ(this->checker->GetSearchPos(), 10);
+
+  ASSERT_EQ(this->checker->StepUpSearchPos(), 0);
+  ASSERT_TRUE(this->checker->SearchDone());
+}
+
 #endif

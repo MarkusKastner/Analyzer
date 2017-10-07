@@ -23,6 +23,7 @@ namespace analyzer {
       virtual void checkData();
 
     private:
+      size_t lastFoundSyntaxOffset;
       bool isSyntax(const size_t & offset);
       bool isICaseSyntax(const size_t & offset);
 

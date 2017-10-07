@@ -88,6 +88,7 @@ namespace analyzer {
     {
       this->startOffest = startOffset;
       this->checkOffest = checkOffset;
+      this->searchPos = this->startOffest;
     }
 
     const size_t & ContentChecker::GetStartOffest() const
@@ -140,9 +141,38 @@ namespace analyzer {
       return strg;
     }
 
+    const size_t & ContentChecker::GetSearchPos() const
+    {
+      return this->searchPos;
+    }
+
+    const size_t & ContentChecker::StepUpSearchPos()
+    {
+      ++this->searchPos;
+      if (this->searchPos > this->checkOffest) {
+        this->searchPos = 0;
+        this->searchDone = true;
+      }
+      return this->searchPos;
+    }
+
+    void ContentChecker::SetSearchPos(const size_t & searchPos)
+    {
+      this->searchPos = searchPos;
+      if (this->searchPos == 0) {
+        this->searchDone = false;
+      }
+    }
+
+    bool ContentChecker::SearchDone()
+    {
+      return this->searchDone;
+    }
+
     ContentChecker::ContentChecker()
-      :checkObservers(), workingColor({0,0,0}), data(),
-      startOffest(0), checkOffest(0), runCheck(false), finished(false)
+      :checkObservers(), workingColor({ 0,0,0 }), data(),
+      startOffest(0), checkOffest(0), runCheck(false), finished(false),
+      searchPos(0), searchDone(false)
     {
     }
 

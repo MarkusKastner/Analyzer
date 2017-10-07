@@ -9,6 +9,7 @@
 namespace analyzer {
   namespace checker {
     MacroChecker::MacroChecker()
+      :ContentChecker(), lastFoundSyntaxOffset(0)
     {
     }
 
@@ -18,32 +19,44 @@ namespace analyzer {
 
     size_t MacroChecker::FindNextSyntaxHint()
     {
-      size_t checkOffset = this->GetCheckOffest();
-
-      for (size_t i = this->GetStartOffest(); i < checkOffset; ++i) {
+      size_t currentIndex = this->GetSearchPos();
+      while(!this->SearchDone()) {
         this->notifyClearWorkingMarkings();
-        this->notifyMarkedIndex(i);
+        this->notifyMarkedIndex(currentIndex);
 
-        if (MacroChecker::isSyntax(i)) {
-          return i;
+        if (MacroChecker::isSyntax(currentIndex)) {
+          this->SetSearchPos(currentIndex + this->lastFoundSyntaxOffset);
+          return currentIndex;
         }
+        currentIndex = this->StepUpSearchPos();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
       }
       return 0;
     }
 
     void MacroChecker::checkData()
     {
-      auto data = this->getData();
-
-      for (size_t i = this->GetStartOffest(); i < this->GetCheckOffest(); ++i) {
+      while (!this->SearchDone()) {
         if (!this->IsChecking()) {
           return;
         }
-        this->notifyClearWorkingMarkings();
-        this->notifyMarkedIndex(i);
-        
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        size_t syntaxOffset = this->FindNextSyntaxHint();
+        if (this->lastFoundSyntaxOffset > 0) {
+          this->notifySuspectRange(syntaxOffset, this->lastFoundSyntaxOffset);
+          this->lastFoundSyntaxOffset = 0;
+        }
       }
+      //auto data = this->getData();
+
+      //for (size_t i = this->GetStartOffest(); i < this->GetCheckOffest(); ++i) {
+      //  if (!this->IsChecking()) {
+      //    return;
+      //  }
+      //  this->notifyClearWorkingMarkings();
+      //  this->notifyMarkedIndex(i);
+      //  
+      //  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+      //}
     }
 
     bool MacroChecker::isSyntax(const size_t & offset)
@@ -73,24 +86,31 @@ namespace analyzer {
     bool MacroChecker::isICaseSyntax(const size_t & offset)
     {
       if (this->RangeToString(offset, MacroChecker::KeyWord_if.size()).compare(MacroChecker::KeyWord_if) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_if.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_implements.size()).compare(MacroChecker::KeyWord_implements) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_implements.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_import.size()).compare(MacroChecker::KeyWord_import) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_import.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_in.size()).compare(MacroChecker::KeyWord_in) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_in.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_instanceof.size()).compare(MacroChecker::KeyWord_instanceof) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_instanceof.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_int.size()).compare(MacroChecker::KeyWord_int) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_int.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_interface.size()).compare(MacroChecker::KeyWord_interface) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_interface.size();
         return true;
       }
       return false;
