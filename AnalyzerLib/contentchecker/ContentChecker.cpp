@@ -149,7 +149,7 @@ namespace analyzer {
     const size_t & ContentChecker::StepUpSearchPos()
     {
       ++this->searchPos;
-      if (this->searchPos > this->checkOffest) {
+      if (this->searchPos >= this->checkOffest) {
         this->searchPos = 0;
         this->searchDone = true;
       }

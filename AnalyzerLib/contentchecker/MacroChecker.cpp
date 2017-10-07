@@ -29,7 +29,7 @@ namespace analyzer {
           return currentIndex;
         }
         currentIndex = this->StepUpSearchPos();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
       }
       return 0;
     }
@@ -46,17 +46,6 @@ namespace analyzer {
           this->lastFoundSyntaxOffset = 0;
         }
       }
-      //auto data = this->getData();
-
-      //for (size_t i = this->GetStartOffest(); i < this->GetCheckOffest(); ++i) {
-      //  if (!this->IsChecking()) {
-      //    return;
-      //  }
-      //  this->notifyClearWorkingMarkings();
-      //  this->notifyMarkedIndex(i);
-      //  
-      //  std::this_thread::sleep_for(std::chrono::milliseconds(200));
-      //}
     }
 
     bool MacroChecker::isSyntax(const size_t & offset)
