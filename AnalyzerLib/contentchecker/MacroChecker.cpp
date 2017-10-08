@@ -24,7 +24,7 @@ namespace analyzer {
         this->notifyClearWorkingMarkings();
         this->notifyMarkedIndex(currentIndex);
 
-        if (MacroChecker::isSyntax(currentIndex)) {
+        if (MacroChecker::IsSyntax(currentIndex)) {
           this->SetSearchPos(currentIndex + this->lastFoundSyntaxOffset);
           return currentIndex;
         }
@@ -34,21 +34,7 @@ namespace analyzer {
       return 0;
     }
 
-    void MacroChecker::checkData()
-    {
-      while (!this->SearchDone()) {
-        if (!this->IsChecking()) {
-          return;
-        }
-        size_t syntaxOffset = this->FindNextSyntaxHint();
-        if (this->lastFoundSyntaxOffset > 0) {
-          this->notifySuspectRange(syntaxOffset, this->lastFoundSyntaxOffset);
-          this->lastFoundSyntaxOffset = 0;
-        }
-      }
-    }
-
-    bool MacroChecker::isSyntax(const size_t & offset)
+    bool MacroChecker::IsSyntax(const size_t & offset)
     {
       switch (this->getData()->at(offset)) {
       case 'a':
@@ -66,13 +52,30 @@ namespace analyzer {
       case 'g':
         return false;
       case 'i':
-        return this->isICaseSyntax(offset);
+        return this->IsICaseSyntax(offset);
       default:
         return false;
       }
     }
 
-    bool MacroChecker::isICaseSyntax(const size_t & offset)
+    bool MacroChecker::IsACaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_abstract.size()).compare(MacroChecker::KeyWord_abstract) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_abstract.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_arguments.size()).compare(MacroChecker::KeyWord_arguments) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_arguments.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_await.size()).compare(MacroChecker::KeyWord_await) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_await.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsICaseSyntax(const size_t & offset)
     {
       if (this->RangeToString(offset, MacroChecker::KeyWord_if.size()).compare(MacroChecker::KeyWord_if) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_if.size();
@@ -104,6 +107,61 @@ namespace analyzer {
       }
       return false;
     }
+
+    const size_t & MacroChecker::GetLastFoundSyntaxOffset() const
+    {
+      return this->lastFoundSyntaxOffset;
+    }
+
+    void MacroChecker::checkData()
+    {
+      while (!this->SearchDone()) {
+        if (!this->IsChecking()) {
+          return;
+        }
+        size_t syntaxOffset = this->FindNextSyntaxHint();
+        if (this->lastFoundSyntaxOffset > 0) {
+          this->notifySuspectRange(syntaxOffset, this->lastFoundSyntaxOffset);
+          this->lastFoundSyntaxOffset = 0;
+        }
+      }
+    }
+
+    const std::string MacroChecker::KeyWord_abstract = "abstract";
+    const std::string MacroChecker::KeyWord_arguments = "arguments";
+    const std::string MacroChecker::KeyWord_await = "await";
+
+    const std::string MacroChecker::KeyWord_boolean = "boolean";
+    const std::string MacroChecker::KeyWord_break = "break";
+    const std::string MacroChecker::KeyWord_byte = "byte";
+
+    const std::string MacroChecker::KeyWord_case = "case";
+    const std::string MacroChecker::KeyWord_catch = "catch";
+    const std::string MacroChecker::KeyWord_char = "char";
+    const std::string MacroChecker::KeyWord_class = "class";
+    const std::string MacroChecker::KeyWord_const = "const";
+    const std::string MacroChecker::KeyWord_continue = "continue";
+
+    const std::string MacroChecker::KeyWord_debugger = "debugger";
+    const std::string MacroChecker::KeyWord_default = "default";
+    const std::string MacroChecker::KeyWord_delete = "delete";
+    const std::string MacroChecker::KeyWord_do = "do";
+    const std::string MacroChecker::KeyWord_double = "double";
+
+    const std::string MacroChecker::KeyWord_else = "else";
+    const std::string MacroChecker::KeyWord_enum = "enum";
+    const std::string MacroChecker::KeyWord_eval = "eval";
+    const std::string MacroChecker::KeyWord_export = "export";
+    const std::string MacroChecker::KeyWord_extends = "extends";
+
+    const std::string MacroChecker::KeyWord_false = "false";
+    const std::string MacroChecker::KeyWord_final = "final";
+    const std::string MacroChecker::KeyWord_finally = "finally";
+    const std::string MacroChecker::KeyWord_float = "float";
+    const std::string MacroChecker::KeyWord_for = "for";
+    const std::string MacroChecker::KeyWord_function = "function";
+
+    const std::string MacroChecker::KeyWord_goto = "goto";
 
     const std::string MacroChecker::KeyWord_if = "if";
     const std::string MacroChecker::KeyWord_implements = "implements";
