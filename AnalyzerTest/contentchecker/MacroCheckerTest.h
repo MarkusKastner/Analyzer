@@ -72,7 +72,7 @@ TEST_F(MacroCheckerTest, jsAstractSyntax)
 
 TEST_F(MacroCheckerTest, jsArgumentsSyntax)
 {
-  size_t startOffset = 11;
+  size_t startOffset = 10;
   analyzer::checker::MacroChecker checker;
   checker.SetData(this->jsSyntaxDef);
   ASSERT_TRUE(checker.IsACaseSyntax(startOffset));
@@ -81,10 +81,93 @@ TEST_F(MacroCheckerTest, jsArgumentsSyntax)
 
 TEST_F(MacroCheckerTest, jsAwaitSyntax)
 {
-  size_t startOffset = 23;
+  size_t startOffset = 21;
   analyzer::checker::MacroChecker checker;
   checker.SetData(this->jsSyntaxDef);
   ASSERT_TRUE(checker.IsACaseSyntax(startOffset));
   ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_await.c_str());
 }
+
+TEST_F(MacroCheckerTest, jsBooleanSyntax)
+{
+  size_t startOffset = 29;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsBCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_boolean.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsBreakSyntax)
+{
+  size_t startOffset = 38;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsBCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_break.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsByteSyntax)
+{
+  size_t startOffset = 46;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsBCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_byte.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsCaseSyntax)
+{
+  size_t startOffset = 53;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsCCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_case.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsCatchSyntax)
+{
+  size_t startOffset = 60;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsCCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_catch.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsCharSyntax)
+{
+  size_t startOffset = 67;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsCCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_char.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsClassSyntax)
+{
+  size_t startOffset = 74;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsCCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_class.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsConstSyntax)
+{
+  size_t startOffset = 83;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsCCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_const.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsContinueSyntax)
+{
+  size_t startOffset = 91;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsCCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_continue.c_str());
+}
+
+
 #endif

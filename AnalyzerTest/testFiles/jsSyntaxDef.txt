@@ -1,6 +1,6 @@
-abstract	
-arguments	
-await*	
+abstract
+arguments
+await*
 boolean
 break	
 byte	

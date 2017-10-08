@@ -21,6 +21,8 @@ namespace analyzer {
       bool IsSyntax(const size_t & offset);
       bool IsACaseSyntax(const size_t & offset);
       bool IsICaseSyntax(const size_t & offset);
+      bool IsBCaseSyntax(const size_t & offset);
+      bool IsCCaseSyntax(const size_t & offset);
       const size_t & GetLastFoundSyntaxOffset() const;
 
     protected:
