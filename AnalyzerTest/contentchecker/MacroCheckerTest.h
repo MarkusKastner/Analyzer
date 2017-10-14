@@ -169,5 +169,50 @@ TEST_F(MacroCheckerTest, jsContinueSyntax)
   ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_continue.c_str());
 }
 
+TEST_F(MacroCheckerTest, jsDebuggerSyntax)
+{
+  size_t startOffset = 101;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsDCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_debugger.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsDefaultSyntax)
+{
+  size_t startOffset = 112;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsDCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_default.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsDeleteSyntax)
+{
+  size_t startOffset = 122;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsDCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_delete.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsDoSyntax)
+{
+  size_t startOffset = 131;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsDCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_do.c_str());
+}
+
+TEST_F(MacroCheckerTest, jsDoubleSyntax)
+{
+  size_t startOffset = 135;
+  analyzer::checker::MacroChecker checker;
+  checker.SetData(this->jsSyntaxDef);
+  ASSERT_TRUE(checker.IsDCaseSyntax(startOffset));
+  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_double.c_str());
+}
+
 
 #endif

@@ -40,11 +40,11 @@ namespace analyzer {
       case 'a':
         return this->IsACaseSyntax(offset);
       case 'b':
-        return false;
+        return this->IsBCaseSyntax(offset);
       case 'c':
-        return false;
+        return this->IsCCaseSyntax(offset);
       case 'd':
-        return false;
+        return this->IsDCaseSyntax(offset);
       case 'e':
         return false;
       case 'f':
@@ -149,6 +149,31 @@ namespace analyzer {
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_continue.size()).compare(MacroChecker::KeyWord_continue) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_continue.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsDCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_debugger.size()).compare(MacroChecker::KeyWord_debugger) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_debugger.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_default.size()).compare(MacroChecker::KeyWord_default) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_default.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_delete.size()).compare(MacroChecker::KeyWord_delete) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_delete.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_double.size()).compare(MacroChecker::KeyWord_double) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_double.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_do.size()).compare(MacroChecker::KeyWord_do) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_do.size();
         return true;
       }
       return false;
