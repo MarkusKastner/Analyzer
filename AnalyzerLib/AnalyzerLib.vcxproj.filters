@@ -50,6 +50,9 @@
     <Filter Include="contentchecker\error">
       <UniqueIdentifier>{26c66f3f-2d3e-4074-a673-738b0b5ddeba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="contentchecker\javascript">
+      <UniqueIdentifier>{3e89fe2d-9a27-43fb-8a38-0c46399d79ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\error\CoreException.cpp">
@@ -144,6 +147,12 @@
     </ClCompile>
     <ClCompile Include="contentchecker\MacroChecker.cpp">
       <Filter>contentchecker</Filter>
+    </ClCompile>
+    <ClCompile Include="contentchecker\javascript\JSChecker.cpp">
+      <Filter>contentchecker\javascript</Filter>
+    </ClCompile>
+    <ClCompile Include="contentchecker\javascript\JSICaseChecker.cpp">
+      <Filter>contentchecker\javascript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +305,12 @@
     </ClInclude>
     <ClInclude Include="contentchecker\MacroChecker.h">
       <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\javascript\JSChecker.h">
+      <Filter>contentchecker\javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\javascript\JSICaseChecker.h">
+      <Filter>contentchecker\javascript</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -171,6 +171,8 @@
     <ClCompile Include="..\AnalyzerLib\contentchecker\ExecutableChecker.cpp" />
     <ClCompile Include="..\AnalyzerLib\contentchecker\ExternalLinkChecker.cpp" />
     <ClCompile Include="..\AnalyzerLib\contentchecker\ExtraordinaryChecker.cpp" />
+    <ClCompile Include="..\AnalyzerLib\contentchecker\javascript\JSChecker.cpp" />
+    <ClCompile Include="..\AnalyzerLib\contentchecker\javascript\JSICaseChecker.cpp" />
     <ClCompile Include="..\AnalyzerLib\contentchecker\MacroChecker.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\error\CoreException.cpp" />
     <ClCompile Include="..\AnalyzerLib\core\File.cpp" />
@@ -213,6 +215,8 @@
     <ClInclude Include="..\AnalyzerLib\contentchecker\ExecutableChecker.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\ExternalLinkChecker.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\ExtraordinaryChecker.h" />
+    <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSChecker.h" />
+    <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSICaseChecker.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\MacroChecker.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
@@ -251,6 +255,8 @@
     <ClInclude Include="contentchecker\ExecutableCheckerTest.h" />
     <ClInclude Include="contentchecker\ExternalLinkCheckerTest.h" />
     <ClInclude Include="contentchecker\ExtraordinaryCheckerTest.h" />
+    <ClInclude Include="contentchecker\javascript\JSCheckerTest.h" />
+    <ClInclude Include="contentchecker\javascript\JSICaseCheckerTest.h" />
     <ClInclude Include="contentchecker\MacroCheckerTest.h" />
     <ClInclude Include="core\FileTest.h" />
     <ClInclude Include="core\TypeAnalyzerTest.h" />

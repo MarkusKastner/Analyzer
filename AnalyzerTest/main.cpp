@@ -33,6 +33,8 @@
 #include "contentchecker/ExecutableCheckerTest.h"
 #include "contentchecker/ExternalLinkCheckerTest.h"
 #include "contentchecker/MacroCheckerTest.h"
+#include "contentchecker/javascript/JSCheckerTest.h"
+#include "contentchecker/javascript/JSICaseCheckerTest.h"
 
 int main(int argc, char** argv) {
 

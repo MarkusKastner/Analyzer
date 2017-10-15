@@ -58,6 +58,9 @@
     <Filter Include="contentchecker\error">
       <UniqueIdentifier>{aa57af57-1b06-46ff-ab61-467e919681c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="contentchecker\javascript">
+      <UniqueIdentifier>{b6de0923-b929-45db-8811-c40965f1830e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -158,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="..\AnalyzerLib\contentchecker\MacroChecker.cpp">
       <Filter>contentchecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\javascript\JSICaseChecker.cpp">
+      <Filter>contentchecker\javascript</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\javascript\JSChecker.cpp">
+      <Filter>contentchecker\javascript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +382,18 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\contentchecker\MacroChecker.h">
       <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\javascript\JSCheckerTest.h">
+      <Filter>contentchecker\javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSICaseChecker.h">
+      <Filter>contentchecker\javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSChecker.h">
+      <Filter>contentchecker\javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\javascript\JSICaseCheckerTest.h">
+      <Filter>contentchecker\javascript</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
