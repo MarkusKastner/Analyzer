@@ -41,10 +41,12 @@ TEST_F(JSCheckerTest, data)
 TEST_F(JSCheckerTest, iCases)
 {
   auto jsIfSyntax(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/if.txt"));
-  size_t offset = 21;
+  size_t offset = 20;
 
   analyzer::checker::JSChecker jsChecker;
   jsChecker.SetData(jsIfSyntax);
   ASSERT_TRUE(jsChecker.IsICaseSyntax(offset));
+  ASSERT_EQ(jsChecker.GetLastFoundSyntaxOffset(), 2);
 }
+
 #endif

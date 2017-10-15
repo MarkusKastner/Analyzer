@@ -6,12 +6,17 @@
 
 #include "AnalyzerLib/contentchecker/javascript/JSICaseChecker.h"
 #include "JSICaseChecker.h"
+#include "AnalyzerLib/contentchecker/SyntaxCheckerParent.h"
 
 namespace analyzer {
   namespace checker {
-    JSICaseChecker::JSICaseChecker(const std::shared_ptr<std::vector<unsigned char>>& data)
-      :data(data)
+    JSICaseChecker::JSICaseChecker(SyntaxCheckerParent * parent)
+      :parent(parent), data()
     {
+      if (parent == nullptr) {
+        throw - 1;
+      }
+      this->data = this->parent->GetData();
     }
 
     JSICaseChecker::~JSICaseChecker()
@@ -35,12 +40,28 @@ namespace analyzer {
     {
       this->data.reset();
     }
+
     bool JSICaseChecker::IsMyCase(const size_t & offset)
     {
-      if (offset == 21) {
+      std::string strg;
+      size_t length = JSICaseChecker::KeyWord_if.size();
+      size_t endOffset = length + offset;
+
+      if (endOffset > this->data->size()) {
+        return false;
+      }
+
+      for (size_t i = offset; i < endOffset; ++i) {
+        strg.push_back(static_cast<char>(this->data->at(i)));
+      }
+
+      if (strg.compare(JSICaseChecker::KeyWord_if) == 0) {
+        this->parent->SetLastFoundSyntaxOffset(JSICaseChecker::KeyWord_if.size());
         return true;
       }
       return false;
     }
+
+    const std::string JSICaseChecker::KeyWord_if = "if";
   }
 }

@@ -218,6 +218,7 @@
     <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSChecker.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSICaseChecker.h" />
     <ClInclude Include="..\AnalyzerLib\contentchecker\MacroChecker.h" />
+    <ClInclude Include="..\AnalyzerLib\contentchecker\SyntaxCheckerParent.h" />
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h" />
     <ClInclude Include="..\AnalyzerLib\core\File.h" />
     <ClInclude Include="..\AnalyzerLib\core\FileObserver.h" />

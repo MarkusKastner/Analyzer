@@ -12,11 +12,12 @@
 
 namespace analyzer {
   namespace checker {
+    class SyntaxCheckerParent;
     class JSICaseChecker
     {
     public:
       JSICaseChecker() = delete;
-      explicit JSICaseChecker(const std::shared_ptr<std::vector<unsigned char>> & data);
+      explicit JSICaseChecker(SyntaxCheckerParent * parent);
       ~JSICaseChecker();
       bool HasData() const;
       void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
@@ -25,7 +26,10 @@ namespace analyzer {
       bool IsMyCase(const size_t & offset);
 
     private:
+      SyntaxCheckerParent * parent;
       std::shared_ptr<std::vector<unsigned char>> data;
+      
+      static const std::string KeyWord_if;
     };
   }
 }

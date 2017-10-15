@@ -312,5 +312,8 @@
     <ClInclude Include="contentchecker\javascript\JSICaseChecker.h">
       <Filter>contentchecker\javascript</Filter>
     </ClInclude>
+    <ClInclude Include="contentchecker\SyntaxCheckerParent.h">
+      <Filter>contentchecker</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

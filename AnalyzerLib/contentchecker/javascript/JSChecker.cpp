@@ -9,12 +9,22 @@
 namespace analyzer {
   namespace checker {
     JSChecker::JSChecker()
-      :data(), iCaseChecker()
+      :data(), iCaseChecker(), lastFoundSyntaxOffset(0)
     {
     }
 
     JSChecker::~JSChecker()
     {
+    }
+
+    void JSChecker::SetLastFoundSyntaxOffset(const size_t & offset)
+    {
+      this->lastFoundSyntaxOffset = offset;
+    }
+
+    const std::shared_ptr<std::vector<unsigned char>> & JSChecker::GetData() const
+    {
+      return this->data;
     }
 
     bool JSChecker::HasData() const
@@ -41,9 +51,16 @@ namespace analyzer {
     bool JSChecker::IsICaseSyntax(const size_t & offset)
     {
       if (!this->iCaseChecker) {
-        this->iCaseChecker.reset(new JSICaseChecker(this->data));
+        this->iCaseChecker.reset(new JSICaseChecker(this));
       }
-      return this->iCaseChecker->IsMyCase(offset);
+      if (this->iCaseChecker->IsMyCase(offset)) {
+        return true;
+      }
+      return false;
+    }
+    const size_t & JSChecker::GetLastFoundSyntaxOffset() const
+    {
+      return this->lastFoundSyntaxOffset;
     }
   }
 }

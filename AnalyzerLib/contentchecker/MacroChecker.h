@@ -8,6 +8,7 @@
 #define MACROCHECKER_H
 
 #include "ContentChecker.h"
+#include "AnalyzerLib/contentchecker/javascript/JSChecker.h"
 
 namespace analyzer {
   namespace checker {
@@ -16,6 +17,9 @@ namespace analyzer {
     public:
       MacroChecker();
       virtual ~MacroChecker();
+
+      virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      virtual void ReleaseData();
 
       size_t FindNextSyntaxHint();
       bool IsSyntax(const size_t & offset);
@@ -44,6 +48,7 @@ namespace analyzer {
 
     private:
       size_t lastFoundSyntaxOffset;
+      JSChecker jsChecker;
 
     public:
       static const std::string KeyWord_abstract;
@@ -82,7 +87,6 @@ namespace analyzer {
 
       static const std::string KeyWord_goto;
 
-      static const std::string KeyWord_if;
       static const std::string KeyWord_implements;
       static const std::string KeyWord_import;
       static const std::string KeyWord_instanceof;

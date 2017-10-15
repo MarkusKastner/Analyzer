@@ -9,12 +9,24 @@
 namespace analyzer {
   namespace checker {
     MacroChecker::MacroChecker()
-      :ContentChecker(), lastFoundSyntaxOffset(0)
+      :ContentChecker(), lastFoundSyntaxOffset(0), jsChecker()
     {
     }
 
     MacroChecker::~MacroChecker()
     {
+    }
+
+    void MacroChecker::SetData(const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      ContentChecker::SetData(data);
+      this->jsChecker.SetData(data);
+    }
+
+    void MacroChecker::ReleaseData()
+    {
+      ContentChecker::ReleaseData();
+      this->jsChecker.ReleaseData();
     }
 
     size_t MacroChecker::FindNextSyntaxHint()
@@ -95,8 +107,8 @@ namespace analyzer {
 
     bool MacroChecker::IsICaseSyntax(const size_t & offset)
     {
-      if (this->RangeToString(offset, MacroChecker::KeyWord_if.size()).compare(MacroChecker::KeyWord_if) == 0) {
-        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_if.size();
+      if (this->jsChecker.IsICaseSyntax(offset)) {
+        this->lastFoundSyntaxOffset = this->jsChecker.GetLastFoundSyntaxOffset();;
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_implements.size()).compare(MacroChecker::KeyWord_implements) == 0) {
@@ -472,7 +484,6 @@ namespace analyzer {
 
     const std::string MacroChecker::KeyWord_goto = "goto";
 
-    const std::string MacroChecker::KeyWord_if = "if";
     const std::string MacroChecker::KeyWord_implements = "implements";
     const std::string MacroChecker::KeyWord_import = "import";
     const std::string MacroChecker::KeyWord_in = "in";

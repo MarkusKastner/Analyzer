@@ -219,6 +219,7 @@
     <ClInclude Include="contentchecker\javascript\JSChecker.h" />
     <ClInclude Include="contentchecker\javascript\JSICaseChecker.h" />
     <ClInclude Include="contentchecker\MacroChecker.h" />
+    <ClInclude Include="contentchecker\SyntaxCheckerParent.h" />
     <ClInclude Include="core\error\CoreException.h" />
     <ClInclude Include="core\File.h" />
     <ClInclude Include="core\FileInfo.h" />

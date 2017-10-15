@@ -32,8 +32,8 @@ namespace analyzer {
       void MarkSuspectRange(const size_t & index, const size_t & offset);
 
       bool HasData();
-      void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
-      void ReleaseData();
+      virtual void SetData(const std::shared_ptr<std::vector<unsigned char>> & data);
+      virtual void ReleaseData();
 
       void SetCheckRange(const size_t & startOffset, const size_t & checkOffset);
       const size_t & GetStartOffest() const;
