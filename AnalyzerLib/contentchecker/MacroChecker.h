@@ -24,6 +24,19 @@ namespace analyzer {
       bool IsBCaseSyntax(const size_t & offset);
       bool IsCCaseSyntax(const size_t & offset);
       bool IsDCaseSyntax(const size_t & offset);
+      bool IsECaseSyntax(const size_t & offset);
+      bool IsFCaseSyntax(const size_t & offset);
+      bool IsGCaseSyntax(const size_t & offset);
+      bool IsLCaseSyntax(const size_t & offset);
+      bool IsNCaseSyntax(const size_t & offset);
+      bool IsPCaseSyntax(const size_t & offset);
+      bool IsRCaseSyntax(const size_t & offset);
+      bool IsSCaseSyntax(const size_t & offset);
+      bool IsTCaseSyntax(const size_t & offset);
+      bool IsVCaseSyntax(const size_t & offset);
+      bool IsWCaseSyntax(const size_t & offset);
+      bool IsYCaseSyntax(const size_t & offset);
+
       const size_t & GetLastFoundSyntaxOffset() const;
 
     protected:
@@ -72,44 +85,47 @@ namespace analyzer {
       static const std::string KeyWord_if;
       static const std::string KeyWord_implements;
       static const std::string KeyWord_import;
-      static const std::string KeyWord_in;
       static const std::string KeyWord_instanceof;
-      static const std::string KeyWord_int;
       static const std::string KeyWord_interface;
+      static const std::string KeyWord_int;
+      static const std::string KeyWord_in;
 
-      /*
+      static const std::string KeyWord_let;
+      static const std::string KeyWord_long;
 
+      static const std::string KeyWord_native;
+      static const std::string KeyWord_new;
+      static const std::string KeyWord_null;
 
-static const std::string KeyWord_let
-static const std::string KeyWord_long	
-static const std::string KeyWord_native	
-static const std::string KeyWord_new
-static const std::string KeyWord_null	
-static const std::string KeyWord_package	
-static const std::string KeyWord_private	
-static const std::string KeyWord_protected
-static const std::string KeyWord_public	
-static const std::string KeyWord_return	
-static const std::string KeyWord_short	
-static const std::string KeyWord_static
-static const std::string KeyWord_super
-static const std::string KeyWord_switch	
-static const std::string KeyWord_synchronized	
-static const std::string KeyWord_this
-static const std::string KeyWord_throw	
-static const std::string KeyWord_throws	
-static const std::string KeyWord_transient	
-static const std::string KeyWord_true
-static const std::string KeyWord_try	
-static const std::string KeyWord_typeof	
-static const std::string KeyWord_var	
-static const std::string KeyWord_void
-static const std::string KeyWord_volatile	
-static const std::string KeyWord_while	
-static const std::string KeyWord_with	
-static const std::string KeyWord_yield
-      
-      */
+      static const std::string KeyWord_package;
+      static const std::string KeyWord_private;
+      static const std::string KeyWord_protected;
+      static const std::string KeyWord_public;
+
+      static const std::string KeyWord_return;
+
+      static const std::string KeyWord_short;
+      static const std::string KeyWord_static;
+      static const std::string KeyWord_super;
+      static const std::string KeyWord_switch;
+      static const std::string KeyWord_synchronized;
+
+      static const std::string KeyWord_this;
+      static const std::string KeyWord_throw;
+      static const std::string KeyWord_throws;
+      static const std::string KeyWord_transient;
+      static const std::string KeyWord_true;
+      static const std::string KeyWord_try;
+      static const std::string KeyWord_typeof;
+
+      static const std::string KeyWord_var;
+      static const std::string KeyWord_void;
+      static const std::string KeyWord_volatile;
+
+      static const std::string KeyWord_while;
+      static const std::string KeyWord_with;
+
+      static const std::string KeyWord_yield;
     };
   }
 }

@@ -46,13 +46,31 @@ namespace analyzer {
       case 'd':
         return this->IsDCaseSyntax(offset);
       case 'e':
-        return false;
+        return this->IsECaseSyntax(offset);
       case 'f':
-        return false;
+        return this->IsFCaseSyntax(offset);
       case 'g':
-        return false;
+        return this->IsGCaseSyntax(offset);
       case 'i':
         return this->IsICaseSyntax(offset);
+      case 'l':
+        return this->IsLCaseSyntax(offset);
+      case 'n':
+        return this->IsNCaseSyntax(offset);
+      case 'p':
+        return this->IsPCaseSyntax(offset);
+      case 'r':
+        return this->IsRCaseSyntax(offset);
+      case 's':
+        return this->IsSCaseSyntax(offset);
+      case 't':
+        return this->IsTCaseSyntax(offset);
+      case 'v':
+        return this->IsVCaseSyntax(offset);
+      case 'w':
+        return this->IsWCaseSyntax(offset);
+      case 'y':
+        return this->IsYCaseSyntax(offset);
       default:
         return false;
       }
@@ -89,20 +107,20 @@ namespace analyzer {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_import.size();
         return true;
       }
-      if (this->RangeToString(offset, MacroChecker::KeyWord_in.size()).compare(MacroChecker::KeyWord_in) == 0) {
-        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_in.size();
-        return true;
-      }
       if (this->RangeToString(offset, MacroChecker::KeyWord_instanceof.size()).compare(MacroChecker::KeyWord_instanceof) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_instanceof.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_interface.size()).compare(MacroChecker::KeyWord_interface) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_interface.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_int.size()).compare(MacroChecker::KeyWord_int) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_int.size();
         return true;
       }
-      if (this->RangeToString(offset, MacroChecker::KeyWord_interface.size()).compare(MacroChecker::KeyWord_interface) == 0) {
-        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_interface.size();
+      if (this->RangeToString(offset, MacroChecker::KeyWord_in.size()).compare(MacroChecker::KeyWord_in) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_in.size();
         return true;
       }
       return false;
@@ -179,6 +197,226 @@ namespace analyzer {
       return false;
     }
 
+    bool MacroChecker::IsECaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_else.size()).compare(MacroChecker::KeyWord_else) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_else.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_enum.size()).compare(MacroChecker::KeyWord_enum) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_enum.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_eval.size()).compare(MacroChecker::KeyWord_eval) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_eval.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_export.size()).compare(MacroChecker::KeyWord_export) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_export.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_extends.size()).compare(MacroChecker::KeyWord_extends) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_extends.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsFCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_false.size()).compare(MacroChecker::KeyWord_false) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_false.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_finally.size()).compare(MacroChecker::KeyWord_finally) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_finally.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_final.size()).compare(MacroChecker::KeyWord_final) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_final.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_float.size()).compare(MacroChecker::KeyWord_float) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_float.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_for.size()).compare(MacroChecker::KeyWord_for) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_for.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_function.size()).compare(MacroChecker::KeyWord_function) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_function.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsGCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_goto.size()).compare(MacroChecker::KeyWord_goto) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_goto.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsLCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_let.size()).compare(MacroChecker::KeyWord_let) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_let.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_long.size()).compare(MacroChecker::KeyWord_long) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_long.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsNCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_native.size()).compare(MacroChecker::KeyWord_native) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_native.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_new.size()).compare(MacroChecker::KeyWord_new) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_new.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_null.size()).compare(MacroChecker::KeyWord_null) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_null.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsPCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_package.size()).compare(MacroChecker::KeyWord_package) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_package.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_private.size()).compare(MacroChecker::KeyWord_private) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_private.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_protected.size()).compare(MacroChecker::KeyWord_protected) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_protected.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_public.size()).compare(MacroChecker::KeyWord_public) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_public.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsRCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_return.size()).compare(MacroChecker::KeyWord_return) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_return.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsSCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_short.size()).compare(MacroChecker::KeyWord_short) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_short.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_static.size()).compare(MacroChecker::KeyWord_static) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_static.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_super.size()).compare(MacroChecker::KeyWord_super) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_super.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_switch.size()).compare(MacroChecker::KeyWord_switch) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_switch.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_synchronized.size()).compare(MacroChecker::KeyWord_synchronized) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_synchronized.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsTCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_this.size()).compare(MacroChecker::KeyWord_this) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_this.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_throws.size()).compare(MacroChecker::KeyWord_throws) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_throws.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_throw.size()).compare(MacroChecker::KeyWord_throw) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_throw.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_transient.size()).compare(MacroChecker::KeyWord_transient) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_transient.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_true.size()).compare(MacroChecker::KeyWord_true) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_true.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_try.size()).compare(MacroChecker::KeyWord_try) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_try.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_typeof.size()).compare(MacroChecker::KeyWord_typeof) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_typeof.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsVCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_var.size()).compare(MacroChecker::KeyWord_var) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_var.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_void.size()).compare(MacroChecker::KeyWord_void) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_void.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_volatile.size()).compare(MacroChecker::KeyWord_volatile) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_volatile.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsWCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_while.size()).compare(MacroChecker::KeyWord_while) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_while.size();
+        return true;
+      }
+      if (this->RangeToString(offset, MacroChecker::KeyWord_with.size()).compare(MacroChecker::KeyWord_with) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_with.size();
+        return true;
+      }
+      return false;
+    }
+
+    bool MacroChecker::IsYCaseSyntax(const size_t & offset)
+    {
+      if (this->RangeToString(offset, MacroChecker::KeyWord_yield.size()).compare(MacroChecker::KeyWord_yield) == 0) {
+        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_yield.size();
+        return true;
+      }
+      return false;
+    }
+
     const size_t & MacroChecker::GetLastFoundSyntaxOffset() const
     {
       return this->lastFoundSyntaxOffset;
@@ -241,5 +479,42 @@ namespace analyzer {
     const std::string MacroChecker::KeyWord_instanceof = "instanceof";
     const std::string MacroChecker::KeyWord_int = "int";
     const std::string MacroChecker::KeyWord_interface = "interface";
+
+    const std::string MacroChecker::KeyWord_let = "let";
+    const std::string MacroChecker::KeyWord_long = "long";
+
+    const std::string MacroChecker::KeyWord_native = "native";
+    const std::string MacroChecker::KeyWord_new = "new";
+    const std::string MacroChecker::KeyWord_null = "null";
+
+    const std::string MacroChecker::KeyWord_package = "package";
+    const std::string MacroChecker::KeyWord_private = "private";
+    const std::string MacroChecker::KeyWord_protected = "protected";
+    const std::string MacroChecker::KeyWord_public = "public";
+
+    const std::string MacroChecker::KeyWord_return = "return";
+
+    const std::string MacroChecker::KeyWord_short = "short";
+    const std::string MacroChecker::KeyWord_static = "static";
+    const std::string MacroChecker::KeyWord_super = "super";
+    const std::string MacroChecker::KeyWord_switch = "switch";
+    const std::string MacroChecker::KeyWord_synchronized = "synchronized";
+
+    const std::string MacroChecker::KeyWord_this = "this";
+    const std::string MacroChecker::KeyWord_throw = "throw";
+    const std::string MacroChecker::KeyWord_throws = "throws";
+    const std::string MacroChecker::KeyWord_transient = "transient";
+    const std::string MacroChecker::KeyWord_true = "true";
+    const std::string MacroChecker::KeyWord_try = "try";
+    const std::string MacroChecker::KeyWord_typeof = "typeof";
+
+    const std::string MacroChecker::KeyWord_var = "var";
+    const std::string MacroChecker::KeyWord_void = "void";
+    const std::string MacroChecker::KeyWord_volatile = "volatile";
+
+    const std::string MacroChecker::KeyWord_while = "while";
+    const std::string MacroChecker::KeyWord_with = "with";
+
+    const std::string MacroChecker::KeyWord_yield = "yield";
   }
 }
