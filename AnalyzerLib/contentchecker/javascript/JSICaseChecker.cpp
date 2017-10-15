@@ -57,6 +57,48 @@ namespace analyzer {
 
       if (strg.compare(JSICaseChecker::KeyWord_if) == 0) {
         this->parent->SetLastFoundSyntaxOffset(JSICaseChecker::KeyWord_if.size());
+        
+        if (JSICaseChecker::hasPreByte(offset)) {
+          if (!JSICaseChecker::isByteSpace(offset - 1, this->data)) {
+            return false;
+          }
+        }
+        if (JSICaseChecker::findNextNoneSpacePrintable(offset + JSICaseChecker::KeyWord_if.size(), this->data) == '(') {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    bool JSICaseChecker::hasPreByte(const size_t & offset)
+    {
+      return (offset >= 1);
+    }
+
+    bool JSICaseChecker::isByteSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      char byte = data->at(offset);
+      return (byte == ' ' || byte == '\r' || byte == '\n' || byte == '\t');
+    }
+
+    unsigned char JSICaseChecker::findNextNoneSpacePrintable(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      size_t size = data->size();
+      for (size_t i = offset; i < size; ++i) {
+        if (JSICaseChecker::isNoneSpacePrintable(data->at(i))) {
+          return data->at(i);
+        }
+      }
+      return 0;
+    }
+
+    bool JSICaseChecker::isNoneSpacePrintable(const unsigned char & byte)
+    {
+      if ((byte >= 33 && byte <= 126) ||
+        (byte >= 128 && byte <= 159) ||
+        (byte >= 161 && byte <= 172) ||
+        (byte >= 147 && byte <= 255)
+        ) {
         return true;
       }
       return false;

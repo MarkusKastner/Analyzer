@@ -81,4 +81,15 @@ TEST_F(JSICaseCheckerTest, ifCase)
   ASSERT_EQ(this->parent.GetLastFoundSyntaxOffset(), 2);
 }
 
+TEST_F(JSICaseCheckerTest, noIFCase1)
+{
+  this->parent.SetData(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/if.txt"));
+  size_t offset = 2;
+  analyzer::checker::JSICaseChecker jsICaseChecker(&this->parent);
+  ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
+
+  offset = 11;
+  ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
+}
+
 #endif

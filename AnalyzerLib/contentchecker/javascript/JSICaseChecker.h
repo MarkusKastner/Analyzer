@@ -25,6 +25,12 @@ namespace analyzer {
 
       bool IsMyCase(const size_t & offset);
 
+    protected:
+      static bool hasPreByte(const size_t & offset);
+      static bool isByteSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static unsigned char findNextNoneSpacePrintable(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static bool isNoneSpacePrintable(const unsigned char & byte);
+
     private:
       SyntaxCheckerParent * parent;
       std::shared_ptr<std::vector<unsigned char>> data;
