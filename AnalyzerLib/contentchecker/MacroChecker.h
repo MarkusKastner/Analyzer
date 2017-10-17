@@ -87,7 +87,6 @@ namespace analyzer {
 
       static const std::string KeyWord_goto;
 
-      static const std::string KeyWord_implements;
       static const std::string KeyWord_import;
       static const std::string KeyWord_instanceof;
       static const std::string KeyWord_interface;

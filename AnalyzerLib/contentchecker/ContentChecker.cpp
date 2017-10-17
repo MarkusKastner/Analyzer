@@ -130,13 +130,18 @@ namespace analyzer {
 
     std::string ContentChecker::RangeToString(const size_t & offset, const size_t & length) const
     {
+      return ContentChecker::RangeToString(offset, length, this->data);
+    }
+
+    std::string ContentChecker::RangeToString(const size_t & offset, const size_t & length, const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
       std::string strg;
       size_t endOffset = length + offset;
-      if (endOffset > this->data->size()) {
+      if (endOffset > data->size()) {
         return strg;
       }
       for (size_t i = offset; i < endOffset; ++i) {
-        strg.push_back(static_cast<char>(this->data->at(i)));
+        strg.push_back(static_cast<char>(data->at(i)));
       }
       return strg;
     }

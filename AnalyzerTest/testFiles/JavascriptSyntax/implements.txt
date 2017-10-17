@@ -1,0 +1,6 @@
+xximplementsxx
+xx implements xx
+class xx implements yy{
+class xx 
+implements 
+yy{

@@ -45,7 +45,8 @@ namespace analyzer {
       bool IsFinished() const;
 
       std::string RangeToString(const size_t & offset, const size_t & length) const;
-      
+      static std::string RangeToString(const size_t & offset, const size_t & length, const std::shared_ptr<std::vector<unsigned char>> & data);
+
       const size_t & GetSearchPos() const;
       const size_t & StepUpSearchPos();
       void SetSearchPos(const size_t & searchPos);

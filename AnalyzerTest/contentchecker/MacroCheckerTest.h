@@ -322,15 +322,6 @@ TEST_F(MacroCheckerTest, jsGoToSyntax)
   ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_goto.c_str());
 }
 
-TEST_F(MacroCheckerTest, jsImplementesSyntax)
-{
-  size_t startOffset = 247;
-  analyzer::checker::MacroChecker checker;
-  checker.SetData(this->jsSyntaxDef);
-  ASSERT_TRUE(checker.IsICaseSyntax(startOffset));
-  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_implements.c_str());
-}
-
 TEST_F(MacroCheckerTest, jsImportSyntax)
 {
   size_t startOffset = 260;
