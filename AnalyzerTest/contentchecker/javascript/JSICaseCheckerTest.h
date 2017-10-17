@@ -84,15 +84,8 @@ TEST_F(JSICaseCheckerTest, ifCase)
   ASSERT_TRUE(jsICaseChecker.IsMyCase(offset));
   offset = 51;
   ASSERT_TRUE(jsICaseChecker.IsMyCase(offset));
-}
-
-TEST_F(JSICaseCheckerTest, noIFCase1)
-{
-  this->parent.SetData(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/if.txt"));
-  size_t offset = 2;
-  analyzer::checker::JSICaseChecker jsICaseChecker(&this->parent);
+  offset = 2;
   ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
-
   offset = 11;
   ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
 }
@@ -107,15 +100,27 @@ TEST_F(JSICaseCheckerTest, implementsCase)
 
   offset = 70;
   ASSERT_TRUE(jsICaseChecker.IsMyCase(offset));
-}
-
-TEST_F(JSICaseCheckerTest, noImplementsCase)
-{
-  this->parent.SetData(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/implements.txt"));
-  size_t offset = 2;
-  analyzer::checker::JSICaseChecker jsICaseChecker(&this->parent);
+  offset = 2;
   ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
   offset = 19;
   ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
 }
+
+TEST_F(JSICaseCheckerTest, importCase)
+{
+  this->parent.SetData(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/import.txt"));
+  size_t offset = 2;
+  analyzer::checker::JSICaseChecker jsICaseChecker(&this->parent);
+  ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
+  offset = 15;
+  ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
+  offset = 26;
+  ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
+  offset = 36;
+  ASSERT_FALSE(jsICaseChecker.IsMyCase(offset));
+  offset = 63;
+  ASSERT_TRUE(jsICaseChecker.IsMyCase(offset));
+  ASSERT_EQ(this->parent.GetLastFoundSyntaxOffset(), analyzer::checker::JSICaseChecker::KeyWord_import.size());
+}
+
 #endif

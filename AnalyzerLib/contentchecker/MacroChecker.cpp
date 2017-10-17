@@ -111,10 +111,6 @@ namespace analyzer {
         this->lastFoundSyntaxOffset = this->jsChecker.GetLastFoundSyntaxOffset();;
         return true;
       }
-      if (this->RangeToString(offset, MacroChecker::KeyWord_import.size()).compare(MacroChecker::KeyWord_import) == 0) {
-        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_import.size();
-        return true;
-      }
       if (this->RangeToString(offset, MacroChecker::KeyWord_instanceof.size()).compare(MacroChecker::KeyWord_instanceof) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_instanceof.size();
         return true;
@@ -480,7 +476,6 @@ namespace analyzer {
 
     const std::string MacroChecker::KeyWord_goto = "goto";
 
-    const std::string MacroChecker::KeyWord_import = "import";
     const std::string MacroChecker::KeyWord_in = "in";
     const std::string MacroChecker::KeyWord_instanceof = "instanceof";
     const std::string MacroChecker::KeyWord_int = "int";
