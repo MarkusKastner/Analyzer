@@ -52,6 +52,17 @@ namespace analyzer {
       void SetSearchPos(const size_t & searchPos);
       bool SearchDone();
 
+      static bool HasPreByte(const size_t & offset);
+      static bool IsByteSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static bool IsByteSpace(const unsigned char & byte);
+      static bool IsByteBeforeSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static bool IsByteBeforeLineFeed(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static unsigned char FindNextNoneSpacePrintable(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static std::string FindWordBeforeOffset(const size_t numWordsBefore, const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static bool LastByteInLineIs(const unsigned char value, const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data);
+      static std::vector<unsigned char> GetRestOfLineWithoutLF(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data, const bool & skipSpaces);
+      static bool IsNoneSpacePrintable(const unsigned char & byte);
+
     protected:
       ContentChecker();
 

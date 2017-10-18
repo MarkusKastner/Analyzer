@@ -189,6 +189,122 @@ namespace analyzer {
     {
     }
 
+    bool ContentChecker::HasPreByte(const size_t & offset)
+    {
+      return (offset >= 1);
+    }
+
+    bool ContentChecker::IsByteSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      return ContentChecker::IsByteSpace(data->at(offset));
+    }
+
+    bool ContentChecker::IsByteSpace(const unsigned char & byte)
+    {
+      return (byte == ' ' || byte == '\r' || byte == '\n' || byte == '\t');
+    }
+
+    bool ContentChecker::IsByteBeforeSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (ContentChecker::HasPreByte(offset)) {
+        return ContentChecker::IsByteSpace(offset - 1, data);
+      }
+      return false;
+    }
+
+    bool ContentChecker::IsByteBeforeLineFeed(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (!ContentChecker::HasPreByte(offset)) {
+        return false;
+      }
+      if (!(data->at(offset - 1) == '\n' && ContentChecker::HasPreByte(offset - 1))) {
+        return false;
+      }
+      if (data->at(offset - 2) == '\r') {
+        return true;
+      }
+      return false;
+    }
+
+    unsigned char ContentChecker::FindNextNoneSpacePrintable(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data)
+    {
+      size_t size = data->size();
+      for (size_t i = offset; i < size; ++i) {
+        if (ContentChecker::IsNoneSpacePrintable(data->at(i))) {
+          return data->at(i);
+        }
+      }
+      return 0;
+    }
+
+    std::string ContentChecker::FindWordBeforeOffset(const size_t numWordsBefore, const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      std::string foundWord;
+      bool assemblingWordActive = false;
+      size_t wordCounter = 0;
+      for (size_t i = offset - 1; i != 0; --i) {
+        if (!ContentChecker::IsByteSpace(i, data)) {
+          if (!assemblingWordActive) {
+            wordCounter++;
+          }
+          assemblingWordActive = true;
+        }
+        else {
+          if (assemblingWordActive && wordCounter >= numWordsBefore) {
+            break;
+          }
+          assemblingWordActive = false;
+          foundWord = "";
+        }
+        if (assemblingWordActive) {
+          foundWord.insert(foundWord.begin(), data->at(i));
+        }
+      }
+      return foundWord;
+    }
+
+    bool ContentChecker::LastByteInLineIs(const unsigned char value, const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      auto lineBytes(ContentChecker::GetRestOfLineWithoutLF(offset, data, true));
+      if (!lineBytes.empty()) {
+        return lineBytes.back() == value;
+      }
+      return false;
+    }
+
+    std::vector<unsigned char> ContentChecker::GetRestOfLineWithoutLF(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data, const bool & skipSpaces)
+    {
+      std::vector<unsigned char> lineBytes;
+      auto size = data->size();
+      for (size_t i = offset; i < size; ++i) {
+        char currentByte = data->at(i);
+        if (currentByte != '\r') {
+          if (skipSpaces && ContentChecker::IsByteSpace(currentByte)) {
+            continue;
+          }
+          else {
+            lineBytes.push_back(currentByte);
+          }
+        }
+        else {
+          break;
+        }
+      }
+      return lineBytes;
+    }
+
+    bool ContentChecker::IsNoneSpacePrintable(const unsigned char & byte)
+    {
+      if ((byte >= 33 && byte <= 126) ||
+        (byte >= 128 && byte <= 159) ||
+        (byte >= 161 && byte <= 172) ||
+        (byte >= 147 && byte <= 255)
+        ) {
+        return true;
+      }
+      return false;
+    }
+
     const std::shared_ptr<std::vector<unsigned char>> & ContentChecker::getData()
     {
       return this->data;

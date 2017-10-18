@@ -59,7 +59,12 @@ endobj
 
 8 0 obj
 <<
-/JS (app.alert({cMsg: "This is Javascript!", cTitle: "Matura Herbst 2017"});)
+/JS (
+for(var i = 10; i > 0; i--){
+  app.alert({cMsg: "This is Javascript! " + i, nIcon: 2, cTitle: "Matura Herbst 2017"});
+}
+
+)
 /S /JavaScript
 >>
 endobj
