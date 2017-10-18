@@ -384,8 +384,8 @@ namespace analyzer {
 
     bool MacroChecker::IsVCaseSyntax(const size_t & offset)
     {
-      if (this->RangeToString(offset, MacroChecker::KeyWord_var.size()).compare(MacroChecker::KeyWord_var) == 0) {
-        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_var.size();
+      if (this->jsChecker.IsVCaseSyntax(offset)) {
+        this->lastFoundSyntaxOffset = this->jsChecker.GetLastFoundSyntaxOffset();;
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_void.size()).compare(MacroChecker::KeyWord_void) == 0) {
@@ -508,7 +508,6 @@ namespace analyzer {
     const std::string MacroChecker::KeyWord_try = "try";
     const std::string MacroChecker::KeyWord_typeof = "typeof";
 
-    const std::string MacroChecker::KeyWord_var = "var";
     const std::string MacroChecker::KeyWord_void = "void";
     const std::string MacroChecker::KeyWord_volatile = "volatile";
 

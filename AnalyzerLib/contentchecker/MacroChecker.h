@@ -119,7 +119,6 @@ namespace analyzer {
       static const std::string KeyWord_try;
       static const std::string KeyWord_typeof;
 
-      static const std::string KeyWord_var;
       static const std::string KeyWord_void;
       static const std::string KeyWord_volatile;
 

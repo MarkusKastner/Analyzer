@@ -9,7 +9,7 @@
 namespace analyzer {
   namespace checker {
     JSChecker::JSChecker()
-      :data(), iCaseChecker(), fCaseChecker(), 
+      :data(), iCaseChecker(), fCaseChecker(), vCaseChecker(),
       lastFoundSyntaxOffset(0)
     {
     }
@@ -68,6 +68,16 @@ namespace analyzer {
         this->fCaseChecker.reset(new JSFCaseChecker(this));
       }
       if (this->fCaseChecker->IsMyCase(offset)) {
+        return true;
+      }
+      return false;
+    }
+    bool JSChecker::IsVCaseSyntax(const size_t & offset)
+    {
+      if (!this->vCaseChecker) {
+        this->vCaseChecker.reset(new JSVCaseChecker(this));
+      }
+      if (this->vCaseChecker->IsMyCase(offset)) {
         return true;
       }
       return false;

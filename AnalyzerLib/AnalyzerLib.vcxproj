@@ -176,6 +176,7 @@
     <ClCompile Include="contentchecker\javascript\JSChecker.cpp" />
     <ClCompile Include="contentchecker\javascript\JSFCaseChecker.cpp" />
     <ClCompile Include="contentchecker\javascript\JSICaseChecker.cpp" />
+    <ClCompile Include="contentchecker\javascript\JSVCaseChecker.cpp" />
     <ClCompile Include="contentchecker\MacroChecker.cpp" />
     <ClCompile Include="core\error\CoreException.cpp" />
     <ClCompile Include="core\File.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="contentchecker\javascript\JSChecker.h" />
     <ClInclude Include="contentchecker\javascript\JSFCaseChecker.h" />
     <ClInclude Include="contentchecker\javascript\JSICaseChecker.h" />
+    <ClInclude Include="contentchecker\javascript\JSVCaseChecker.h" />
     <ClInclude Include="contentchecker\MacroChecker.h" />
     <ClInclude Include="contentchecker\SyntaxCheckerParent.h" />
     <ClInclude Include="core\error\CoreException.h" />

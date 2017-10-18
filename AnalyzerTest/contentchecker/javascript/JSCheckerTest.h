@@ -49,4 +49,25 @@ TEST_F(JSCheckerTest, iCases)
   ASSERT_EQ(jsChecker.GetLastFoundSyntaxOffset(), 2);
 }
 
+TEST_F(JSCheckerTest, fCases)
+{
+  auto jsForSyntax(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/for.txt"));
+  size_t offset = 22;
+
+  analyzer::checker::JSChecker jsChecker;
+  jsChecker.SetData(jsForSyntax);
+  ASSERT_TRUE(jsChecker.IsFCaseSyntax(offset));
+  ASSERT_EQ(jsChecker.GetLastFoundSyntaxOffset(), 3);
+}
+
+TEST_F(JSCheckerTest, vCases)
+{
+  auto jsVarSyntax(TestSupport::GetInstance()->GetDataFromTestFilesDir("JavascriptSyntax/var.txt"));
+  size_t offset = 16;
+
+  analyzer::checker::JSChecker jsChecker;
+  jsChecker.SetData(jsVarSyntax);
+  ASSERT_TRUE(jsChecker.IsVCaseSyntax(offset));
+  ASSERT_EQ(jsChecker.GetLastFoundSyntaxOffset(), 3);
+}
 #endif

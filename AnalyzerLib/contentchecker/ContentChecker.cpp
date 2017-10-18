@@ -194,6 +194,11 @@ namespace analyzer {
       return (offset >= 1);
     }
 
+    bool ContentChecker::HasPostByte(const size_t & offset, const size_t & expressionLength, const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      return (offset + expressionLength + 1 < data->size());
+    }
+
     bool ContentChecker::IsByteSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>> & data)
     {
       return ContentChecker::IsByteSpace(data->at(offset));
@@ -204,10 +209,28 @@ namespace analyzer {
       return (byte == ' ' || byte == '\r' || byte == '\n' || byte == '\t');
     }
 
+    bool ContentChecker::IsByteABC(const unsigned char & byte)
+    {
+      return ((byte >= 65 && byte <= 90) || (byte >= 97 && byte <= 122));
+    }
+
+    bool ContentChecker::IsByteNum(const unsigned char & byte)
+    {
+      return (byte >= 48 && byte <= 57);
+    }
+
     bool ContentChecker::IsByteBeforeSpace(const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data)
     {
       if (ContentChecker::HasPreByte(offset)) {
         return ContentChecker::IsByteSpace(offset - 1, data);
+      }
+      return false;
+    }
+
+    bool ContentChecker::IsByteBefore(const unsigned char & value, const size_t & offset, const std::shared_ptr<std::vector<unsigned char>>& data)
+    {
+      if (ContentChecker::HasPreByte(offset)) {
+        return data->at(offset - 1) == value;
       }
       return false;
     }

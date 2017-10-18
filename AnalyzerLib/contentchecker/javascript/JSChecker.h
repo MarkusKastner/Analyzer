@@ -12,6 +12,7 @@
 
 #include "AnalyzerLib/contentchecker/javascript/JSICaseChecker.h"
 #include "AnalyzerLib/contentchecker/javascript/JSFCaseChecker.h"
+#include "AnalyzerLib/contentchecker/javascript/JSVCaseChecker.h"
 #include "AnalyzerLib/contentchecker/SyntaxCheckerParent.h"
 
 namespace analyzer {
@@ -31,12 +32,15 @@ namespace analyzer {
 
       bool IsICaseSyntax(const size_t & offset);
       bool IsFCaseSyntax(const size_t & offset);
+      bool IsVCaseSyntax(const size_t & offset);
       const size_t & GetLastFoundSyntaxOffset() const;
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::unique_ptr<JSICaseChecker> iCaseChecker;
       std::unique_ptr<JSFCaseChecker> fCaseChecker;
+      std::unique_ptr<JSVCaseChecker> vCaseChecker;
+
       size_t lastFoundSyntaxOffset;
     };
   }
