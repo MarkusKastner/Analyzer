@@ -168,6 +168,9 @@
     <ClCompile Include="..\AnalyzerLib\contentchecker\javascript\JSChecker.cpp">
       <Filter>contentchecker\javascript</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnalyzerLib\contentchecker\javascript\JSFCaseChecker.cpp">
+      <Filter>contentchecker\javascript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AnalyzerLib\core\error\CoreException.h">
@@ -397,6 +400,12 @@
     </ClInclude>
     <ClInclude Include="..\AnalyzerLib\contentchecker\SyntaxCheckerParent.h">
       <Filter>contentchecker</Filter>
+    </ClInclude>
+    <ClInclude Include="contentchecker\javascript\JSFCaseCheckerTest.h">
+      <Filter>contentchecker\javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AnalyzerLib\contentchecker\javascript\JSFCaseChecker.h">
+      <Filter>contentchecker\javascript</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

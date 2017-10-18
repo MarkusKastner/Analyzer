@@ -82,7 +82,6 @@ namespace analyzer {
       static const std::string KeyWord_final;
       static const std::string KeyWord_finally;
       static const std::string KeyWord_float;
-      static const std::string KeyWord_for;
       static const std::string KeyWord_function;
 
       static const std::string KeyWord_goto;

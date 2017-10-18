@@ -295,15 +295,6 @@ TEST_F(MacroCheckerTest, jsFloatSyntax)
   ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_float.c_str());
 }
 
-TEST_F(MacroCheckerTest, jsForSyntax)
-{
-  size_t startOffset = 219;
-  analyzer::checker::MacroChecker checker;
-  checker.SetData(this->jsSyntaxDef);
-  ASSERT_TRUE(checker.IsFCaseSyntax(startOffset));
-  ASSERT_STREQ(checker.RangeToString(startOffset, checker.GetLastFoundSyntaxOffset()).c_str(), analyzer::checker::MacroChecker::KeyWord_for.c_str());
-}
-
 TEST_F(MacroCheckerTest, jsFunctionSyntax)
 {
   size_t startOffset = 225;

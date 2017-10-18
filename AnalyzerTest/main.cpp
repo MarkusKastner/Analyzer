@@ -35,6 +35,7 @@
 #include "contentchecker/MacroCheckerTest.h"
 #include "contentchecker/javascript/JSCheckerTest.h"
 #include "contentchecker/javascript/JSICaseCheckerTest.h"
+#include "contentchecker/javascript/JSFCaseCheckerTest.h"
 
 int main(int argc, char** argv) {
 

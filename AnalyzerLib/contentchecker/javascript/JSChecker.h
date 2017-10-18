@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "AnalyzerLib/contentchecker/javascript/JSICaseChecker.h"
+#include "AnalyzerLib/contentchecker/javascript/JSFCaseChecker.h"
 #include "AnalyzerLib/contentchecker/SyntaxCheckerParent.h"
 
 namespace analyzer {
@@ -29,11 +30,13 @@ namespace analyzer {
       void ReleaseData();
 
       bool IsICaseSyntax(const size_t & offset);
+      bool IsFCaseSyntax(const size_t & offset);
       const size_t & GetLastFoundSyntaxOffset() const;
 
     private:
       std::shared_ptr<std::vector<unsigned char>> data;
       std::unique_ptr<JSICaseChecker> iCaseChecker;
+      std::unique_ptr<JSFCaseChecker> fCaseChecker;
       size_t lastFoundSyntaxOffset;
     };
   }

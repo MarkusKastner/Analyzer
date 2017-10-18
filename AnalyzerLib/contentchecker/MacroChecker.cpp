@@ -228,6 +228,10 @@ namespace analyzer {
 
     bool MacroChecker::IsFCaseSyntax(const size_t & offset)
     {
+      if (this->jsChecker.IsFCaseSyntax(offset)) {
+        this->lastFoundSyntaxOffset = this->jsChecker.GetLastFoundSyntaxOffset();;
+        return true;
+      }
       if (this->RangeToString(offset, MacroChecker::KeyWord_false.size()).compare(MacroChecker::KeyWord_false) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_false.size();
         return true;
@@ -242,10 +246,6 @@ namespace analyzer {
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_float.size()).compare(MacroChecker::KeyWord_float) == 0) {
         this->lastFoundSyntaxOffset = MacroChecker::KeyWord_float.size();
-        return true;
-      }
-      if (this->RangeToString(offset, MacroChecker::KeyWord_for.size()).compare(MacroChecker::KeyWord_for) == 0) {
-        this->lastFoundSyntaxOffset = MacroChecker::KeyWord_for.size();
         return true;
       }
       if (this->RangeToString(offset, MacroChecker::KeyWord_function.size()).compare(MacroChecker::KeyWord_function) == 0) {
@@ -471,7 +471,6 @@ namespace analyzer {
     const std::string MacroChecker::KeyWord_final = "final";
     const std::string MacroChecker::KeyWord_finally = "finally";
     const std::string MacroChecker::KeyWord_float = "float";
-    const std::string MacroChecker::KeyWord_for = "for";
     const std::string MacroChecker::KeyWord_function = "function";
 
     const std::string MacroChecker::KeyWord_goto = "goto";
