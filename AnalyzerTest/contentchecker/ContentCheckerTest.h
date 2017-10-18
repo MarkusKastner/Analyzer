@@ -97,6 +97,8 @@ public:
     this->suspectOffet = offset;
   }
 
+  virtual void NotifyProgress(const int & percent) {
+  }
 private:
   bool finishedReported;
   std::vector<size_t> checkedIndexes;

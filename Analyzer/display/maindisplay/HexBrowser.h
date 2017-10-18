@@ -12,6 +12,8 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QProgressBar>
+#include <QEvent>
 
 #include <vector>
 #include <string>
@@ -55,8 +57,13 @@ namespace analyzer {
         void DeleteColor(const analyzer::base::AnalyzerRGB & color);
         void MarkSuspectedRange(const size_t & index, const size_t offset);
 
+        void SetProgress(const int & percent);
+
       signals:
         void SetBinaryOutput(const std::vector<unsigned char> & data);
+
+      protected:
+        virtual void customEvent(QEvent *event);
 
       private:
         HexTableWidget * tableWidget;
@@ -66,6 +73,8 @@ namespace analyzer {
         QTableWidgetItem * doubleCast;
         QTableWidgetItem * wideCharacter;
         
+        QProgressBar * analyzingProgress;
+
         core::File * file;
 
         void setup();
@@ -113,6 +122,20 @@ namespace analyzer {
           QLabel * bLabel;
         };
         RGBWidget * rgb;
+
+        class ProgressEvent : public QEvent {
+        public:
+          static const QEvent::Type type = static_cast<QEvent::Type>(2000);
+          ProgressEvent() = delete;
+          explicit ProgressEvent(const int & progress) 
+            : QEvent(type), progress(progress)
+          {
+          }
+          virtual ~ProgressEvent() {}
+          const int & GetProgress() const { return this->progress; }
+        private:
+          int progress;
+        };
 
       };
     }

@@ -75,6 +75,7 @@ namespace analyzer {
     {
       this->data = data;
       this->checkOffest = this->data->size();
+      this->dataSize = this->data->size();
     }
 
     void ContentChecker::ReleaseData()
@@ -157,6 +158,7 @@ namespace analyzer {
       if (this->searchPos >= this->checkOffest) {
         this->searchPos = 0;
         this->searchDone = true;
+        this->notifyProgress(-1);
       }
       return this->searchPos;
     }
@@ -167,6 +169,12 @@ namespace analyzer {
       if (this->searchPos == 0) {
         this->searchDone = false;
       }
+
+      int percent = 100 * searchPos / this->dataSize;
+      if (percent != this->currentProgress) {
+        this->currentProgress = percent;
+        this->notifyProgress(this->currentProgress.load());
+      }
     }
 
     bool ContentChecker::SearchDone()
@@ -175,9 +183,9 @@ namespace analyzer {
     }
 
     ContentChecker::ContentChecker()
-      :checkObservers(), workingColor({ 0,0,0 }), data(),
+      :checkObservers(), workingColor({ 0,0,0 }), data(), dataSize(0),
       startOffest(0), checkOffest(0), runCheck(false), finished(false),
-      searchPos(0), searchDone(false)
+      searchPos(0), searchDone(false), currentProgress(-1)
     {
     }
 
@@ -211,6 +219,13 @@ namespace analyzer {
     {
       for (auto& observer : this->checkObservers) {
         observer->NotifyMarkSuspectRange(index, offset);
+      }
+    }
+
+    void ContentChecker::notifyProgress(const int percent)
+    {
+      for (auto& observer : this->checkObservers) {
+        observer->NotifyProgress(percent);
       }
     }
 

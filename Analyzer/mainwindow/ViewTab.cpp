@@ -113,6 +113,13 @@ namespace analyzer {
       }
     }
 
+    void ViewTab::NotifyProgress(const int & percent)
+    {
+      if (dynamic_cast<display::HexBrowser*>(this->viewOutput)) {
+        dynamic_cast<display::HexBrowser*>(this->viewOutput)->SetProgress(percent);
+      }
+    }
+
     void ViewTab::setup()
     {
       this->setLayout(new QVBoxLayout());

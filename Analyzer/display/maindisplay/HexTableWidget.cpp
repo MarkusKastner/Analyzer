@@ -88,14 +88,14 @@ namespace analyzer {
 
       void HexTableWidget::MarkIndex(const analyzer::base::Marking & marking)
       {
-        std::lock_guard<std::recursive_mutex> lock(this->newMarkingsLock);
-        this->newMarkings.push(marking);
+        //std::lock_guard<std::recursive_mutex> lock(this->newMarkingsLock);
+        //this->newMarkings.push(marking);
       }
 
       void HexTableWidget::DeleteColor(const analyzer::base::AnalyzerRGB & color)
       {
-        std::lock_guard<std::recursive_mutex> lock(this->colorToDeleteLock);
-        this->colorToDelete.push(color);
+        //std::lock_guard<std::recursive_mutex> lock(this->colorToDeleteLock);
+        //this->colorToDelete.push(color);
       }
 
       void HexTableWidget::MarkSuspectRange(const size_t & index, const size_t offset)
@@ -216,7 +216,7 @@ namespace analyzer {
           }
 
           if(pause){
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            std::this_thread::sleep_for(std::chrono::milliseconds(20));
           }
 
         } while (this->runMarker.load());

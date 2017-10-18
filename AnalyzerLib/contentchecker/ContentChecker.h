@@ -62,11 +62,13 @@ namespace analyzer {
       void notifyMarkedIndex(const size_t index);
       void notifyClearWorkingMarkings();
       void notifySuspectRange(const size_t & index, const size_t & offset);
+      void notifyProgress(const int percent);
 
     private:
       std::vector<CheckObserver*> checkObservers;
       base::AnalyzerRGB workingColor;
       std::shared_ptr<std::vector<unsigned char>> data;
+      size_t dataSize;
       size_t startOffest;
       size_t checkOffest;
       std::atomic<bool> runCheck;
@@ -74,6 +76,7 @@ namespace analyzer {
       std::unique_ptr<std::thread> checkThread;
       size_t searchPos;
       bool searchDone;
+      std::atomic<int> currentProgress;
 
       void checkRoutine();
       void notifyCheckFinished();

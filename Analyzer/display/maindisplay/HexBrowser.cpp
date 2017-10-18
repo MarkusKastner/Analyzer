@@ -16,6 +16,7 @@
 #include <QLabel>
 #include <QTableWidgetItem>
 #include <QTableWidget>
+#include <QApplication>
 
 #include "AnalyzerLib\core\File.h"
 #include "AnalyzerLib\interpreter\HEXInterpreter.h"
@@ -27,7 +28,8 @@ namespace analyzer {
       HexBrowser::HexBrowser(QWidget * parent)
         :QWidget(parent), tableWidget(nullptr), castTable(nullptr), 
         integerCast(new QTableWidgetItem()), doubleCast(new QTableWidgetItem()),
-        wideCharacter(new QTableWidgetItem()), rgb(new RGBWidget())
+        wideCharacter(new QTableWidgetItem()), rgb(new RGBWidget()), 
+        analyzingProgress(new QProgressBar())
       {
         this->setup();
       }
@@ -93,6 +95,25 @@ namespace analyzer {
         this->tableWidget->MarkSuspectRange(index, offset);
       }
 
+      void HexBrowser::SetProgress(const int & percent)
+      {
+        if (percent < 0) {
+          QApplication::postEvent(this, new HexBrowser::ProgressEvent(0));
+        }
+        else {
+          QApplication::postEvent(this, new HexBrowser::ProgressEvent(percent));
+        }
+      }
+
+      void HexBrowser::customEvent(QEvent * event)
+      {
+        if (dynamic_cast<HexBrowser::ProgressEvent*>(event)) {
+          this->analyzingProgress->setValue(dynamic_cast<HexBrowser::ProgressEvent*>(event)->GetProgress());
+          return;
+        }
+        QWidget::customEvent(event);
+      }
+
       void HexBrowser::setup()
       {
         this->setLayout(new QHBoxLayout());
@@ -101,7 +122,7 @@ namespace analyzer {
         detailWidget->setLayout(new QVBoxLayout());
         detailWidget->layout()->setContentsMargins(0, 0, 0, 0);
         detailWidget->setFixedWidth(250);
-        detailWidget->setFixedHeight(300);
+        detailWidget->setFixedHeight(350);
 
         QGroupBox * details = new QGroupBox("Details", detailWidget);
         details->setLayout(new QVBoxLayout());
@@ -111,10 +132,19 @@ namespace analyzer {
         detailWidget->layout()->addWidget(details);
         detailWidget->layout()->addItem(new QSpacerItem(1,1, QSizePolicy::Expanding, QSizePolicy::Expanding));
         
+
+        this->analyzingProgress->setAttribute(Qt::WA_DeleteOnClose, false);
+        this->analyzingProgress->setOrientation(Qt::Horizontal);
+        this->analyzingProgress->setRange(0, 100);
+        this->analyzingProgress->setWindowFlags(Qt::WindowStaysOnTopHint);
+        this->analyzingProgress->setWindowModality(Qt::WindowModal);
+        detailWidget->layout()->addWidget(this->analyzingProgress);
+
         this->tableWidget = new HexTableWidget(this);
         this->layout()->addWidget(this->tableWidget);
         this->layout()->addWidget(detailWidget);
         
+
       }
 
       void HexBrowser::createCastTable()
